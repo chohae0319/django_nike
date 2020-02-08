@@ -1,0 +1,107 @@
+{% load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>나이키. Just Do It. CloneNike.com</title>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div id="world">
+      <nav>
+        <!-- upper-nav -->
+        <div class="nav-upper flex-box">
+          <ul class="flex-box top-nav">
+            <li>
+              <a href="/"><span>Nike</span></a>
+            </li>
+            <li>
+              <a href=""><span>Nike Membership</span></a>
+            </li>
+            <li>
+              <a href="">
+                <div class="img-wrppaer"><img src="" alt="조던로고" /></div>
+              </a>
+            </li>
+            <li>
+              <a href=""><span>converse</span></a>
+            </li>
+          </ul>
+          <ul class="flex-box" id="nav-guide">
+            <li>
+              <a href=""><span>회원가입 / 로그인</span></a>
+            </li>
+            <li>
+              <a href=""><span>고객센터</span></a>
+            </li>
+            <li>
+              <a href=""><span>쇼핑카트 아이콘</span></a>
+            </li>
+            <li>
+              <a href=""><span>대한민국</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- lower nav -->
+        <div class="nav-lower flex-box">
+          <div class="nikeLogo">
+            <div class="logo-wrapper">
+              <a href="/">
+                <img
+                  src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
+                  alt="나이키 로고"
+                />
+              </a>
+            </div>
+          </div>
+
+          <!-- main nav -->
+          <ul class="mainNav flex-box">
+            <li>
+              <a href=""><span>new releases</span></a>
+            </li>
+            <li>
+              <a href=""><span>men</span></a>
+            </li>
+            <li>
+              <a href=""><span>women</span></a>
+            </li>
+            <li>
+              <a href=""><span>kids</span></a>
+            </li>
+          </ul>
+          <div class="search flex-box">
+            <button class="hide"></button>
+            <input type="text" placeholder="검색" class="search-input" />
+          </div>
+        </div>
+      </nav>
+      <section class="landing-section">
+        <figure>
+          <picture>
+            <img
+              src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/structured-content/2357/200129_rn_p1_bg.jpg"
+              alt="cover"
+            />
+          </picture>
+          <figurecaption>
+            <div>
+              <h1>나이키 리액트 인피니티 런</h1>
+              <p>
+                부상 없는 러닝을 위해 새롭게 출시된 리액트 인피니티 런. 러너들이
+                증명한 혁신적인 기능성과 함께 제품 리뷰 혜택도 만나보세요.
+              </p>
+            </div>
+            <div>
+              <a href="/product/"><span>제품보기</span></a>
+              <a href="/wishlist/"><span>장바구니</span></a>
+            </div>
+          </figurecaption>
+        </figure>
+      </section>
+    </div>
+  </body>
+</html>
