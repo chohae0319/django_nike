@@ -6,8 +6,8 @@ class Category(models.Model):
     sub_class = models.CharField(max_length=25, unique=True)
     shoes_sub = models.CharField(max_length=25, unique=True)
 
-
 class Product(models.Model):
+    name = models.CharField(max_length=20, unique=True)
     # 상품번호, 상품명, 상품가격, 카테고리번호, (총재고량), 출시일, 판매량, 썸네일 이미지
     name = models.CharField(max_length=25)
     price = models.IntegerField()
@@ -16,7 +16,6 @@ class Product(models.Model):
     release_date = models.DateField()
     sales = models.IntegerField(default=0)   # 판매량 default를 0으로
     thumbnail = models.ImageField(upload_to='product/thumbnail/')
-
 
 class Inventory(models.Model):
     # 상품번호, 사이즈, 재고

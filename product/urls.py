@@ -17,5 +17,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+<<<<<<< HEAD
+    path('product/', views.product_list, name='product'),
+=======
+>>>>>>> bcc41a2e7bdf2ab2600bad14e7b5ba04b481c7e2
     path('', views.index),
 ]
