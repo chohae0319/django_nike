@@ -7,5 +7,5 @@ class Category(models.Model):
     shoes_sub = models.CharField(max_length=25, unique=True)
 
 
-# class Product(models.Model):
-    # 상품 번호, 상품명, 상품가격, (총 재고량), 출시일, 판매량, 썸네일 이미지
+class Product(models.Model):
+    name = models.CharField(max_length=20, unique=True)
