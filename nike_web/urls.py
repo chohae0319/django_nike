@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-<<<<<<< HEAD
     path('', include('product.urls')),
-=======
->>>>>>> bcc41a2e7bdf2ab2600bad14e7b5ba04b481c7e2
-    path('product/', include('product.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# 이미지 파일에 대한 path 추가
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

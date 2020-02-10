@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>{{ object.name }}</p>
+<p>{{ object.price }}</p>
+<p>썸네일 이미지</p>
+<img src="{{ object.thumbnail.url }}" style="width: 300px; height: 200px;">
+<p>상세 이미지</p>
+{% for p in product_image %}
+<img src="{{ p.image.url }}" style="width: 300px; height: 200px;">
+{% endfor %}
+<p>사이즈</p>
+{% for p in inventory %}
+<p>{{ p.size }}</p>
+{% endfor %}
+
+</body>
+</html>
