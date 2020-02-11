@@ -1,0 +1,66 @@
+{% extends "product/base.html" %}
+
+<!-- content -->
+{% block content %}
+<section id="detail" class="cover">
+  <div class="detail-header">
+    <!-- left img view -->
+    <div class="detail-img-gallery">
+      <div class="detail-img-wrapper">
+        <a href=""
+          ><img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD0881-103/a893445e-c7c5-4b3f-a90e-31ff643728a7_primary.jpg?browse"
+            alt="이미지 상세 보기"
+        /></a>
+      </div>
+    </div>
+    <!-- right 상세 설정 -->
+    <div class="detail-selection">
+      <div class="detail-product-info">
+        <div class="detail-item-tilte">
+          <span>남성 신발 라이프스타일{{product.subtitle}}</span>
+          <span>139,000{{product.price}}</span>
+          <h2>나이키 에어맥스 90 {{product.title}}</h2>
+        </div>
+        <!-- size select -->
+        <div class="size-select">
+          <h3>사이즈 선택</h3>
+          <form method="POST" action="">
+            <span>
+              <label for="260">260</label>
+              <input type="radio" name="size" id="260" value="260" />
+            </span>
+            <span>
+              <label for="270">270</label>
+              <input type="radio" name="size" id="270" value="270" />
+            </span>
+            <div class="detail-num">
+              <span>{{num}}</span>
+              <button>+</button>
+              <button>-</button>
+            </div>
+            <div>
+              <button type="submit">바로구매</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- main detail-view -->
+  <div class="detail-view">
+    <div class="detail-view-wrap">
+      <img
+        src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/structured-content/2357/200207_nsw_epdp_volt_bg-1.jpg"
+        alt=""
+      />
+      <iframe
+        src="https://players.brightcove.net/72451143001/Hk7rH5kvb_default/index.html?videoId=6120496352001"
+        allowfullscreenallow="encrypted-media"
+        width="960"
+        height="745"
+      ></iframe>
+    </div>
+  </div>
+</section>
+{% endblock %}
