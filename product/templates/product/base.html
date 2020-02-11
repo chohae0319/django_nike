@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- xeicon -->
+    <link
+      rel="stylesheet"
+      href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aside.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/content.css' %}" />
+    <title>
+      {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
+    </title>
+  </head>
+  <body>
+    <!-- nav -->
+    {% block navbar %}
+    <nav>
+      <!-- upper-nav -->
+      <div class="nav-upper flex-box">
+        <ul class="flex-box top-nav">
+          <li>
+            <a href="/"><span>Nike</span></a>
+          </li>
+          <li>
+            <a href=""><span>Nike Membership</span></a>
+          </li>
+          <li>
+            <a href="">
+              <div class="img-wrppaer"><img src="" alt="조던로고" /></div>
+            </a>
+          </li>
+          <li>
+            <a href=""><span>converse</span></a>
+          </li>
+        </ul>
+        <ul class="flex-box" id="nav-guide">
+          <!-- 로그인 안 했을 경우 -->
+
+          <li>
+            <a href="/sign-up/"><span>회원가입</span></a>
+            <span id="signOpen">/ 로그인</span>
+          </li>
+          <!-- 로그인 했을 경우 -->
+          <!-- <li>
+            <a href=""><span>회원이름</span></a>
+          </li> -->
+          <!-- login modal -->
+
+          <li>
+            <a href=""><span>고객센터</span></a>
+          </li>
+          <li>
+            <a href="/cart/"
+              ><span><i class="xi-cart"></i></span
+            ></a>
+          </li>
+          <li>
+            <a href=""><span>대한민국</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- lower nav -->
+      <div class="nav-lower flex-box">
+        <div class="nikeLogo">
+          <div class="logo-wrapper">
+            <a href="/">
+              <img
+                src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
+                alt="나이키 로고"
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- main nav -->
+        <ul class="mainNav flex-box">
+          <li>
+            <a href="/product/"><span>new releases</span></a>
+          </li>
+          <li>
+            <a href="/product/"><span>men</span></a>
+          </li>
+          <li>
+            <a href="/product/"><span>women</span></a>
+          </li>
+          <li>
+            <a href="/product/"><span>kids</span></a>
+          </li>
+        </ul>
+
+        <button class="hide"></button>
+        <input type="text" placeholder="검색" class="search" />
+      </div>
+    </nav>
+    <!-- modal box -->
+    <div class="modal-wrapper" style="display: none;">
+      <div class="modal">
+        <div class="logo-wrapper">
+          <img
+            src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
+            alt="나이키 로고"
+          />
+        </div>
+        <button id="signClose">X</button>
+
+        <h2>나이키 로그인</h2>
+        <form action="post" class="sign-in-modal flex-col">
+          <input type="text" placeholder="아이디" class="sign-in" />
+          <input type="password" placeholder="비밀번호" class="sign-in" />
+          <div class="sign-in-find">
+            <label
+              ><input type="checkbox" />
+              로그인 유지하기
+            </label>
+            <a href=""><span>아이디/비밀번호 찾기</span></a>
+          </div>
+          <button type="submit" class="sns">
+            <span>로그인</span>
+          </button>
+          <div class="sns-box">
+            <div class="sns-kakao sns">
+              <a href=""><span>카카오 계정 로그인</span></a>
+            </div>
+            <div class="sns-facebook sns">
+              <a href=""><span>페이스북 계정으로 로그인</span></a>
+            </div>
+          </div>
+        </form>
+        <div class="sign-in-footer">
+          <div class="sign-footer-box">
+            <span>회원이 아니신가요?</span>
+            <a href="/sign-up/"><span>회원가입</span></a>
+          </div>
+          <div class="sign-footer-box">
+            <a href=""><span>비회원 주문 조회</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/modal.js' %}"></script>
+    {% endblock %}
+
+    <!-- aside -->
+    {% block aside %} {% endblock %}
+
+    <!-- main content -->
+    {% block content %} {% endblock %}
+
+    <!-- footer -->
+    {% block footer %}
+    <footer></footer>
+    {% endblock %}
+  </body>
+</html>

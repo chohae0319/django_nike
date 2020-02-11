@@ -1,16 +1,20 @@
 nav {
   width: 100%;
   color: rgb(140, 140, 140);
-  font-size: 12px;
   position: fixed;
-  z-index: 100;
+  font-size: 2.2rem;
+  top: 0;
+  z-index: 99;
   background-color: #ffffff;
 }
+nav li a:hover {
+  color: black;
+}
 nav li a {
-  padding: 0 20px;
+  padding: 0 3.636rem;
   display: inline-block;
-  height: 38px;
-  min-width: 50px;
+  height: 7.273rem;
+  min-width: 9.091rem;
   text-align: center;
 }
 /* upper, lower */
@@ -22,8 +26,8 @@ nav li a {
 
 /* nav-upper */
 .nav-upper {
-  height: 38px;
-  line-height: 38px;
+  height: 7.273rem;
+  line-height: 7.273rem;
 }
 
 /* top-nav */
@@ -36,53 +40,60 @@ nav li a {
 }
 
 /* nav-guide */
+#nav-guide li {
+  padding: 0 2rem;
+}
 #nav-guide li a {
-  padding: 0 11px;
+  padding: 0;
+}
+
+#signOpen {
+  cursor: pointer;
+}
+#signOpen:hover {
+  color: black;
+}
+
+.xi-cart {
+  font-size: 3.5rem;
+  line-height: 7.273rem;
 }
 
 /* nav-lower */
 .nav-lower {
   box-sizing: border-box;
-  height: 70px;
-  padding: 0 52px 0 30px;
+  height: 12.91rem;
+  padding: 0 9.455rem 0 5.455rem;
   align-items: center;
 }
 
 /* logo-wrapper */
 .nav-lower .nikeLogo {
-  width: 194px;
+  width: 17.64rem;
 }
-.nikeLogo .logo-wrapper {
-  width: 60px;
-  height: 40px;
+.logo-wrapper {
+  width: 10.91rem;
+  height: 7.273rem;
 }
 /* main nav */
 .nav-lower .mainNav {
   justify-content: center;
   text-transform: uppercase;
+  flex: 1;
 }
 .nav-lower .mainNav li a {
-  line-height: 38px;
+  line-height: 7.273rem;
 }
 
+/* search */
 .nav-lower .search {
-  box-sizing: border-box;
   border: 0.5px solid rgb(229, 229, 229);
-  width: 224px;
-  height: 40px;
-  padding: 10px 30px 10px 49px;
+  width: 33.36rem;
+  height: 7.636rem;
+  padding: 0.9091rem 2.727rem 0.9091rem 4.455rem;
 }
 
 /* hide button */
 button.hide {
   border: none;
-}
-
-/* search-input */
-.nav-lower .search-input {
-  border: none;
-}
-
-.nav-lower .search-input:focus {
-  outline: none;
 }
