@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-from .models import Category, Product
+from .models import Category, Product, ProductImage, Inventory
 
 # Create your views here.
 def index(request):
@@ -9,10 +9,19 @@ def index(request):
         'product/index.html/',
         {}
     )
-<<<<<<< HEAD
 
-def product_list(request):
-    product = Product.objects.all()
-    return render(request, 'product/product.html', {'product':product})
-=======
->>>>>>> bcc41a2e7bdf2ab2600bad14e7b5ba04b481c7e2
+
+class ProductDetail(DetailView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        # 기본 구현을 호출해 context(product)를 가져온다.
+        context = super(ProductDetail, self).get_context_data(**kwargs)
+
+        # ProductImage를 context에 추가
+        context['product_image'] = ProductImage.objects.filter(product_id=self.object.pk)
+
+        #Inventory를 context에 추가
+        context['inventory'] = Inventory.objects.filter(product_id=self.object.pk)
+
+        return context
