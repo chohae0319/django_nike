@@ -144,3 +144,21 @@ footer {
   background-color: black;
   color: #ffffff;
 }
+.whole-wrapper {
+  display: none;
+  position: absolute;
+  top: 108px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+}
+.bg-black {
+  display: block;
+  background-color: rgba(52, 52, 52,0.5);
+}
+
+/* title */
+.title{
+  font-size: 16px;
+}
