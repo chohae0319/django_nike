@@ -14,7 +14,7 @@ nav li a {
   padding: 0 20px;
   display: inline-block;
   height: 38px;
-  min-width: 50px;
+  min-width: 30px;
   text-align: center;
 }
 /* upper, lower */
@@ -28,19 +28,31 @@ nav li a {
 .nav-upper {
   height: 38px;
   line-height: 38px;
+  overflow-y: hidden;
+}
+/* 로고 추가했습니다. */
+#jordan-logo {
+  position: relative;
+  top: 6px;
+  width: 38px;
+  height: 40px;
 }
 
 /* top-nav */
 .nav-upper .top-nav {
   align-items: center;
+  font-size: 14px;
 }
 
 .nav-upper .top-nav li {
   border-right: 0.5px solid rgb(229, 229, 229);
+  min-width: 80px;
+  text-align: center;
 }
 
 /* nav-guide */
 #nav-guide li {
+  font-size: 12px;
   padding: 0 11px;
 }
 #nav-guide li a {
@@ -112,7 +124,9 @@ button.hide {
 
 /* dropdown */
 .dropdown-box:hover .dropdown-wrapper {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dropdown-wrapper {
@@ -123,8 +137,33 @@ button.hide {
   display: none;
   width: 100%;
   min-height: 100px;
-  background-color: seagreen;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgb(229, 229, 229);
 }
+
+/* drop-down list */
+.dropdown-wrapper .nav-list-wrapper {
+  width: 800px;
+  display: flex;
+  justify-content: space-around;
+  padding: 45px 0;
+  font-size: 13px;
+}
+.nav-list-wrapper ul li {
+  /* font-size: 12px; */
+  margin-bottom: 10px;
+}
+.nav-list-wrapper ul + ul {
+  border-left: 1px solid rgb(229, 229, 229);
+  padding-left: 60px;
+}
+.nav-list.category,
+.nav-list .list-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* mobile */
 #nav-mobile {
   display: none;
   color: black;
