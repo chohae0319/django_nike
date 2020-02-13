@@ -18,7 +18,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('product/', views.product, name='product'),
+#    path('product/', views.product, name='product'),
     path('sign-up/', views.sign_up, name='sign-up'),
     path('cart/', views.cart, name='cart'),
     path('detail/', views.detail, name='detail'),
