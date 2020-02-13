@@ -1,13 +1,14 @@
 from django.db import models
 
-# Create your models here.
+
 class Category(models.Model):
     main_class = models.CharField(max_length=25, unique=True)
     sub_class = models.CharField(max_length=25, unique=True)
-    shoes_sub = models.CharField(max_length=25, unique=True)
+    shoes_sub = models.CharField(max_length=25, blank=True)
 
     def __str__(self):
-        return '{} : {} : {}'.format(self.main_class, self.sub_class, self.shoes_sub)
+        return '{} : {} : {} : {}'.format(self.pk, self.main_class, self.sub_class, self.shoes_sub)
+
 
 class Product(models.Model):
     # 상품번호, 상품명, 상품가격, 카테고리번호, (총재고량), 출시일, 판매량, 썸네일 이미지
@@ -21,6 +22,7 @@ class Product(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
 
 class Inventory(models.Model):
     # 상품번호, 사이즈, 재고
