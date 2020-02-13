@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserCreateForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
+from .models import Profile, Order
 
 
 def home(request):
@@ -48,5 +49,16 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
+
+def my_profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = {
+        'my_orders': my_orders
+    }
+
+    return render(request, 'profile.html', context)
+
+
 
 
