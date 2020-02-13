@@ -1,8 +1,8 @@
 section {
   position: relative;
   z-index: 1;
-  top: 22rem;
-  left: 200px;
+  top: 108.5px;
+  left: 288px;
   min-height: 100vh;
 }
 /* landing-section */
@@ -12,7 +12,7 @@ section {
 
 /* product */
 #product {
-  width: 80%;
+  width: 929px;
 }
 
 /* wrapper */
@@ -26,7 +26,7 @@ section {
 .card {
   border: 1px solid;
   width: 300px;
-  height: 408px;
+  height: 325px;
   margin-bottom: 80px;
 }
 
@@ -42,16 +42,17 @@ section {
 }
 
 .detail-img-gallery {
-  width: 65%;
+  width: 720px;
   padding: 0 54px;
 }
 
 .detail-img-wrapper {
-  width: 50%;
+  width: 348px;
+  height: 348px;
 }
 
 .detail-selection {
-  width: 35%;
+  width: 449px;
 }
 
 .detail-view-wrap iframe {
@@ -69,7 +70,7 @@ section {
 
 /* sign-up */
 #sign-up {
-  width: 40%;
+  width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -84,35 +85,35 @@ section {
 
 /* sns-box */
 .sns-box {
-  margin: 1.5rem 0;
+  margin: 0.7rem 0;
 }
 .sns {
-  width: 500px;
-  height: 60px;
+  width: 420px;
+  height: 40px;
   display: flex;
   justify-content: center;
 }
 .sns span {
-  line-height: 60px;
+  line-height: 40px;
 }
 .sns-kakao {
   background-color: rgb(254, 235, 74);
-  margin-top: 30px;
+  margin-top: 15px;
 }
 .sns-facebook {
   background-color: rgb(36, 84, 136);
   color: #fff;
-  margin: 30px 0;
+  margin: 15px 0;
 }
 
 #sign-up form {
-  width: 500px;
+  width: 420px;
   display: flex;
   flex-direction: column;
 }
 #sign-up .hr {
   border-top: 0.5px solid rgb(229, 229, 229);
-  height: 10px;
+  height: 5px;
 }
 
 #sign-up .hr span {
@@ -127,14 +128,14 @@ section {
 }
 
 #sign-up form input {
-  padding: 1rem;
-  height: 5rem;
-  margin-top: 1.5rem;
+  padding: 9px 12px;
+  height: 40px;
+  margin-top: 0.7rem;
   border: 0.5px solid rgb(229, 229, 229);
 }
 
 #sign-up form button[type="submit"] {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   border: none;
   background-color: black;
   color: #fff;
@@ -142,4 +143,104 @@ section {
 
 #sign-up form button[type="submit"]:hover {
   background-color: rgb(52, 52, 52);
+}
+
+/* cart */
+#cart .cart-header {
+  border: 1px solid;
+  text-align: center;
+}
+
+#no-items {
+  margin-top: 30px;
+  text-align: center;
+}
+#no-items i {
+  font-size: 40px;
+}
+.cart-contents {
+  border: 1px solid;
+  display: flex;
+}
+
+.cart-list-box {
+  border: 1px solid seagreen;
+}
+.cart-list-wrapper {
+  width: 841px;
+}
+.cart-list-wrapper > li {
+  display: flex;
+  width: 841px;
+  height: 152px;
+  padding: 20px 50px 20px 0;
+  justify-content: space-between;
+  color: rgb(96, 96, 96);
+}
+.cart-itemimg-wrapper {
+  width: 110px;
+  height: 110px;
+}
+
+.cart-list-wrapper > li .cart-item-detail {
+  width: 420px;
+}
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(1) {
+  font-size: 14px;
+  font-weight: bolder;
+  color: black;
+}
+
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(2) {
+  font-weight: 600;
+  margin-top: 10px;
+  color: black;
+}
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(3) {
+  margin-bottom: 5px;
+}
+
+.cart-list-wrapper > li .cart-item-option {
+  text-decoration: underline;
+}
+.cart-list-wrapper > li .cart-item-price {
+  color: rgb(248, 84, 32);
+}
+.cart-list-wrapper > li .cart-item-delete {
+  cursor: pointer;
+}
+
+/* cart-order-box */
+.cart-order-box {
+  border: 1px solid rgb(229, 229, 229);
+  width: 384px;
+  height: 350px;
+  margin-left: 20px;
+}
+
+.cart-order-header {
+  background-color: rgb(229, 229, 229);
+  padding: 20px;
+}
+
+.cart-order-info {
+  padding: 20px;
+}
+.order-info-list {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-order-box a {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 16px 0;
+  background: rgb(248, 84, 32);
+  width: 342px;
+  height: 48px;
+  text-align: center;
+  border: none;
+  color: #fff;
 }

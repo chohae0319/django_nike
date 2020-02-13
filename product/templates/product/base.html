@@ -10,16 +10,21 @@
       rel="stylesheet"
       href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
     />
-    <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
-    <link rel="stylesheet" href="{% static 'product/css/nav.css' %}" />
-    <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'product/css/aside.css' %}" />
-    <link rel="stylesheet" href="{% static 'product/css/content.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aside.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/content.css' %}" />
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
   </head>
   <body>
+    <div class="whole-wrapper"></div>
     <!-- nav -->
     {% block navbar %}
     <nav>
@@ -34,11 +39,21 @@
           </li>
           <li>
             <a href="">
-              <div class="img-wrppaer"><img src="" alt="조던로고" /></div>
+              <div id="jordan-logo">
+                <img
+                  src="../../static/img/스크린샷 2020-02-12 오후 8.54.47.png"
+                  alt="조던로고"
+                />
+              </div>
             </a>
           </li>
           <li>
             <a href=""><span>converse</span></a>
+          </li>
+          <li>
+            <a href="https://www.nike.com/kr/ko_kr/"
+              ><span>진짜 나이키 가기</span></a
+            >
           </li>
         </ul>
         <ul class="flex-box" id="nav-guide">
@@ -49,9 +64,9 @@
             <span id="signOpen">/ 로그인</span>
           </li>
           <!-- 로그인 했을 경우 -->
-          <!-- <li>
+          <li>
             <a href=""><span>회원이름</span></a>
-          </li> -->
+          </li>
           <!-- login modal -->
 
           <li>
@@ -83,24 +98,134 @@
 
         <!-- main nav -->
         <ul class="mainNav flex-box">
-          <li>
+          <li class="dropdown-box">
             <a href="/product/"><span>new releases</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="dropdown-box">
             <a href="/product/"><span>men</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  <li>라이프스타일</li>
+                  <li>러닝</li>
+                  <li>트레이닝 & 짐</li>
+                  <li>농구</li>
+                  <li>조던</li>
+                  <li>축구</li>
+                  <li>스케이트보딩</li>
+                  <li>골프</li>
+                  <li>테니스</li>
+                  <li>샌들 & 슬리퍼</li>
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  <li>러닝</li>
+                  <li>트레이닝 & 짐</li>
+                  <li>축구</li>
+                  <li>골프</li>
+                  <li>테니스</li>
+                  <li>요가</li>
+                </ul>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="dropdown-box">
             <a href="/product/"><span>women</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="dropdown-box">
             <a href="/product/"><span>kids</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
           </li>
         </ul>
 
         <button class="hide"></button>
-        <input type="text" placeholder="검색" class="search" />
+        <div class="desktop-only">
+          <i class="xi-search" id="nonhide-search-icon"></i>
+          <input type="text" placeholder="검색" class="search" />
+        </div>
+
+        <!-- only mobile screen -->
+        <div id="nav-mobile" class="flex-box">
+          <div class="icon-wrapper" id="search-icon">
+            <i class="xi-search"></i>
+          </div>
+          <a href="/cart/"
+            ><div class="icon-wrapper"><i class="xi-cart"></i></div
+          ></a>
+          <div class="icon-wrapper" id="hamburger"><i class="xi-bars"></i></div>
+          <div class="hide-search">
+            <div class="hide-input-wrapper">
+              <i class="xi-search" id="hide-search-icon"></i>
+              <input type="text" placeholder="검색" id="hide-search-input" />
+            </div>
+          </div>
+        </div>
       </div>
+      <div id="hide-search-modal"></div>
     </nav>
+
+    <!-- nav js -->
+    <script src="{% static 'js/nav.js' %}"></script>
     <!-- modal box -->
     <div class="modal-wrapper" style="display: none;">
       <div class="modal">
@@ -157,7 +282,13 @@
 
     <!-- footer -->
     {% block footer %}
-    <footer></footer>
+    <footer>
+      <ul>
+        <li>매장안내</li>
+        <li>로그인</li>
+        <li>회원가입</li>
+      </ul>
+    </footer>
     {% endblock %}
   </body>
 </html>
