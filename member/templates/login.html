@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>login</h1>
+
+    {% if login_form %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+    {% else %}
+    <div>{{ message }}</div>
+    <a href="{% url 'member:login' %}"><button type="button" class="btn btn-primary">
+        go back
+    </button>
+    </a>
+    {% endif %}
+</div>
