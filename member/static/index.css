@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 가시화를 위한 임시 */
+/* div {
+      box-sizing: border-box;
+      border: 1px solid;
+    } */
+
+.flex-box {
+  display: flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.hide {
+  width: 0;
+  height: 0;
+}
+
