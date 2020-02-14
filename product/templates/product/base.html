@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- xeicon -->
+    <link
+      rel="stylesheet"
+      href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aside.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/content.css' %}" />
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>
+      {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
+    </title>
+  </head>
+  <body>
+    <div class="whole-wrapper"></div>
+    <!-- nav -->
+    {% block navbar %}
+    <nav>
+      <!-- upper-nav -->
+      <div class="nav-upper flex-box">
+        <ul class="flex-box top-nav">
+          <li>
+            <a href="/"><span>Nike</span></a>
+          </li>
+          <li>
+            <a href=""><span>Nike Membership</span></a>
+          </li>
+          <li>
+            <a href="">
+              <div id="jordan-logo">
+                <img
+                  src="../../static/img/스크린샷 2020-02-12 오후 8.54.47.png"
+                  alt="조던로고"
+                />
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href=""><span>converse</span></a>
+          </li>
+          <li>
+            <a href="https://www.nike.com/kr/ko_kr/"
+              ><span>진짜 나이키 가기</span></a
+            >
+          </li>
+        </ul>
+        <ul class="flex-box" id="nav-guide">
+          <!-- 로그인 안 했을 경우 -->
+
+          <li>
+            <a href="/sign-up/"><span>회원가입</span></a>
+            <span id="signOpen">/ 로그인</span>
+          </li>
+          <!-- 로그인 했을 경우 -->
+          <li>
+            <a href=""><span>회원이름</span></a>
+          </li>
+          <!-- login modal -->
+
+          <li>
+            <a href=""><span>고객센터</span></a>
+          </li>
+          <li>
+            <a href="/cart/"
+              ><span><i class="xi-cart"></i></span
+            ></a>
+          </li>
+          <li>
+            <a href=""><span>대한민국</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- lower nav -->
+      <div class="nav-lower flex-box">
+        <div class="nikeLogo">
+          <div class="logo-wrapper">
+            <a href="/">
+              <img
+                src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
+                alt="나이키 로고"
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- main nav -->
+        <ul class="mainNav flex-box">
+          <li class="dropdown-box">
+            <a href="/product/"><span>new releases</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-box">
+            <a href="/product/"><span>men</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  <li>라이프스타일</li>
+                  <li>러닝</li>
+                  <li>트레이닝 & 짐</li>
+                  <li>농구</li>
+                  <li>조던</li>
+                  <li>축구</li>
+                  <li>스케이트보딩</li>
+                  <li>골프</li>
+                  <li>테니스</li>
+                  <li>샌들 & 슬리퍼</li>
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  <li>러닝</li>
+                  <li>트레이닝 & 짐</li>
+                  <li>축구</li>
+                  <li>골프</li>
+                  <li>테니스</li>
+                  <li>요가</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-box">
+            <a href="/product/"><span>women</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-box">
+            <a href="/product/"><span>kids</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="hide"></button>
+        <div class="desktop-only">
+          <i class="xi-search" id="nonhide-search-icon"></i>
+          <input type="text" placeholder="검색" class="search" />
+        </div>
+
+        <!-- only mobile screen -->
+        <div id="nav-mobile" class="flex-box">
+          <div class="icon-wrapper" id="search-icon">
+            <i class="xi-search"></i>
+          </div>
+          <a href="/cart/"
+            ><div class="icon-wrapper"><i class="xi-cart"></i></div
+          ></a>
+          <div class="icon-wrapper" id="hamburger"><i class="xi-bars"></i></div>
+          <div class="hide-search">
+            <div class="hide-input-wrapper">
+              <i class="xi-search" id="hide-search-icon"></i>
+              <input type="text" placeholder="검색" id="hide-search-input" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="hide-search-modal"></div>
+    </nav>
+
+    <!-- nav js -->
+    <script src="{% static 'js/nav.js' %}"></script>
+    <!-- modal box -->
+    <div class="modal-wrapper" style="display: none;">
+      <div class="modal">
+        <div class="logo-wrapper">
+          <img
+            src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
+            alt="나이키 로고"
+          />
+        </div>
+        <button id="signClose">X</button>
+
+        <h2>나이키 로그인</h2>
+        <form action="post" class="sign-in-modal flex-col">
+          <input type="text" placeholder="아이디" class="sign-in" />
+          <input type="password" placeholder="비밀번호" class="sign-in" />
+          <div class="sign-in-find">
+            <label
+              ><input type="checkbox" />
+              로그인 유지하기
+            </label>
+            <a href=""><span>아이디/비밀번호 찾기</span></a>
+          </div>
+          <button type="submit" class="sns">
+            <span>로그인</span>
+          </button>
+          <div class="sns-box">
+            <div class="sns-kakao sns">
+              <a href=""><span>카카오 계정 로그인</span></a>
+            </div>
+            <div class="sns-facebook sns">
+              <a href=""><span>페이스북 계정으로 로그인</span></a>
+            </div>
+          </div>
+        </form>
+        <div class="sign-in-footer">
+          <div class="sign-footer-box">
+            <span>회원이 아니신가요?</span>
+            <a href="/sign-up/"><span>회원가입</span></a>
+          </div>
+          <div class="sign-footer-box">
+            <a href=""><span>비회원 주문 조회</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/modal.js' %}"></script>
+    {% endblock %}
+
+    <!-- aside -->
+    {% block aside %} {% endblock %}
+
+    <!-- main content -->
+    {% block content %} {% endblock %}
+
+    <!-- footer -->
+    {% block footer %}
+    <footer>
+      <ul>
+        <li>매장안내</li>
+        <li>로그인</li>
+        <li>회원가입</li>
+      </ul>
+    </footer>
+    {% endblock %}
+  </body>
+</html>

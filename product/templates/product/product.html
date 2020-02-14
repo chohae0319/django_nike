@@ -1,419 +1,78 @@
-{% load static%}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>나이키. Just Do It. CloneNike.com</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/nav.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/aside.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/product.css' %}" />
-  </head>
-  <body>
-<<<<<<< HEAD
-    <div>
-      {{ product }}
+{% extends "product/base.html" %}
+<!-- title -->
+{% block title %}신발-나이키{% endblock %}
+
+<!-- aside -->
+{% block aside %}
+<aside>
+  <div class="category-filter-box">
+    <ul class="category-wrapper">
+      <li>
+        <a href=""><span>라이프스타일</span></a>
+      </li>
+      <li>
+        <a href=""><span>러닝</span></a>
+      </li>
+      <li>
+        <a href=""><span>트레이닝 & 짐</span></a>
+      </li>
+      <li>
+        <a href=""><span>조던</span></a>
+      </li>
+      <li>
+        <a href=""><span>축구</span></a>
+      </li>
+      <li>
+        <a href=""><span>골프</span></a>
+      </li>
+      <li>
+        <a href=""><span>테니스</span></a>
+      </li>
+      <li>
+        <a href=""><span>샌들 & 슬리퍼</span></a>
+      </li>
+    </ul>
+    <ul>
+      <div>
+        <span>신발 사이즈</span>
+        <button>접기</button>
+      </div>
+      <div>신발사이즈1</div>
+      <div>신발사이즈2</div>
+    </ul>
+  </div>
+</aside>
+{% endblock aside %}
+
+<!-- content -->
+{% block content %}
+<section id="product">
+  <div class="product-box">
+    <div class="product-wrapper flex-box">
+      <div class="card">
+        <!-- product img -->
+        <div class="img-wrapper">
+          <a href="/detail/">
+            <img
+              src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD0881-103/a893445e-c7c5-4b3f-a90e-31ff643728a7_primary.jpg?browse"
+              alt="상품1 이미지"
+            />
+          </a>
+        </div>
+        <div class="product-info">
+          <!-- item-title-->
+          <div class="item-title">{{product.title}}</div>
+          <!-- sub-title -->
+          <div class="item-subtitle color-light-gray">
+            {{product.subtitle}}
+          </div>
+          <!-- item-color 는 안 하기로 결정-->
+
+          <!-- price -->
+          <div>{{product.price}}</div>
+        </div>
+      </div>
     </div>
-
-=======
->>>>>>> bcc41a2e7bdf2ab2600bad14e7b5ba04b481c7e2
-    <nav>
-      <!-- upper-nav -->
-      <div class="nav-upper flex-box">
-        <ul class="flex-box top-nav">
-          <li>
-            <a href="/"><span>Nike</span></a>
-          </li>
-          <li>
-            <a href=""><span>Nike Membership</span></a>
-          </li>
-          <li>
-            <a href="">
-              <div class="img-wrppaer"><img src="" alt="조던로고" /></div>
-            </a>
-          </li>
-          <li>
-            <a href=""><span>converse</span></a>
-          </li>
-        </ul>
-        <ul class="flex-box" id="nav-guide">
-          <li>
-            <a href=""><span>회원가입 / 로그인</span></a>
-          </li>
-          <li>
-            <a href=""><span>고객센터</span></a>
-          </li>
-          <li>
-            <a href=""><span>쇼핑카트 아이콘</span></a>
-          </li>
-          <li>
-            <a href=""><span>대한민국</span></a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- lower nav -->
-      <div class="nav-lower flex-box">
-        <div class="nikeLogo">
-          <div class="logo-wrapper">
-            <a href="/">
-              <img
-                src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
-                alt="나이키 로고"
-              />
-            </a>
-          </div>
-        </div>
-
-        <!-- main nav -->
-        <ul class="mainNav flex-box">
-          <li>
-            <a href=""><span>new releases</span></a>
-          </li>
-          <li>
-            <a href=""><span>men</span></a>
-          </li>
-          <li>
-            <a href=""><span>women</span></a>
-          </li>
-          <li>
-            <a href=""><span>kids</span></a>
-          </li>
-        </ul>
-        <div class="search flex-box">
-          <button class="hide"></button>
-          <input type="text" placeholder="검색" class="search-input" />
-        </div>
-      </div>
-    </nav>
-
-    <!-- left-sidebar -->
-    <aside>
-      <div class="category-filter-box">
-        <ul class="category-wrapper">
-          <li>
-            <a href=""><span>라이프스타일</span></a>
-          </li>
-          <li>
-            <a href=""><span>러닝</span></a>
-          </li>
-          <li>
-            <a href=""><span>트레이닝 & 짐</span></a>
-          </li>
-          <li>
-            <a href=""><span>조던</span></a>
-          </li>
-          <li>
-            <a href=""><span>축구</span></a>
-          </li>
-          <li>
-            <a href=""><span>골프</span></a>
-          </li>
-          <li>
-            <a href=""><span>테니스</span></a>
-          </li>
-          <li>
-            <a href=""><span>샌들 & 슬리퍼</span></a>
-          </li>
-        </ul>
-        <ul>
-          <div>
-            <span>신발 사이즈</span>
-            <button>접기</button>
-          </div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div><div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div><div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-          <div>220</div>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- product section -->
-    <section class="product">
-      <div class="product-box">
-        <div class="product-wrapper flex-box">
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CQ0912-100/ec676c48-584d-4ec0-9e53-f8d0cff9f021_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CW1408-001/66ffb05a-efd5-4a32-bee9-8c104ade0b09_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CJ1794-600/61e69820-b12c-4cd0-99de-41e33b96c1e3_first.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CQ0912-100/ec676c48-584d-4ec0-9e53-f8d0cff9f021_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CW1408-001/66ffb05a-efd5-4a32-bee9-8c104ade0b09_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CJ1794-600/61e69820-b12c-4cd0-99de-41e33b96c1e3_first.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CQ0912-100/ec676c48-584d-4ec0-9e53-f8d0cff9f021_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CW1408-001/66ffb05a-efd5-4a32-bee9-8c104ade0b09_primary.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-          <div class="card">
-            <!-- product img -->
-            <div class="img-wrapper">
-              <a href="">
-                <img
-                  src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CJ1794-600/61e69820-b12c-4cd0-99de-41e33b96c1e3_first.jpg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <!-- item-title-->
-              <div class="item-title">나이키 에어맥스 90 VDAY</div>
-              <!-- sub-title -->
-              <div class="item-subtitle color-light-gray">
-                여성 신발 라이프스타일
-              </div>
-              <!-- item-color -->
-              <div class=" item-color color-light-gray">
-                1 컬러
-              </div>
-              <!-- price -->
-              <div>149,000원</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </body>
-</html>
+  </div>
+</section>
+{% endblock content %}
