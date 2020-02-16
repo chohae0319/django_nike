@@ -3,7 +3,6 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from .models import Category, Product, ProductImage, Inventory
 
 
-
 def index(request):
     return render(
         request,
@@ -21,14 +20,6 @@ class CategoryDetail(DetailView):
         context['product_list'] = Product.objects.filter(category_id=self.object.pk)
 
         return context
-
-
-def product(request):
-    return render(request, 'product/product.html', {})
-
-
-def sign_up(request):
-    return render(request, 'product/sign-up.html', {})
 
 
 def cart(request):
