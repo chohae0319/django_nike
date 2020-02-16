@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from .models import Category, Product, ProductImage, Inventory
 
-# Create your views here.
-
 
 def index(request):
     return render(
@@ -13,12 +11,15 @@ def index(request):
     )
 
 
-def product(request):
-    return render(request, 'product/product.html', {})
+class CategoryDetail(DetailView):
+    model = Product
+    template_name = 'product/product.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDetail, self).get_context_data(**kwargs)
+        context['product_list'] = Product.objects.filter(category_id=self.object.pk)
 
-def sign_up(request):
-    return render(request, 'product/sign-up.html', {})
+        return context
 
 
 def cart(request):
@@ -31,6 +32,7 @@ def detail(request):
 
 class ProductDetail(DetailView):
     model = Product
+    template_name = 'product/detail.html'
 
     def get_context_data(self, **kwargs):
         # 기본 구현을 호출해 context(product)를 가져온다.
