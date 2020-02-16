@@ -59,6 +59,3 @@ def my_profile(request):
 
     return render(request, 'profile.html', context)
 
-
-
-

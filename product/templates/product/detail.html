@@ -7,40 +7,40 @@
     <!-- left img view -->
     <div class="detail-img-gallery">
       <div class="detail-img-wrapper">
-        <a href=""
-          ><img
-            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD0881-103/a893445e-c7c5-4b3f-a90e-31ff643728a7_primary.jpg?browse"
-            alt="이미지 상세 보기"
-        /></a>
+        <a href=""><img src="{{ product.thumbnail.url }}" alt="이미지 상세 보기"/></a>
       </div>
+      {% for p in product_image %}
+      <div class="detail-img-wrapper">
+        <a href=""><img src="{{ p.image.url }}" alt="이미지 상세 보기"/></a>
+      </div>
+      {% endfor %}
     </div>
     <!-- right 상세 설정 -->
     <div class="detail-selection">
       <div class="detail-product-info">
         <div class="detail-item-tilte">
-          <span>남성 신발 라이프스타일{{product.subtitle}}</span>
-          <span>139,000{{product.price}}</span>
-          <h2>나이키 에어맥스 90 {{product.title}}</h2>
+          <span>{{ category }}</span>
+          <span>{{ product.price }}</span>
+          <h2>{{ product.name }}</h2>
         </div>
         <!-- size select -->
         <div class="size-select">
           <h3>사이즈 선택</h3>
-          <form method="POST" action="">
+          <form id="order-form">
+            {% for i in inventory %}
             <span>
-              <label for="260">260</label>
-              <input type="radio" name="size" id="260" value="260" />
+              <label for="{{ i.pk }}">{{ i.size }}</label>
+              <input type="radio" name="inventory" id="{{ i.pk }}" value="{{ i.pk }}" />
             </span>
-            <span>
-              <label for="270">270</label>
-              <input type="radio" name="size" id="270" value="270" />
-            </span>
+            {% endfor %}
             <div class="detail-num">
-              <span>{{num}}</span>
+              <span><input type="text" name="quantity" value="1" /></span>
               <button>+</button>
               <button>-</button>
             </div>
             <div>
-              <button type="submit">바로구매</button>
+              <button>바로구매</button>
+              <button id="cart-btn">장바구니</button>
             </div>
           </form>
         </div>
@@ -63,4 +63,31 @@
     </div>
   </div>
 </section>
+
+<script>
+    $(document).ready(function() {
+        $("#cart-btn").on('click', function() {
+            var inventory_id = $('input[name="inventory"]:checked').val();
+            var quantity = $('input[name="quantity"]').val();
+
+            if(inventory_id == null) {
+              alert("사이즈를 선택해주세요");
+              return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/add-cart/",
+                data: {inventory: inventory_id,
+                    quantity: quantity,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(response) {
+                    var answer = response.result;
+                    if (answer == 'success') alert("장바구니에 담겼습니다");
+                    else if (answer == 'no user') alert("로그인하세요!");
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -20,31 +20,33 @@
   </div>
   <div class="cart-contents">
     <ul class="cart-list-wrapper">
+      {% for c in cart %}
       <li>
         <div class="cart-itemimg-wrapper">
           <img
-            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4373-100/a00136d2-e708-439f-b175-beecf51e5009_primary.jpg?option"
+            src="{{ c.inventory_id.product_id.thumbnail.url }}"
             alt="아이템1"
           />
         </div>
         <div class="cart-item-detail">
           <ul>
-            <li>나이키 리액트 비전</li>
-            <li>스타일 : CD4373-100</li>
-            <li>사이즈 : 260</li>
-            <li>수량 : 1</li>
+            <li>{{ c.inventory_id.product_id.name }}</li>
+            <li>스타일 : {{ c.inventory_id.product_id.style }}</li>
+            <li>사이즈 : {{ c.inventory_id.size }}</li>
+            <li>수량 : {{ c.quantity }}</li>
           </ul>
         </div>
         <div class="cart-item-option">
           <a href=""><span>옵션 변경</span></a>
         </div>
         <div class="cart-item-price">
-          <span>149,000원</span>
+          <span>{{ c.inventory_id.product_id.price }}</span>
         </div>
         <div class="cart-item-delete">
           <i class="xi-close"></i>
         </div>
       </li>
+      {% endfor %}
       <li>
         <div class="cart-itemimg-wrapper">
           <img

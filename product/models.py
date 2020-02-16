@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -11,8 +12,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     # 상품번호, 상품명, 상품가격, 카테고리번호, (총재고량), 출시일, 판매량, 썸네일 이미지
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=30, unique=True)
     price = models.IntegerField()
+    style = models.CharField(max_length=10, blank=True)    # 상품번호. 나중에 blank=false로 바꿀예정
     category_id = models.ForeignKey(Category, on_delete=models.PROTECT)  # 카테고리에 속한 상품 존재하면 카테고리 삭제 불가
     soldout = models.BooleanField(default=False)   # 재고 있으면 False, 품절이면 True
     release_date = models.DateField()
@@ -38,3 +40,11 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return '{} image'.format(self.product_id)
+
+class Cart(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    inventory_id = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return '{} - {}'.format(self.user_id, self.inventory_id)

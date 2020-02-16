@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+        <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -22,11 +24,35 @@
 <p>{{ p.size }}</p>
 {% endfor %}
 
-<form action="" method="post">
-    <input type="text" name="size" value="230"/>
-    <input type="text" name="quantity" value="2"/>
-    <input type="text" name="size" value="{{ product.name }}"/>
+<form>
+    <input type="text" id="user-id" value="1"/>
+    <input type="text" id="inventory-id" value="1"/>
+    <input type="text" id="quantity" value="2"/>
+    <button type="button" id="cart-btn">장바구니</button>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#cart-btn").on('click', function() {
+            var user_id = $("#user-id").val();
+            var inventory_id = $("#inventory-id").val();
+            var quantity = $("#quantity").val();
+            $.ajax({
+                type: "POST",
+                url: "/add-cart/",
+                data: {user: user_id,
+                    inventory: inventory_id,
+                    quantity: quantity,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(data) {
+                    var answer = data.result;
+                    alert(answer);
+                }
+            });
+            return false;
+        });
+    });
+</script>
 
 </body>
 </html>
