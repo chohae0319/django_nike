@@ -6,8 +6,6 @@ from django.http import HttpResponse
 
 import json
 
-# Create your views here.
-
 
 def index(request):
     return render(
@@ -17,12 +15,15 @@ def index(request):
     )
 
 
-def product(request):
-    return render(request, 'product/product.html', {})
+class CategoryDetail(DetailView):
+    model = Product
+    template_name = 'product/product.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDetail, self).get_context_data(**kwargs)
+        context['product_list'] = Product.objects.filter(category_id=self.object.pk)
 
-def sign_up(request):
-    return render(request, 'product/sign-up.html', {})
+        return context
 
 
 # def cart(request):

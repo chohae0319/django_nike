@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
     />
-
+    
     <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/nav.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
@@ -99,27 +99,6 @@
         <!-- main nav -->
         <ul class="mainNav flex-box">
           <li class="dropdown-box">
-            <a href="/product/"><span>new releases</span></a>
-            <!-- dropdown -->
-            <div class="dropdown-wrapper">
-              <div class="nav-list-wrapper">
-                <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li>THE BEST</li>
-                  <li>SALE</li>
-                </ul>
-                <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-box">
             <a href="/product/"><span>men</span></a>
             <!-- dropdown -->
             <div class="dropdown-wrapper">
@@ -130,16 +109,11 @@
                   <li>SALE</li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
-                  <li>라이프스타일</li>
+                  <li class="list-title">신발</li>
+                  <a href="{% url 'products:list' 2 %}" ><li>라이프스타일</li></a>
                   <li>러닝</li>
-                  <li>트레이닝 & 짐</li>
                   <li>농구</li>
-                  <li>조던</li>
                   <li>축구</li>
-                  <li>스케이트보딩</li>
-                  <li>골프</li>
-                  <li>테니스</li>
                   <li>샌들 & 슬리퍼</li>
                 </ul>
                 <ul class="nav-list sports">
