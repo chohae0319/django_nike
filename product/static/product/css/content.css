@@ -76,8 +76,7 @@ section {
   /* background-color: rosybrown; */
 }
 
-#sign-up > h1,
-#sign-in > h1 {
+#sign-up > h1 {
   width: 380px;
   margin: 20px auto 0 auto;
   text-align: center;
@@ -87,7 +86,7 @@ section {
 #sign-in .form-box-signIn {
   /* border: 1px solid; */
   width: 380px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
 }
 #sign-up .form-box-signUp p {
   margin: 10px 0;
@@ -109,9 +108,58 @@ section {
 }
 
 /* sign-in */
+.sign-in-header {
+  width: 380px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-box-signIn {
   margin-top: 20px;
 }
+
+.sign-in-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: rgb(229, 229, 229);
+}
+.sign-in-footer a {
+  color: black;
+  text-decoration: underline;
+}
+
+/* already-login */
+.already-login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 108px;
+  width: 100%;
+  height: 40vh;
+  font-size: 14px;
+}
+.already-login a {
+  display: inline-block;
+  width: 85.77px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: black;
+  color: #fff;
+}
+.already-login h2 {
+  font-size: 24px;
+  margin: 15px 0;
+}
+.already-login span {
+  margin: 20px 0;
+}
+
 
 /* cart */
 #cart {
