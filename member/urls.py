@@ -1,6 +1,6 @@
 from django.urls import path
 # from . import views
-from .views import signup, login, logout, profile
+from .views import signup, login, logout, profile, order
 
 app_name = 'member'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
     path('profile/', profile, name='profile'),
+    path('order/', order, name='order'),
 ]
