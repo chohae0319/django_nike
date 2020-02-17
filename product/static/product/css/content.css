@@ -26,13 +26,21 @@ section {
 .card {
   border: 1px solid;
   width: 300px;
-  height: 325px;
   margin-bottom: 80px;
 }
 
 .card .img-wrapper {
   width: 300px;
   height: 300px;
+}
+
+.card .item-info {
+  padding: 10px 0 0 10px;
+}
+
+.card .item-subtitle {
+  color: rgb(96, 96, 96);
+  padding: 0 0 10px 10px;
 }
 
 /* detail */
@@ -63,88 +71,52 @@ section {
   left: 0;
 }
 
-/* cart */
-#cart {
-  width: 100%;
-}
-
 /* sign-up */
 #sign-up {
-  width: 420px;
+  /* background-color: rosybrown; */
+}
+
+#sign-up > h1,
+#sign-in > h1 {
+  width: 380px;
+  margin: 20px auto 0 auto;
+  text-align: center;
+}
+
+#sign-up .form-box-signUp,
+#sign-in .form-box-signIn {
+  /* border: 1px solid; */
+  width: 380px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
+#sign-up .form-box-signUp p {
+  margin: 10px 0;
 }
 
-#sign-up h1 {
-  text-align: center;
-  font-weight: 600;
-}
-
-/* sns-box */
-.sns-box {
-  margin: 0.7rem 0;
-}
-.sns {
-  width: 420px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-}
-.sns span {
-  line-height: 40px;
-}
-.sns-kakao {
-  background-color: rgb(254, 235, 74);
-  margin-top: 15px;
-}
-.sns-facebook {
-  background-color: rgb(36, 84, 136);
-  color: #fff;
-  margin: 15px 0;
-}
-
-#sign-up form {
-  width: 420px;
-  display: flex;
-  flex-direction: column;
-}
-#sign-up .hr {
-  border-top: 0.5px solid rgb(229, 229, 229);
-  height: 5px;
-}
-
-#sign-up .hr span {
-  position: relative;
-  display: inline-block;
-  background-color: #fff;
-  min-width: 100px;
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-#sign-up form input {
-  padding: 9px 12px;
-  height: 40px;
-  margin-top: 0.7rem;
+.sign-up-input,
+.sign-in-input {
+  width: 380px;
+  height: 44px;
   border: 0.5px solid rgb(229, 229, 229);
+  padding: 9px 12px;
 }
 
-#sign-up form button[type="submit"] {
-  margin-top: 0.5rem;
-  border: none;
+.form-box-signUp input[type="submit"],
+.form-box-signIn input[type="submit"] {
+  margin-top: 20px;
   background-color: black;
   color: #fff;
 }
 
-#sign-up form button[type="submit"]:hover {
-  background-color: rgb(52, 52, 52);
+/* sign-in */
+.form-box-signIn {
+  margin-top: 20px;
 }
 
+/* cart */
+#cart {
+  width: 100%;
+}
 /* cart */
 #cart .cart-header {
   border: 1px solid;

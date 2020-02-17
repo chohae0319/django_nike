@@ -30,7 +30,6 @@ nav li a {
   line-height: 38px;
   overflow-y: hidden;
 }
-/* 로고 추가했습니다. */
 #jordan-logo {
   position: relative;
   top: 6px;
@@ -150,8 +149,7 @@ button.hide {
   font-size: 13px;
 }
 .nav-list-wrapper ul li {
-  /* font-size: 12px; */
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .nav-list-wrapper ul + ul {
   border-left: 1px solid rgb(229, 229, 229);
