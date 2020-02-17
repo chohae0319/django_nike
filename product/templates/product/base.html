@@ -59,7 +59,9 @@
         <ul class="flex-box" id="nav-guide">
           <li>
             {% if user.is_authenticated %}
-            <a href="/member/profile/"><span>{{ user.username }}님 환영합니다</span></a>
+            <a href="/member/profile/"
+              ><span>{{ user.username }}님 환영합니다</span></a
+            >
             <a href="/member/logout/"><span>로그아웃</span></a>
             {% else %}
             <!-- 로그인 안 했을 경우 -->
@@ -108,7 +110,9 @@
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title">신발</li>
-                  <a href="{% url 'products:list' 2 %}" ><li>라이프스타일</li></a>
+                  <li>
+                    <a href="{% url 'products:list' 2 %}">라이프스타일</a>
+                  </li>
                   <li>러닝</li>
                   <li>농구</li>
                   <li>축구</li>
