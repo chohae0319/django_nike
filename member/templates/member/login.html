@@ -1,0 +1,23 @@
+{% extends "product/base.html" %}
+
+<!-- sign-in content -->
+{% block content %}
+<section class="cover" id="sign-in">
+  <div class="logo-wrapper"><img src="" alt="나이키로고" /></div>
+  <h1>나이키 로그인</h1>
+
+  {% if login_form %}
+  <form method="POST" class="form-box-signIn">
+    {% csrf_token %} {{ login_form.as_p }}
+    <input type="submit" value="로그인" />
+  </form>
+  {% else %}
+  <div>{{ message }}</div>
+  <a href="/member/login/"
+    ><button type="button" class="btn btn-primary">
+      go back
+    </button>
+  </a>
+  {% endif %}
+</section>
+{% endblock %}

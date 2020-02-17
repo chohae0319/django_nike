@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('', include('product.urls')),
     path('admin/', admin.site.urls),
+    path('member/', include('member.urls')),
 ]
 
 # 이미지 파일에 대한 path 추가
