@@ -18,14 +18,16 @@
     <div class="detail-selection">
       <div class="detail-product-info">
         <div class="detail-item-tilte">
-          <span>남성 신발 라이프스타일</span>
-          <span>{{product.price}}</span>
-          <h2>{{product.name}}</h2>
+          <div class="detail-title-header">
+            <span>남성 신발 라이프스타일{{product.subtitle}}</span>
+            <span class="big-title">139,000{{product.price}}</span>
+          </div>
+          <h2 class="big-title">나이키 에어맥스 90 {{product.title}}</h2>
         </div>
         <!-- size select -->
-        <div class="size-select">
-          <h3>사이즈 선택</h3>
-          <form method="POST" action="">
+        <div class="order-box">
+          <div class="size-wrapper">
+            <h3>사이즈 선택</h3>
             <span>
               <label for="260">260</label>
               <input type="radio" name="size" id="260" value="260" />
@@ -35,14 +37,15 @@
               <input type="radio" name="size" id="270" value="270" />
             </span>
             <div class="detail-num">
-              <span>{{num}}</span>
-              <button>+</button>
-              <button>-</button>
+              <span id="numOfItems"></span>
+              <button id="increaseNum">+</button>
+              <button id="decreaseNum">-</button id="decreaseNum">
             </div>
-            <div>
-              <button type="submit">바로구매</button>
-            </div>
-          </form>
+          </div>
+          <div id="order-wrapper">
+            <a href="" class="round-btn-big">바로구매</a>
+            <a href="" class="round-btn-big white">장바구니 담기</a>
+          </div>
         </div>
       </div>
     </div>
