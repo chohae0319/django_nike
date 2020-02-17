@@ -49,29 +49,30 @@
 <section id="product">
   <div class="product-box">
     <div class="product-wrapper flex-box">
+    {% for product in product_list %}
       <div class="card">
         <!-- product img -->
         <div class="img-wrapper">
-          <a href="/detail/">
+          <a href="{% url 'products:detail' product.pk %}">
             <img
-              src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD0881-103/a893445e-c7c5-4b3f-a90e-31ff643728a7_primary.jpg?browse"
+              src="{{product.thumbnail.url}}"
               alt="상품1 이미지"
             />
           </a>
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title">{{product.title}}</div>
+          <div class="item-title">{{product.name}}</div>
           <!-- sub-title -->
           <div class="item-subtitle color-light-gray">
-            {{product.subtitle}}
+            남자 신발 라이프스타일
           </div>
           <!-- item-color 는 안 하기로 결정-->
-
           <!-- price -->
           <div>{{product.price}}</div>
         </div>
       </div>
+     {% endfor %}
     </div>
   </div>
 </section>
