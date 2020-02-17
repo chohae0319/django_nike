@@ -1,6 +1,7 @@
 section {
   position: relative;
   z-index: 1;
+  max-width: 960px;
   top: 108.5px;
   left: 288px;
   min-height: 100vh;
@@ -8,7 +9,36 @@ section {
 /* landing-section */
 .cover {
   left: 0;
+  min-width: 100%;
 }
+/* --------------------------------------------------------------  index mainpage*/
+#index .main-card {
+  width: 1185px;
+  margin-bottom: 40px;
+}
+
+#index .card-comment-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1185px;
+}
+
+.card-comment-box .card-comment-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card-comment-header p {
+  font-size: 16px;
+}
+
+#index .main-card video {
+  width: 1185px;
+}
+
+/* -------------------------------------------------------------- product */
 
 /* product */
 #product {
@@ -19,12 +49,10 @@ section {
 .product-wrapper {
   flex-wrap: wrap;
   justify-content: space-around;
-  border: 1px solid;
 }
 
 /* card */
 .card {
-  border: 1px solid;
   width: 300px;
   margin-bottom: 80px;
 }
@@ -42,25 +70,48 @@ section {
   color: rgb(96, 96, 96);
   padding: 0 0 10px 10px;
 }
-
+/* -------------------------------------------------------------- detail*/
 /* detail */
+section#detail{
+  padding: 20px;
+}
 #detail .detail-header {
   display: flex;
   width: 100%;
 }
 
 .detail-img-gallery {
-  width: 720px;
+  width: 840px;
   padding: 0 54px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .detail-img-wrapper {
   width: 348px;
   height: 348px;
+  margin: 0 10px 10px 0;
 }
 
 .detail-selection {
   width: 449px;
+}
+
+.detail-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.size-wrapper {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#order-wrapper {
+  margin-top: 40px;
+}
+#order-wrapper a + a {
+  margin-top: 10px;
 }
 
 .detail-view-wrap iframe {
@@ -71,11 +122,8 @@ section {
   left: 0;
 }
 
+/* -------------------------------------------------------------- sign-up */
 /* sign-up */
-#sign-up {
-  /* background-color: rosybrown; */
-}
-
 #sign-up > h1 {
   width: 380px;
   margin: 20px auto 0 auto;
@@ -107,6 +155,7 @@ section {
   color: #fff;
 }
 
+/* -------------------------------------------------------------- sign-in*/
 /* sign-in */
 .sign-in-header {
   width: 380px;
@@ -159,8 +208,7 @@ section {
 .already-login span {
   margin: 20px 0;
 }
-
-
+/* -------------------------------------------------------------- cart */
 /* cart */
 #cart {
   width: 100%;
@@ -263,4 +311,38 @@ section {
   text-align: center;
   border: none;
   color: #fff;
+}
+
+/* -------------------------------------------------------------- prfile mypage */
+/* profile */
+/* member안에 있는 css 폴더로 옮겨야 함 */
+section#profile > div {
+  border-bottom: 1px solid #e0e0e0;
+}
+.profile-list-title {
+  padding: 30px 0;
+}
+
+.profile-list-view {
+  text-align: center;
+  padding: 50px 0;
+}
+#profile-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-cart a {
+  display: inline-block;
+  background-color: black;
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+
+  /* margin */
+  margin-top: 20px;
 }
