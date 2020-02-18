@@ -49,6 +49,11 @@ def logout(request):
 
 
 def profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = {
+        'my_orders': my_orders
+    }
     return render(request, 'member/profile.html', {})
 
 
@@ -56,11 +61,4 @@ def order(request):
     return render(request, 'member/profile-orders.html', {})
 
 
-def my_profile(request):
-    my_user_profile = Profile.objects.filter(user=request.user).first()
-    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
-    context = {
-        'my_orders': my_orders
-    }
-
-    return render(request, 'profile.html', context)
+# 기존에 있던 profile_view 파일 삭제
