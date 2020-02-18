@@ -1,5 +1,4 @@
-{% extends "product/base.html" %}
-{% load humanize %}
+{% extends "product/base.html" %} {% load humanize %}
 
 <!-- content -->
 {% block content %}
@@ -8,7 +7,9 @@
     <!-- left img view -->
     <div class="detail-img-gallery">
       <div class="detail-img-wrapper">
-        <a href=""><img src="{{ product.thumbnail.url }}" alt="이미지 상세 보기"/></a>
+        <a href=""
+          ><img src="{{ product.thumbnail.url }}" alt="이미지 상세 보기"
+        /></a>
       </div>
       {% for p in product_image %}
       <div class="detail-img-wrapper">
@@ -33,18 +34,27 @@
             {% for i in inventory %}
             <span>
               <label for="{{ i.pk }}">{{ i.size }}</label>
-              <input type="radio" name="inventory" id="{{ i.pk }}" value="{{ i.pk }}" />
+              <input
+                type="radio"
+                name="inventory"
+                id="{{ i.pk }}"
+                value="{{ i.pk }}"
+              />
             </span>
             {% endfor %}
             <div class="detail-num">
-              <span id="numOfItems"><input type="text" name="quantity" value="1" /></span>
+              <span id="numOfItems"
+                ><input type="text" name="quantity" value="1"
+              /></span>
               <button id="increaseNum">+</button>
               <button id="decreaseNum">-</button>
             </div>
           </div>
           <div id="order-wrapper">
             <a href="" class="round-btn-big">바로구매</a>
-            <a href="" class="round-btn-big white" id="cart-btn">장바구니 담기</a>
+            <a href="" class="round-btn-big white" id="cart-btn"
+              >장바구니 담기</a
+            >
           </div>
         </div>
       </div>
@@ -66,31 +76,53 @@
     </div>
   </div>
 </section>
-
+<div class="modal-cover">
+  <div class="mini-cart">
+    <div class="mini-cart-card">
+      <div class="mini-image-wrapper">
+        <a href=""><img src="{{ product.thumbnail.url }}" alt="미니썸네일"></a>
+      </div>
+      <div class="mini-cart-detail">
+        <span>{{ product.name }}</span>
+        <span>{{ category.name }}</span>
+        <span>사이즈</span>
+        <span>수량</span>
+        <span>{{ product.price|intcomma }}</span>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
-    $(document).ready(function() {
-        $("#cart-btn").on('click', function() {
-            var inventory_id = $('input[name="inventory"]:checked').val();
-            var quantity = $('input[name="quantity"]').val();
+  $(document).ready(function() {
+    $("#cart-btn").on("click", function() {
+      var inventory_id = $('input[name="inventory"]:checked').val();
+      var quantity = $('input[name="quantity"]').val();
 
-            if(inventory_id == null) {
-              alert("사이즈를 선택해주세요");
-              return;
-            }
+      if (inventory_id == null) {
+        alert("사이즈를 선택해주세요");
+        return;
+      }
 
-            $.ajax({
-                type: "POST",
-                url: "{% url 'products:add-cart' %}",
-                data: {inventory: inventory_id,
-                    quantity: quantity,
-                    csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(response) {
-                    var answer = response.result;
-                    if (answer == 'success') alert("장바구니에 담겼습니다");
-                    else if (answer == 'no user') alert("로그인하세요!");
-                }
-            });
-        });
+      $.ajax({
+        type: "POST",
+        url: "{% url 'products:add-cart' %}",
+        data: {
+          inventory: inventory_id,
+          quantity: quantity,
+          csrfmiddlewaretoken: "{{ csrf_token }}"
+        },
+        success: function(response) {
+          var answer = response.result;
+          if (answer == "success") {
+            $(".modal-cover").addClass("on-modal");
+          } else if (answer == "no user") alert("로그인하세요!");
+        }
+      });
     });
+    // 검정화면 클릭시 모달 끄기
+    $(".modal-cover").on("click", function() {
+      $(this).removeClass("on-modal");
+    });
+  });
 </script>
 {% endblock %}
