@@ -55,16 +55,12 @@ def profile(request):
     context = {
         'my_orders': my_orders
     }
-<<<<<<< HEAD
     return render(request, 'member/profile.html', {'context':context})
-=======
-    return render(request, 'member/profile.html', {})
->>>>>>> 19dcab486c05c0adc0a86d81934064ac60d08f1d
 
 
 def order(request):
     return render(request, 'member/profile-orders.html', {})
-<<<<<<< HEAD
+
 
 @login_required
 def user_info_update(request):
@@ -94,7 +90,4 @@ def user_info_password(request):
     else:
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
-=======
 
-# 기존에 있던 profile_view 파일 삭제
->>>>>>> 19dcab486c05c0adc0a86d81934064ac60d08f1d
