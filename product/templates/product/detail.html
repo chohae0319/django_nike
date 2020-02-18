@@ -20,14 +20,16 @@
     <div class="detail-selection">
       <div class="detail-product-info">
         <div class="detail-item-tilte">
-          <span>{{ category.name }}</span>
-          <span>{{ product.price|intcomma }}</span>
-          <h2>{{ product.name }}</h2>
+          <div class="detail-title-header">
+            <span>{{ category.name }}</span>
+            <span class="big-title">{{ product.price|intcomma }}</span>
+          </div>
+          <h2 class="big-title">{{ product.name }}</h2>
         </div>
         <!-- size select -->
-        <div class="size-select">
-          <h3>사이즈 선택</h3>
-          <form id="order-form">
+        <div class="order-box">
+          <div class="size-wrapper">
+            <h3>사이즈 선택</h3>
             {% for i in inventory %}
             <span>
               <label for="{{ i.pk }}">{{ i.size }}</label>
@@ -35,15 +37,15 @@
             </span>
             {% endfor %}
             <div class="detail-num">
-              <span><input type="text" name="quantity" value="1" /></span>
-              <button>+</button>
-              <button>-</button>
+              <span id="numOfItems"><input type="text" name="quantity" value="1" /></span>
+              <button id="increaseNum">+</button>
+              <button id="decreaseNum">-</button>
             </div>
-            <div>
-              <button>바로구매</button>
-              <button id="cart-btn">장바구니</button>
-            </div>
-          </form>
+          </div>
+          <div id="order-wrapper">
+            <a href="" class="round-btn-big">바로구매</a>
+            <a href="" class="round-btn-big white" id="cart-btn">장바구니 담기</a>
+          </div>
         </div>
       </div>
     </div>

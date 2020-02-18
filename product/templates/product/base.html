@@ -18,6 +18,8 @@
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+    <!-- 회원가입, 로그인 페이지 js -->
+    <script src="{% static 'product/js/sign-up.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
@@ -40,7 +42,7 @@
             <a href="">
               <div id="jordan-logo">
                 <img
-                  src="../../static/img/스크린샷 2020-02-12 오후 8.54.47.png"
+                  src="../../static/product/img/스크린샷 2020-02-12 오후 8.54.47.png"
                   alt="조던로고"
                 />
               </div>
@@ -56,18 +58,15 @@
           </li>
         </ul>
         <ul class="flex-box" id="nav-guide">
-          <!-- 로그인 안 했을 경우 -->
-
           <li>
-            <a href="/sign-up/"><span>회원가입</span></a>
-            <span id="signOpen">/ 로그인</span>
+            {% if user.is_authenticated %}
+            <span id="user-profile">{{ user.username }}</span>
+            {% else %}
+            <!-- 로그인 안 했을 경우 -->
+            <a href="/member/signup/"><span>회원가입</span></a>
+            <a href="/member/login/"><span>/ 로그인</span></a>
+            {% endif %}
           </li>
-          <!-- 로그인 했을 경우 -->
-          <li>
-            <a href=""><span>회원이름</span></a>
-          </li>
-          <!-- login modal -->
-
           <li>
             <a href=""><span>고객센터</span></a>
           </li>
@@ -109,7 +108,9 @@
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title">신발</li>
-                  <a href="{% url 'products:list' 2 %}" ><li>라이프스타일</li></a>
+                  <li>
+                    <a href="{% url 'products:list' 2 %}">라이프스타일</a>
+                  </li>
                   <li>러닝</li>
                   <li>농구</li>
                   <li>축구</li>
@@ -198,53 +199,8 @@
     </nav>
 
     <!-- nav js -->
-    <script src="{% static 'js/nav.js' %}"></script>
-    <!-- modal box -->
-    <div class="modal-wrapper" style="display: none;">
-      <div class="modal">
-        <div class="logo-wrapper">
-          <img
-            src="https://t1.daumcdn.net/cfile/tistory/2425A9455747DAB308"
-            alt="나이키 로고"
-          />
-        </div>
-        <button id="signClose">X</button>
-
-        <h2>나이키 로그인</h2>
-        <form action="post" class="sign-in-modal flex-col">
-          <input type="text" placeholder="아이디" class="sign-in" />
-          <input type="password" placeholder="비밀번호" class="sign-in" />
-          <div class="sign-in-find">
-            <label
-              ><input type="checkbox" />
-              로그인 유지하기
-            </label>
-            <a href=""><span>아이디/비밀번호 찾기</span></a>
-          </div>
-          <button type="submit" class="sns">
-            <span>로그인</span>
-          </button>
-          <div class="sns-box">
-            <div class="sns-kakao sns">
-              <a href=""><span>카카오 계정 로그인</span></a>
-            </div>
-            <div class="sns-facebook sns">
-              <a href=""><span>페이스북 계정으로 로그인</span></a>
-            </div>
-          </div>
-        </form>
-        <div class="sign-in-footer">
-          <div class="sign-footer-box">
-            <span>회원이 아니신가요?</span>
-            <a href="/sign-up/"><span>회원가입</span></a>
-          </div>
-          <div class="sign-footer-box">
-            <a href=""><span>비회원 주문 조회</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="{% static 'product/js/nav.js' %}"></script>
+    <!-- modal 로그인이 필요가 없어져서 삭제 -->
     {% endblock %}
 
     <!-- aside -->
