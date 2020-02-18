@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', include('product.urls')),
+    path('member/', include('member.urls')),    # member app에 대한 url 추가(일단 임시로..)
     path('admin/', admin.site.urls),
     path('member/', include('member.urls')),
 ]

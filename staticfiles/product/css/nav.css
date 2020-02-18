@@ -30,7 +30,6 @@ nav li a {
   line-height: 38px;
   overflow-y: hidden;
 }
-/* 로고 추가했습니다. */
 #jordan-logo {
   position: relative;
   top: 6px;
@@ -150,8 +149,7 @@ button.hide {
   font-size: 13px;
 }
 .nav-list-wrapper ul li {
-  /* font-size: 12px; */
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .nav-list-wrapper ul + ul {
   border-left: 1px solid rgb(229, 229, 229);
@@ -227,8 +225,38 @@ button.hide {
   background-color: #ffffff;
   transition: ease 0.5s;
 }
+/* profile-toggle */
+#user-profile {
+  cursor: pointer;
+}
+#user-profile:hover {
+  color: black;
+}
 
-@media screen and (max-width: 768px) {
+#user-profile-drop {
+  display: none;
+  position: absolute;
+  top: 38px;
+  right: 130px;
+  width: 150px;
+  background-color: #ffffff;
+  border-radius: 4px 0 4px 4px;
+  font-size: 12px;
+  box-sizing: border-box;
+  line-height: 34px;
+  padding: 31px 32px 26px 32px;
+  border: 1px solid #e0e0e0;
+  color: black;
+  z-index: 2000;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#user-profile-drop.toggle-drop {
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
   .nav-upper {
     width: 0;
     height: 0;
@@ -246,5 +274,8 @@ button.hide {
   #hide-search-icon:focus #hide-search-focus {
     width: 100%;
     height: 100vh;
+  }
+  #user-profile-drop.toggle-drop {
+    display: none;
   }
 }
