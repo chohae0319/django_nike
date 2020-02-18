@@ -20,7 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- 회원가입, 로그인 페이지 js -->
-    <script src="{% static 'product/js/sign-up.js' %}"></script>
+    <script src="{% static 'product/js/member.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
@@ -136,7 +136,7 @@
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
                   <li>신상품</li>
-                  <li>THE BEST</li>
+                  <li><a href="/product/best">THE BEST</a></li>
                   <li>SALE</li>
                 </ul>
                 <ul class="nav-list shoes">
