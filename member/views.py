@@ -60,5 +60,4 @@ def profile(request):
 def order(request):
     return render(request, 'member/profile-orders.html', {})
 
-
 # 기존에 있던 profile_view 파일 삭제
