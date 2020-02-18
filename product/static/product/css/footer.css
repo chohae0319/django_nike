@@ -1,0 +1,32 @@
+/* footer */
+footer {
+  position: relative;
+  top: 108.5px;
+  bottom: 0em;
+  width: 100%;
+  height: 80vh;
+  background-color: black;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.footer-header {
+  display: flex;
+  width: 880px;
+  margin: 0 auto;
+  padding: 60px 0;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.footer-header .col li {
+  margin-top: 8px;
+  color: #999999;
+}
+
+.footer-header .col li:hover {
+  color: #ffffff;
+}
+
+.footer-header .col li.list-title {
+  color: #ffffff;
+}
