@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserCreateForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
+from .forms import UserCreateForm, CustomUserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 from .models import Profile, Order
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -54,10 +55,39 @@ def profile(request):
     context = {
         'my_orders': my_orders
     }
-    return render(request, 'member/profile.html', {})
+    return render(request, 'member/profile.html', {'context':context})
 
 
 def order(request):
     return render(request, 'member/profile-orders.html', {})
 
-# 기존에 있던 profile_view 파일 삭제
+
+@login_required
+def user_info_update(request):
+    if request.method == 'POST':
+        user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
+        if user_change_form.is_valid():
+            user_change_form.save()
+            return redirect('member:profile')
+    else:
+        user_change_form = UserChangeForm(instance=request.user)
+    return render(request, 'member/profile-update.html', {'user_change_form':user_change_form})
+
+@login_required
+def user_info_delete(request):
+    if request.method == 'POST':
+        request.user.delete()
+        return redirect('/')
+    return render(request, 'member/profile-delete.html')
+
+@login_required
+def user_info_password(request):
+    if request.method == 'POST':
+        password_change_form = PasswordChangeForm(request.user, request.POST)
+        if password_change_form.is_valid():
+            password_change_form.save()
+            return redirect('/')
+    else:
+        password_change_form = PasswordChangeForm(request.user)
+    return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
+
