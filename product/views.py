@@ -22,6 +22,26 @@ class CategoryDetail(DetailView):
         return context
 
 
+class BestProductList(DetailView):
+    model = Product
+    template_name = 'product/best.html'
+    # context_object_name = 'product_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(BestProductList, self).get_context_data(**kwargs)
+        # 판매량 내림차순으로 상위 1개 상품 출력.
+        pk = self.kwargs['pk']
+        if pk == 1:
+            category_list = Category.objects.filter(main_class='MEN').values('pk')
+            productlist = []
+            for id in range(len(category_list)):
+                categoryid = category_list[id]['pk']
+                productlist.append(Product.objects.filter(category_id=categoryid).order_by('-sales')[:1])
+                context['product_list'] = productlist
+
+        return context
+
+
 def cart(request):
     return render(request, 'product/cart.html', {})
 

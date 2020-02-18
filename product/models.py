@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Category(models.Model):
-    main_class = models.CharField(max_length=25)
-    sub_class = models.CharField(max_length=25)
+    main_class = models.CharField(max_length=25, unique=False)
+    sub_class = models.CharField(max_length=25, unique=False)
     shoes_sub = models.CharField(max_length=25, blank=True)
 
     def __str__(self):
