@@ -28,10 +28,6 @@ class CategoryDetail(DetailView):
         return context
 
 
-def detail(request):
-    return render(request, 'product/detail.html', {})
-
-
 class ProductDetail(DetailView):
     model = Product
     context_object_name = 'product'   # object name을 product로

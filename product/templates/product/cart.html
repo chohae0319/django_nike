@@ -73,7 +73,7 @@
         <li class="order-info-list">
           <span>총 결제 예정 금액</span><span>{{amount|intcomma}}원</span>
         </li>
-        <a href="">주문하기</a>
+        <a href="" onclick="order()">주문하기</a>
       </ul>
       
     </div>
@@ -119,6 +119,23 @@
         }
         else if (answer == 'no action') {
           window.location.href = "{% url 'products:cart' %}";
+        }
+      }
+    });
+  }
+
+  function order() {
+    var product_list = [];
+    var $product_list = $(".cart-list-wrapper").find("[data-product-item]");
+
+    $.ajax({
+      type: "POST",
+      url: "{% url 'order:ship-info' %}",
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}'},
+      success: function(response) {
+        var answer = response.result;
+        if (answer == 'success') {
+          alert("주문ㅇㅇ");
         }
       }
     });
