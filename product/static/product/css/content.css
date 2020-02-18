@@ -312,6 +312,30 @@ section#detail{
   border: none;
   color: #fff;
 }
+/* cart-modal */
+.modal-cover {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3000;
+  background-color: rgba(0, 0, 0, 0.1);
+  touch-action: none;
+}
+.modal-cover.on-modal {
+  display: flex;
+}
+
+.modal-cover .mini-cart {
+  position: absolute;
+  right: 0;
+  width: 330px;
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: #fff;
+}
 
 /* -------------------------------------------------------------- prfile mypage */
 /* profile */
