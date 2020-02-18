@@ -3,8 +3,6 @@ aside {
   height: 100vh;
   padding: 0 48px;
   position: fixed;
-  box-sizing: border-box;
-  border: 1px solid;
   overflow-y: scroll;
   /* z-index: 99; */
   margin: 108.5px 0 0 0;
@@ -20,4 +18,26 @@ aside::-webkit-scrollbar {
 .category-wrapper li a {
   display: inline-block;
   padding: 7px 0;
+}
+
+#profile-ul {
+  margin-top: 20px;
+  height: 100vh;
+  margin-bottom: 600px;
+  font-size: 14px;
+}
+#profile-ul li {
+  /* background-color: seagreen; */
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0;
+}
+
+#profile-ul li div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#profile-ul li div a {
+  padding-top: 20px;
 }

@@ -1,6 +1,7 @@
 section {
   position: relative;
   z-index: 1;
+  max-width: 960px;
   top: 108.5px;
   left: 288px;
   min-height: 100vh;
@@ -8,7 +9,36 @@ section {
 /* landing-section */
 .cover {
   left: 0;
+  min-width: 100%;
 }
+/* --------------------------------------------------------------  index mainpage*/
+#index .main-card {
+  width: 1185px;
+  margin-bottom: 40px;
+}
+
+#index .card-comment-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1185px;
+}
+
+.card-comment-box .card-comment-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card-comment-header p {
+  font-size: 16px;
+}
+
+#index .main-card video {
+  width: 1185px;
+}
+
+/* -------------------------------------------------------------- product */
 
 /* product */
 #product {
@@ -19,14 +49,11 @@ section {
 .product-wrapper {
   flex-wrap: wrap;
   justify-content: space-around;
-  border: 1px solid;
 }
 
 /* card */
 .card {
-  border: 1px solid;
   width: 300px;
-  height: 325px;
   margin-bottom: 80px;
 }
 
@@ -35,24 +62,56 @@ section {
   height: 300px;
 }
 
+.card .item-info {
+  padding: 10px 0 0 10px;
+}
+
+.card .item-subtitle {
+  color: rgb(96, 96, 96);
+  padding: 0 0 10px 10px;
+}
+/* -------------------------------------------------------------- detail*/
 /* detail */
+section#detail{
+  padding: 20px;
+}
 #detail .detail-header {
   display: flex;
   width: 100%;
 }
 
 .detail-img-gallery {
-  width: 720px;
+  width: 840px;
   padding: 0 54px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .detail-img-wrapper {
   width: 348px;
   height: 348px;
+  margin: 0 10px 10px 0;
 }
 
 .detail-selection {
   width: 449px;
+}
+
+.detail-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.size-wrapper {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#order-wrapper {
+  margin-top: 40px;
+}
+#order-wrapper a + a {
+  margin-top: 10px;
 }
 
 .detail-view-wrap iframe {
@@ -63,88 +122,97 @@ section {
   left: 0;
 }
 
-/* cart */
-#cart {
-  width: 100%;
+/* -------------------------------------------------------------- sign-up */
+/* sign-up */
+#sign-up > h1 {
+  width: 380px;
+  margin: 20px auto 0 auto;
+  text-align: center;
 }
 
-/* sign-up */
-#sign-up {
-  width: 420px;
-  margin: 0 auto;
+#sign-up .form-box-signUp,
+#sign-in .form-box-signIn {
+  /* border: 1px solid; */
+  width: 380px;
+  margin: 20px auto 0 auto;
+}
+#sign-up .form-box-signUp p {
+  margin: 10px 0;
+}
+
+.sign-up-input,
+.sign-in-input {
+  width: 380px;
+  height: 44px;
+  border: 0.5px solid rgb(229, 229, 229);
+  padding: 9px 12px;
+}
+
+.form-box-signUp input[type="submit"],
+.form-box-signIn input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: #fff;
+}
+
+/* -------------------------------------------------------------- sign-in*/
+/* sign-in */
+.sign-in-header {
+  width: 380px;
+  margin: 20px auto 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#sign-up h1 {
+.form-box-signIn {
+  margin-top: 20px;
+}
+
+.sign-in-footer {
   text-align: center;
-  font-weight: 600;
+  margin-top: 30px;
+  color: rgb(229, 229, 229);
+}
+.sign-in-footer a {
+  color: black;
+  text-decoration: underline;
 }
 
-/* sns-box */
-.sns-box {
-  margin: 0.7rem 0;
-}
-.sns {
-  width: 420px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-}
-.sns span {
-  line-height: 40px;
-}
-.sns-kakao {
-  background-color: rgb(254, 235, 74);
-  margin-top: 15px;
-}
-.sns-facebook {
-  background-color: rgb(36, 84, 136);
-  color: #fff;
-  margin: 15px 0;
-}
-
-#sign-up form {
-  width: 420px;
+/* already-login */
+.already-login {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 108px;
+  width: 100%;
+  height: 40vh;
+  font-size: 14px;
 }
-#sign-up .hr {
-  border-top: 0.5px solid rgb(229, 229, 229);
-  height: 5px;
-}
-
-#sign-up .hr span {
-  position: relative;
+.already-login a {
   display: inline-block;
-  background-color: #fff;
-  min-width: 100px;
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-#sign-up form input {
-  padding: 9px 12px;
+  width: 85.77px;
   height: 40px;
-  margin-top: 0.7rem;
-  border: 0.5px solid rgb(229, 229, 229);
-}
-
-#sign-up form button[type="submit"] {
-  margin-top: 0.5rem;
-  border: none;
+  line-height: 40px;
+  text-align: center;
   background-color: black;
   color: #fff;
 }
-
-#sign-up form button[type="submit"]:hover {
-  background-color: rgb(52, 52, 52);
+.already-login h2 {
+  font-size: 24px;
+  margin: 15px 0;
 }
-
+.already-login span {
+  margin: 20px 0;
+}
+/* -------------------------------------------------------------- cart */
+/* cart */
+#cart {
+  width: 100%;
+}
 /* cart */
 #cart .cart-header {
   border: 1px solid;
@@ -243,4 +311,38 @@ section {
   text-align: center;
   border: none;
   color: #fff;
+}
+
+/* -------------------------------------------------------------- prfile mypage */
+/* profile */
+/* member안에 있는 css 폴더로 옮겨야 함 */
+section#profile > div {
+  border-bottom: 1px solid #e0e0e0;
+}
+.profile-list-title {
+  padding: 30px 0;
+}
+
+.profile-list-view {
+  text-align: center;
+  padding: 50px 0;
+}
+#profile-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-cart a {
+  display: inline-block;
+  background-color: black;
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+
+  /* margin */
+  margin-top: 20px;
 }

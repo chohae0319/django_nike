@@ -1,4 +1,5 @@
 {% extends "product/base.html" %}
+{% load humanize %}
 
 <!-- title -->
 {% block title %} 장바구니-나이키 {% endblock %}
@@ -8,62 +9,47 @@
 <section id="cart" class="cover">
   <div class="cart-header">
     <h1>장바구니</h1>
-    <span></span><span>개 상품</span>
+    <span>{{ total_quantity }}</span><span>개 상품</span>
   </div>
+  {% if total_quantity == 0 %}
   <div id="no-items">
     <i class="xi-cart"></i>
     <h2>장바구니에 담긴 상품이 없습니다.</h2>
     <a href="/"><span>계속 쇼핑하기</span></a>
   </div>
+  {% else %}
   <div class="cart-list-delete">
-    <a href=""><span>전체삭제</span></a>
+    <a href="" onclick="delete_all({{user.id}})"><span>전체삭제</span></a>
   </div>
   <div class="cart-contents">
     <ul class="cart-list-wrapper">
+      {% for c in cart %}
       <li>
         <div class="cart-itemimg-wrapper">
           <img
-            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4373-100/a00136d2-e708-439f-b175-beecf51e5009_primary.jpg?option"
+            src="{{ c.inventory_id.product_id.thumbnail.url }}"
             alt="아이템1"
           />
         </div>
         <div class="cart-item-detail">
           <ul>
-            <li>나이키 리액트 비전</li>
-            <li>스타일 : CD4373-100</li>
-            <li>사이즈 : 260</li>
-            <li>수량 : 1</li>
+            <li>{{ c.inventory_id.product_id.name }}</li>
+            <li>스타일 : {{ c.inventory_id.product_id.style }}</li>
+            <li>사이즈 : {{ c.inventory_id.size }}</li>
+            <li>수량 : {{ c.quantity }}</li>
           </ul>
         </div>
         <div class="cart-item-option">
           <a href=""><span>옵션 변경</span></a>
         </div>
         <div class="cart-item-price">
-          <span>149,000원</span>
+          <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
         </div>
         <div class="cart-item-delete">
-          <i class="xi-close"></i>
+          <i class="xi-close" onclick="delete_one({{ c.id }})"></i>
         </div>
       </li>
-      <li>
-        <div class="cart-itemimg-wrapper">
-          <img
-            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4373-100/a00136d2-e708-439f-b175-beecf51e5009_primary.jpg?option"
-            alt="아이템1"
-          />
-        </div>
-        <div class="cart-item-detail">
-          <ul>
-            <li>나이키 리액트 비전</li>
-            <li>스타일 : CD4373-100</li>
-            <li>사이즈 : 260</li>
-            <li>수량 : 1</li>
-          </ul>
-        </div>
-        <div>
-          <a href=""><span>옵션 변경</span></a>
-        </div>
-      </li>
+      {% endfor %}
     </ul>
 
     <div class="cart-order-box">
@@ -73,7 +59,7 @@
 
       <ul class="cart-order-info">
         <li class="order-info-list">
-          <span>상품 금액</span><span>178,000원</span>
+          <span>상품 금액</span><span>{{amount|intcomma}}원</span>
         </li>
         <li class="order-info-list">
           <span>예상 배송비</span><span>0원</span>
@@ -85,12 +71,57 @@
           <span>주문 할인 금액</span><span>0원</span>
         </li>
         <li class="order-info-list">
-          <span>총 결제 예정 금액</span><span>178,000원</span>
+          <span>총 결제 예정 금액</span><span>{{amount|intcomma}}원</span>
         </li>
         <a href="">주문하기</a>
       </ul>
       
     </div>
   </div>
+  {% endif %}
 </section>
+
+<script>
+  function delete_one(id) {
+    $.ajax({
+      type: "POST",
+      url: "{% url 'products:cart-delete-one' %}",
+      data: {'cart-id': id, csrfmiddlewaretoken: '{{ csrf_token }}'},
+      success: function(response) {
+        var answer = response.result;
+        if (answer == 'success') {
+          alert("삭제되었습니다");
+          window.location.href = "{% url 'products:cart' %}";
+        }
+        else if (answer == 'no user') {
+          alert("로그인하세요!");
+        }
+        else if (answer == 'no action') {
+          window.location.href = "{% url 'products:cart' %}";
+        }
+      }
+    });
+  }
+
+  function delete_all(user_id) {
+    $.ajax({
+      type: "POST",
+      url: "{% url 'products:cart-delete-all' %}",
+      data: {'user-id': user_id, csrfmiddlewaretoken: '{{ csrf_token }}'},
+      success: function(response) {
+        var answer = response.result;
+        if (answer == 'success') {
+          alert("삭제되었습니다");
+          window.location.href = "{% url 'products:cart' %}";
+        }
+        else if (answer == 'no user') {
+          alert("로그인하세요!");
+        }
+        else if (answer == 'no action') {
+          window.location.href = "{% url 'products:cart' %}";
+        }
+      }
+    });
+  }
+</script>
 {% endblock %}
