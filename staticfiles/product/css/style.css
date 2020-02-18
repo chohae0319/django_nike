@@ -1,4 +1,12 @@
+@font-face {
+  font-family: "S-CoreDream-2ExtraLight";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
+  font-family: "S-CoreDream-2ExtraLight";
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,7 +20,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
 ul {
   list-style: none;
 }
@@ -20,11 +27,6 @@ ul {
 input:focus {
   outline: 1px solid black;
 }
-/* 가시화를 위한 임시 */
-/* div {
-        box-sizing: border-box;
-        border: 1px solid;
-      } */
 
 .flex-box {
   display: flex;
@@ -43,97 +45,6 @@ img {
   width: 0;
   height: 0;
 }
-/* modal */
-
-/* modal */
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #00000080;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-.modal {
-  position: relative;
-  background: white;
-  padding: 20px;
-  border-radius: 4px;
-  width: 420px;
-}
-.modal a:hover {
-  color: rgb(229, 229, 229);
-}
-.modal h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.modal > .logo-wrapper {
-  width: 100px;
-  height: 100px;
-  margin: 10px auto;
-}
-
-.modal form .sign-in {
-  height: 40px;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-.modal .sign-in-find {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-#signClose {
-  position: absolute;
-  border: none;
-  background-color: #ffffff;
-  right: 6%;
-  top: 6%;
-  font-size: 22px;
-}
-#signClose:hover {
-  color: rgb(229, 229, 229);
-}
-
-/* sns-box */
-.modal .sns-box {
-  margin: 0;
-}
-.modal .sns {
-  width: 100%;
-}
-
-.modal button[type="submit"] {
-  margin-top: 30px;
-  background-color: black;
-  color: #ffffff;
-}
-.modal button[type="submit"]:hover {
-  background-color: rgb(52, 52, 52);
-}
-
-.sign-in-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sign-in-footer a {
-  text-decoration: underline;
-}
-
-.sign-footer-box {
-  margin-bottom: 10px;
-}
-
 /* footer */
 footer {
   position: relative;
@@ -153,12 +64,42 @@ footer {
   height: 100vh;
   z-index: 2000;
 }
-.bg-black {
-  display: block;
-  background-color: rgba(52, 52, 52,0.5);
+/* title */
+.title {
+  font-size: 16px;
 }
 
-/* title */
-.title{
-  font-size: 16px;
+.big-title {
+  font-size: 26px;
+}
+
+.main-title {
+  font-size: 42px;
+}
+
+.round-btn {
+  display: inline-block;
+  border-radius: 20px;
+  background-color: black;
+  color: #ffffff;
+  height: 40px;
+  padding: 11px 25px;
+  font-size: 14px;
+}
+
+.round-btn-big {
+  display: inline-block;
+  border-radius: 20px;
+  background-color: black;
+  color: #ffffff;
+  width: 385px;
+  height: 60px;
+  padding: 24px;
+  text-align: center;
+  font-size: 15px;
+}
+.round-btn-big.white {
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
 }
