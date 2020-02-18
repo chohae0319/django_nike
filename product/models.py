@@ -10,6 +10,9 @@ class Category(models.Model):
     def __str__(self):
         return '{} : {} : {} : {}'.format(self.pk, self.main_class, self.sub_class, self.shoes_sub)
 
+    def name(self):
+        return '{} {} {}'.format(self.main_class, self.sub_class, self.shoes_sub)
+
 class Product(models.Model):
     # 상품번호, 상품명, 상품가격, 카테고리번호, (총재고량), 출시일, 판매량, 썸네일 이미지
     name = models.CharField(max_length=30, unique=True)

@@ -1,0 +1,348 @@
+section {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  top: 108.5px;
+  left: 288px;
+  min-height: 100vh;
+}
+/* landing-section */
+.cover {
+  left: 0;
+  min-width: 100%;
+}
+/* --------------------------------------------------------------  index mainpage*/
+#index .main-card {
+  width: 1185px;
+  margin-bottom: 40px;
+}
+
+#index .card-comment-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1185px;
+}
+
+.card-comment-box .card-comment-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card-comment-header p {
+  font-size: 16px;
+}
+
+#index .main-card video {
+  width: 1185px;
+}
+
+/* -------------------------------------------------------------- product */
+
+/* product */
+#product {
+  width: 929px;
+}
+
+/* wrapper */
+.product-wrapper {
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* card */
+.card {
+  width: 300px;
+  margin-bottom: 80px;
+}
+
+.card .img-wrapper {
+  width: 300px;
+  height: 300px;
+}
+
+.card .item-info {
+  padding: 10px 0 0 10px;
+}
+
+.card .item-subtitle {
+  color: rgb(96, 96, 96);
+  padding: 0 0 10px 10px;
+}
+/* -------------------------------------------------------------- detail*/
+/* detail */
+section#detail{
+  padding: 20px;
+}
+#detail .detail-header {
+  display: flex;
+  width: 100%;
+}
+
+.detail-img-gallery {
+  width: 840px;
+  padding: 0 54px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail-img-wrapper {
+  width: 348px;
+  height: 348px;
+  margin: 0 10px 10px 0;
+}
+
+.detail-selection {
+  width: 449px;
+}
+
+.detail-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.size-wrapper {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#order-wrapper {
+  margin-top: 40px;
+}
+#order-wrapper a + a {
+  margin-top: 10px;
+}
+
+.detail-view-wrap iframe {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 71.6%;
+  left: 0;
+}
+
+/* -------------------------------------------------------------- sign-up */
+/* sign-up */
+#sign-up > h1 {
+  width: 380px;
+  margin: 20px auto 0 auto;
+  text-align: center;
+}
+
+#sign-up .form-box-signUp,
+#sign-in .form-box-signIn {
+  /* border: 1px solid; */
+  width: 380px;
+  margin: 20px auto 0 auto;
+}
+#sign-up .form-box-signUp p {
+  margin: 10px 0;
+}
+
+.sign-up-input,
+.sign-in-input {
+  width: 380px;
+  height: 44px;
+  border: 0.5px solid rgb(229, 229, 229);
+  padding: 9px 12px;
+}
+
+.form-box-signUp input[type="submit"],
+.form-box-signIn input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: #fff;
+}
+
+/* -------------------------------------------------------------- sign-in*/
+/* sign-in */
+.sign-in-header {
+  width: 380px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box-signIn {
+  margin-top: 20px;
+}
+
+.sign-in-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: rgb(229, 229, 229);
+}
+.sign-in-footer a {
+  color: black;
+  text-decoration: underline;
+}
+
+/* already-login */
+.already-login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 108px;
+  width: 100%;
+  height: 40vh;
+  font-size: 14px;
+}
+.already-login a {
+  display: inline-block;
+  width: 85.77px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: black;
+  color: #fff;
+}
+.already-login h2 {
+  font-size: 24px;
+  margin: 15px 0;
+}
+.already-login span {
+  margin: 20px 0;
+}
+/* -------------------------------------------------------------- cart */
+/* cart */
+#cart {
+  width: 100%;
+}
+/* cart */
+#cart .cart-header {
+  border: 1px solid;
+  text-align: center;
+}
+
+#no-items {
+  margin-top: 30px;
+  text-align: center;
+}
+#no-items i {
+  font-size: 40px;
+}
+.cart-contents {
+  border: 1px solid;
+  display: flex;
+}
+
+.cart-list-box {
+  border: 1px solid seagreen;
+}
+.cart-list-wrapper {
+  width: 841px;
+}
+.cart-list-wrapper > li {
+  display: flex;
+  width: 841px;
+  height: 152px;
+  padding: 20px 50px 20px 0;
+  justify-content: space-between;
+  color: rgb(96, 96, 96);
+}
+.cart-itemimg-wrapper {
+  width: 110px;
+  height: 110px;
+}
+
+.cart-list-wrapper > li .cart-item-detail {
+  width: 420px;
+}
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(1) {
+  font-size: 14px;
+  font-weight: bolder;
+  color: black;
+}
+
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(2) {
+  font-weight: 600;
+  margin-top: 10px;
+  color: black;
+}
+.cart-list-wrapper > li .cart-item-detail ul li:nth-child(3) {
+  margin-bottom: 5px;
+}
+
+.cart-list-wrapper > li .cart-item-option {
+  text-decoration: underline;
+}
+.cart-list-wrapper > li .cart-item-price {
+  color: rgb(248, 84, 32);
+}
+.cart-list-wrapper > li .cart-item-delete {
+  cursor: pointer;
+}
+
+/* cart-order-box */
+.cart-order-box {
+  border: 1px solid rgb(229, 229, 229);
+  width: 384px;
+  height: 350px;
+  margin-left: 20px;
+}
+
+.cart-order-header {
+  background-color: rgb(229, 229, 229);
+  padding: 20px;
+}
+
+.cart-order-info {
+  padding: 20px;
+}
+.order-info-list {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-order-box a {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 16px 0;
+  background: rgb(248, 84, 32);
+  width: 342px;
+  height: 48px;
+  text-align: center;
+  border: none;
+  color: #fff;
+}
+
+/* -------------------------------------------------------------- prfile mypage */
+/* profile */
+/* member안에 있는 css 폴더로 옮겨야 함 */
+section#profile > div {
+  border-bottom: 1px solid #e0e0e0;
+}
+.profile-list-title {
+  padding: 30px 0;
+}
+
+.profile-list-view {
+  text-align: center;
+  padding: 50px 0;
+}
+#profile-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-cart a {
+  display: inline-block;
+  background-color: black;
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+
+  /* margin */
+  margin-top: 20px;
+}
