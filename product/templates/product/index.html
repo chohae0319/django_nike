@@ -70,3 +70,41 @@
   </figure>
 </section>
 {% endblock %}
+{% block nav_content %}
+{% for i in numbers %}
+<li class="dropdown-box">
+  <a href="/product/">
+    {%if i == 1 %}
+      <span>men</span>
+    {% else %}
+      <span>women</span>
+    {% endif %}
+  </a>
+  <!-- dropdown -->
+  <div class="dropdown-wrapper">
+    <div class="nav-list-wrapper">
+      <ul class="nav-list category">
+        <li><a href="{% url 'products:new' i %}">신상품</a></li>
+        <li><a href="{% url 'products:best' i %}">THE BEST</a></li>
+        <li><a href="{% url 'products:sale' i %}">SALE</a></li>
+      </ul>
+      <ul class="nav-list shoes">
+        {% for category in category_list%}
+        <li><a href="{% url 'products:list' i category.pk %}"> {{category.name}} </a></li>
+        {% endfor %}
+      </ul>
+      <ul class="nav-list sports">
+        <li class="list-title">스포츠</li>
+        <li>러닝</li>
+        <li>트레이닝 & 짐</li>
+        <li>축구</li>
+        <li>골프</li>
+        <li>테니스</li>
+        <li>요가</li>
+      </ul>
+    </div>
+  </div>
+</li>
+{% endfor %}
+{% endblock %}
+

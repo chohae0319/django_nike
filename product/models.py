@@ -1,21 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
 
 
 class Category(models.Model):
-    main_class = models.CharField(max_length=25, unique=False)
-    sub_class = models.CharField(max_length=25, unique=False)
-    shoes_sub = models.CharField(max_length=25, blank=True)
+    name = models.CharField(max_length=25, unique=True, default='라이프스타일')
 
     def __str__(self):
-        return '{} : {} : {} : {}'.format(self.pk, self.main_class, self.sub_class, self.shoes_sub)
+        return '{} : {}'.format(self.pk, self.name)
 
-    def name(self):
-        return '{} {} {}'.format(self.main_class, self.sub_class, self.shoes_sub)
 
 class Product(models.Model):
     # 상품번호, 상품명, 상품가격, 카테고리번호, (총재고량), 출시일, 판매량, 썸네일 이미지
+
+    GENDER_CHOICES = (
+        ('MEN', 'MEN'),
+        ('WOMEN', 'WOMEN'),
+    )
+
     name = models.CharField(max_length=30, unique=True)
+    gender = models.CharField(max_length=5, choices=GENDER_CHOICES, default=1)
     price = models.IntegerField()
     style = models.CharField(max_length=10, blank=True)    # 상품번호. 나중에 blank=false로 바꿀예정
     category_id = models.ForeignKey(Category, on_delete=models.PROTECT)  # 카테고리에 속한 상품 존재하면 카테고리 삭제 불가

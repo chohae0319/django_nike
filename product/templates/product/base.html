@@ -95,82 +95,8 @@
         </div>
 
         <!-- main nav -->
-        <ul class="mainNav flex-box">
-          <li class="dropdown-box">
-            <a href="/product/"><span>men</span></a>
-            <!-- dropdown -->
-            <div class="dropdown-wrapper">
-              <div class="nav-list-wrapper">
-                <ul class="nav-list category">
-                  <li>신상품</li>
-                  <a href="{% url 'products:best' 1 %}"><li>THE BEST</li></a>
-                  <li>SALE</li>
-                </ul>
-                <ul class="nav-list shoes">
-                  <li class="list-title">신발</li>
-                  <li>
-                    <a href="{% url 'products:list' 1 %}">라이프스타일</a>
-                  </li>
-                  <li>러닝</li>
-                  <li>농구</li>
-                  <li>축구</li>
-                  <li>샌들 & 슬리퍼</li>
-                </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  <li>러닝</li>
-                  <li>트레이닝 & 짐</li>
-                  <li>축구</li>
-                  <li>골프</li>
-                  <li>테니스</li>
-                  <li>요가</li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-box">
-            <a href="/product/"><span>women</span></a>
-            <!-- dropdown -->
-            <div class="dropdown-wrapper">
-              <div class="nav-list-wrapper">
-                <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li>THE BEST</li>
-                  <li>SALE</li>
-                </ul>
-                <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-box">
-            <a href="/product/"><span>kids</span></a>
-            <!-- dropdown -->
-            <div class="dropdown-wrapper">
-              <div class="nav-list-wrapper">
-                <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li>THE BEST</li>
-                  <li>SALE</li>
-                </ul>
-                <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  {% for category in categorys %} {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
+        {% block nav_content %}
+        {% endblock %}
 
         <button class="hide"></button>
         <div class="desktop-only">
