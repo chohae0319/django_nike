@@ -5,6 +5,7 @@ section {
   top: 108.5px;
   left: 288px;
   min-height: 100vh;
+  transition: 0.35s;
 }
 /* landing-section */
 .cover {
