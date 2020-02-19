@@ -30,3 +30,8 @@ footer {
 .footer-header .col li.list-title {
   color: #ffffff;
 }
+@media screen and (max-width: 768px) {
+  .footer-header {
+    display: none;
+  }
+}
