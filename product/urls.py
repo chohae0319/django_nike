@@ -20,8 +20,10 @@ app_name = "products"
 
 urlpatterns = [
     path('', views.index),
-#    path('product/', views.product, name='product'),
+    #    path('product/', views.product, name='product'),
     path('product/<int:pk>', views.CategoryDetail.as_view(), name='list'),
+    # 데이터 전송 없는 읽기전용 페이지 입니다.
+    path('product/best/', views.best, name='best'),
     path('product/best/<int:pk>', views.BestProductList.as_view(), name='best'),
     path('cart/', views.cart, name='cart'),
     path('product/detail/<int:pk>/', views.ProductDetail.as_view(), name='detail'),

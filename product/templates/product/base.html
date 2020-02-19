@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/aside.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/content.css' %}" />
+    <link rel="stylesheet" href="{% static 'product/css/footer.css' %}" />
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- 회원가입, 로그인 페이지 js -->
-    <script src="{% static 'product/js/sign-up.js' %}"></script>
+    <script src="{% static 'product/js/member.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
@@ -135,7 +136,7 @@
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
                   <li>신상품</li>
-                  <li>THE BEST</li>
+                  <li><a href="/product/best">THE BEST</a></li>
                   <li>SALE</li>
                 </ul>
                 <ul class="nav-list shoes">
@@ -198,22 +199,14 @@
       <div id="hide-search-modal"></div>
       <div id="user-profile-drop">
         <a href="/member/profile/"><span>마이페이지</span></a>
-<<<<<<< HEAD
         <a href="/member/profile-update/"><span>회원정보관리</span></a>
-=======
-        <a href=""><span>회원정보관리</span></a>
->>>>>>> 19dcab486c05c0adc0a86d81934064ac60d08f1d
         <a href="/member/logout/"><span>로그아웃</span></a>
       </div>
     </nav>
 
     <!-- nav js -->
     <script src="{% static 'product/js/nav.js' %}"></script>
-<<<<<<< HEAD
-       <script src="{% static 'product/js/profile-dropdown.js' %}"></script>
-=======
     <script src="{% static 'product/js/profile-dropdown.js' %}"></script>
->>>>>>> 19dcab486c05c0adc0a86d81934064ac60d08f1d
     <!-- modal 로그인이 필요가 없어져서 삭제 -->
     {% endblock %}
 
