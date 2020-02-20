@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Order, OrderProduct
+from .models import Order, OrderList
 
 # Register your models here.
 admin.site.register(Order)
-admin.site.register(OrderProduct)
+admin.site.register(OrderList)

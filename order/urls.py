@@ -5,8 +5,10 @@ from . import views
 app_name = "order"
 
 urlpatterns = [
-    path('cart-order/', views.cart_order, name='cart-order'),
-    path('ship-info/', views.ship_info, name='ship-info'),
+    path('checkout1/', views.Checkout1View.as_view(), name='checkout1'),
+    path('checkout2/', views.Checkout2View.as_view(), name='checkout2'),
+    path('to-checkout1/', views.ToCheckout1.as_view(), name='to-checkout1'),
+    path('to-checkout2/', views.ToCheckout2.as_view(), name='to-checkout2'),
     # path('product/<int:pk>', views.CategoryDetail.as_view(), name='list'),
     # path('cart/', views.CartList.as_view(), name='cart'),
     # path('product/detail/<int:pk>/', views.ProductDetail.as_view(), name='detail'),
