@@ -5,10 +5,21 @@ aside {
   position: fixed;
   overflow-y: scroll;
   /* z-index: 99; */
-  margin: 108.5px 0 0 0;
+  top: 108.5px;
 }
 aside::-webkit-scrollbar {
   display: none;
+}
+aside.product {
+  top: 279px;
+  transition: all 0.35s;
+}
+
+#toggle-aside:checked ~ aside.product {
+  left: -288px;
+}
+#toggle-section-header:checked ~ aside.product {
+  top: 183px;
 }
 
 .category-wrapper li {
