@@ -111,28 +111,25 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <a href="{% url 'products:best' 1 %}"><li>THE BEST</li></a>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="{% url 'products:best' 1 %}">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   <li>
                     <a href="{% url 'products:list' 1 %}">라이프스타일</a>
                   </li>
-                  <li>러닝</li>
-                  <li>농구</li>
-                  <li>축구</li>
-                  <li>샌들 & 슬리퍼</li>
+                  <li><a href="">러닝</a></li>
+                  <li><a href="">농구</a></li>
+                  <li><a href="">축구</a></li>
+                  <li><a href="">샌들 & 슬리퍼</a></li>
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  <li>러닝</li>
-                  <li>트레이닝 & 짐</li>
-                  <li>축구</li>
-                  <li>골프</li>
-                  <li>테니스</li>
-                  <li>요가</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
+                  <li><a href="">러닝</a></li>
+                  <li><a href="">농구</a></li>
+                  <li><a href="">축구</a></li>
                 </ul>
               </div>
             </div>
@@ -143,16 +140,16 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li><a href="/product/best">THE BEST</a></li>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
               </div>
@@ -164,16 +161,16 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li>THE BEST</li>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
               </div>
