@@ -1,0 +1,37 @@
+{% extends "member/profile-base.html" %}
+
+<!-- content -->
+{% block profileContent %}
+
+<div class="profile-list-title"><h2 class="big-title">최근 주문 내역</h2></div class="profile-list-tile">
+
+{% if not my_orders %}
+    <div class="profile-list-view no-itmes">
+      <span>최근 등록된 주문내역이 없습니다.</span>
+    </div>
+    {% else %}
+    <div class="items"> <!-- 클래스명 임의로 명시 -->
+        {% for order in my_orders %}
+            <ul>
+                <li>{{ order.date_ordered }}</li>
+                <li>
+                    {% for item in order.items.all %}
+                        {{ item.product.name }}
+                        {{ item.product.price }}
+                        {{ item.product.thumbnail }}
+                    {% endfor %}
+                </li>
+                <li>${{ order.get_cart_total }}</li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="profile-list-title"><h2 class="big-title">장바구니</h2></div>
+<div class="profile-list-view no-items" id="profile-cart">
+  <span>장바구니에 담긴 상품이 없습니다. </span>
+  <a href="/">계속 쇼핑하기</a>
+</div>
+
+
+{% endblock %}

@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/aside.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/content.css' %}" />
+    <link rel="stylesheet" href="{% static 'product/css/footer.css' %}" />
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- 회원가입, 로그인 페이지 js -->
-    <script src="{% static 'product/js/sign-up.js' %}"></script>
+    <script src="{% static 'product/js/member.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
@@ -103,13 +104,13 @@
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
                   <li>신상품</li>
-                  <li>THE BEST</li>
+                  <a href="{% url 'products:best' 1 %}"><li>THE BEST</li></a>
                   <li>SALE</li>
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title">신발</li>
                   <li>
-                    <a href="{% url 'products:list' 2 %}">라이프스타일</a>
+                    <a href="{% url 'products:list' 1 %}">라이프스타일</a>
                   </li>
                   <li>러닝</li>
                   <li>농구</li>
@@ -135,7 +136,7 @@
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
                   <li>신상품</li>
-                  <li>THE BEST</li>
+                  <li><a href="/product/best">THE BEST</a></li>
                   <li>SALE</li>
                 </ul>
                 <ul class="nav-list shoes">
@@ -198,7 +199,7 @@
       <div id="hide-search-modal"></div>
       <div id="user-profile-drop">
         <a href="/member/profile/"><span>마이페이지</span></a>
-        <a href=""><span>회원정보관리</span></a>
+        <a href="/member/profile-update/"><span>회원정보관리</span></a>
         <a href="/member/logout/"><span>로그아웃</span></a>
       </div>
     </nav>
