@@ -256,7 +256,7 @@ button.hide {
   display: flex;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;
     height: 0;

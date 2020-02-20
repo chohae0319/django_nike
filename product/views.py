@@ -23,9 +23,39 @@ class CategoryDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
-        context['product_list'] = Product.objects.filter(category_id=self.object.pk)
+        context['product_list'] = Product.objects.filter(
+            category_id=self.object.pk)
 
         return context
+
+class BestProductList(DetailView):
+    model = Product
+    template_name = 'product/best.html'
+    # context_object_name = 'product_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(BestProductList, self).get_context_data(**kwargs)
+        # 판매량 내림차순으로 상위 1개 상품 출력.
+        pk = self.kwargs['pk']
+        if pk == 1:
+            category_list = Category.objects.filter(
+                main_class='MEN').values('pk')
+            productlist = []
+            for id in range(len(category_list)):
+                categoryid = category_list[id]['pk']
+                productlist.append(Product.objects.filter(
+                    category_id=categoryid).order_by('-sales')[:1])
+                context['product_list'] = productlist
+
+        return context
+
+
+def cart(request):
+    return render(request, 'product/cart.html', {})
+
+
+def detail(request):
+    return render(request, 'product/detail.html', {})
 
 
 class ProductDetail(DetailView):
@@ -38,14 +68,16 @@ class ProductDetail(DetailView):
         context = super(ProductDetail, self).get_context_data(**kwargs)
 
         # Category를 context에 추가
-        context['category'] = Category.objects.get(pk=self.object.category_id.pk)
+        context['category'] = Category.objects.get(
+            pk=self.object.category_id.pk)
 
         # ProductImage를 context에 추가
-        context['product_image'] = ProductImage.objects.filter(product_id=self.object.pk)
+        context['product_image'] = ProductImage.objects.filter(
+            product_id=self.object.pk)
 
         # Inventory를 context에 추가
-        context['inventory'] = Inventory.objects.filter(product_id=self.object.pk)
-
+        context['inventory'] = Inventory.objects.filter(
+            product_id=self.object.pk)
         return context
 
 
@@ -58,7 +90,8 @@ def add_cart(request):      # 장바구니에 상품 추가
     inventory_id = request.POST['inventory']
     quantity = int(request.POST['quantity'])
     try:
-        exist_cart = Cart.objects.filter(user_id=user_id).get(inventory_id=inventory_id)
+        exist_cart = Cart.objects.filter(
+            user_id=user_id).get(inventory_id=inventory_id)
         if exist_cart is not None:      # 장바구니에 동일 상품이 존재할 때, quantity만 늘려줌
             exist_cart.quantity += quantity
             exist_cart.save()
@@ -138,3 +171,9 @@ class CartList(LoginRequiredMixin, ListView):
             context['total_price'] = queryset2['amount']
 
         return context
+
+# 데이터 전송 없는 읽기 전용 페이지 입니다.
+
+
+def best(request):
+    return render(request, 'product/minsoo-best.html', {})
