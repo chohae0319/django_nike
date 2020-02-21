@@ -10,6 +10,11 @@
       rel="stylesheet"
       href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
     />
+    <link
+      href="../../static/product/img/favicon.ico"
+      rel="icon"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/nav.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
@@ -29,6 +34,9 @@
     <div class="whole-wrapper"></div>
     <!-- nav -->
     {% block navbar %}
+    <input type="checkbox" id="sidebar" />
+
+    <label for="sidebar" id="whole-wrapper"></label>
     <nav>
       <!-- upper-nav -->
       <div class="nav-upper flex-box">
@@ -103,28 +111,25 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <a href="{% url 'products:best' 1 %}"><li>THE BEST</li></a>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="{% url 'products:best' 1 %}">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   <li>
                     <a href="{% url 'products:list' 1 %}">라이프스타일</a>
                   </li>
-                  <li>러닝</li>
-                  <li>농구</li>
-                  <li>축구</li>
-                  <li>샌들 & 슬리퍼</li>
+                  <li><a href="">러닝</a></li>
+                  <li><a href="">농구</a></li>
+                  <li><a href="">축구</a></li>
+                  <li><a href="">샌들 & 슬리퍼</a></li>
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
-                  <li>러닝</li>
-                  <li>트레이닝 & 짐</li>
-                  <li>축구</li>
-                  <li>골프</li>
-                  <li>테니스</li>
-                  <li>요가</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
+                  <li><a href="">러닝</a></li>
+                  <li><a href="">농구</a></li>
+                  <li><a href="">축구</a></li>
                 </ul>
               </div>
             </div>
@@ -135,16 +140,16 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li><a href="/product/best">THE BEST</a></li>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
               </div>
@@ -156,16 +161,16 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li>THE BEST</li>
-                  <li>SALE</li>
+                  <li><a href="">신상품</a></li>
+                  <li><a href="">THE BEST</a></li>
+                  <li><a href="">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title">신발전체</li>
+                  <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
                 <ul class="nav-list sports">
-                  <li class="list-title">스포츠</li>
+                  <li class="list-title"><a href="">스포츠</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
               </div>
@@ -187,7 +192,9 @@
           <a href="/cart/"
             ><div class="icon-wrapper"><i class="xi-cart"></i></div
           ></a>
-          <div class="icon-wrapper" id="hamburger"><i class="xi-bars"></i></div>
+          <div class="icon-wrapper" id="hamburger">
+            <label for="sidebar"><i class="xi-bars"></i></label>
+          </div>
           <div class="hide-search">
             <div class="hide-input-wrapper">
               <i class="xi-search" id="hide-search-icon"></i>
@@ -203,7 +210,39 @@
         <a href="/member/logout/"><span>로그아웃</span></a>
       </div>
     </nav>
-
+    <div id="hide-sidebar">
+      <ul id="sidebar-inner-box">
+        {% if user.is_authenticated %}
+        <li>
+          <a href="/member/logout/"><span>로그아웃</span></a>
+        </li>
+        {% else %}
+        <!-- 로그인 안 했을 경우 -->
+        <li>
+          <a href="/member/signup/"><span>회원가입</span></a>
+          <a href="/member/login/"><span>/ 로그인</span></a>
+        </li>
+        {% endif %}
+        <li>
+          <a href=""><span>New Releasses</span></a>
+        </li>
+        <li>
+          <a href=""><span>Men</span></a>
+        </li>
+        <li>
+          <a href=""><span>Women</span></a>
+        </li>
+        <li>
+          <a href=""><span>Kids</span></a>
+        </li>
+        <li>
+          <a href=""><span>SALE</span></a>
+        </li>
+        <li>
+          <a href="/member/profile/"><span>마이페이지</span></a>
+        </li>
+      </ul>
+    </div>
     <!-- nav js -->
     <script src="{% static 'product/js/nav.js' %}"></script>
     <script src="{% static 'product/js/profile-dropdown.js' %}"></script>
@@ -219,11 +258,70 @@
     <!-- footer -->
     {% block footer %}
     <footer>
-      <ul>
-        <li>매장안내</li>
-        <li>로그인</li>
-        <li>회원가입</li>
-      </ul>
+      <div class="footer-header">
+        <ul class="col col1">
+          <li class="list-title">
+            <a href=""><span>매장안내</span></a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="list-title">
+            <a href="/member/logout/"><span>로그아웃</span></a>
+          </li>
+          {% else %}
+          <!-- 로그인 안 했을 경우 -->
+          <li class="list-title">
+            <a href="/member/signup/"><span>회원가입</span></a>
+            <a href="/member/login/"><span>/ 로그인</span></a>
+          </li>
+          {% endif %}
+        </ul>
+        <ul class="col col2">
+          <li class="list-title"><span>고객센터</span></li>
+          <li>
+            <a href=""><span>080-022-0182</span></a>
+          </li>
+          <li>
+            <a href=""><span>주문/결제</span></a>
+          </li>
+          <li>
+            <a href=""><span>배송</span></a>
+          </li>
+          <li>
+            <a href=""><span>주문배송조회</span></a>
+          </li>
+          <li>
+            <a href=""><span>멤버쉽 혜택/서비스</span></a>
+          </li>
+          <li>
+            <a href=""><span>공지사항</span></a>
+          </li>
+          <li>
+            <a href=""><span>1:1 채팅 문의</span></a>
+          </li>
+          <li>
+            <a href=""><span>1:1 이메일문의</span></a>
+          </li>
+          <li>
+            <a href=""><span>이용약관</span></a>
+          </li>
+          <li>
+            <a href=""><span>개인정보처리방침</span></a>
+          </li>
+        </ul>
+        <ul class="col col3">
+          <li class="list-title"><span>ABOUT NIKE</span></li>
+          <li>
+            <a href=""><span>나이키에 대하여</span></a>
+          </li>
+        </ul>
+        <ul class="col col4">
+          <li class="list-title"><span>SOCIAL</span></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
     </footer>
     {% endblock %}
   </body>

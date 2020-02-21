@@ -61,6 +61,7 @@ def profile(request):
 def order(request):
     return render(request, 'member/profile-orders.html', {})
 
+
 @login_required
 def user_info_update(request):
     if request.method == 'POST':
