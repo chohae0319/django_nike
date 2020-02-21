@@ -45,16 +45,26 @@ $(document).ready(function() {
 // member - update
 $(document).ready(function() {
   $(
-    "#profile-update .helptext,label,#id_password,#id_last_login,#id_is_superuser,#id_groups,#id_user_permissions,#id_is_staff,#id_is_active,#id_date_joined"
+    "#profile-update #id_user_permissions,#id_is_staff,#id_is_active,#id_date_joined"
   ).remove();
-  // $("#id_username").focus();
+
+  $("#profile-update .helptext").remove();
+  $("#profile-update label").remove();
+  $("#profile-update #id_password").remove();
+  $("#profile-update #id_is_superuser").remove();
+  $("#profile-update #id_groups").remove();
+
+  $("#id_username").focus();
 
   $("#profile-update #id_first_name").attr("placeholder", "firstname");
   $("#profile-update #id_last_name").attr("placeholder", "lastname");
   $("#profile-update br").remove();
-  $(
-    "#profile-update #id_username,#id_first_name,#id_last_name,#id_email"
-  ).after($("<br/><br/><br/>"));
+  $("#profile-update #id_last_login").remove();
+  $("#profile-update #id_first_name,#id_last_name").after($("<br/><br/><br/>"));
+
+  $("#profile-update #id_email").after($("<br/><br/><br/>"));
+  $("#profile-update #id_username").after($("<br/><br/><br/>"));
+
   $("#profile-update #id_username").before($("<div>아이디</div>"));
   $("#profile-update #id_first_name").before($("<div>이름</div>"));
   $("#profile-update #id_last_name").before($("<div>성</div>"));
@@ -65,6 +75,7 @@ $(document).ready(function() {
 // 비밀번호 변경
 $(document).ready(function() {
   $("#profile-password ul").remove();
+  $("#profile-password label").remove();
   $(
     "#profile-password #id_old_password,#id_new_password1,#id_new_password2"
   ).after($("<br/><br/><br/>"));
