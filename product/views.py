@@ -28,7 +28,7 @@ class CategoryDetail(DetailView):
 
         return context
 
-
+      
 class BestProductList(DetailView):
     model = Product
     template_name = 'product/best.html'
@@ -57,7 +57,6 @@ def cart(request):
 
 def detail(request):
     return render(request, 'product/detail.html', {})
-
 
 class ProductDetail(DetailView):
     model = Product
@@ -167,6 +166,9 @@ class CartList(LoginRequiredMixin, ListView):
             queryset2 = queryset.annotate(price_sum=F('inventory_id__product_id__price')*F('quantity'))\
                 .aggregate(amount=Sum('price_sum'))
             context['amount'] = queryset2['amount']
+
+            #총 결제 예정 금액(수정 필요)
+            context['total_price'] = queryset2['amount']
 
         return context
 
