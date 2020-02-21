@@ -25,7 +25,7 @@ urlpatterns = [
     # 데이터 전송 없는 읽기전용 페이지 입니다.
     path('product/best/', views.best, name='best'),
     path('product/best/<int:pk>', views.BestProductList.as_view(), name='best'),
-    path('cart/', views.cart, name='cart'),
+    path('cart/', views.CartList.as_view(), name='cart'),
     path('product/detail/<int:pk>/', views.ProductDetail.as_view(), name='detail'),
     path('cart/add/', views.add_cart, name='add-cart'),
     path('cart/delete-one/', views.cart_delete_one, name='cart-delete-one'),

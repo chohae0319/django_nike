@@ -50,8 +50,8 @@ class BestProductList(DetailView):
         return context
 
 
-def cart(request):
-    return render(request, 'product/cart.html', {})
+# def cart(request):
+#     return render(request, 'product/cart.html', {})
 
 
 def detail(request):
