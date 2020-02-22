@@ -71,9 +71,9 @@
           <span>주문 할인 금액</span><span>0원</span>
         </li>
         <li class="order-info-list">
-          <span>총 결제 예정 금액</span><span>{{amount|intcomma}}원</span>
+          <span>총 결제 예정 금액</span><span>{{total_price|intcomma}}원</span>
         </li>
-        <a href="">주문하기</a>
+          <a href=# onclick="order()">주문하기</a>
       </ul>
       
     </div>
@@ -123,5 +123,29 @@
       }
     });
   }
+
+  function order() {
+    var order_list = [];
+    {% for c in cart %}
+    order_list.push({ 'inventory-id': {{ c.inventory_id.id }}, quantity: {{ c.quantity }} });
+    {% endfor %}
+    var order_list_str = JSON.stringify(order_list);
+    var total_price = {{ total_price }};
+    $.ajax({
+      type: "POST",
+      url: "{% url 'order:to-checkout1' %}",
+      data: {'order-list': order_list_str,
+             'total-price': total_price,
+              csrfmiddlewaretoken: '{{ csrf_token }}'},
+      dataType:'json',
+      success: function(response) {
+        var answer = response.result;
+        if (answer == 'success') {
+          window.location.href = "{% url 'order:checkout1' %}";
+        }
+      }
+    });
+  }
+
 </script>
 {% endblock %}

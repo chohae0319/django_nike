@@ -12,6 +12,9 @@ class Item(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cellphone_number = models.FloatField(default=None)
+    shipping = models.CharField(max_length=100, default=None)
+    account_number = models.IntegerField(default=None)
 
     def __str__(self):
         return self.user.username

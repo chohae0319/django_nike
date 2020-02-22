@@ -1,0 +1,19 @@
+{% extends "member/profile-base.html" %}
+
+<!-- 타이틀 -->
+{% block title %}나이키{% endblock %}
+
+<!-- content -->
+{% block profileContent %}
+
+<form
+  method="POST"
+  action="{% url 'member:profile-delete' %}"
+  id="profile-delete"
+>
+  {% csrf_token %}
+  <h1 class="profile-update-title">회원탈퇴</h1>
+  <p>정말로 탈퇴하시겠습니까?</p>
+  <input type="submit" value="탈퇴하기" />
+</form>
+{% endblock %}
