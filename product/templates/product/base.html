@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="{% static 'product/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/aside.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/content.css' %}" />
+    <link rel="stylesheet" href="{% static 'product/css/footer.css' %}" />
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- 회원가입, 로그인 페이지 js -->
-    <script src="{% static 'product/js/sign-up.js' %}"></script>
+    <script src="{% static 'product/js/member.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
@@ -95,8 +96,93 @@
         </div>
 
         <!-- main nav -->
-        {% block nav_content %}
-        {% endblock %}
+        <ul class="mainNav flex-box">
+          <li class="dropdown-box">
+            <a href="/product/"><span>men</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li><a href="{% url 'products:new' 1 %}">신상품</a></li>
+                  <li><a href="{% url 'products:best' 1 %}">THE BEST</a></li>
+                  <li><a href="{% url 'products:sale' 1 %}">SALE</a></li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발</li>
+                  <li>
+                    <a href="{% url 'products:list' 1 0 %}">신발 전체</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 1 1 %}">라이프스타일</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 1 2 %}">러닝</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 1 3 %}">농구</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 1 4 %}">축구</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 1 5 %}">샌들 & 슬리퍼</a>
+                  </li>
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  <li>러닝</li>
+                  <li>트레이닝 & 짐</li>
+                  <li>축구</li>
+                  <li>골프</li>
+                  <li>테니스</li>
+                  <li>요가</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-box">
+            <a href="/product/"><span>women</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li><a href="/product/best">THE BEST</a></li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-box">
+            <a href="/product/"><span>kids</span></a>
+            <!-- dropdown -->
+            <div class="dropdown-wrapper">
+              <div class="nav-list-wrapper">
+                <ul class="nav-list category">
+                  <li>신상품</li>
+                  <li>THE BEST</li>
+                  <li>SALE</li>
+                </ul>
+                <ul class="nav-list shoes">
+                  <li class="list-title">신발전체</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+                <ul class="nav-list sports">
+                  <li class="list-title">스포츠</li>
+                  {% for category in categorys %} {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
 
         <button class="hide"></button>
         <div class="desktop-only">
@@ -124,7 +210,7 @@
       <div id="hide-search-modal"></div>
       <div id="user-profile-drop">
         <a href="/member/profile/"><span>마이페이지</span></a>
-        <a href=""><span>회원정보관리</span></a>
+        <a href="/member/profile-update/"><span>회원정보관리</span></a>
         <a href="/member/logout/"><span>로그아웃</span></a>
       </div>
     </nav>

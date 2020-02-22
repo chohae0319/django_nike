@@ -15,11 +15,7 @@ def index(request):
     return render(
         request,
         'product/index.html/',
-        {
-            'category_list': Category.objects.all(),
-            'numbers': range(1, 3),
-         },
-
+        {},
     )
 
 
@@ -41,8 +37,12 @@ class CategoryDetail(DetailView):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
         gender = self.kwargs['gender']
         if gender == 1:
+            if self.object.pk == 0:
+                context['product_list'] = Product.objects.filter(gender='MEN')
             context['product_list'] = Product.objects.filter(gender='MEN', category_id=self.object.pk)
         else:
+            if self.object.pk == 0:
+                context['product_list'] = Product.objects.filter(gender='WOMEN')
             context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=self.object.pk)
 
         return context
