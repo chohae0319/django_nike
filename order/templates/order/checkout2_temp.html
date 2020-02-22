@@ -28,7 +28,32 @@
 <p>배송주소: {{ request.session.order_info.receive_address }}</p>
 <h3>결제수단 선택</h3>
 <p><input type="text" value="신용카드"></p>
-<p><input type="checkbox">어쩌구 동의합니다.</p>
-<button>{{ request.session.order_info.total_price|intcomma }}원 결제하기</button>
+<p><input type="checkbox" id="chk-agree">어쩌구 동의합니다.</p>
+
+<button onclick="makeOrder()">{{ request.session.order_info.total_price|intcomma }}원 결제하기</button>
+
+<script>
+    function makeOrder() {
+        if (!($("#chk-agree").is(":checked"))) {
+            alert("결제동의에 체크해주세요!");
+            return;
+        }
+
+        $.ajax({
+          type: "POST",
+          url: "{% url 'order:make-order' %}",
+          data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+          success: function(response) {
+            var answer = response.result;
+            if (answer == 'success') {
+              window.location.href = "{% url 'order:complete' %}";
+            }
+            if (answer == 'fail') {
+              alert("에러!");
+            }
+          }
+        });
+    }
+</script>
 </body>
 </html>

@@ -28,7 +28,6 @@ class CategoryDetail(DetailView):
 
         return context
 
-      
 class BestProductList(DetailView):
     model = Product
     template_name = 'product/best.html'
@@ -51,8 +50,8 @@ class BestProductList(DetailView):
         return context
 
 
-def cart(request):
-    return render(request, 'product/cart.html', {})
+# def cart(request):
+#     return render(request, 'product/cart.html', {})
 
 
 def detail(request):
