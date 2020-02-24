@@ -55,7 +55,7 @@ def profile(request):
     context = {
         'my_orders': my_orders
     }
-    return render(request, 'member/profile.html', {'context':context})
+    return render(request, 'member/profile.html', context)
 
 
 def order(request):
