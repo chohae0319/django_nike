@@ -8,6 +8,10 @@ nav {
   background-color: #ffffff;
   transition: all 0.35s;
 }
+nav .mainNav > li:hover {
+  border-bottom: 2px solid;
+}
+
 nav li a:hover {
   color: black;
 }
@@ -288,7 +292,6 @@ input#sidebar {
 #hamburger > label {
   cursor: pointer;
 }
-
 @media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;

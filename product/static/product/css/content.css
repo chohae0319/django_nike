@@ -329,7 +329,7 @@ section#detail {
 .cart-list-wrapper > li .cart-item-option {
   text-decoration: underline;
 }
-.cart-list-wrapper > li .cart-item-price {
+.cart-item-price {
   color: rgb(248, 84, 32);
 }
 .cart-list-wrapper > li .cart-item-delete {
@@ -340,7 +340,6 @@ section#detail {
 .cart-order-box {
   border: 1px solid rgb(229, 229, 229);
   width: 384px;
-  height: 350px;
   margin-left: 20px;
 }
 
