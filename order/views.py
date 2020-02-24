@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
@@ -8,20 +9,29 @@ import json
 import order.exceptions
 
 
+def checkout(request):
+    return render(request, 'order/checkout.html', {})
+
+
 class ToCheckout1(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = {}
-        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
-        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
+        request.session['order_info']['order_list'] = request.POST.get(
+            'order-list', False)
+        request.session['order_info']['total_price'] = request.POST.get(
+            'total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
 class ToCheckout2(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = request.session['order_info']
-        request.session['order_info']['receive_name'] = request.POST.get('receive_name', False)
-        request.session['order_info']['receive_phone'] = request.POST.get('receive_phone', False)
-        request.session['order_info']['receive_address'] = request.POST.get('receive_address', False)
+        request.session['order_info']['receive_name'] = request.POST.get(
+            'receive_name', False)
+        request.session['order_info']['receive_phone'] = request.POST.get(
+            'receive_phone', False)
+        request.session['order_info']['receive_address'] = request.POST.get(
+            'receive_address', False)
         request.session['order_info']['memo'] = request.POST.get('memo', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
@@ -34,7 +44,7 @@ class Checkout1View(TemplateView):
 
         # 세션에서 order_info 가져오기
         order_info = self.request.session['order_info']
-        
+
         # order_list context에 추가
         order_list = []
         for i in json.loads(order_info['order_list']):
@@ -44,6 +54,7 @@ class Checkout1View(TemplateView):
             order_list.append(item)
         context['order_list'] = order_list
         return context
+
 
 class Checkout2View(TemplateView):
     template_name = 'order/checkout2_temp.html'
@@ -64,6 +75,7 @@ class Checkout2View(TemplateView):
         context['order_list'] = order_list
 
         return context
+
 
 class CompleteView(TemplateView):
     template_name = 'order/complete.html'
@@ -121,8 +133,10 @@ class MakeOrder(View):
                 # 3~4. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
-                    all_inventory = Inventory.objects.filter(product_id=item['product_id'])
-                    total_amount = all_inventory.aggregate(total_amount=Sum('amount'))['total_amount']
+                    all_inventory = Inventory.objects.filter(
+                        product_id=item['product_id'])
+                    total_amount = all_inventory.aggregate(
+                        total_amount=Sum('amount'))['total_amount']
                     if total_amount <= 0:
                         item['product_id'].soldout = True
                     # 판매량 늘리기
