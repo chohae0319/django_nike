@@ -1,0 +1,230 @@
+<!-- 확장 -->
+{% extends "product/base.html" %}
+
+<!-- 링크확장 -->
+{% load static %}
+<!-- 링크확장 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'order/css/checkout.css' %}" />
+<script src="{% static 'order/js/checkout-next-step.js' %}"></script>
+{% endblock %}
+
+<!-- title 확장 -->
+{% block title %} 나이키 {% endblock %}
+
+<!-- content -->
+{% block content %}
+<section id="checkout" class="cover">
+  <div class="checkout-header-box">
+    <h1 class="main-title">주문결제</h1>
+  </div>
+  <div class="checkout-main-box">
+    <div class="client-detail-box">
+      <div class="checkout-tab-box">
+        <ul class="checkout-list-box">
+          <input
+            type="checkbox"
+            name="checkout-tab-menu"
+            id="checkout-client-detail"
+          />
+          <label for="checkout-client-detail">
+            <li class="checkout-list-header">
+              <span>주문 고객</span>
+              <i class="xi-plus"><span id="username">{{ user.email }}</span></i>
+              <i class="xi-minus"></i>
+            </li>
+          </label>
+          <li>
+            <span>이름</span>
+          </li>
+          <li>
+            <span>휴대폰 번호</span>
+          </li>
+          <li>
+            <span>이메일</span>
+          </li>
+        </ul>
+      </div>
+      <div class="checkout-tab-box" id="checkout-address-box">
+        <ul class="checkout-list-box">
+          <input
+            type="checkbox"
+            checked
+            name="checkout-tab-menu"
+            id="checkout-address-detail"
+          />
+          <label for="checkout-address-detail">
+            <li class="checkout-list-header">
+              <span>배송지 정보</span>
+              <i class="xi-plus"></i>
+              <i class="xi-minus"></i>
+            </li>
+          </label>
+          <li id="address-list1">
+            <div>
+              <span>받으시는 분</span>
+              <span id="receive_name_info" class="alert-msg"></span>
+              <input type="text" name="이름" autofocus placeholder="이름" id="receive_name" class="input-info"/>
+              
+            </div>
+            <div>
+              <span>연락처</span>
+              
+              <span id="receive_phone_info" class="alert-msg"></span>
+                <input
+                name="연락처"
+                  type="text"
+                  placeholder="-없이 입력"
+                  id="receive_phone"
+                  class="input-info"
+                />
+              
+              
+            </div>
+          </li>
+          <li>
+            <span>배송 주소</span>
+            <span id="receive_address_info" class="alert-msg"></span>
+            <input
+            name="주소"
+              type="text"
+              placeholder="나머지 주소 입력"
+              id="receive_address"
+              class="input-info"
+            />
+            
+          </li>
+          <li>
+            <span>배송 메모를 입력해주세요</span>
+            <span id="receive_memo_info" class="alert-msg"></span>
+            <input
+            name="메모"
+              type="text"
+              placeholder="ex. 부재시 문 앞에 놔주세요"
+              id="memo"
+              class="input-info"
+            />
+          </li>
+          <li>
+            <button id="checkout-next">다음단계 진행</button>
+            <button id="modify-client-detail" style="display: none;">수정하기</button>
+            <button id="modify-client" style="display: none;">수정완료</button>
+          </li>
+        </ul>
+      </div>
+      <div class="checkout-tab-box checkout-next-step">
+        <ul class="checkout-list-box">
+          <input
+            type="checkbox"
+            name="checkout-tab-menu"
+            id="checkout-sale-detail"
+          />
+          <label for="checkout-sale-detail">
+            <li class="checkout-list-header">
+              <span>할인/혜택사용</span>
+              <i class="xi-plus"></i>
+              <i class="xi-minus"></i>
+            </li>
+          </label>
+          <li>
+            <span
+              >사용 가능한 프로모 코드를 확인하시고 아래 프로코드 란에 입력하여
+              사용하세요.</span
+            >
+          </li>
+          <li>
+            <!-- 사용가능한 쿠폰이 있을 경우 -->
+            <ul>
+              <li>
+                <!-- 안내 -->
+                <span>* 사용 가능한 신규가입 쿠폰이 있습니다.</span>
+              </li>
+              <li>
+                <!-- 코드 -->
+                <span>- 쿠폰 코드 : </span>
+              </li>
+              <li>
+                <!-- 주의사항 -->
+                <span
+                  >- 1만원 할인 적용되며 장바구니 전체에 5만원 이상 구매 시
+                  적용됩니다.</span
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span>프로모 코드</span
+            ><input type="text" placeholder="프로모 코드 입력" />
+          </li>
+        </ul>
+      </div>
+      <!-- 결제 여부 -->
+      <div class="checkout-tab-box checkout-next-step">
+        <ul class="checkout-list-box">
+          <input
+            type="checkbox"
+            name="checkout-tab-menu"
+            id="checkout-pay-detail"
+          />
+          <label for="checkout-pay-detail">
+            <li class="checkout-list-header">
+              <span>결제수단 선택</span>
+              <i class="xi-plus"></i>
+              <i class="xi-minus"></i>
+            </li>
+          </label>
+          <li>
+            <span>\</span>
+          </li>
+          <li>
+            <span>\</span>
+          </li>
+          <li>
+            <span>\</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 주문 상세 정보 -->
+    <div class="order-detail-box">
+      <div class="cart-order-box">
+        <div class="cart-order-header">
+          <strong class="title">주문내역</strong>
+        </div>
+        <div class="order-detail-thumbnail">
+          <div class="img-wrapper">
+            <img
+              src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4371-600/23d4ab93-4855-4902-91e2-7ae8edc2a256_primary.jpg?thumbnail"
+              alt="주문상품썸네일"
+            />
+          </div>
+          <ul class="cart-order-info">
+            <li class="order-info-list"><span>상품 이름</span></li>
+            <li class="order-info-list"><span>스타일</span></li>
+            <li class="order-info-list"><span>사이즈</span></li>
+            <li class="order-info-list"><span>수량</span></li>
+            <li class="order-info-list cart-item-price"><span>가격</span></li>
+          </ul>
+        </div>
+        <ul class="cart-order-info">
+          <li class="order-info-list">
+            <span>상품 금액</span><span>178,000원</span>
+          </li>
+          <li class="order-info-list">
+            <span>예상 배송비</span><span>0원</span>
+          </li>
+          <li class="order-info-list">
+            <span>상품 할인 금액</span><span class="cart-item-price">0원</span>
+          </li>
+          <li class="order-info-list">
+            <span>주문 할인 금액</span><span class="cart-item-price">0원</span>
+          </li>
+          <li class="order-info-list">
+            <span>총 결제 예정 금액</span><span class="cart-item-price">178,000원</span class="cart-item-price">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
