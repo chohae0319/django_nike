@@ -7,4 +7,3 @@ admin.site.register(Profile)
 admin.site.register(OrderItem)
 admin.site.register(Order)
 
-

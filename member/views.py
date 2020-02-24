@@ -90,4 +90,3 @@ def user_info_password(request):
     else:
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
-

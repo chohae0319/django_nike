@@ -5,6 +5,8 @@ from .models import Category, Product, ProductImage, Inventory, Cart
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
+from django.utils import timezone
+import datetime
 
 import json
 
@@ -13,8 +15,18 @@ def index(request):
     return render(
         request,
         'product/index.html/',
-        {}
+        {},
     )
+
+
+# class CategoryListView(ListView):
+#     model = Category
+#     template_name = 'product/index.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(CategoryListView, self).get_context_data(**kwargs)
+#         context['category_list'] = Category.objects.all()
+#         return context
 
 
 class CategoryDetail(DetailView):
@@ -23,14 +35,106 @@ class CategoryDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
-        context['product_list'] = Product.objects.filter(category_id=self.object.pk)
+        gender = self.kwargs['gender']
+        if gender == 1:
+            if self.object.pk == 0:
+                context['product_list'] = Product.objects.filter(gender='MEN')
+            context['product_list'] = Product.objects.filter(gender='MEN', category_id=self.object.pk)
+        else:
+            if self.object.pk == 0:
+                context['product_list'] = Product.objects.filter(gender='WOMEN')
+            context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=self.object.pk)
 
         return context
 
 
+class NewProductList(ListView):
+    # 모든 신발 카테고리 해당. today 기준 출시일이 30일 전 이내인 상품만
+    model = Product
+    template_name = 'product/product.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewProductList, self).get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+
+        date_format = "%Y-%m-%d"
+        one_month_ago = (datetime.datetime.now() - datetime.timedelta(days=30)).strftime(date_format)
+        now_date = datetime.datetime.now().strftime(date_format)
+
+        if pk == 1:
+            context['product_list'] = Product.objects.filter(
+                gender='MEN',
+                release_date__range=[one_month_ago, now_date]
+            ).reverse()
+        else:
+            context['product_list'] = Product.objects.filter(
+                gender='WOMEN',
+                release_date__range=[one_month_ago, now_date]
+            ).reverse()
+
+        return context
+
+
+class BestProductList(ListView):
+    model = Product
+    template_name = 'product/product.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BestProductList, self).get_context_data(**kwargs)
+        # 판매량 내림차순으로 상위 1개 상품 출력.
+        # 카테고리마다 구별해서 템플릿 표시.
+        pk = self.kwargs['pk']
+        if pk == 1:
+            # MEN의 BEST 품목
+            context['life_product_list'] = Product.objects.filter(gender='MEN', category_id=1).order_by('-sales')[:1]
+            context['run_product_list'] = Product.objects.filter(gender='MEN', category_id=2).order_by('-sales')[:1]
+            context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:1]
+            context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:1]
+            context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:1]
+        else:
+            # WOMEN의 BEST 품목
+            context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:1]
+            context['run_product_list'] = Product.objects.filter(gender='WOMEN', category_id=2).order_by('-sales')[:1]
+            context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:1]
+            context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:1]
+            context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:1]
+        return context
+
+
+class SaleProductList(ListView):
+    model = Product
+    template_name = 'product/product.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SaleProductList, self).get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+
+        date_format = "%Y-%m-%d"
+        three_month_ago = (datetime.datetime.now() - datetime.timedelta(days=90)).strftime(date_format)
+        now_date = datetime.datetime.now().strftime(date_format)
+
+        if pk == 1:
+            context['product_list'] = Product.objects.filter(
+                gender='MEN',
+                release_date__lt=three_month_ago,
+                soldout=False
+            ).reverse()
+        else:
+            context['product_list'] = Product.objects.filter(
+                gender='WOMEN',
+                release_date__lt=three_month_ago,
+                soldout=False
+            ).reverse()
+
+        return context
+
+
+# def cart(request):
+#     return render(request, 'product/cart.html', {})
+
+
 def detail(request):
     return render(request, 'product/detail.html', {})
-
 
 class ProductDetail(DetailView):
     model = Product
@@ -42,14 +146,16 @@ class ProductDetail(DetailView):
         context = super(ProductDetail, self).get_context_data(**kwargs)
 
         # Category를 context에 추가
-        context['category'] = Category.objects.get(pk=self.object.category_id.pk)
+        context['category'] = Category.objects.get(
+            pk=self.object.category_id.pk)
 
         # ProductImage를 context에 추가
-        context['product_image'] = ProductImage.objects.filter(product_id=self.object.pk)
+        context['product_image'] = ProductImage.objects.filter(
+            product_id=self.object.pk)
 
         # Inventory를 context에 추가
-        context['inventory'] = Inventory.objects.filter(product_id=self.object.pk)
-
+        context['inventory'] = Inventory.objects.filter(
+            product_id=self.object.pk)
         return context
 
 
@@ -62,7 +168,8 @@ def add_cart(request):      # 장바구니에 상품 추가
     inventory_id = request.POST['inventory']
     quantity = int(request.POST['quantity'])
     try:
-        exist_cart = Cart.objects.filter(user_id=user_id).get(inventory_id=inventory_id)
+        exist_cart = Cart.objects.filter(
+            user_id=user_id).get(inventory_id=inventory_id)
         if exist_cart is not None:      # 장바구니에 동일 상품이 존재할 때, quantity만 늘려줌
             exist_cart.quantity += quantity
             exist_cart.save()
@@ -138,4 +245,13 @@ class CartList(LoginRequiredMixin, ListView):
                 .aggregate(amount=Sum('price_sum'))
             context['amount'] = queryset2['amount']
 
+            #총 결제 예정 금액(수정 필요)
+            context['total_price'] = queryset2['amount']
+
         return context
+
+# 데이터 전송 없는 읽기 전용 페이지 입니다.
+
+
+def best(request):
+    return render(request, 'product/minsoo-best.html', {})
