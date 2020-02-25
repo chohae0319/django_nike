@@ -1,0 +1,13 @@
+<h3>배송지 내역</h3>
+<a href="/order/shipping/"><button>배송지추가</button></a>
+{% if not shipping_instance %}
+<div>등록된 배송지가 없습니다</div>
+{% else %}
+{% for ship in shipping_instance %}
+<p>{{ ship.destination_nickname }}</p>
+<p>{{ ship.receiver }}</p>
+<p>{{ ship.receiver_phone }}</p>
+<p>{{ ship.receiver_address }}</p>
+<br>
+{% endfor %}
+{% endif %}
