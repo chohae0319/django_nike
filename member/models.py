@@ -20,13 +20,13 @@ class Profile(models.Model):
         return self.user.username
 
 class OrderItem(models.Model): # 내가 주문한 아이템
-    # product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
+    product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
-    # def __str__(self):
-    #     return self.product.name
+    def __str__(self):
+        return self.product.name
 
 class Order(models.Model): # 카트에 들어 있는 아이템
     ref_code = models.CharField(max_length=15)

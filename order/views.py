@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
 from product.models import Inventory, Cart
-from .models import Order, OrderList
+from .models import Order, OrderList, Shipping
 from django.http import HttpResponse
 import json
 import order.exceptions
+from .forms import ShippingForm
+
 
 
 def checkout(request):
@@ -167,3 +169,24 @@ class MakeOrder(View):
         # 기타 에러상황
         except Exception as e:
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+
+
+def Shippings(request):
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/shipping.html', {'form':form})
+
+def ShippingShow(request):
+    shipping_instance = Shipping.objects.all()
+    return render(request, 'order/shipping-show.html', {'shipping_instance':shipping_instance})
+
+# def Shippings(request):
+#     form = ShippingForm(request, request.POST)
+#     return render(request, 'order/shipping.html', {'form': form})
