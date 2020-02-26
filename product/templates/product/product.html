@@ -57,37 +57,6 @@
   </div>
 </aside>
 <script>
-  $(document).ready(function() {
-    var size_checked_list = [];
-    $('input[name="size"]').on("click", function() {
-      var length = $('input[name="size"]:checked').length;
-      $('input[name="size"]:checked').each(function() {
-        size_checked_list.push($(this).val());
-      });
-      var checkedValue = [];
-      var cnt = 0;
-      for (let i = 0; i < length; i++) {
-        checkedValue[i] = size_checked_list[cnt];
-        cnt++;
-      }
-      // console.log(checkedValue);
-      $.ajax({
-        type: "POST",
-        url: "{% url 'product:list' %}",
-        data: {
-          checked: checkedValue,
-          csrfmiddlewaretoken: "{{ csrf_token }}"
-        },
-        dataType: "json",
-        success: function(response) {
-          window.location.href = "{% url 'product:' %}";
-        },
-        error: function(request, status, error) {
-          console.log("실패");
-        }
-      });
-    });
-  });
 </script>
 {% endblock aside %}
 
@@ -95,7 +64,7 @@
 {% block content %}
 <div id="section-header">
   <h2 class="title" id="section-title">Men</h2>
-  <h2 class="big-title">Men`s 신발</h2>
+  <h2 class="big-title">Men`s 신발{{checked_list}}</h2>
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>

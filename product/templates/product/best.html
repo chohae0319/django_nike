@@ -1,17 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>the best</title>
-</head>
-<body>
+{% extends "product/base.html" %}
 
-    <h1>{{product_list}}</h1>
-    <h1> 1111 </h1>
+<!-- title 확장 -->
+{% block title %} 나이키 {% endblock %}
 
-
-<!--    <h1>{{product_list}}</h1>-->
-<!--    <h1> 1111 </h1>-->
-
-</body>
-</html>
+<!-- content 확장 -->
+{% block content %}
+<section id="best" class="cover">
+  <!-- 이 갤러리가 반복되면 됩니다. -->
+  <div class="best-category-gallery">
+    <div class="best-category-header">
+      <h2 class="main-title">BEST 라이프스타일</h2>
+      <!-- 해당 카테고리로 연결하시면 됩니다. -->
+      <a href="{% url 'products:list' 1 1 %}">신발 전체 보기</a>
+    </div>
+    <div class="best-img-box">
+      <div class="best-img-box best-alnoe">
+        <div class="best-img-wrapper best-alone">
+          <!-- 썸네일 이미지 불러오시면 됩니다. -->
+          <img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CQ2344-001/fa5b05a4-dfc7-4969-a0f0-318dd0851854_primary.jpg?gallery"
+            alt="나이키에어포스"
+          />
+          <div class="best-hover-box">
+            <!-- 상품 디테일  -->
+            <h3 class="title">나이키에어포스</h3>
+            <h3 class="title">149,000원</h3>
+            <!-- 디테일 페이지 연결 -->
+            <a href="">구매하기</a>
+          </div>
+        </div>
+      </div>
+      <div class="best-img-box best-notAlone">
+        <div class="best-img-wrapper">
+          <img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4373-002/2ef42163-3696-481c-86a5-8c2b57176370_primary.jpg"
+            alt="나이키리액트비전"
+          />
+          <div class="best-hover-box">
+            <h3 class="title">나이키에어포스</h3>
+            <h3 class="title">149,000원</h3>
+            <a href="">구매하기</a>
+          </div>
+        </div>
+        <div class="best-img-wrapper">
+          <img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD0881-103/2686da97-97e8-4b30-a647-38198170fad6_5.jpg"
+            alt="나이키에어맥스"
+          />
+          <div class="best-hover-box">
+            <h3 class="title">나이키에어포스</h3>
+            <h3 class="title">149,000원</h3>
+            <a href="">구매하기</a>
+          </div>
+        </div>
+        <div class="best-img-wrapper">
+          <img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4962-001/422a4e3b-5466-466c-9b57-f00e029cbe30_primary.jpg"
+            alt="나이키조던농구"
+          />
+          <div class="best-hover-box">
+            <h3 class="title">나이키에어포스</h3>
+            <h3 class="title">149,000원</h3>
+            <a href="">구매하기</a>
+          </div>
+        </div>
+        <div class="best-img-wrapper" id="expame">
+          <img
+            src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4371-600/d5c61e2a-b66d-4236-b759-d55af54f6fdd_first.jpg"
+            alt="나이키리액트인피니티런"
+          />
+          <div class="best-hover-box">
+            <h3 class="title">나이키에어포스</h3>
+            <h3 class="title">149,000원</h3>
+            <a href="">구매하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

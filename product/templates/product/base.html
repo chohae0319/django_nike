@@ -116,7 +116,7 @@
                   <li><a href="{% url 'products:sale' 1 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title"><a href="">신발전체</a></li>
+                  <li class="list-title"><a href="">신발</a></li>
                   <li>
                     <a href="{% url 'products:list' 1 0 %}">신발 전체</a>
                   </li>
@@ -151,13 +151,30 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li><a href="/product/best">THE BEST</a></li>
-                  <li>SALE</li>
+                  <li><a href="{% url 'products:new' 2 %}">신상품</a></li>
+                  <li><a href="{% url 'products:best' 2 %}">THE BEST</a></li>
+                  <li><a href="{% url 'products:sale' 2 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title"><a href="">신발전체</a></li>
-                  {% for category in categorys %} {% endfor %}
+                  <li class="list-title"><a href="">신발</a></li>
+                  <li>
+                    <a href="{% url 'products:list' 2 0 %}">신발 전체</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 2 1 %}">라이프스타일</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 2 2 %}">러닝</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 2 3 %}">농구</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 2 4 %}">축구</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'products:list' 2 5 %}">샌들 & 슬리퍼</a>
+                  </li>
                 </ul>
                 <ul class="nav-list sports">
                   <li class="list-title"><a href="">스포츠</a></li>
