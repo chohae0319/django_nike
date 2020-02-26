@@ -117,3 +117,5 @@ $(function() {
     $("#checkout-sale-detail").prop("checked", true);
   });
 });
+
+
