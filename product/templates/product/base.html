@@ -11,7 +11,7 @@
       href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
     />
     <link
-      href="../../static/product/img/favicon.ico"
+      href="{% static 'product/img/favicon.ico' %}"
       rel="icon"
       type="image/x-icon"
     />
@@ -28,13 +28,15 @@
     <!-- 링크 -->
     {% endblock %}
     <!-- 회원가입, 로그인 페이지 js -->
-    <script src="{% static 'product/js/member.js' %}"></script>
     <title>
       {% block title %}나이키. Just Do It. CloneNike.com{% endblock %}
     </title>
   </head>
   <body>
     <div class="whole-wrapper"></div>
+    {% block modal %}
+    <!-- 필요한 모달창 들어올 곳 -->
+    {% endblock %}
     <!-- nav -->
     {% block navbar %}
     <input type="checkbox" id="sidebar" />
@@ -119,9 +121,8 @@
                   <li><a href="{% url 'products:sale' 1 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title"><a href="">신발전체</a></li>
-                  <li>
-                    <a href="{% url 'products:list' 1 0 %}">신발 전체</a>
+                  <li class="list-title">
+                    <a href="{% url 'products:list' 1 0 %}">신발전체</a>
                   </li>
                   <li>
                     <a href="{% url 'products:list' 1 1 %}">라이프스타일</a>
@@ -139,11 +140,13 @@
                     <a href="{% url 'products:list' 1 5 %}">샌들 & 슬리퍼</a>
                   </li>
                 </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title"><a href="">스포츠</a></li>
-                  <li><a href="">러닝</a></li>
-                  <li><a href="">농구</a></li>
-                  <li><a href="">축구</a></li>
+                <ul class="nav-list brands">
+                  <li class="list-title"><a href="">브랜드</a></li>
+                  <li>
+                    <a href="https://www.nike.com/kr/ko_kr/l/jordan">Jordan</a>
+                  </li>
+                  <li><a href="https://www.converse.co.kr/">converse</a></li>
+                  <li><a href="https://www.nike.com/kr/ko_kr/l/acg">ACG</a></li>
                 </ul>
               </div>
             </div>
@@ -154,17 +157,21 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li>신상품</li>
-                  <li><a href="/product/best">THE BEST</a></li>
-                  <li>SALE</li>
+                  <li><a href="{% url 'products:new' 1 %}">신상품</a></li>
+                  <li><a href="{% url 'products:best' 1 %}">THE BEST</a></li>
+                  <li><a href="{% url 'products:sale' 1 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title"><a href="">스포츠</a></li>
-                  {% for category in categorys %} {% endfor %}
+                <ul class="nav-list brands">
+                  <li class="list-title"><a href="">브랜드</a></li>
+                  <li>
+                    <a href="https://www.nike.com/kr/ko_kr/l/jordan">Jordan</a>
+                  </li>
+                  <li><a href="https://www.converse.co.kr/">converse</a></li>
+                  <li><a href="https://www.nike.com/kr/ko_kr/l/acg">ACG</a></li>
                 </ul>
               </div>
             </div>
@@ -175,17 +182,21 @@
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
                 <ul class="nav-list category">
-                  <li><a href="">신상품</a></li>
-                  <li><a href="">THE BEST</a></li>
-                  <li><a href="">SALE</a></li>
+                  <li><a href="{% url 'products:new' 1 %}">신상품</a></li>
+                  <li><a href="{% url 'products:best' 1 %}">THE BEST</a></li>
+                  <li><a href="{% url 'products:sale' 1 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title"><a href="">신발전체</a></li>
                   {% for category in categorys %} {% endfor %}
                 </ul>
-                <ul class="nav-list sports">
-                  <li class="list-title"><a href="">스포츠</a></li>
-                  {% for category in categorys %} {% endfor %}
+                <ul class="nav-list brands">
+                  <li class="list-title"><a href="">브랜드</a></li>
+                  <li>
+                    <a href="https://www.nike.com/kr/ko_kr/l/jordan">Jordan</a>
+                  </li>
+                  <li><a href="https://www.converse.co.kr/">converse</a></li>
+                  <li><a href="https://www.nike.com/kr/ko_kr/l/acg">ACG</a></li>
                 </ul>
               </div>
             </div>
