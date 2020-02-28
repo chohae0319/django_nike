@@ -35,6 +35,9 @@
 .order-address-wrapper span:nth-child(2) {
   font-size: 13px;
 }
+.order-address-list > label {
+  cursor: pointer;
+}
 
 /* modal */
 #plus-shipping,
@@ -63,6 +66,7 @@
   width: 100%;
   height: 50px;
   font-size: 20px;
+  cursor: pointer;
 }
 .shipping-box > label > i {
   margin-right: 10px;
