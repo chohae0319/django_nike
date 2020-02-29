@@ -20,6 +20,10 @@ class ToCheckout1(View):
         request.session['order_info'] = {}
         request.session['order_info']['order_list'] = request.POST.get(
             'order-list', False)
+        request.session['order_info']['amount'] = request.POST.get(
+            'amount', False)
+        request.session['order_info']['shipping_price'] = request.POST.get(
+            'shipping-price', False)
         request.session['order_info']['total_price'] = request.POST.get(
             'total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
@@ -38,8 +42,9 @@ class ToCheckout2(View):
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
-class Checkout1View(TemplateView):
-    template_name = 'order/checkout1_temp.html'
+class CheckoutView(TemplateView):
+    # template_name = 'order/checkout1_temp.html'
+    template_name = 'order/checkout.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -245,8 +245,14 @@ class CartList(LoginRequiredMixin, ListView):
                 .aggregate(amount=Sum('price_sum'))
             context['amount'] = queryset2['amount']
 
-            #총 결제 예정 금액(수정 필요)
-            context['total_price'] = queryset2['amount']
+            # 배송비(5만원 이상 무료배송)
+            if context['amount'] >= 50000:
+                context['shipping_price'] = 0
+            else:
+                context['shipping_price'] = 2500
+
+            #총 결제 예정 금액
+            context['total_price'] = context['amount'] + context['shipping_price']
 
         return context
 

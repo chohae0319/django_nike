@@ -62,7 +62,7 @@
           <span>상품 금액</span><span>{{amount|intcomma}}원</span>
         </li>
         <li class="order-info-list">
-          <span>예상 배송비</span><span>0원</span>
+          <span>예상 배송비</span><span>{{shipping_price|intcomma}}원</span>
         </li>
         <li class="order-info-list">
           <span>상품 할인 금액</span><span>0원</span>
@@ -130,18 +130,22 @@
     order_list.push({ 'inventory-id': {{ c.inventory_id.id }}, quantity: {{ c.quantity }} });
     {% endfor %}
     var order_list_str = JSON.stringify(order_list);
+    var amount = {{ amount }};
+    var shipping_price = {{ shipping_price }};
     var total_price = {{ total_price }};
     $.ajax({
       type: "POST",
       url: "{% url 'order:to-checkout1' %}",
       data: {'order-list': order_list_str,
+             'amount': amount,
+             'shipping-price': shipping_price,
              'total-price': total_price,
               csrfmiddlewaretoken: '{{ csrf_token }}'},
       dataType:'json',
       success: function(response) {
         var answer = response.result;
         if (answer == 'success') {
-          window.location.href = "{% url 'order:checkout1' %}";
+          window.location.href = "{% url 'order:checkout' %}";
         }
       }
     });

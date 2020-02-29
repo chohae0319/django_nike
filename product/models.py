@@ -22,7 +22,7 @@ class Product(models.Model):
     name = models.CharField(max_length=30, unique=True)
     gender = models.CharField(max_length=5, choices=GENDER_CHOICES, default=1)
     price = models.IntegerField()
-    style = models.CharField(max_length=10, blank=True)    # 상품번호. 나중에 blank=false로 바꿀예정
+    style = models.CharField(max_length=10)    # 상품번호. 나중에 blank=false로 바꿀예정
     category_id = models.ForeignKey(Category, on_delete=models.PROTECT)  # 카테고리에 속한 상품 존재하면 카테고리 삭제 불가
     soldout = models.BooleanField(default=False)   # 재고 있으면 False, 품절이면 True
     release_date = models.DateField()
@@ -31,6 +31,9 @@ class Product(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    def category_name(self):
+        return '{} {}'.format(self.gender, self.category_id.name)
 
 
 class Inventory(models.Model):

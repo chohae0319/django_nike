@@ -12,6 +12,9 @@
 <!-- title 확장 -->
 {% block title %} 나이키 {% endblock %}
 
+<!-- 정수 필터 확장-->
+{% load humanize %}
+
 <!-- content -->
 {% block content %}
 <section id="checkout" class="cover">
@@ -191,27 +194,29 @@
         <div class="cart-order-header">
           <strong class="title">주문내역</strong>
         </div>
+        {% for item in order_list %}
         <div class="order-detail-thumbnail">
           <div class="img-wrapper">
             <img
-              src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/product/CD4371-600/23d4ab93-4855-4902-91e2-7ae8edc2a256_primary.jpg?thumbnail"
+              src="{{ item.inventory.product_id.thumbnail.url }}"
               alt="주문상품썸네일"
             />
           </div>
           <ul class="cart-order-info">
-            <li class="order-info-list"><span>상품 이름</span></li>
-            <li class="order-info-list"><span>스타일</span></li>
-            <li class="order-info-list"><span>사이즈</span></li>
-            <li class="order-info-list"><span>수량</span></li>
-            <li class="order-info-list cart-item-price"><span>가격</span></li>
+            <li class="order-info-list"><span>{{ item.inventory.product_id.name }}</span></li>
+            <li class="order-info-list"><span>스타일 : {{ item.inventory.product_id.style }}</span></li>
+            <li class="order-info-list"><span>사이즈 : {{ item.inventory.size }}</span></li>
+            <li class="order-info-list"><span>수량 : {{ item.quantity }}개</span></li>
+            <li class="order-info-list cart-item-price"><span>{{ item.inventory.product_id.price|intcomma }} 원</span></li>
           </ul>
         </div>
+        {% endfor %}
         <ul class="cart-order-info">
           <li class="order-info-list">
-            <span>상품 금액</span><span>178,000원</span>
+            <span>상품 금액</span><span>{{ request.session.order_info.amount|intcomma }}원</span>
           </li>
           <li class="order-info-list">
-            <span>예상 배송비</span><span>0원</span>
+            <span>예상 배송비</span><span>{{ request.session.order_info.shipping_price|intcomma }}원</span>
           </li>
           <li class="order-info-list">
             <span>상품 할인 금액</span><span class="cart-item-price">0원</span>
@@ -220,7 +225,7 @@
             <span>주문 할인 금액</span><span class="cart-item-price">0원</span>
           </li>
           <li class="order-info-list">
-            <span>총 결제 예정 금액</span><span class="cart-item-price">178,000원</span class="cart-item-price">
+            <span>총 결제 예정 금액</span><span class="cart-item-price">{{ request.session.order_info.total_price|intcomma }}원</span class="cart-item-price">
           </li>
         </ul>
       </div>
