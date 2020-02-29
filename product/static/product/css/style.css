@@ -100,3 +100,14 @@ img {
   color: black;
   border: 1px solid black;
 }
+
+.color-gray {
+  color: #e0e0e0;
+}
+
+.btn-rectangle {
+  padding: 8px 16px;
+  background-color: black;
+  color: #ffffff;
+  font-size: 13px;
+}

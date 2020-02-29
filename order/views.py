@@ -10,7 +10,6 @@ import order.exceptions
 from .forms import ShippingForm
 
 
-
 def checkout(request):
     return render(request, 'order/checkout.html', {})
 
@@ -186,11 +185,21 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/shipping.html', {'form':form})
+    return render(request, 'order/shipping.html', {'form': form})
+
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
-    return render(request, 'order/shipping-show.html', {'shipping_instance':shipping_instance})
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
 # def Shippings(request):
 #     form = ShippingForm(request, request.POST)

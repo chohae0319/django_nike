@@ -18,6 +18,7 @@
 <!-- content -->
 {% block content %}
 <section id="checkout" class="cover">
+  {% if user.is_authenticated %}
   <div class="checkout-header-box">
     <h1 class="main-title">주문결제</h1>
   </div>
@@ -231,5 +232,16 @@
       </div>
     </div>
   </div>
+{% else %}
+<div class="already-login">
+  <h2 class="title">나이키</h2>
+  <span>로그인이 필요한 기능입니다.</span>
+  <div class="flex-box">
+    <a href="/member/login">로그인</a>
+    <a href="/">홈으로</a>
+  </div>
+</div>
+{% endif %}
 </section>
+
 {% endblock %}
