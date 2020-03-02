@@ -7,6 +7,7 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'order/css/checkout.css' %}" />
 <script src="{% static 'order/js/checkout-next-step.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% endblock %}
 
 <!-- title 확장 -->
@@ -36,17 +37,16 @@
             </li>
           </label>
           <li>
-            <span>이름</span>
+            <span>{{ user.username }}</span>
           </li>
           <li>
-            <span>휴대폰 번호</span>
-          </li>
-          <li>
-            <span>이메일</span>
+            <span>{{user.email}}</span>
           </li>
         </ul>
       </div>
       <div class="checkout-tab-box" id="checkout-address-box">
+        <!-- 배송지가 없을 경우 -->
+        {% if not shipping_instance %}
         <ul class="checkout-list-box">
           <input
             type="checkbox"
@@ -57,7 +57,7 @@
           <label for="checkout-address-detail">
             <li class="checkout-list-header">
               <span>배송지 정보</span>
-              <i class="xi-plus"></i>
+              <i class="xi-plus"><span id="after-address"></span></i>
               <i class="xi-minus"></i>
             </li>
           </label>
@@ -73,14 +73,12 @@
               
               <span id="receive_phone_info" class="alert-msg"></span>
                 <input
-                name="연락처"
+                  name="연락처"
                   type="text"
                   placeholder="-없이 입력"
                   id="receive_phone"
                   class="input-info"
                 />
-              
-              
             </div>
           </li>
           <li>
@@ -107,11 +105,117 @@
             />
           </li>
           <li>
+            <p id="alert-msg-next"></p>
+            <a href="/cart"><span>장바구니 바로가기</span></a>
             <button id="checkout-next">다음단계 진행</button>
             <button id="modify-client-detail" style="display: none;">수정하기</button>
             <button id="modify-client" style="display: none;">수정완료</button>
           </li>
         </ul>
+        <!-- 배송지가 있다면 -->
+    {% else %}
+    <ul class="checkout-list-box" id="checkout-address-wrapper">
+      <input
+        type="checkbox"
+        checked
+        name="checkout-tab-menu"
+        id="checkout-address-detail"
+      />
+      <label for="checkout-address-detail">
+        <li class="checkout-list-header">
+          <span>배송지 정보</span>
+          <i class="xi-plus"><span id="after-address"></span></i>
+          <i class="xi-minus"></i>
+        </li>
+      </label>
+      <li id="input-user_address">
+        <input type="radio" name="address-tab" checked value="oldAddress" id="checkout-address-tab-old">
+        <input type="radio" name="address-tab" value="newAddress" id="checkout-address-tab-new">
+        <div class="tab-header">  
+          <label id="checkout-address-label-old" for="checkout-address-tab-old">이전 주소</label>
+          <label id="checkout-address-label-new" for="checkout-address-tab-new">새로 입력</label>
+        </div>
+        {% for ship in shipping_instance %}
+        <div class="checkout-address-oldList">
+          <span class="receiver-name">{{ ship.receiver }}</span>
+          <span class="receiver-address">{{ ship.receiver_address }}</span>
+          <span class="receiver-phone">{{ ship.receiver_phone }}</span>
+        </div>
+        {% endfor %}
+        <div class="checkout-address-memo">
+          <input type="text" placeholder="배송 메모를 입력해주세요" id="checkout-address-memo">
+        </div>
+
+        <!-- 새 배송지 입력 -->
+        <div class="checkout-address-newList">
+          <ul>
+            <li>
+              <span>받으시는 분</span>
+              <span id="receive_name_info" class="alert-msg"></span>
+              <input type="text" name="name" autofocus placeholder="이름" id="receive_name" class="input-info"/>
+            </li>
+            <li>
+              <span>연락처</span>
+              <span id="receive_phone_info" class="alert-msg"></span>
+                <input
+                  name="address"
+                  type="text"
+                  placeholder="-없이 입력"
+                  id="receive_phone"
+                  class="input-info"
+                />
+            </li>
+            <li>
+              <span>배송 주소</span>
+              <span id="receive_address_info" class="alert-msg"></span>
+              <input
+              name="address"
+                type="text"
+                placeholder="나머지 주소 입력"
+                id="receive_address"
+                class="input-info"
+              />
+              
+            </li>
+            <li>
+              <span>배송 메모를 입력해주세요</span>
+              <span id="receive_memo_info" class="alert-msg"></span>
+              <input
+              name="memo"
+                type="text"
+                placeholder="ex. 부재시 문 앞에 놔주세요"
+                id="memo"
+                class="input-info"
+              />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="before-next-step" style="display: none;">
+        <p>
+          <span>받으시는 분 :</span>
+          <span class="after-checkout" id="checkout-username"></span>
+        </p>
+        <p>
+          <span>받으실 주소 :</span>
+          <span class="after-checkout" id="checkout-address"></span>
+        </p>
+        <p>
+          <span>연락받으실 번호 :</span>
+          <span class="after-checkout" id="checkout-phone"></span>
+        </p>
+        <p>
+          <span>부탁하신 배송 메모 :</span>
+          <span class="after-checkout" id="checkout-memo"></span>
+        </p>
+      </li>
+      <li>
+        <p id="alert-msg-next"></p>
+        <a href="/cart"><span>장바구니 바로가기</span></a>
+        <button id="checkout-next2">다음단계 진행</button>
+      </li>
+    </ul>
+    {% endif %}
       </div>
       <div class="checkout-tab-box checkout-next-step">
         <ul class="checkout-list-box">
@@ -169,19 +273,36 @@
           />
           <label for="checkout-pay-detail">
             <li class="checkout-list-header">
-              <span>결제수단 선택</span>
+              <span>결제</span>
               <i class="xi-plus"></i>
               <i class="xi-minus"></i>
             </li>
           </label>
           <li>
-            <span>\</span>
-          </li>
-          <li>
-            <span>\</span>
-          </li>
-          <li>
-            <span>\</span>
+            <!-- 이 버튼에 ajax 추가하시면 됩니다. -->
+            <!-- 배송지 data : userInfo -->
+            <button onclick="makeOrder()">결제하기</button>
+            <script>
+              function makeOrder() {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'order:make-order' %}",
+                    data: {
+                      user_address : userInfo,
+                      csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                      var answer = response.result;
+                      if (answer == 'success') {
+                        window.location.href = "{% url 'order:complete' %}";
+                      }
+                      if (answer == 'fail') {
+                        alert("에러!");
+                      }
+                    }
+                  });
+              }
+          </script>
           </li>
         </ul>
       </div>
