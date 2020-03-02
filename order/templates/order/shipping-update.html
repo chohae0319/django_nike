@@ -1,0 +1,12 @@
+{% extends "member/profile-base.html" %}
+
+{% block profileContent %}
+
+{% if user.is_authenticated %}
+<form method="POST" action="{% url 'order:shipping-update' ship.id%}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="수정하기" />
+</form>
+{% endif %}
+{% endblock %}

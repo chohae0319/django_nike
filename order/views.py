@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
@@ -8,6 +8,7 @@ from django.http import HttpResponse
 import json
 import order.exceptions
 from .forms import ShippingForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -172,7 +173,6 @@ class MakeOrder(View):
 
 
 def Shippings(request):
-    #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
         shipping = ShippingForm(request.POST, instance=ship)
@@ -187,6 +187,26 @@ def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
     return render(request, 'order/shipping-show.html', {'shipping_instance':shipping_instance})
 
-# def Shippings(request):
-#     form = ShippingForm(request, request.POST)
-#     return render(request, 'order/shipping.html', {'form': form})
+@login_required
+def Shipping_update(request, shipping_id):
+    # if request.method == 'POST':
+    ship = get_object_or_404(Shipping, pk=shipping_id)
+    shipping = ShippingForm(request.POST, user_id=request.user, instance=ship)
+    if shipping.is_valid():
+        shipping.save()
+        # return redirect(reverse('order:shipping-show'), kwargs={''}
+    # else:
+    #     ship = get_object_or_404(Shipping, pk=shipping_id)
+    #     form = ShippingForm(instance=ship)
+    return render(request, 'order/shipping-update.html', {'form':shipping})
+
+@login_required
+def Shipping_delete(request, id):
+    if request.method == 'POST':
+        chosen = Shipping.objects.get(id=id)
+        shipping = Shipping.objects.all(user_id=request.user)
+        for ship in shipping:
+            if ship.id == chosen:
+                ship.delete(id=id)
+                return redirect('order:shipping-show')
+    return render(request, 'order/shipping-delete.html', {'shipping':shipping})
