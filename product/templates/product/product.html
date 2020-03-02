@@ -1,4 +1,4 @@
-{% extends "product/base.html" %}
+{% extends "product/base.html" %} {% load humanize %}
 <!-- title -->
 {% block title %}신발-나이키{% endblock %}
 
@@ -57,7 +57,15 @@
   </div>
 </aside>
 <script>
-
+  $(document).ready(function() {
+    $('input[name="size"]').on("click", function() {
+      var size_checked_list = [];
+      $('input[name="size"]:checked').each(function() {
+        size_checked_list.push($(this).val());
+      });
+      console.log(size_checked_list);
+    });
+  });
 </script>
 {% endblock aside %}
 
@@ -87,7 +95,7 @@
     </div>
   </div>
 </div>
-<section id="product">
+<section id="product" class="product">
   <div class="product-box">
     <div class="product-wrapper flex-box">
       {% for product in product_list %}
@@ -100,14 +108,14 @@
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title">{{product.name}}</div>
+          <div class="item-title ">{{product.name}}</div>
           <!-- sub-title -->
-          <div class="item-subtitle color-light-gray">
-            남자 신발 라이프스타일
+          <div class="item-subtitle color-8D">
+            {{product.style}}
           </div>
           <!-- item-color 는 안 하기로 결정-->
           <!-- price -->
-          <div>{{product.price}}</div>
+          <div class="color-8D">{{product.price|intcomma}}원</div>
         </div>
       </div>
       {% endfor %}

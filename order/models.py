@@ -20,3 +20,11 @@ class OrderList(models.Model):  # Order 모델에 대한 상세내역 담는 클
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)
     size = models.IntegerField()
     quantity = models.IntegerField()
+
+class Shipping(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    destination_nickname = models.CharField(max_length=100)
+    receiver = models.CharField(max_length=100)
+    receiver_phone = models.CharField(max_length=100)
+    receiver_address = models.CharField(max_length=100)
+

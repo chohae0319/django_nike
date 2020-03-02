@@ -13,19 +13,21 @@
     <div class="items"> <!-- 클래스명 임의로 명시 -->
         {% for order in my_orders %}
             <ul>
-                <li>{{ order.date_ordered }}</li>
+                <li>{{ order.date_ordered }}</li><br>
                 <li>
                     {% for item in order.items.all %}
-                        {{ item.product.name }}
-                        {{ item.product.price }}
-                        {{ item.product.thumbnail }}
+                        <li><strong>{{ item.product.name }}</strong></li>
+                        <li>{{ item.product.price }}</li>
+                        <li>{{ item.product.thumbnail }}</li>
                     {% endfor %}
-                </li>
+                </li><br>
                 <li>${{ order.get_cart_total }}</li>
             </ul>
         {% endfor %}
     </div>
 {% endif %}
+
+
 
 <div class="profile-list-title"><h2 class="big-title">장바구니</h2></div>
 <div class="profile-list-view no-items" id="profile-cart">

@@ -1,27 +1,49 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
 from product.models import Inventory, Cart
-from .models import Order, OrderList
+from .models import Order, OrderList, Shipping
 from django.http import HttpResponse
 import json
 import order.exceptions
+from .forms import ShippingForm
+
+
+def checkout(request):
+    # 배송지 목록을 불러옴
+    shipping_instance = Shipping.objects.all()
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/checkout.html', {'shipping_instance': shipping_instance, "form": form})
 
 
 class ToCheckout1(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = {}
-        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
-        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
+        request.session['order_info']['order_list'] = request.POST.get(
+            'order-list', False)
+        request.session['order_info']['total_price'] = request.POST.get(
+            'total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
 class ToCheckout2(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = request.session['order_info']
-        request.session['order_info']['receive_name'] = request.POST.get('receive_name', False)
-        request.session['order_info']['receive_phone'] = request.POST.get('receive_phone', False)
-        request.session['order_info']['receive_address'] = request.POST.get('receive_address', False)
+        request.session['order_info']['receive_name'] = request.POST.get(
+            'receive_name', False)
+        request.session['order_info']['receive_phone'] = request.POST.get(
+            'receive_phone', False)
+        request.session['order_info']['receive_address'] = request.POST.get(
+            'receive_address', False)
         request.session['order_info']['memo'] = request.POST.get('memo', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
@@ -34,7 +56,7 @@ class Checkout1View(TemplateView):
 
         # 세션에서 order_info 가져오기
         order_info = self.request.session['order_info']
-        
+
         # order_list context에 추가
         order_list = []
         for i in json.loads(order_info['order_list']):
@@ -44,6 +66,7 @@ class Checkout1View(TemplateView):
             order_list.append(item)
         context['order_list'] = order_list
         return context
+
 
 class Checkout2View(TemplateView):
     template_name = 'order/checkout2_temp.html'
@@ -64,6 +87,7 @@ class Checkout2View(TemplateView):
         context['order_list'] = order_list
 
         return context
+
 
 class CompleteView(TemplateView):
     template_name = 'order/complete.html'
@@ -121,8 +145,10 @@ class MakeOrder(View):
                 # 3~4. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
-                    all_inventory = Inventory.objects.filter(product_id=item['product_id'])
-                    total_amount = all_inventory.aggregate(total_amount=Sum('amount'))['total_amount']
+                    all_inventory = Inventory.objects.filter(
+                        product_id=item['product_id'])
+                    total_amount = all_inventory.aggregate(
+                        total_amount=Sum('amount'))['total_amount']
                     if total_amount <= 0:
                         item['product_id'].soldout = True
                     # 판매량 늘리기
@@ -153,3 +179,34 @@ class MakeOrder(View):
         # 기타 에러상황
         except Exception as e:
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+
+
+def Shippings(request):
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/shipping.html', {'form': form})
+
+
+def ShippingShow(request):
+    shipping_instance = Shipping.objects.all()
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
+
+# def Shippings(request):
+#     form = ShippingForm(request, request.POST)
+#     return render(request, 'order/shipping.html', {'form': form})
