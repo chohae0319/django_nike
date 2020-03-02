@@ -1,5 +1,4 @@
-{% extends "product/base.html" %}
-{% load humanize %}
+{% extends "product/base.html" %} {% load humanize %}
 
 <!-- title -->
 {% block title %} 장바구니-나이키 {% endblock %}
@@ -42,7 +41,7 @@
         <div class="cart-item-option">
           <a href=""><span>옵션 변경</span></a>
         </div>
-        <div class="cart-item-price">
+        <div class="color-orange">
           <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
         </div>
         <div class="cart-item-delete">
@@ -73,9 +72,8 @@
         <li class="order-info-list">
           <span>총 결제 예정 금액</span><span>{{total_price|intcomma}}원</span>
         </li>
-          <a href=# onclick="order()">주문하기</a>
+        <a href="#" onclick="order()">주문하기</a>
       </ul>
-      
     </div>
   </div>
   {% endif %}
@@ -146,6 +144,5 @@
       }
     });
   }
-
 </script>
 {% endblock %}

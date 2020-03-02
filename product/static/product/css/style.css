@@ -101,13 +101,20 @@ img {
   border: 1px solid black;
 }
 
-.color-gray {
-  color: #e0e0e0;
-}
-
 .btn-rectangle {
   padding: 8px 16px;
   background-color: black;
   color: #ffffff;
   font-size: 13px;
+}
+
+/* ---------------------------------------------------------color */
+.color-gray {
+  color: #e0e0e0;
+}
+.color-8D {
+  color: #8d8d8d;
+}
+.color-orange {
+  color: rgb(248, 84, 32);
 }

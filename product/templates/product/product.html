@@ -1,4 +1,4 @@
-{% extends "product/base.html" %}
+{% extends "product/base.html" %} {% load humanize %}
 <!-- title -->
 {% block title %}신발-나이키{% endblock %}
 
@@ -106,14 +106,14 @@
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title">{{product.name}}</div>
+          <div class="item-title ">{{product.name}}</div>
           <!-- sub-title -->
-          <div class="item-subtitle color-light-gray">
+          <div class="item-subtitle color-8D">
             {{product.style}}
           </div>
           <!-- item-color 는 안 하기로 결정-->
           <!-- price -->
-          <div>{{product.price}}원</div>
+          <div class="color-8D">{{product.price|intcomma}}원</div>
         </div>
       </div>
       {% endfor %}

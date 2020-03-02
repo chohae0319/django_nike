@@ -3,6 +3,7 @@ myvenv/
 _media/
 
 .idea/
+.vscode/
 
 nike/
 
