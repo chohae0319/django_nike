@@ -21,18 +21,22 @@ def index(request):
 
 class CategoryDetail(ListView):
     model = Product
-    template_name = 'product/product.html/'
+    template_name = 'product/product.html'
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
         gender = self.kwargs['gender']
         id = self.kwargs['id']
         if gender == 1:
+            context['gender'] = 'Men'
             if id == 0:
                 context['product_list'] = Product.objects.filter(gender='MEN')
+                context['category'] = '신발'
             else:
                 context['product_list'] = Product.objects.filter(gender='MEN', category_id=id)
+                context['category'] = Category.objects.filter(pk=id)
         else:
+            context['gender'] = 'Women'
             if id == 0:
                 context['product_list'] = Product.objects.filter(gender='WOMEN')
             else:
