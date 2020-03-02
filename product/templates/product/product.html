@@ -72,8 +72,10 @@
 <!-- content -->
 {% block content %}
 <div id="section-header">
-  <h2 class="title" id="section-title">Men</h2>
-  <h2 class="big-title">Men`s 신발</h2>
+  <h2 class="title" id="section-title">{{gender}}</h2>
+  {% for category in category %}
+  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
+  {% endfor %}
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>

@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from .models import Category, Product, ProductImage, Inventory, Cart
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, request, JsonResponse
 from django.utils import timezone
 import datetime
 
@@ -19,31 +19,28 @@ def index(request):
     )
 
 
-# class CategoryListView(ListView):
-#     model = Category
-#     template_name = 'product/index.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(CategoryListView, self).get_context_data(**kwargs)
-#         context['category_list'] = Category.objects.all()
-#         return context
-
-
-class CategoryDetail(DetailView):
+class CategoryDetail(ListView):
     model = Product
     template_name = 'product/product.html'
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
         gender = self.kwargs['gender']
+        id = self.kwargs['id']
         if gender == 1:
-            if self.object.pk == 0:
+            context['gender'] = 'Men'
+            if id == 0:
                 context['product_list'] = Product.objects.filter(gender='MEN')
-            context['product_list'] = Product.objects.filter(gender='MEN', category_id=self.object.pk)
+                context['category'] = '신발'
+            else:
+                context['product_list'] = Product.objects.filter(gender='MEN', category_id=id)
+                context['category'] = Category.objects.filter(pk=id)
         else:
-            if self.object.pk == 0:
+            context['gender'] = 'Women'
+            if id == 0:
                 context['product_list'] = Product.objects.filter(gender='WOMEN')
-            context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=self.object.pk)
+            else:
+                context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=id)
 
         return context
 
@@ -77,27 +74,27 @@ class NewProductList(ListView):
 
 class BestProductList(ListView):
     model = Product
-    template_name = 'product/product.html'
+    template_name = 'product/best.html'
 
     def get_context_data(self, **kwargs):
         context = super(BestProductList, self).get_context_data(**kwargs)
-        # 판매량 내림차순으로 상위 1개 상품 출력.
+        # 판매량 내림차순으로 상위 5개 상품 출력.
         # 카테고리마다 구별해서 템플릿 표시.
         pk = self.kwargs['pk']
         if pk == 1:
             # MEN의 BEST 품목
-            context['life_product_list'] = Product.objects.filter(gender='MEN', category_id=1).order_by('-sales')[:1]
-            context['run_product_list'] = Product.objects.filter(gender='MEN', category_id=2).order_by('-sales')[:1]
-            context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:1]
-            context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:1]
-            context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:1]
+            context['life_product_list'] = Product.objects.filter(gender='MEN', category_id=1).order_by('-sales')[:5]
+            context['run_product_list'] = Product.objects.filter(gender='MEN', category_id=2).order_by('-sales')[:5]
+            context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:5]
+            context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:5]
+            context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:5]
         else:
             # WOMEN의 BEST 품목
-            context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:1]
-            context['run_product_list'] = Product.objects.filter(gender='WOMEN', category_id=2).order_by('-sales')[:1]
-            context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:1]
-            context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:1]
-            context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:1]
+            context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:5]
+            context['run_product_list'] = Product.objects.filter(gender='WOMEN', category_id=2).order_by('-sales')[:5]
+            context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:5]
+            context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:5]
+            context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:5]
         return context
 
 
