@@ -14,12 +14,12 @@ $(function() {
         .text("필수 입력란입니다.")
         .attr("style", "color :rgb(248, 84, 32)");
       // 공백으로 저장
-      userinfo = {
-        ...userinfo,
+      userInfo = {
+        ...userInfo,
         [this.name]: this.value
       };
       // 콘솔창 확인용
-      console.log(userinfo);
+      console.log(userInfo);
       return false;
     } else {
       // 제대로 입력했다면 경고 문구 삭제
@@ -28,24 +28,24 @@ $(function() {
         .text("")
         .attr("style", "color : black");
       // 값 저장
-      userinfo = {
-        ...userinfo,
+      userInfo = {
+        ...userInfo,
         [this.name]: this.value
       };
       // 콘솔창 확인용
-      console.log(userinfo);
+      console.log(userInfo);
     }
   });
 });
 
 $(function() {
   $("#checkout-next").click(function() {
-    //   userinfo의 길이만큼 반복하며 입력 안 한게 있는지 검사
-    for (var i = 0; i < Object.keys(userinfo).length; i++) {
-      if (userinfo[Object.keys(userinfo)[i]] === "") {
-        alert(Object.keys(userinfo)[i] + "을 입력해주세요");
+    //   userInfo의 길이만큼 반복하며 입력 안 한게 있는지 검사
+    for (var i = 0; i < Object.keys(userInfo).length; i++) {
+      if (userInfo[Object.keys(userInfo)[i]] === "") {
+        alert(Object.keys(userInfo)[i] + "을 입력해주세요");
 
-        $(`input[name=${Object.keys(userinfo)[i]}]`).focus();
+        $(`input[name=${Object.keys(userInfo)[i]}]`).focus();
         return;
       }
     }
@@ -85,11 +85,11 @@ $(function() {
     );
   });
   $("#modify-client").click(function() {
-    for (var i = 0; i < Object.keys(userinfo).length; i++) {
-      if (userinfo[Object.keys(userinfo)[i]] === "") {
-        alert(Object.keys(userinfo)[i] + "을 입력해주세요");
+    for (var i = 0; i < Object.keys(userInfo).length; i++) {
+      if (userInfo[Object.keys(userInfo)[i]] === "") {
+        alert(Object.keys(userInfo)[i] + "을 입력해주세요");
 
-        $(`input[name=${Object.keys(userinfo)[i]}]`).focus();
+        $(`input[name=${Object.keys(userInfo)[i]}]`).focus();
         return;
       }
     }
@@ -126,12 +126,12 @@ $(function() {
   $("#checkout-next2").click(function() {
     var alertMsg = $("#alert-msg-next");
     if ($(`input[name="address-tab"]:checked`).val() === "newAddress") {
-      //   userinfo의 길이만큼 반복하며 입력 안 한게 있는지 검사
-      for (var i = 0; i < Object.keys(userinfo).length; i++) {
-        if (userinfo[Object.keys(userinfo)[i]] === "") {
-          alertMsg.text(Object.keys(userinfo)[i] + "을 입력해주세요");
+      //   userInfo의 길이만큼 반복하며 입력 안 한게 있는지 검사
+      for (var i = 0; i < Object.keys(userInfo).length; i++) {
+        if (userInfo[Object.keys(userInfo)[i]] === "") {
+          alertMsg.text(Object.keys(userInfo)[i] + "을 입력해주세요");
 
-          $(`input[name=${Object.keys(userinfo)[i]}]`).focus();
+          $(`input[name=${Object.keys(userInfo)[i]}]`).focus();
           return;
         }
       }
