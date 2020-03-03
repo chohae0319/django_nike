@@ -145,7 +145,7 @@
     $("#order-btn").on("click", function() {
       var order_list = [];
       var inventory_id = $('input[name="inventory"]:checked').val();
-      var quantity = $("#numOfItems").text();
+      var quantity = $("#numOfItems").text() * 1;
       order_list.push({ 'inventory-id': inventory_id, quantity: quantity });
       var order_list_str = JSON.stringify(order_list);
       var amount = quantity * {{ product.price }};
@@ -158,7 +158,8 @@
       $.ajax({
         type: "POST",
         url: "{% url 'order:to-checkout1' %}",
-        data: {'order-list': order_list_str,
+        data: {'is-cart': 0,
+               'order-list': order_list_str,
                'amount': amount,
                'shipping-price': shipping_price,
                'total-price': total_price,

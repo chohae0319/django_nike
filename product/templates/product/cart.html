@@ -134,7 +134,8 @@
     $.ajax({
       type: "POST",
       url: "{% url 'order:to-checkout1' %}",
-      data: {'order-list': order_list_str,
+      data: {'is-cart': 1,
+             'order-list': order_list_str,
              'amount': amount,
              'shipping-price': shipping_price,
              'total-price': total_price,

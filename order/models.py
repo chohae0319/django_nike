@@ -17,12 +17,18 @@ class Order(models.Model):
     receive_phone = models.CharField(max_length=11)
     memo = models.CharField(max_length=100, blank=True)     # 배송요청사항
 
+    def __str__(self):
+        return '{}. {} - {}'.format(self.pk, self.order_date.strftime("%Y-%m-%d"), self.user_id)
+
 
 class OrderList(models.Model):  # Order 모델에 대한 상세내역 담는 클래스
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)
     size = models.IntegerField()
     quantity = models.IntegerField()
+
+    def __str__(self):
+        return '{}({}) : {}'.format(self.order_id.pk, self.pk, self.product_id)
 
 class Shipping(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

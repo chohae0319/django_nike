@@ -28,14 +28,11 @@ def checkout(request):
 class ToCheckout1(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = {}
-        request.session['order_info']['order_list'] = request.POST.get(
-            'order-list', False)
-        request.session['order_info']['amount'] = request.POST.get(
-            'amount', False)
-        request.session['order_info']['shipping_price'] = request.POST.get(
-            'shipping-price', False)
-        request.session['order_info']['total_price'] = request.POST.get(
-            'total-price', False)
+        request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
+        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
+        request.session['order_info']['amount'] = request.POST.get('amount', False)
+        request.session['order_info']['shipping_price'] = request.POST.get('shipping-price', False)
+        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -53,7 +50,6 @@ class ToCheckout2(View):
 
 
 class CheckoutView(TemplateView):
-    # template_name = 'order/checkout1_temp.html'
     template_name = 'order/checkout.html'
 
     def get_context_data(self, **kwargs):
@@ -117,6 +113,9 @@ class MakeOrder(View):
             item['is_soldout'] = False
             order_list.append(item)
 
+        # is_cart 정보
+        is_cart = order_info['is_cart']
+
         # 배송 정보
         receive_address = request.POST.get('receive_name', False)
         receive_name = request.POST.get('receive_phone', False)
@@ -178,6 +177,11 @@ class MakeOrder(View):
                                                quantity=item['quantity'])
                     order_list_obj.save()
 
+                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제
+                if is_cart:
+                    data = Cart.objects.filter(user_id=user_id)
+                    data.delete()
+
                 return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
         # 재고 부족시
@@ -185,8 +189,8 @@ class MakeOrder(View):
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
         # 기타 에러상황
-        except Exception as e:
-            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        # except Exception as e:
+        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):
