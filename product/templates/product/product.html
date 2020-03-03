@@ -1,4 +1,4 @@
-{% extends "product/base.html" %}
+{% extends "product/base.html" %} {% load humanize %}
 <!-- title -->
 {% block title %}신발-나이키{% endblock %}
 
@@ -72,8 +72,10 @@
 <!-- content -->
 {% block content %}
 <div id="section-header">
-  <h2 class="title" id="section-title">Men</h2>
-  <h2 class="big-title">Men`s 신발</h2>
+  <h2 class="title" id="section-title">{{gender}}</h2>
+  {% for category in category %}
+  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
+  {% endfor %}
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>
@@ -106,14 +108,14 @@
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title">{{product.name}}</div>
+          <div class="item-title ">{{product.name}}</div>
           <!-- sub-title -->
-          <div class="item-subtitle color-light-gray">
+          <div class="item-subtitle color-8D">
             {{product.style}}
           </div>
           <!-- item-color 는 안 하기로 결정-->
           <!-- price -->
-          <div>{{product.price}}원</div>
+          <div class="color-8D">{{product.price|intcomma}}원</div>
         </div>
       </div>
       {% endfor %}

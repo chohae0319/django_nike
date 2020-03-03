@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the best</title>
+</head>
+<body>
+    <div id="size-wrapper">
+        <label class="size-label" for="210">210</label>
+        <label class="size-label" for="220">220</label>
+        <label class="size-label" for="230">230</label>
+        <label class="size-label" for="240">240</label>
+        <label class="size-label" for="250">250</label>
+    </div>
+    <div class="input-wrapper">
+        <input type="checkbox" name="size" id="210" value="210" />
+        <input type="checkbox" name="size" id="220" value="220" />
+        <input type="checkbox" name="size" id="230" value="230" />
+        <input type="checkbox" name="size" id="240" value="240" />
+        <input type="checkbox" name="size" id="250" value="250" />
+    </div>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+          var size_checked_list = [];
+          $('input[name="size"]').on("click", function() {
+            var length = $('input[name="size"]:checked').length;
+            $('input[name="size"]:checked').each(function() {
+              size_checked_list.push($(this).val());
+            });
+            var checkedValue = [];
+            var cnt = 0;
+            for (let i = 0; i < length; i++) {
+              checkedValue[i] = size_checked_list[cnt];
+              cnt++;
+            }
+            console.log(checkedValue);
+            $.ajax({
+              type: "POST",
+              url: "{% url 'products:checked_list' %}",
+              data: {
+                'checked[]': checkedValue,
+                'csrfmiddlewaretoken': "{{ csrf_token }}",
+                'is_ajax':true
+              },
+              dataType: "json",
+              success: function(response) {
+                alert('신청 완료되었습니다.');
+                window.location.href = "{% url 'products:test' %}";
+              },
+              error: function(request, status, error) {
+                console.log("실패");
+              }
+            });
+          });
+        });
+        </script>
+    <h1> {{checked_list}}</h1>
+
+
+<!--    <h1>{{product_list}}</h1>-->
+<!--    <h1> 1111 </h1>-->
+
+</body>
+</html>

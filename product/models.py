@@ -41,9 +41,18 @@ class Inventory(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)  # 재고 존재하면 상품 삭제 불가
     size = models.CharField(max_length=10)
     amount = models.IntegerField()
+    sale = models.IntegerField(default=0)
+    soldout = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)
+
+    def soldout(self):
+        if (self.amount - self.sale) == 0:
+            self.soldout = True
+        else:
+            self.soldout = False
+        self.save()
 
 
 class ProductImage(models.Model):
@@ -52,6 +61,7 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return '{} image'.format(self.product_id)
+
 
 class Cart(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

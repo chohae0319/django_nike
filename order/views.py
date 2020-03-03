@@ -11,7 +11,18 @@ from .forms import ShippingForm
 
 
 def checkout(request):
-    return render(request, 'order/checkout.html', {})
+    # 배송지 목록을 불러옴
+    shipping_instance = Shipping.objects.all()
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/checkout.html', {'shipping_instance': shipping_instance, "form": form})
 
 
 class ToCheckout1(View):
