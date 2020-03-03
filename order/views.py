@@ -104,7 +104,7 @@ class MakeOrder(View):
         user_id = request.user
 
         # 세션에서 order_info 가져오기
-        order_info = self.request.session['order_info']
+        order_info = self.request.session.pop('order_info', None)
 
         # order_list 변환
         order_list = []
@@ -118,20 +118,22 @@ class MakeOrder(View):
             order_list.append(item)
 
         # 배송 정보
-        receive_address = order_info['receive_address']
-        receive_name = order_info['receive_name']
-        receive_phone = order_info['receive_phone']
+        receive_address = request.POST.get('receive_name', False)
+        receive_name = request.POST.get('receive_phone', False)
+        receive_phone = request.POST.get('receive_address', False)
+        memo = request.POST.get('memo', False)
 
         # 결제 금액
+        amount = order_info['amount']
+        shipping_price = order_info['shipping_price']
         total_price = order_info['total_price']
 
         # 주문 완료 절차
         # 1. 재고 검사
-        # 2. 계좌 잔액 줄이기(아직 구현 안함)
-        # 3. 전 사이즈 재고 하나도 없으면 product 모델에서 품절 표시하기
-        # 4. product 모델 판매량 늘리기
-        # 5. Order, OrderList 모델 insert
-        # => 1,2번 과정에서 재고 부족, 잔액 부족으로 exception 발생시 다시 처음 상태로 롤백 시켜야 함(transaction.atomic으로 처리)
+        # 2. 전 사이즈 재고 하나도 없으면 product 모델에서 품절 표시하기
+        # 3. product 모델 판매량 늘리기
+        # 4. Order, OrderList 모델 insert
+        # => 1번 과정에서 재고 부족으로 exception 발생시 다시 처음 상태로 롤백 시켜야 함(transaction.atomic으로 처리)
 
         try:
             with transaction.atomic():
@@ -139,15 +141,13 @@ class MakeOrder(View):
                 for item in order_list:
                     # 재고 없으면 예외 발생
                     if item['inventory_id'].amount < item['quantity']:
-                        out_of_stock_product = item['product_id'].name
+                        # out_of_stock_product = item['product_id'].name
                         raise order.exceptions.OutOfStockError()
                     # 재고 줄이기
                     item['inventory_id'].amount -= item['quantity']
                     item['inventory_id'].save()
 
-                # 2. 계좌 잔액 줄이기(아직 구현 안함)
-
-                # 3~4. 품절 검사 & 판매량 늘리기
+                # 2~3. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
                     all_inventory = Inventory.objects.filter(
@@ -160,12 +160,15 @@ class MakeOrder(View):
                     item['product_id'].sales += item['quantity']
                     item['product_id'].save()
 
-                # 5. Order, OrderList 모델 insert
+                # 4. Order, OrderList 모델 insert
                 order_obj = Order(user_id=user_id,
+                                  amount=amount,
+                                  shipping_price=shipping_price,
                                   total_price=total_price,
                                   receive_address=receive_address,
                                   receive_name=receive_name,
-                                  receive_phone=receive_phone)
+                                  receive_phone=receive_phone,
+                                  memo=memo)
                 order_obj.save()
 
                 for item in order_list:

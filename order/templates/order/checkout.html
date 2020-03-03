@@ -10,11 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% endblock %}
 
-<!-- title 확장 -->
-{% block title %} 나이키 {% endblock %}
-
 <!-- 정수 필터 확장-->
 {% load humanize %}
+
+<!-- title 확장 -->
+{% block title %} 나이키 {% endblock %}
 
 <!-- content -->
 {% block content %}
@@ -68,15 +68,15 @@
             <div>
               <span>받으시는 분</span>
               <span id="receive_name_info" class="alert-msg"></span>
-              <input type="text" name="이름" autofocus placeholder="이름" id="receive_name" class="input-info"/>
-              
+              <input type="text" name="name" autofocus placeholder="이름" id="receive_name" class="input-info"/>
+
             </div>
             <div>
               <span>연락처</span>
-              
+
               <span id="receive_phone_info" class="alert-msg"></span>
                 <input
-                  name="연락처"
+                  name="phone"
                   type="text"
                   placeholder="-없이 입력"
                   id="receive_phone"
@@ -88,19 +88,19 @@
             <span>배송 주소</span>
             <span id="receive_address_info" class="alert-msg"></span>
             <input
-            name="주소"
+            name="address"
               type="text"
               placeholder="나머지 주소 입력"
               id="receive_address"
               class="input-info"
             />
-            
+
           </li>
           <li>
             <span>배송 메모를 입력해주세요</span>
             <span id="receive_memo_info" class="alert-msg"></span>
             <input
-            name="메모"
+            name="memo"
               type="text"
               placeholder="ex. 부재시 문 앞에 놔주세요"
               id="memo"
@@ -134,7 +134,7 @@
       <li id="input-user_address">
         <input type="radio" name="address-tab" checked value="oldAddress" id="checkout-address-tab-old">
         <input type="radio" name="address-tab" value="newAddress" id="checkout-address-tab-new">
-        <div class="tab-header">  
+        <div class="tab-header">
           <label id="checkout-address-label-old" for="checkout-address-tab-old">이전 주소</label>
           <label id="checkout-address-label-new" for="checkout-address-tab-new">새로 입력</label>
         </div>
@@ -161,7 +161,7 @@
               <span>연락처</span>
               <span id="receive_phone_info" class="alert-msg"></span>
                 <input
-                  name="address"
+                  name="phone"
                   type="text"
                   placeholder="-없이 입력"
                   id="receive_phone"
@@ -178,7 +178,7 @@
                 id="receive_address"
                 class="input-info"
               />
-              
+
             </li>
             <li>
               <span>배송 메모를 입력해주세요</span>
@@ -287,25 +287,30 @@
             <button onclick="makeOrder()">결제하기</button>
             <script>
               function makeOrder() {
+                var receive_name = $("#receive_name_info").text();
+                var receive_phone = $("#receive_phone_info").text();
+                var receive_address = $("#receive_address_info").text();
+                var memo = $("#receive_memo_info").text();
                 $.ajax({
-                    type: "POST",
-                    url: "{% url 'order:make-order' %}",
-                    data: {
-                      user_address : userInfo,
-                      csrfmiddlewaretoken: '{{ csrf_token }}'
-                    },
-                    success: function(response) {
-                      var answer = response.result;
-                      if (answer == 'success') {
-                        window.location.href = "{% url 'order:complete' %}";
-                      }
-                      if (answer == 'fail') {
-                        alert("에러!");
-                      }
+                  type: "POST",
+                  url: "{% url 'order:make-order' %}",
+                  data: {receive_name: receive_name,
+                          receive_phone: receive_phone,
+                          receive_address: receive_address,
+                          memo: memo,
+                          csrfmiddlewaretoken: '{{ csrf_token }}'},
+                  success: function(response) {
+                    var answer = response.result;
+                    if (answer == 'success') {
+                      window.location.href = "{% url 'order:complete' %}";
                     }
-                  });
+                    if (answer == 'fail') {
+                      alert("에러!");
+                    }
+                  }
+                });
               }
-          </script>
+            </script>
           </li>
         </ul>
       </div>

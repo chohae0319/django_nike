@@ -63,7 +63,7 @@
             </div>
           </div>
           <div id="order-wrapper">
-            <a href="" class="round-btn-big">바로구매</a>
+            <a href="#" class="round-btn-big" id="order-btn">바로구매</a>
             <span class="round-btn-big white" id="cart-btn">장바구니 담기</span>
           </div>
         </div>
@@ -140,6 +140,37 @@
     $(".modal-cover").on("click", function() {
       $(this).removeClass("on-modal");
       $("body").css({ overflow: "auto" });
+    });
+
+    $("#order-btn").on("click", function() {
+      var order_list = [];
+      var inventory_id = $('input[name="inventory"]:checked').val();
+      var quantity = $("#numOfItems").text();
+      order_list.push({ 'inventory-id': inventory_id, quantity: quantity });
+      var order_list_str = JSON.stringify(order_list);
+      var amount = quantity * {{ product.price }};
+      if (amount >= 50000) {
+        shipping_price = 0;
+      } else {
+        shipping_price = 2500;
+      };
+      var total_price = amount + shipping_price;
+      $.ajax({
+        type: "POST",
+        url: "{% url 'order:to-checkout1' %}",
+        data: {'order-list': order_list_str,
+               'amount': amount,
+               'shipping-price': shipping_price,
+               'total-price': total_price,
+                csrfmiddlewaretoken: '{{ csrf_token }}'},
+        dataType:'json',
+        success: function(response) {
+          var answer = response.result;
+          if (answer == 'success') {
+            window.location.href = "{% url 'order:checkout' %}";
+          }
+        }
+      });
     });
   });
 </script>
