@@ -31,3 +31,16 @@ $(document).ready(function() {
     $("#numOfItems").text(quantity);
   });
 });
+
+var view = true;
+$(document).ready(function() {
+  $("#review-title").click(function() {
+    if (view) {
+      $(".review-box>li").css({ height: "100vh" });
+      view = false;
+    } else {
+      $(".review-box>li").css({ height: "55px" });
+      view = true;
+    }
+  });
+});
