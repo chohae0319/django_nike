@@ -164,9 +164,9 @@ def add_cart(request):      # 장바구니에 상품 추가
     user_id = request.user.pk
     inventory_id = request.POST['inventory']
     quantity = int(request.POST['quantity'])
+    all_cart = Cart.objects.filter(user_id=user_id)
     try:
-        exist_cart = Cart.objects.filter(
-            user_id=user_id).get(inventory_id=inventory_id)
+        exist_cart = all_cart.get(inventory_id=inventory_id)
         if exist_cart is not None:      # 장바구니에 동일 상품이 존재할 때, quantity만 늘려줌
             exist_cart.quantity += quantity
             exist_cart.save()
@@ -178,6 +178,8 @@ def add_cart(request):      # 장바구니에 상품 추가
         cart_instance = Cart(user_id=User.objects.get(id=user_id), inventory_id=Inventory.objects.get(id=inventory_id),
                              quantity=quantity)
         cart_instance.save()
+
+    request.session['cart_count'] = all_cart.count()
 
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
@@ -193,6 +195,7 @@ def cart_delete_one(request):      # 장바구니 특정상품 삭제
 
     if data.user_id.id == user_id:       # 삭제 성공
         data.delete()
+        request.session['cart_count'] -= 1
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
     else:       # Cart의 user_id와 로그인한 유저가 다른 경우
         return HttpResponse(json.dumps({'result': 'no action'}), content_type="application/json")
@@ -211,6 +214,9 @@ def cart_delete_all(request):      # 장바구니 전체상품 삭제
 
     data = Cart.objects.filter(user_id=user_id)     # user_id가 일치하는 쿼리셋 반환
     data.delete()
+
+    request.session.pop('cart_count', None)
+
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -242,8 +248,14 @@ class CartList(LoginRequiredMixin, ListView):
                 .aggregate(amount=Sum('price_sum'))
             context['amount'] = queryset2['amount']
 
-            #총 결제 예정 금액(수정 필요)
-            context['total_price'] = queryset2['amount']
+            # 배송비(5만원 이상 무료배송)
+            if context['amount'] >= 50000:
+                context['shipping_price'] = 0
+            else:
+                context['shipping_price'] = 2500
+
+            #총 결제 예정 금액
+            context['total_price'] = context['amount'] + context['shipping_price']
 
         return context
 
