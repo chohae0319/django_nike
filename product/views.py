@@ -17,7 +17,12 @@ def index(request):
         'product/index.html/',
         {},
     )
-
+def about(request):
+    return render(
+        request,
+        'product/about.html/',
+        {},
+    )
 
 class CategoryDetail(ListView):
     model = Product
