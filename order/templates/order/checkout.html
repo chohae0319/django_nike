@@ -333,7 +333,7 @@
             <li class="order-info-list"><span>스타일 : {{ item.inventory.product_id.style }}</span></li>
             <li class="order-info-list"><span>사이즈 : {{ item.inventory.size }}</span></li>
             <li class="order-info-list"><span>수량 : {{ item.quantity }}개</span></li>
-            <li class="order-info-list cart-item-price"><span>{{ item.inventory.product_id.price|intcomma }} 원</span></li>
+            <li class="order-info-list color-orange"><span>{{ item.inventory.product_id.price|intcomma }} 원</span></li>
           </ul>
         </div>
         {% endfor %}
@@ -345,13 +345,13 @@
             <span>예상 배송비</span><span>{{ request.session.order_info.shipping_price|intcomma }}원</span>
           </li>
           <li class="order-info-list">
-            <span>상품 할인 금액</span><span class="cart-item-price">0원</span>
+            <span>상품 할인 금액</span><span class="color-orange">0원</span>
           </li>
           <li class="order-info-list">
-            <span>주문 할인 금액</span><span class="cart-item-price">0원</span>
+            <span>주문 할인 금액</span><span class="color-orange">0원</span>
           </li>
           <li class="order-info-list">
-            <span>총 결제 예정 금액</span><span class="cart-item-price">{{ request.session.order_info.total_price|intcomma }}원</span class="cart-item-price">
+            <span>총 결제 예정 금액</span><span class="color-orange">{{ request.session.order_info.total_price|intcomma }}원</span class="cart-item-price">
           </li>
         </ul>
       </div>

@@ -246,12 +246,8 @@ label.no-amount {
 #order-wrapper {
   margin-top: 40px;
 }
-#order-wrapper a {
+#order-wrapper > span {
   margin-bottom: 10px;
-}
-
-/* 장바구니 버튼 */
-#cart-btn {
   cursor: pointer;
 }
 .mini-cart-header {
@@ -280,13 +276,16 @@ label.no-amount {
   flex-direction: column;
   width: 100%;
 }
-.mini-cart-link a {
+.mini-cart-link > * {
   width: 290px;
   height: 40px;
   padding: 0 16px;
   line-height: 40px;
   margin: 0 auto;
   text-align: center;
+}
+.mini-cart-link span {
+  cursor: pointer;
 }
 
 .mini-cart-link a:first-child {
@@ -545,15 +544,21 @@ label.no-amount {
 .on-modal {
   display: flex;
   overflow: hidden;
+  flex-direction: row-reverse;
 }
 
 .modal-cover .mini-cart {
-  position: absolute;
+  position: relative;
   right: 0;
   width: 330px;
   height: 100vh;
   overflow-y: scroll;
   background-color: #fff;
+}
+.black-paper {
+  height: 100vh;
+  position: relative;
+  flex: 1;
 }
 
 /* -------------------------------------------------------------- prfile mypage */
