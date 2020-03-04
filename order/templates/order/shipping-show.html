@@ -1,18 +1,18 @@
 <h3>배송지 내역</h3>
 <a href="/order/shipping/"><button>배송지추가</button></a>
-<a href="{% url 'order:shipping-update' %}"><button>수정</button></a>
-<a href="/order/shipping-delete/"><button>삭제</button></a>
 {% if not shipping_instance %}
 <div>등록된 배송지가 없습니다</div>
 {% else %}
 {% for ship in shipping_instance %}
-<input type="radio" name="ship" id="ship{{ forloop.counter }}" value="{{ ship.id }}">
+<input type="radio" name="ship" id="ship{{ forloop.counter }}" value="{{ ship.pk }}">
 <label for="ship{{ forloop.counter }}">
 <p>{{ ship.destination_nickname }}</p>
 <p>{{ ship.receiver }}</p>
 <p>{{ ship.receiver_phone }}</p>
 <p>{{ ship.receiver_address }}</p>
-<br>
+<a href="{% url 'order:shipping-update' pk=ship.pk %}"><button>수정</button></a>
+<a href="{% url 'order:shipping-delete' pk=ship.pk %}"><button>삭제</button></a>
+    <br>
 </label>
 {% endfor %}
 {% endif %}

@@ -181,32 +181,29 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/shipping.html', {'form':form})
+    return render(request, 'order/shipping.html', {'ship':form})
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
     return render(request, 'order/shipping-show.html', {'shipping_instance':shipping_instance})
 
-@login_required
-def Shipping_update(request, shipping_id):
-    # if request.method == 'POST':
-    ship = get_object_or_404(Shipping, pk=shipping_id)
-    shipping = ShippingForm(request.POST, user_id=request.user, instance=ship)
-    if shipping.is_valid():
-        shipping.save()
-        # return redirect(reverse('order:shipping-show'), kwargs={''}
-    # else:
-    #     ship = get_object_or_404(Shipping, pk=shipping_id)
-    #     form = ShippingForm(instance=ship)
-    return render(request, 'order/shipping-update.html', {'form':shipping})
 
 @login_required
-def Shipping_delete(request, id):
+def Shipping_update(request, pk):
+    ship = Shipping.objects.get(id=pk)
     if request.method == 'POST':
-        chosen = Shipping.objects.get(id=id)
-        shipping = Shipping.objects.all(user_id=request.user)
-        for ship in shipping:
-            if ship.id == chosen:
-                ship.delete(id=id)
-                return redirect('order:shipping-show')
-    return render(request, 'order/shipping-delete.html', {'shipping':shipping})
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        ship = ShippingForm(instance=ship)
+    return render(request, 'order/shipping-update.html', {'ship':ship})
+
+@login_required
+def Shipping_delete(request, pk):
+    ship = Shipping.objects.get(id=pk)
+    if request.method == 'POST':
+        ship.delete()
+        return redirect('order:shipping-show')
+    return render(request, 'order/shipping-delete.html', {'ship':ship})
