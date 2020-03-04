@@ -71,11 +71,14 @@
             >
           </li>
         </ul>
-        <ul class="flex-box" id="nav-guide">
-          <li>
+        <ul class="flex-box" id="nav-guide">          
             {% if user.is_authenticated %}
-            <span id="user-profile">{{ user.username }}</span>
+            <li id="user-profile">
+              <i class="xi-profile"></i>
+            <span >{{ user.username }}</span>
+          </li>
             {% else %}
+          <li>
             <!-- 로그인 안 했을 경우 -->
             <a href="/member/signup/"><span>회원가입</span></a>
             <a href="/member/login/"><span>/ 로그인</span></a>
@@ -90,7 +93,10 @@
             ></a>
           </li>
           <li>
-            <a href=""><span>대한민국</span></a>
+            <a href="">
+              <i class="xi-maker"></i>
+              <span>대한민국</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -111,7 +117,7 @@
         <!-- main nav -->
         <ul class="mainNav flex-box">
           <li class="dropdown-box">
-            <a href="/product/"><span>men</span></a>
+            <a href="{% url 'products:list' 1 0 %}"><span>men</span></a>
             <!-- dropdown -->
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
@@ -152,7 +158,7 @@
             </div>
           </li>
           <li class="dropdown-box">
-            <a href="/product/"><span>women</span></a>
+            <a href="{% url 'products:list' 2 0 %}"><span>women</span></a>
             <!-- dropdown -->
             <div class="dropdown-wrapper">
               <div class="nav-list-wrapper">
@@ -162,9 +168,8 @@
                   <li><a href="{% url 'products:sale' 2 %}">SALE</a></li>
                 </ul>
                 <ul class="nav-list shoes">
-                  <li class="list-title"><a href="">신발</a></li>
-                  <li>
-                    <a href="{% url 'products:list' 2 0 %}">신발 전체</a>
+                  <li class="list-title">
+                    <a href="{% url 'products:list' 2 0 %}">신발전체</a>
                   </li>
                   <li>
                     <a href="{% url 'products:list' 2 1 %}">라이프스타일</a>
@@ -205,7 +210,6 @@
                 </ul>
                 <ul class="nav-list shoes">
                   <li class="list-title"><a href="">신발전체</a></li>
-                  {% for category in categorys %} {% endfor %}
                 </ul>
                 <ul class="nav-list brands">
                   <li class="list-title"><a href="">브랜드</a></li>
@@ -220,7 +224,7 @@
           </li>
         </ul>
 
-        <button class="hide"></button>
+        <!-- 검색창 -->
         <div class="desktop-only">
           <i class="xi-search" id="nonhide-search-icon"></i>
           <input type="text" placeholder="검색" class="search" />
@@ -354,7 +358,7 @@
         <ul class="col col3">
           <li class="list-title"><span>ABOUT NIKE</span></li>
           <li>
-            <a href=""><span>나이키에 대하여</span></a>
+            <a href="/product/about"><span>나이키에 대하여</span></a>
           </li>
         </ul>
         <ul class="col col4">

@@ -17,7 +17,12 @@ def index(request):
         'product/index.html/',
         {},
     )
-
+def about(request):
+    return render(
+        request,
+        'product/about.html/',
+        {},
+    )
 
 class CategoryDetail(ListView):
     model = Product
@@ -34,16 +39,17 @@ class CategoryDetail(ListView):
                 context['category'] = '신발'
             else:
                 context['product_list'] = Product.objects.filter(gender='MEN', category_id=id)
-                context['category'] = Category.objects.filter(pk=id)
+                context['category'] = Category.objects.filter(pk=id).values('name')
         else:
             context['gender'] = 'Women'
             if id == 0:
                 context['product_list'] = Product.objects.filter(gender='WOMEN')
+                context['category'] = '신발'
             else:
                 context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=id)
+                context['category'] = Category.objects.filter(pk=id)
 
         return context
-
 
 class NewProductList(ListView):
     # 모든 신발 카테고리 해당. today 기준 출시일이 30일 전 이내인 상품만
