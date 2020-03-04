@@ -20,9 +20,7 @@ app_name = "products"
 
 urlpatterns = [
     path('', views.index),
-    # path('', views.CategoryListView.as_view()),
-    # path('product/', views.product, name='product'),
-    path('product/<int:gender>/<int:pk>', views.CategoryDetail.as_view(), name='list'),
+    path('product/<int:gender>/<int:id>', views.CategoryDetail.as_view(), name='list'),
     path('product/new/<int:pk>', views.NewProductList.as_view(), name='new'),
     path('product/best/<int:pk>', views.BestProductList.as_view(), name='best'),
     path('product/sale/<int:pk>', views.SaleProductList.as_view(), name='sale'),

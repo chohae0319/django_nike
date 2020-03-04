@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 venv/
-=======
->>>>>>> front-patch-4
 myvenv/
+_media/
 
 .idea/
+.vscode/
 
 nike/
 

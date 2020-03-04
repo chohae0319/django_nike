@@ -1,5 +1,12 @@
 {% extends "product/base.html" %} {% load humanize %}
 
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- js -->
+{% block link %}
+<script src="{% static 'product/js/detail.js' %}"></script>
+{% endblock %}
+
 <!-- content -->
 {% block content %}
 <section id="detail" class="cover">
@@ -22,8 +29,8 @@
       <div class="detail-product-info">
         <div class="detail-item-tilte">
           <div class="detail-title-header">
-            <span>{{ category.name }}</span>
-            <span class="big-title">{{ product.price|intcomma }}</span>
+            <span>{{ product.category_name }}</span>
+            <span>{{ product.price|intcomma }}원</span>
           </div>
           <h2 class="big-title">{{ product.name }}</h2>
         </div>
@@ -31,63 +38,68 @@
         <div class="order-box">
           <div class="size-wrapper">
             <h3>사이즈 선택</h3>
-            {% for i in inventory %}
-            <span>
-              <label for="{{ i.pk }}">{{ i.size }}</label>
+            <div class="size-selector">
+              {% for i in inventory %} {% if i.amount %}
               <input
                 type="radio"
                 name="inventory"
                 id="{{ i.pk }}"
                 value="{{ i.pk }}"
               />
-            </span>
-            {% endfor %}
-            <div class="detail-num">
-              <span id="numOfItems"
-                ><input type="text" name="quantity" value="1"
-              /></span>
-              <button id="increaseNum">+</button>
-              <button id="decreaseNum">-</button>
+              <label for="{{ i.pk }}">{{ i.size }}</label>
+              <span id="size-{{i.pk}}">{{i.amount}}</span>
+              {% else %}
+              <label class="no-amount" for="{{ i.pk }}">{{ i.size }}</label>
+              {% endif %} {% endfor %}
+            </div>
+            <div class="detail-num-wrapper">
+              <div class="detail-num">
+                <span>수량</span>
+                <span id="numOfItems"></span>
+                <button id="decreaseNum"><i class="xi-minus"></i></button>
+                <button id="increaseNum"><i class="xi-plus"></i></button>
+              </div>
+              <span class="color-orange" id="size-alert"></span>
             </div>
           </div>
           <div id="order-wrapper">
-            <a href="" class="round-btn-big">바로구매</a>
-            <a href="" class="round-btn-big white" id="cart-btn"
-              >장바구니 담기</a
-            >
+            <a href="#" class="round-btn-big" id="order-btn">바로구매</a>
+            <span class="round-btn-big white" id="cart-btn">장바구니 담기</span>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- main detail-view -->
-  <div class="detail-view">
-    <div class="detail-view-wrap">
-      <img
-        src="https://static-breeze.nike.co.kr/kr/ko_kr/cmsstatic/structured-content/2357/200207_nsw_epdp_volt_bg-1.jpg"
-        alt=""
-      />
-      <iframe
-        src="https://players.brightcove.net/72451143001/Hk7rH5kvb_default/index.html?videoId=6120496352001"
-        allowfullscreenallow="encrypted-media"
-        width="960"
-        height="745"
-      ></iframe>
     </div>
   </div>
 </section>
 <div class="modal-cover">
   <div class="mini-cart">
     <div class="mini-cart-card">
+      <div class="mini-cart-header">
+        <h3>미니 장바구니</h3>
+      </div>
       <div class="mini-image-wrapper">
-        <a href=""><img src="{{ product.thumbnail.url }}" alt="미니썸네일"></a>
+        <img src="{{ product.thumbnail.url }}" alt="미니썸네일" />
       </div>
       <div class="mini-cart-detail">
-        <span>{{ product.name }}</span>
-        <span>{{ category.name }}</span>
-        <span>사이즈</span>
-        <span>수량</span>
-        <span>{{ product.price|intcomma }}</span>
+        <ul class="mini-cart-wrapper">
+          <li>{{ product.name }}</li>
+          <li><span>스타일 : {{ product.style }}</span></li>
+          <li>
+            <span>사이즈 : </span>
+            <span id="selected_size"></span>
+          </li>
+          <li>
+            <span>수량 : </span>
+            <span id="selected_quantity"></span>
+          </li>
+          <li>
+            <span class="color-orange">{{ product.price|intcomma }} 원</span>
+          </li>
+        </ul>
+        <div class="mini-cart-link">
+          <a href="/cart/" class="btn-rectangle"><span>장바구니 가기</span></a>
+          <a href="" class="btn-rectangle"><span>바로구매</span></a>
+        </div>
       </div>
     </div>
   </div>
@@ -96,7 +108,9 @@
   $(document).ready(function() {
     $("#cart-btn").on("click", function() {
       var inventory_id = $('input[name="inventory"]:checked').val();
-      var quantity = $('input[name="quantity"]').val();
+      // 사이즈 가져오기 위한 코드
+      var size = $(`label[for=${inventory_id}]`).text();
+      var quantity = $("#numOfItems").text();
 
       if (inventory_id == null) {
         alert("사이즈를 선택해주세요");
@@ -115,6 +129,9 @@
           var answer = response.result;
           if (answer == "success") {
             $(".modal-cover").addClass("on-modal");
+            $("#selected_size").text(size);
+            $("#selected_quantity").text(quantity);
+            $("body").css({ overflow: "hidden" });
           } else if (answer == "no user") alert("로그인하세요!");
         }
       });
@@ -122,6 +139,39 @@
     // 검정화면 클릭시 모달 끄기
     $(".modal-cover").on("click", function() {
       $(this).removeClass("on-modal");
+      $("body").css({ overflow: "auto" });
+    });
+
+    $("#order-btn").on("click", function() {
+      var order_list = [];
+      var inventory_id = $('input[name="inventory"]:checked').val();
+      var quantity = $("#numOfItems").text() * 1;
+      order_list.push({ 'inventory-id': inventory_id, quantity: quantity });
+      var order_list_str = JSON.stringify(order_list);
+      var amount = quantity * {{ product.price }};
+      if (amount >= 50000) {
+        shipping_price = 0;
+      } else {
+        shipping_price = 2500;
+      };
+      var total_price = amount + shipping_price;
+      $.ajax({
+        type: "POST",
+        url: "{% url 'order:to-checkout1' %}",
+        data: {'is-cart': 0,
+               'order-list': order_list_str,
+               'amount': amount,
+               'shipping-price': shipping_price,
+               'total-price': total_price,
+                csrfmiddlewaretoken: '{{ csrf_token }}'},
+        dataType:'json',
+        success: function(response) {
+          var answer = response.result;
+          if (answer == 'success') {
+            window.location.href = "{% url 'order:checkout' %}";
+          }
+        }
+      });
     });
   });
 </script>

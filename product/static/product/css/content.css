@@ -14,6 +14,7 @@ section {
 }
 section.product {
   top: 264px;
+  margin-bottom: 264px;
 }
 #toggle-aside:checked ~ .product {
   left: 0;
@@ -111,14 +112,12 @@ section.product {
   width: 300px;
   height: 300px;
 }
-
-.card .item-info {
-  padding: 10px 0 0 10px;
+.product-info {
+  font-size: 16px;
+  padding: 10px 0;
 }
-
-.card .item-subtitle {
-  color: rgb(96, 96, 96);
-  padding: 0 0 10px 10px;
+.item-subtitle {
+  padding-bottom: 10px;
 }
 /* -------------------------------------------------------------- detail*/
 /* detail */
@@ -152,11 +151,70 @@ section#detail {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
+  font-size: 16px;
 }
 .size-wrapper {
-  padding: 20px 0;
+  padding-top: 20px;
+}
+.detail-num-wrapper {
   border-bottom: 1px solid #e0e0e0;
 }
+.detail-num {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+}
+.detail-num > span {
+  font-size: 16px;
+  font-weight: bold;
+}
+/* size btn */
+input[name="inventory"] {
+  display: none;
+}
+.size-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.size-selector span {
+  display: none;
+}
+.size-selector label {
+  flex-basis: 19%;
+  margin-top: 6px;
+  padding: 16px 0;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[name="inventory"]:checked + label {
+  background-color: black;
+  color: #fff;
+}
+label.no-amount {
+  background-color: rgb(247, 247, 247);
+  color: #e0e0e0;
+  cursor: initial;
+}
+
+/* + - 버튼 */
+.detail-num > button {
+  background-color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+.detail-num > button:focus {
+  outline: none;
+}
+
 #order-wrapper {
   margin-top: 40px;
 }
@@ -164,12 +222,53 @@ section#detail {
   margin-bottom: 10px;
 }
 
-.detail-view-wrap iframe {
-  position: absolute;
+/* 장바구니 버튼 */
+#cart-btn {
+  cursor: pointer;
+}
+.mini-cart-header {
+  width: 290px;
+  margin: 10px auto;
+}
+
+.mini-image-wrapper {
+  width: 290px;
+  height: 290px;
+  margin: 10px auto;
+}
+
+.mini-cart-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 20%;
-  top: 71.6%;
-  left: 0;
+  padding: 10px 20px;
+}
+.mini-cart-wrapper li {
+  margin: 10px 0;
+}
+
+.mini-cart-link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mini-cart-link a {
+  width: 290px;
+  height: 40px;
+  padding: 0 16px;
+  line-height: 40px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mini-cart-link a:first-child {
+  background-color: #fff;
+  color: black;
+  border: 1px solid #e0e0e0;
+}
+.mini-cart-link a + a {
+  margin-top: 10px;
+  background-color: rgb(248, 84, 32);
 }
 
 /* -------------------------------------------------------------- sign-up */
@@ -241,6 +340,10 @@ section#detail {
   width: 100%;
   height: 40vh;
   font-size: 14px;
+}
+.already-login div {
+  width: 200px;
+  justify-content: space-around;
 }
 .already-login a {
   display: inline-block;
@@ -329,9 +432,7 @@ section#detail {
 .cart-list-wrapper > li .cart-item-option {
   text-decoration: underline;
 }
-.cart-item-price {
-  color: rgb(248, 84, 32);
-}
+
 .cart-list-wrapper > li .cart-item-delete {
   cursor: pointer;
 }
@@ -378,11 +479,12 @@ section#detail {
   right: 0;
   bottom: 0;
   z-index: 3000;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
   touch-action: none;
 }
-.modal-cover.on-modal {
+.on-modal {
   display: flex;
+  overflow: hidden;
 }
 
 .modal-cover .mini-cart {
@@ -397,7 +499,8 @@ section#detail {
 /* -------------------------------------------------------------- prfile mypage */
 /* profile */
 /* member안에 있는 css 폴더로 옮겨야 함 */
-section#profile > div {
+section#profile .profile-list-title,
+section#profile .profile-list-view {
   border-bottom: 1px solid #e0e0e0;
 }
 .profile-list-title {

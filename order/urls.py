@@ -5,15 +5,16 @@ from . import views
 app_name = "order"
 
 urlpatterns = [
-    path('checkout1/', views.Checkout1View.as_view(), name='checkout1'),
+    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('checkout2/', views.Checkout2View.as_view(), name='checkout2'),
     path('to-checkout1/', views.ToCheckout1.as_view(), name='to-checkout1'),
     path('to-checkout2/', views.ToCheckout2.as_view(), name='to-checkout2'),
     path('complete/', views.CompleteView.as_view(), name='complete'),
     path('make-order/', views.MakeOrder.as_view(), name='make-order'),
-    path('checkout/', views.checkout, name='checkout'),
+    # path('checkout/', views.checkout, name='checkout'),
     path('shipping/', views.Shippings, name='shipping'),
     path('shipping-show/', views.ShippingShow, name='shipping-show'),
+<<<<<<< HEAD
     path('shipping-update/<int:pk>', views.Shipping_update, name='shipping-update'),
     path('shipping-delete/<int:pk>', views.Shipping_delete, name='shipping-delete'),
 
@@ -23,4 +24,6 @@ urlpatterns = [
     # path('cart/add/', views.add_cart, name='add-cart'),
     # path('cart/delete-one/', views.cart_delete_one, name='cart-delete-one'),
     # path('cart/delete-all/', views.cart_delete_all, name='cart-delete-all'),
+=======
+>>>>>>> upstream/master
 ]

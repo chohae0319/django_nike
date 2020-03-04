@@ -1,4 +1,4 @@
-{% extends "product/base.html" %}
+{% extends "product/base.html" %} {% load humanize %}
 <!-- title -->
 {% block title %}신발-나이키{% endblock %}
 
@@ -58,34 +58,12 @@
 </aside>
 <script>
   $(document).ready(function() {
-    var size_checked_list = [];
     $('input[name="size"]').on("click", function() {
-      var length = $('input[name="size"]:checked').length;
+      var size_checked_list = [];
       $('input[name="size"]:checked').each(function() {
         size_checked_list.push($(this).val());
       });
-      var checkedValue = [];
-      var cnt = 0;
-      for (let i = 0; i < length; i++) {
-        checkedValue[i] = size_checked_list[cnt];
-        cnt++;
-      }
-      // console.log(checkedValue);
-      $.ajax({
-        type: "POST",
-        url: "{% url 'product:list' %}",
-        data: {
-          checked: checkedValue,
-          csrfmiddlewaretoken: "{{ csrf_token }}"
-        },
-        dataType: "json",
-        success: function(response) {
-          window.location.href = "{% url 'product:' %}";
-        },
-        error: function(request, status, error) {
-          console.log("실패");
-        }
-      });
+      console.log(size_checked_list);
     });
   });
 </script>
@@ -94,8 +72,10 @@
 <!-- content -->
 {% block content %}
 <div id="section-header">
-  <h2 class="title" id="section-title">Men</h2>
-  <h2 class="big-title">Men`s 신발</h2>
+  <h2 class="title" id="section-title">{{gender}}</h2>
+  {% for category in category %}
+  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
+  {% endfor %}
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>
@@ -115,7 +95,7 @@
     </div>
   </div>
 </div>
-<section id="product">
+<section id="product" class="product">
   <div class="product-box">
     <div class="product-wrapper flex-box">
       {% for product in product_list %}
@@ -128,14 +108,14 @@
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title">{{product.name}}</div>
+          <div class="item-title ">{{product.name}}</div>
           <!-- sub-title -->
-          <div class="item-subtitle color-light-gray">
-            남자 신발 라이프스타일
+          <div class="item-subtitle color-8D">
+            {{product.style}}
           </div>
           <!-- item-color 는 안 하기로 결정-->
           <!-- price -->
-          <div>{{product.price}}</div>
+          <div class="color-8D">{{product.price|intcomma}}원</div>
         </div>
       </div>
       {% endfor %}

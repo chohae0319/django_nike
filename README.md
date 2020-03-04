@@ -15,8 +15,11 @@
 ## Tech / Framework used
 
 - **Built with**
-  - front : HTML5, CSS3, BootStrap, JavaScript, JQuery
+  - front : HTML5, CSS3, JavaScript, JQuery
   - back : Python3, django2.x
+    - member (프로필 페이지) :
+    - product (상품 페이지) :
+    - order + cart (결제 및 장바구니) :
 
 ## Features
 
@@ -86,3 +89,25 @@ Must Todo-front
 3. css 작성 순서 통일을 해주어야 할 듯 예) position -> width,height -> font ...etc
    - 찾기 힘들고 통일 되어 있지 않으니 협업에 힘들 것이라 예상됌
 
+## 2020 02 26
+
+1. front :
+   배송지 추가 : ~~view 파일에서 전달해주는 form을 shipping-show 라는 페이지에 같이 전달<br> - 모달창을 통해 페이지 변동 없이 하기<br>-배송지 목록 디자인 : jquery + css 결제창에서 기존에 있던 배송지 불러오기~~ best 창에서 사진 배치 해결
+
+## 2020 02 29
+
+1. front Todo :
+   - ~~사이즈 버튼 디자인~~
+   - ~~ajax 성공시 모달창 띄우는거 에러 해결~~
+
+## 2020 03 04
+
+개강 및 각자의 일정으로 인해 온라인으로 진행하기로 함
+
+### 느낀점 또는 배운점
+
+front>
+
+- 반응형 :
+  반응형을 따로 작업하려니깐 너무 착잡하다. 한 페이지를 작업할때 반응형을 같이 작업해 놓는 편이 좋을 것 같다.
+- 서버~db에 대한 이해가 없이 진행되는 프론트는 허전함이 심하다.

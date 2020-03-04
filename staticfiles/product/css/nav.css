@@ -6,6 +6,7 @@ nav {
   top: 0;
   z-index: 99;
   background-color: #ffffff;
+  transition: all 0.35s;
 }
 nav li a:hover {
   color: black;
@@ -256,7 +257,39 @@ button.hide {
   display: flex;
 }
 
-@media screen and (max-width: 800px) {
+input#sidebar {
+  display: none;
+}
+
+#hide-sidebar {
+  position: fixed;
+  display: none;
+  z-index: 20000;
+  opacity: 0;
+  top: 0;
+  right: -470px;
+  width: 470px;
+  height: 100vh;
+  background-color: #ffffff;
+  transition: all 0.35s;
+  overflow-y: scroll;
+}
+
+#whole-wrapper {
+  position: fixed;
+  top: 0;
+  right: 470px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -2000;
+  opacity: 0;
+}
+#hamburger > label {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;
     height: 0;
@@ -277,5 +310,40 @@ button.hide {
   }
   #user-profile-drop.toggle-drop {
     display: none;
+  }
+  input#sidebar:checked ~ nav {
+    right: 470px;
+  }
+  input#sidebar:checked ~ #whole-wrapper {
+    z-index: 20000;
+    opacity: 1;
+    overflow: hidden;
+  }
+  input#sidebar:checked ~ aside {
+    left: -470px;
+  }
+  input#sidebar:checked ~ section {
+    left: -470px;
+  }
+  input#sidebar:checked ~ #hide-sidebar {
+    display: block;
+    opacity: 1;
+    right: 0;
+  }
+
+  #sidebar-inner-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  #sidebar-inner-box li {
+    padding: 20px;
+    background-color: rgb(247, 248, 247);
+  }
+  #sidebar-inner-box li:first-child {
+    background-color: #ffffff;
+  }
+  #sidebar-inner-box li + li {
+    border-top: 1px solid #e0e0e0;
   }
 }

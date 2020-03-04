@@ -1,5 +1,4 @@
-{% extends "product/base.html" %}
-{% load humanize %}
+{% extends "product/base.html" %} {% load humanize %}
 
 <!-- title -->
 {% block title %} 장바구니-나이키 {% endblock %}
@@ -42,7 +41,7 @@
         <div class="cart-item-option">
           <a href=""><span>옵션 변경</span></a>
         </div>
-        <div class="cart-item-price">
+        <div class="color-orange">
           <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
         </div>
         <div class="cart-item-delete">
@@ -62,7 +61,7 @@
           <span>상품 금액</span><span>{{amount|intcomma}}원</span>
         </li>
         <li class="order-info-list">
-          <span>예상 배송비</span><span>0원</span>
+          <span>예상 배송비</span><span>{{shipping_price|intcomma}}원</span>
         </li>
         <li class="order-info-list">
           <span>상품 할인 금액</span><span>0원</span>
@@ -73,9 +72,8 @@
         <li class="order-info-list">
           <span>총 결제 예정 금액</span><span>{{total_price|intcomma}}원</span>
         </li>
-          <a href=# onclick="order()">주문하기</a>
+        <a href="#" onclick="order()">주문하기</a>
       </ul>
-      
     </div>
   </div>
   {% endif %}
@@ -130,22 +128,26 @@
     order_list.push({ 'inventory-id': {{ c.inventory_id.id }}, quantity: {{ c.quantity }} });
     {% endfor %}
     var order_list_str = JSON.stringify(order_list);
+    var amount = {{ amount }};
+    var shipping_price = {{ shipping_price }};
     var total_price = {{ total_price }};
     $.ajax({
       type: "POST",
       url: "{% url 'order:to-checkout1' %}",
-      data: {'order-list': order_list_str,
+      data: {'is-cart': 1,
+             'order-list': order_list_str,
+             'amount': amount,
+             'shipping-price': shipping_price,
              'total-price': total_price,
               csrfmiddlewaretoken: '{{ csrf_token }}'},
       dataType:'json',
       success: function(response) {
         var answer = response.result;
         if (answer == 'success') {
-          window.location.href = "{% url 'order:checkout1' %}";
+          window.location.href = "{% url 'order:checkout' %}";
         }
       }
     });
   }
-
 </script>
 {% endblock %}

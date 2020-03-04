@@ -11,18 +11,29 @@ from .forms import ShippingForm
 from django.contrib.auth.decorators import login_required
 
 
-
 def checkout(request):
-    return render(request, 'order/checkout.html', {})
+    # 배송지 목록을 불러옴
+    shipping_instance = Shipping.objects.all()
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/checkout.html', {'shipping_instance': shipping_instance, "form": form})
 
 
 class ToCheckout1(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = {}
-        request.session['order_info']['order_list'] = request.POST.get(
-            'order-list', False)
-        request.session['order_info']['total_price'] = request.POST.get(
-            'total-price', False)
+        request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
+        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
+        request.session['order_info']['amount'] = request.POST.get('amount', False)
+        request.session['order_info']['shipping_price'] = request.POST.get('shipping-price', False)
+        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -39,8 +50,8 @@ class ToCheckout2(View):
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
-class Checkout1View(TemplateView):
-    template_name = 'order/checkout1_temp.html'
+class CheckoutView(TemplateView):
+    template_name = 'order/checkout.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,7 +101,7 @@ class MakeOrder(View):
         user_id = request.user
 
         # 세션에서 order_info 가져오기
-        order_info = self.request.session['order_info']
+        order_info = self.request.session.pop('order_info', None)
 
         # order_list 변환
         order_list = []
@@ -103,21 +114,26 @@ class MakeOrder(View):
             item['is_soldout'] = False
             order_list.append(item)
 
+        # is_cart 정보
+        is_cart = order_info['is_cart']
+
         # 배송 정보
-        receive_address = order_info['receive_address']
-        receive_name = order_info['receive_name']
-        receive_phone = order_info['receive_phone']
+        receive_address = request.POST.get('receive_name', False)
+        receive_name = request.POST.get('receive_phone', False)
+        receive_phone = request.POST.get('receive_address', False)
+        memo = request.POST.get('memo', False)
 
         # 결제 금액
+        amount = order_info['amount']
+        shipping_price = order_info['shipping_price']
         total_price = order_info['total_price']
 
         # 주문 완료 절차
         # 1. 재고 검사
-        # 2. 계좌 잔액 줄이기(아직 구현 안함)
-        # 3. 전 사이즈 재고 하나도 없으면 product 모델에서 품절 표시하기
-        # 4. product 모델 판매량 늘리기
-        # 5. Order, OrderList 모델 insert
-        # => 1,2번 과정에서 재고 부족, 잔액 부족으로 exception 발생시 다시 처음 상태로 롤백 시켜야 함(transaction.atomic으로 처리)
+        # 2. 전 사이즈 재고 하나도 없으면 product 모델에서 품절 표시하기
+        # 3. product 모델 판매량 늘리기
+        # 4. Order, OrderList 모델 insert
+        # => 1번 과정에서 재고 부족으로 exception 발생시 다시 처음 상태로 롤백 시켜야 함(transaction.atomic으로 처리)
 
         try:
             with transaction.atomic():
@@ -125,15 +141,13 @@ class MakeOrder(View):
                 for item in order_list:
                     # 재고 없으면 예외 발생
                     if item['inventory_id'].amount < item['quantity']:
-                        out_of_stock_product = item['product_id'].name
+                        # out_of_stock_product = item['product_id'].name
                         raise order.exceptions.OutOfStockError()
                     # 재고 줄이기
                     item['inventory_id'].amount -= item['quantity']
                     item['inventory_id'].save()
 
-                # 2. 계좌 잔액 줄이기(아직 구현 안함)
-
-                # 3~4. 품절 검사 & 판매량 늘리기
+                # 2~3. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
                     all_inventory = Inventory.objects.filter(
@@ -146,12 +160,15 @@ class MakeOrder(View):
                     item['product_id'].sales += item['quantity']
                     item['product_id'].save()
 
-                # 5. Order, OrderList 모델 insert
+                # 4. Order, OrderList 모델 insert
                 order_obj = Order(user_id=user_id,
+                                  amount=amount,
+                                  shipping_price=shipping_price,
                                   total_price=total_price,
                                   receive_address=receive_address,
                                   receive_name=receive_name,
-                                  receive_phone=receive_phone)
+                                  receive_phone=receive_phone,
+                                  memo=memo)
                 order_obj.save()
 
                 for item in order_list:
@@ -161,6 +178,11 @@ class MakeOrder(View):
                                                quantity=item['quantity'])
                     order_list_obj.save()
 
+                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제
+                if is_cart:
+                    data = Cart.objects.filter(user_id=user_id)
+                    data.delete()
+
                 return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
         # 재고 부족시
@@ -168,8 +190,8 @@ class MakeOrder(View):
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
         # 기타 에러상황
-        except Exception as e:
-            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        # except Exception as e:
+        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):
@@ -181,12 +203,27 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
+<<<<<<< HEAD
     return render(request, 'order/shipping.html', {'ship':form})
+=======
+    return render(request, 'order/shipping.html', {'form': form})
+
+>>>>>>> upstream/master
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
-    return render(request, 'order/shipping-show.html', {'shipping_instance':shipping_instance})
+    #shipping_instance = get_object_or_404(Shipping)
+    if request.method == 'POST':
+        ship = Shipping.objects.create(user_id=request.user)
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        form = ShippingForm()
+    return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
+<<<<<<< HEAD
 
 @login_required
 def Shipping_update(request, pk):
@@ -207,3 +244,8 @@ def Shipping_delete(request, pk):
         ship.delete()
         return redirect('order:shipping-show')
     return render(request, 'order/shipping-delete.html', {'ship':ship})
+=======
+# def Shippings(request):
+#     form = ShippingForm(request, request.POST)
+#     return render(request, 'order/shipping.html', {'form': form})
+>>>>>>> upstream/master

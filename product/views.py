@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from .models import Category, Product, ProductImage, Inventory, Cart
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, request, JsonResponse
 from django.utils import timezone
 import datetime
 
@@ -19,31 +19,28 @@ def index(request):
     )
 
 
-# class CategoryListView(ListView):
-#     model = Category
-#     template_name = 'product/index.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(CategoryListView, self).get_context_data(**kwargs)
-#         context['category_list'] = Category.objects.all()
-#         return context
-
-
-class CategoryDetail(DetailView):
+class CategoryDetail(ListView):
     model = Product
     template_name = 'product/product.html'
 
     def get_context_data(self, **kwargs):
         context = super(CategoryDetail, self).get_context_data(**kwargs)
         gender = self.kwargs['gender']
+        id = self.kwargs['id']
         if gender == 1:
-            if self.object.pk == 0:
+            context['gender'] = 'Men'
+            if id == 0:
                 context['product_list'] = Product.objects.filter(gender='MEN')
-            context['product_list'] = Product.objects.filter(gender='MEN', category_id=self.object.pk)
+                context['category'] = '신발'
+            else:
+                context['product_list'] = Product.objects.filter(gender='MEN', category_id=id)
+                context['category'] = Category.objects.filter(pk=id)
         else:
-            if self.object.pk == 0:
+            context['gender'] = 'Women'
+            if id == 0:
                 context['product_list'] = Product.objects.filter(gender='WOMEN')
-            context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=self.object.pk)
+            else:
+                context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=id)
 
         return context
 
@@ -77,27 +74,27 @@ class NewProductList(ListView):
 
 class BestProductList(ListView):
     model = Product
-    template_name = 'product/product.html'
+    template_name = 'product/best.html'
 
     def get_context_data(self, **kwargs):
         context = super(BestProductList, self).get_context_data(**kwargs)
-        # 판매량 내림차순으로 상위 1개 상품 출력.
+        # 판매량 내림차순으로 상위 5개 상품 출력.
         # 카테고리마다 구별해서 템플릿 표시.
         pk = self.kwargs['pk']
         if pk == 1:
             # MEN의 BEST 품목
-            context['life_product_list'] = Product.objects.filter(gender='MEN', category_id=1).order_by('-sales')[:1]
-            context['run_product_list'] = Product.objects.filter(gender='MEN', category_id=2).order_by('-sales')[:1]
-            context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:1]
-            context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:1]
-            context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:1]
+            context['life_product_list'] = Product.objects.filter(gender='MEN', category_id=1).order_by('-sales')[:5]
+            context['run_product_list'] = Product.objects.filter(gender='MEN', category_id=2).order_by('-sales')[:5]
+            context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:5]
+            context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:5]
+            context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:5]
         else:
             # WOMEN의 BEST 품목
-            context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:1]
-            context['run_product_list'] = Product.objects.filter(gender='WOMEN', category_id=2).order_by('-sales')[:1]
-            context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:1]
-            context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:1]
-            context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:1]
+            context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:5]
+            context['run_product_list'] = Product.objects.filter(gender='WOMEN', category_id=2).order_by('-sales')[:5]
+            context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:5]
+            context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:5]
+            context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:5]
         return context
 
 
@@ -167,9 +164,9 @@ def add_cart(request):      # 장바구니에 상품 추가
     user_id = request.user.pk
     inventory_id = request.POST['inventory']
     quantity = int(request.POST['quantity'])
+    all_cart = Cart.objects.filter(user_id=user_id)
     try:
-        exist_cart = Cart.objects.filter(
-            user_id=user_id).get(inventory_id=inventory_id)
+        exist_cart = all_cart.get(inventory_id=inventory_id)
         if exist_cart is not None:      # 장바구니에 동일 상품이 존재할 때, quantity만 늘려줌
             exist_cart.quantity += quantity
             exist_cart.save()
@@ -181,6 +178,8 @@ def add_cart(request):      # 장바구니에 상품 추가
         cart_instance = Cart(user_id=User.objects.get(id=user_id), inventory_id=Inventory.objects.get(id=inventory_id),
                              quantity=quantity)
         cart_instance.save()
+
+    request.session['cart_count'] = all_cart.count()
 
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
@@ -196,6 +195,7 @@ def cart_delete_one(request):      # 장바구니 특정상품 삭제
 
     if data.user_id.id == user_id:       # 삭제 성공
         data.delete()
+        request.session['cart_count'] -= 1
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
     else:       # Cart의 user_id와 로그인한 유저가 다른 경우
         return HttpResponse(json.dumps({'result': 'no action'}), content_type="application/json")
@@ -214,6 +214,9 @@ def cart_delete_all(request):      # 장바구니 전체상품 삭제
 
     data = Cart.objects.filter(user_id=user_id)     # user_id가 일치하는 쿼리셋 반환
     data.delete()
+
+    request.session.pop('cart_count', None)
+
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -245,8 +248,14 @@ class CartList(LoginRequiredMixin, ListView):
                 .aggregate(amount=Sum('price_sum'))
             context['amount'] = queryset2['amount']
 
-            #총 결제 예정 금액(수정 필요)
-            context['total_price'] = queryset2['amount']
+            # 배송비(5만원 이상 무료배송)
+            if context['amount'] >= 50000:
+                context['shipping_price'] = 0
+            else:
+                context['shipping_price'] = 2500
+
+            #총 결제 예정 금액
+            context['total_price'] = context['amount'] + context['shipping_price']
 
         return context
 
