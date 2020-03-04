@@ -83,6 +83,7 @@
               </div>
               <ul class="review-wrapper">
                 <li class="my-review">
+                  {% if user.is_authenticated %}
                   <p>
                     <i class="xi-star-o"></i>
                     <i class="xi-star-o"></i>
@@ -93,30 +94,11 @@
                   <div class="my-review-input">
                     <input type="text" />
                   </div>
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Earum accusantium tenetur ducimus voluptatum, labore quibusdam
-                  consequatur? Iusto, nobis maxime et enim, unde inventore sequi
-                  quaerat, dolorem quis exercitationem nisi minus
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Earum accusantium tenetur ducimus voluptatum, labore quibusdam
-                  consequatur? Iusto, nobis maxime et enim, unde inventore sequi
-                  quaerat, dolorem quis exercitationem nisi minus
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Earum accusantium tenetur ducimus voluptatum, labore quibusdam
-                  consequatur? Iusto, nobis maxime et enim, unde inventore sequi
-                  quaerat, dolorem quis exercitationem nisi minus
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Earum accusantium tenetur ducimus voluptatum, labore quibusdam
-                  consequatur? Iusto, nobis maxime et enim, unde inventore sequi
-                  quaerat, dolorem quis exercitationem nisi minus
+                  {% else %}
+                  <div>
+                    로그인이 필요한 기능입니다.
+                  </div>
+                  {% endif %}
                 </li>
                 <li>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.

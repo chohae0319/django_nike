@@ -327,9 +327,6 @@ label.no-amount {
 .review-wrapper li {
   padding: 20px 0;
 }
-.my-review {
-  border: 1px solid;
-}
 .my-review-input input {
   width: 80%;
 }
