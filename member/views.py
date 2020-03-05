@@ -5,6 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 from .models import Profile, Order
+from product.models import Cart
 from django.contrib.auth.decorators import login_required
 
 
@@ -35,6 +36,7 @@ def login(request):
         login_form = AuthenticationForm(request, request.POST)
         if login_form.is_valid():
             auth_login(request, login_form.get_user())
+            request.session['cart_count'] = Cart.objects.filter(user_id=request.user.pk).count()
         else:
             return render(request, 'member/login.html', {'message': 'password not match'})
         return redirect('/')

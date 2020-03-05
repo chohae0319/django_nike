@@ -60,47 +60,6 @@ class ToCheckout2(View):
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
-# class CheckoutView(TemplateView):
-#     template_name = 'order/checkout.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#
-#         # 세션에서 order_info 가져오기
-#         order_info = self.request.session['order_info']
-#
-#         # order_list context에 추가
-#         order_list = []
-#         for i in json.loads(order_info['order_list']):
-#             item = {}
-#             item['inventory'] = Inventory.objects.get(id=i['inventory-id'])
-#             item['quantity'] = i['quantity']
-#             order_list.append(item)
-#         context['order_list'] = order_list
-#         return context
-#
-#
-# class Checkout2View(TemplateView):
-#     template_name = 'order/checkout2_temp.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#
-#         # 세션에서 order_info 가져오기
-#         order_info = self.request.session['order_info']
-#
-#         # order_list context에 추가
-#         order_list = []
-#         for i in json.loads(order_info['order_list']):
-#             item = {}
-#             item['inventory'] = Inventory.objects.get(id=i['inventory-id'])
-#             item['quantity'] = i['quantity']
-#             order_list.append(item)
-#         context['order_list'] = order_list
-#
-#         return context
-
-
 class CompleteView(TemplateView):
     template_name = 'order/complete.html'
 
@@ -200,8 +159,8 @@ class MakeOrder(View):
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
         # 기타 에러상황
-        # except Exception as e:
-        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        except Exception as e:
+            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):
