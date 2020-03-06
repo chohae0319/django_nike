@@ -71,13 +71,13 @@
             >
           </li>
         </ul>
-        <ul class="flex-box" id="nav-guide">          
-            {% if user.is_authenticated %}
-            <li id="user-profile">
-              <i class="xi-profile"></i>
-            <span >{{ user.username }}</span>
+        <ul class="flex-box" id="nav-guide">
+          {% if user.is_authenticated %}
+          <li id="user-profile">
+            <i class="xi-profile"></i>
+            <span>{{ user.username }}</span>
           </li>
-            {% else %}
+          {% else %}
           <li>
             <!-- 로그인 안 했을 경우 -->
             <a href="/member/signup/"><span>회원가입</span></a>
@@ -88,9 +88,17 @@
             <a href=""><span>고객센터</span></a>
           </li>
           <li>
-            <a href="/cart/"
-              ><span><i class="xi-cart"></i></span
-            ></a>
+            <a href="/cart/">
+              <span>
+                <i class="xi-cart">
+                  {% if request.session.cart_count %}
+                  <span id="nav-count-cart"
+                    >{{request.session.cart_count}}</span
+                  >
+                  {% else %} {% endif %}
+                </i>
+              </span>
+            </a>
           </li>
           <li>
             <a href="">

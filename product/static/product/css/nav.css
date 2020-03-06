@@ -79,8 +79,26 @@ nav li a {
   color: black;
 }
 .nav-upper .xi-cart {
+  position: relative;
   font-size: 23px;
   line-height: 38px;
+}
+
+/* 장바구니 담은 개수 */
+#nav-count-cart {
+  position: absolute;
+  top: 5px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: rgb(248, 84, 32);
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* nav-lower */
