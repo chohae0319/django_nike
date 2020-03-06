@@ -264,9 +264,3 @@ class CartList(LoginRequiredMixin, ListView):
             context['total_price'] = context['amount'] + context['shipping_price']
 
         return context
-
-# 데이터 전송 없는 읽기 전용 페이지 입니다.
-
-
-def best(request):
-    return render(request, 'product/minsoo-best.html', {})
