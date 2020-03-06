@@ -12,6 +12,17 @@ from django.contrib.auth.decorators import login_required
 
 
 def checkout(request):
+    # 세션에서 order_info 가져오기
+    order_info = request.session['order_info']
+
+    # order_list context에 추가
+    order_list = []
+    for i in json.loads(order_info['order_list']):
+        item = {}
+        item['inventory'] = Inventory.objects.get(id=i['inventory-id'])
+        item['quantity'] = i['quantity']
+        order_list.append(item)
+
     # 배송지 목록을 불러옴
     shipping_instance = Shipping.objects.all()
     #shipping_instance = get_object_or_404(Shipping)
@@ -23,7 +34,7 @@ def checkout(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/checkout.html', {'shipping_instance': shipping_instance, "form": form})
+    return render(request, 'order/checkout.html', {'order_list': order_list, 'shipping_instance': shipping_instance, "form": form})
 
 
 class ToCheckout1(View):
@@ -48,47 +59,6 @@ class ToCheckout2(View):
             'receive_address', False)
         request.session['order_info']['memo'] = request.POST.get('memo', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
-
-
-class CheckoutView(TemplateView):
-    template_name = 'order/checkout.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # 세션에서 order_info 가져오기
-        order_info = self.request.session['order_info']
-
-        # order_list context에 추가
-        order_list = []
-        for i in json.loads(order_info['order_list']):
-            item = {}
-            item['inventory'] = Inventory.objects.get(id=i['inventory-id'])
-            item['quantity'] = i['quantity']
-            order_list.append(item)
-        context['order_list'] = order_list
-        return context
-
-
-class Checkout2View(TemplateView):
-    template_name = 'order/checkout2_temp.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # 세션에서 order_info 가져오기
-        order_info = self.request.session['order_info']
-
-        # order_list context에 추가
-        order_list = []
-        for i in json.loads(order_info['order_list']):
-            item = {}
-            item['inventory'] = Inventory.objects.get(id=i['inventory-id'])
-            item['quantity'] = i['quantity']
-            order_list.append(item)
-        context['order_list'] = order_list
-
-        return context
 
 
 class CompleteView(TemplateView):
@@ -190,8 +160,8 @@ class MakeOrder(View):
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
         # 기타 에러상황
-        # except Exception as e:
-        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        except Exception as e:
+            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):
