@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-주문이 완료되었습니다.^^
-</body>
-</html>
+{% extends "product/base.html" %}
+
+<!-- 링크확장 -->
+{% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'order/css/complete.css' %}" />
+{% endblock%}
+
+<!-- block title -->
+{% block title %} 나이키 - 주문완료{% endblock %}
+
+<!-- block content -->
+{% block content %}
+<section class="cover">
+  주문완료
+</section>
+{%endblock%}
