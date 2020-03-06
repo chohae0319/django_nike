@@ -1,0 +1,6 @@
+<form method="POST"
+      action="{% url 'order:shipping-update' pk=ship.pk %}">
+    {% csrf_token %}
+    {{ ship }}
+    <input type="submit" value="수정하기" />
+</form>

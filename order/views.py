@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
@@ -8,6 +8,7 @@ from django.http import HttpResponse
 import json
 import order.exceptions
 from .forms import ShippingForm
+from django.contrib.auth.decorators import login_required
 
 
 def checkout(request):
@@ -194,7 +195,6 @@ class MakeOrder(View):
 
 
 def Shippings(request):
-    #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
         shipping = ShippingForm(request.POST, instance=ship)
@@ -203,8 +203,12 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
+<<<<<<< HEAD
+    return render(request, 'order/shipping.html', {'ship':form})
+=======
     return render(request, 'order/shipping.html', {'form': form})
 
+>>>>>>> upstream/master
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
@@ -219,6 +223,29 @@ def ShippingShow(request):
         form = ShippingForm()
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
+<<<<<<< HEAD
+
+@login_required
+def Shipping_update(request, pk):
+    ship = Shipping.objects.get(id=pk)
+    if request.method == 'POST':
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+    else:
+        ship = ShippingForm(instance=ship)
+    return render(request, 'order/shipping-update.html', {'ship':ship})
+
+@login_required
+def Shipping_delete(request, pk):
+    ship = Shipping.objects.get(id=pk)
+    if request.method == 'POST':
+        ship.delete()
+        return redirect('order:shipping-show')
+    return render(request, 'order/shipping-delete.html', {'ship':ship})
+=======
 # def Shippings(request):
 #     form = ShippingForm(request, request.POST)
 #     return render(request, 'order/shipping.html', {'form': form})
+>>>>>>> upstream/master
