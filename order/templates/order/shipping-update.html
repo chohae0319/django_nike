@@ -1,5 +1,5 @@
 <form method="POST"
-      action="{% url 'order:shipping-update' pk=ship.pk %}">
+      action="{% url 'order:shipping-update' pk=number %}">
     {% csrf_token %}
     {{ ship }}
     <input type="submit" value="수정하기" />

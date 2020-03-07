@@ -35,8 +35,11 @@
 .order-address-wrapper span:nth-child(2) {
   font-size: 13px;
 }
-.order-address-list > label {
+.order-address-list > .shipping-edit > label {
   cursor: pointer;
+}
+.order-address-list > .shipping-edit > label:hover {
+  color: rgb(248, 84, 32);
 }
 
 /* modal */
@@ -56,8 +59,11 @@
 
 .shipping-box {
   width: 600px;
-  height: 605px;
   background-color: #ffffff;
+  border-radius: 4px;
+}
+.shipping-box .already-login {
+  top: 0;
 }
 .shipping-box > label {
   display: flex;
@@ -78,7 +84,7 @@
   overflow: hidden;
 }
 
-#form-shipping-plus {
+.form-shipping-plus {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,13 +93,13 @@
   margin: 0 auto;
 }
 
-#form-shipping-plus input {
+.form-shipping-plus input {
   width: 525px;
   padding: 9px 12px;
   margin-bottom: 15px;
 }
 
-#form-shipping-plus input[type="submit"] {
+.form-shipping-plus input[type="submit"] {
   margin-top: 40px;
   background-color: black;
   color: #ffffff;
@@ -105,4 +111,35 @@
   opacity: 1;
   z-index: 100;
   overflow: hidden;
+}
+
+/*  삭제하기 모달창 */
+#remove-form form {
+  font-size: 14px;
+  padding: 10px;
+}
+#remove-form form span {
+  font-weight: bold;
+}
+.form-delete-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-delete-wrapper label {
+  padding: 0 12px;
+  margin-right: 5px;
+  line-height: 30px;
+  min-height: 30px;
+  background-color: #e0e0e0;
+  color: #444;
+}
+
+.form-delete-wrapper input[type="submit"] {
+  padding: 0 12px;
+  line-height: 30px;
+  min-height: 30px;
+  background-color: black;
+  color: #ffffff;
+  border: none;
 }

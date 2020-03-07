@@ -178,12 +178,8 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-<<<<<<< HEAD
-    return render(request, 'order/shipping.html', {'ship':form})
-=======
-    return render(request, 'order/shipping.html', {'form': form})
+    return render(request, 'order/shipping.html', {'ship': form})
 
->>>>>>> upstream/master
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
@@ -198,19 +194,21 @@ def ShippingShow(request):
         form = ShippingForm()
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
-<<<<<<< HEAD
 
 @login_required
 def Shipping_update(request, pk):
     ship = Shipping.objects.get(id=pk)
+    pk = ship.pk
     if request.method == 'POST':
         shipping = ShippingForm(request.POST, instance=ship)
         if shipping.is_valid():
             shipping.save()
             return redirect('order:shipping-show')
+
     else:
         ship = ShippingForm(instance=ship)
-    return render(request, 'order/shipping-update.html', {'ship':ship})
+    return 
+
 
 @login_required
 def Shipping_delete(request, pk):
@@ -218,9 +216,4 @@ def Shipping_delete(request, pk):
     if request.method == 'POST':
         ship.delete()
         return redirect('order:shipping-show')
-    return render(request, 'order/shipping-delete.html', {'ship':ship})
-=======
-# def Shippings(request):
-#     form = ShippingForm(request, request.POST)
-#     return render(request, 'order/shipping.html', {'form': form})
->>>>>>> upstream/master
+    return 
