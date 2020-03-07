@@ -286,10 +286,10 @@
             <button onclick="makeOrder()">결제하기</button>
             <script>
               function makeOrder() {
-                var receive_name = $("#receive_name_info").text();
-                var receive_phone = $("#receive_phone_info").text();
-                var receive_address = $("#receive_address_info").text();
-                var memo = $("#receive_memo_info").text();
+                var receive_name = userInfo.name;
+                var receive_phone = userInfo.phone;
+                var receive_address = userInfo.address;
+                var memo = userInfo.memo;
                 $.ajax({
                   type: "POST",
                   url: "{% url 'order:make-order' %}",
