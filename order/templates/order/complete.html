@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-주문이 완료되었습니다.^^
+<p>주문이 완료되었습니다.^^</p>
+<p>{{ view.kwargs.order_no }}</p>
+{% for item in order_list %}
+<img src="{{ item.product_id.thumbnail.url }}" style="width:300px; height:300px;">
+<p>{{ item.product_id.name }}</p>
+<p>{{ item.quantity }}</p>
+<p>{{ item.size }}</p>
+{% endfor %}
 </body>
 </html>

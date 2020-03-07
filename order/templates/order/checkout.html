@@ -302,10 +302,16 @@
                   success: function(response) {
                     var answer = response.result;
                     if (answer == 'success') {
-                      window.location.href = "{% url 'order:complete' %}";
+                      var order_no = response.order_no;
+                      window.location.href = "/order/complete/" + order_no + "/";
                     }
-                    if (answer == 'fail') {
-                      alert("에러!");
+                    else if (answer == 'fail') {
+                      if (message == 'out of stock') {
+                        alert('품절된 상품입니다.');
+                      }
+                      else if (message == 'unknown error') {
+                        alert('결제 에러가 발생했습니다');
+                      }
                     }
                   }
                 });

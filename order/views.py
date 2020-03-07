@@ -37,7 +37,7 @@ def checkout(request):
 
 
 class ToCheckout1(View):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         request.session['order_info'] = {}
         request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
         request.session['order_info']['order_list'] = request.POST.get('order-list', False)
@@ -47,25 +47,22 @@ class ToCheckout1(View):
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
-class ToCheckout2(View):
-    def post(self, request, *args, **kwargs):
-        request.session['order_info'] = request.session['order_info']
-        request.session['order_info']['receive_name'] = request.POST.get(
-            'receive_name', False)
-        request.session['order_info']['receive_phone'] = request.POST.get(
-            'receive_phone', False)
-        request.session['order_info']['receive_address'] = request.POST.get(
-            'receive_address', False)
-        request.session['order_info']['memo'] = request.POST.get('memo', False)
-        return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
-
-
 class CompleteView(TemplateView):
     template_name = 'order/complete.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+
+        # order_no 가져오기
+        order_no = self.kwargs['order_no']
+
+        # order_list를 context에 추가
+        context['order_list'] = OrderList.objects.filter(order_id=order_no)
+
+        return context
 
 class MakeOrder(View):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         # 로그인한 유저 정보 가져오기
         user_id = request.user
 
@@ -119,10 +116,8 @@ class MakeOrder(View):
                 # 2~3. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
-                    all_inventory = Inventory.objects.filter(
-                        product_id=item['product_id'])
-                    total_amount = all_inventory.aggregate(
-                        total_amount=Sum('amount'))['total_amount']
+                    all_inventory = Inventory.objects.filter(product_id=item['product_id'])
+                    total_amount = all_inventory.aggregate(total_amount=Sum('amount'))['total_amount']
                     if total_amount <= 0:
                         item['product_id'].soldout = True
                     # 판매량 늘리기
@@ -139,6 +134,7 @@ class MakeOrder(View):
                                   receive_phone=receive_phone,
                                   memo=memo)
                 order_obj.save()
+                order_no = order_obj.pk
 
                 for item in order_list:
                     order_list_obj = OrderList(order_id=order_obj,
@@ -152,7 +148,7 @@ class MakeOrder(View):
                     data = Cart.objects.filter(user_id=user_id)
                     data.delete()
 
-                return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
+                return HttpResponse(json.dumps({'result': 'success', 'order_no': order_no}), content_type="application/json")
 
         # 재고 부족시
         except order.exceptions.OutOfStockError as e:
