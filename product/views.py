@@ -1,5 +1,6 @@
 from django.db.models import Sum, F
 from django.shortcuts import render
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, RedirectView
 from .models import Category, Product, ProductImage, Inventory, Cart
 from django.contrib.auth.models import User
@@ -7,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, request, JsonResponse
 from django.utils import timezone
 import datetime
-
+from django.core import serializers
 import json
 
 
@@ -23,6 +24,41 @@ def about(request):
         'product/about.html/',
         {},
     )
+
+def SizeDetail(request):
+    template_name = 'product/product.html'
+    if request.method == "POST":
+        size_list = request.POST.getlist('size')
+        url = request.POST.get('url')
+        url = url.split('/')[3:5]
+        size_id = []
+        for i in size_list:
+            product = Inventory.objects.filter(size=i, soldout=False).values_list('product_id', flat=True)
+            for pro in product:
+                size_id.append(pro)
+        if url[0] == '1':
+            gender = 'Men'
+            if url[1] == '0':
+                product_list = serializers.serialize("json", Product.objects.filter(gender='MEN', pk__in=size_id))
+                category = '신발'
+            else:
+                product_list = serializers.serialize("json", Product.objects.filter(gender='MEN', category_id=url[1], pk__in=size_id))
+                category = serializers.serialize("json", Category.objects.filter(pk=url[1]), fields=('name'))
+        else:
+            gender = 'Women'
+            if url[1] == '0':
+                product_list = serializers.serialize("json", Product.objects.filter(gender='WOMEN', pk__in=size_id))
+                category = '신발'
+            else:
+                product_list = serializers.serialize("json", Product.objects.filter(gender='WOMEN', category_id=url[1], pk__in=size_id))
+                category = serializers.serialize("json", Category.objects.filter(pk=url[1]), fields=('name'))
+
+        ret = {'product_list': product_list,
+               'gender': gender,
+               'category': category}
+
+        return HttpResponse(json.dumps(ret), content_type='application/json')
+
 
 class CategoryDetail(ListView):
     model = Product
@@ -47,7 +83,7 @@ class CategoryDetail(ListView):
                 context['category'] = '신발'
             else:
                 context['product_list'] = Product.objects.filter(gender='WOMEN', category_id=id)
-                context['category'] = Category.objects.filter(pk=id)
+                context['category'] = Category.objects.filter(pk=id).values('name')
 
         return context
 

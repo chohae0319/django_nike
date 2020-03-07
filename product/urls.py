@@ -20,8 +20,9 @@ app_name = "products"
 
 urlpatterns = [
     path('', views.index),
-    path('product/about', views.about),
-    path('product/<int:gender>/<int:id>', views.CategoryDetail.as_view(), name='list'),
+    path('product/all/<int:gender>/<int:id>', views.CategoryDetail.as_view(), name='list'),
+    path('product/size/', views.SizeDetail, name='size'),
+    path('product/align/', views.AlignDetail, name='align'),
     path('product/new/<int:pk>', views.NewProductList.as_view(), name='new'),
     path('product/best/<int:pk>', views.BestProductList.as_view(), name='best'),
     path('product/sale/<int:pk>', views.SaleProductList.as_view(), name='sale'),
