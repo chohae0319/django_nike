@@ -30,7 +30,7 @@ class Product(models.Model):
     thumbnail = models.ImageField(upload_to='product/thumbnail/')
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{} : {}'.format(self.pk, self.name)
 
 
 class Inventory(models.Model):
@@ -44,12 +44,12 @@ class Inventory(models.Model):
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)
 
-    def soldout(self):
-        if (self.amount - self.sale) == 0:
-            self.soldout = True
-        else:
-            self.soldout = False
-        self.save()
+    # def soldout(self):
+    #     if (self.amount - self.sale) == 0:
+    #         self.soldout = True
+    #     else:
+    #         self.soldout = False
+    #     self.save()
 
 
 class ProductImage(models.Model):
