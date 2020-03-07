@@ -14,7 +14,7 @@ def checkout(request):
     # 세션에서 order_info 가져오기
     order_info = request.session['order_info']
 
-    # order_list context에 추가
+    # order_list 만들기
     order_list = []
     for i in json.loads(order_info['order_list']):
         item = {}
@@ -36,8 +36,19 @@ def checkout(request):
     return render(request, 'order/checkout.html', {'order_list': order_list, 'shipping_instance': shipping_instance, "form": form})
 
 
-class ToCheckout1(View):
+class ToCheckout(View):
     def post(self, request):
+        # 품절 검사
+        for i in json.loads(request.POST.get('order-list', False)):
+            inventory = Inventory.objects.get(id=i['inventory-id'])
+            amount = inventory.amount
+            quantity = i['quantity']
+            if amount < quantity:
+                return HttpResponse(json.dumps(
+                    {'result': 'fail', 'message': 'out of stock', 'product': inventory.product_id.name}),
+                    content_type="application/json")
+
+
         request.session['order_info'] = {}
         request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
         request.session['order_info']['order_list'] = request.POST.get('order-list', False)

@@ -133,7 +133,7 @@
     var total_price = {{ total_price }};
     $.ajax({
       type: "POST",
-      url: "{% url 'order:to-checkout1' %}",
+      url: "{% url 'order:to-checkout' %}",
       data: {'is-cart': 1,
              'order-list': order_list_str,
              'amount': amount,
@@ -145,6 +145,13 @@
         var answer = response.result;
         if (answer == 'success') {
           window.location.href = "{% url 'order:checkout' %}";
+        }
+        else {
+          var message = response.message;
+          var product = response.product;
+          if (message == 'out of stock') {
+            alert("재고가 부족합니다\n(상품명 : "+product+")")
+          }
         }
       }
     });
