@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>the best</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
     <div id="size-wrapper">
@@ -19,50 +20,38 @@
         <input type="checkbox" name="size" id="240" value="240" />
         <input type="checkbox" name="size" id="250" value="250" />
     </div>
-
-
-
+    <p id="count">count : hh</p>
 
     <script>
         $(document).ready(function() {
-          var size_checked_list = [];
-          $('input[name="size"]').on("click", function() {
-            var length = $('input[name="size"]:checked').length;
-            $('input[name="size"]:checked').each(function() {
-              size_checked_list.push($(this).val());
-            });
-            var checkedValue = [];
-            var cnt = 0;
-            for (let i = 0; i < length; i++) {
-              checkedValue[i] = size_checked_list[cnt];
-              cnt++;
-            }
-            console.log(checkedValue);
-            $.ajax({
-              type: "POST",
-              url: "{% url 'products:checked_list' %}",
-              data: {
-                'checked[]': checkedValue,
-                'csrfmiddlewaretoken': "{{ csrf_token }}",
-                'is_ajax':true
-              },
-              dataType: "json",
-              success: function(response) {
-                alert('신청 완료되었습니다.');
-                window.location.href = "{% url 'products:test' %}";
-              },
-              error: function(request, status, error) {
-                console.log("실패");
-              }
+            $('input[name="size"]').on("click", function() {
+              var size_checked_list = [];
+              $('input[name="size"]:checked').each(function() {
+                size_checked_list.push($(this).val());
+              });
+              console.log(size_checked_list);
+              $.ajax({
+                type: "POST",
+                url: "{% url 'products:checked_list' %}",
+                data: {
+                  'checked[]': size_checked_list,
+                  'csrfmiddlewaretoken': "{{ csrf_token }}"
+                },
+                dataType: "json",
+                success: function(response) {
+                  var check = [];
+                  check.push(response.message);
+                },
+                error: function(request, status, error) {
+                  console.log("실패");
+                }
+              });
             });
           });
-        });
         </script>
-    <h1> {{checked_list}}</h1>
-
-
-<!--    <h1>{{product_list}}</h1>-->
-<!--    <h1> 1111 </h1>-->
+    {% for ch in check %}
+    <h1> {{ch}}</h1>
+    {% endfor %}
 
 </body>
 </html>
