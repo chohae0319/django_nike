@@ -11,6 +11,48 @@
 <!-- block content -->
 {% block content %}
 <section class="cover">
-  주문완료
+  <div class="complete-box">
+    <div class="complete-header">
+      <h2 class="big-title">주문해 주셔서 감사합니다.</h2>
+      <h4>
+        배송이 시작되면 SMS/이메일로 배송이 안내 됩니다.
+      </h4>
+      <a href="/member/order" class="btn-rectangle">주문내역/배송현황</a>
+    </div>
+    <div class="order-info-box">
+      <ul class="order-info-wrapper">
+        <li>
+          <span class="list-title">주문날짜</span>
+          <span>날짜</span>
+        </li>
+        <li>
+          <span class="list-title">결제완료금액</span>
+          <span>결제 금액</span>
+        </li>
+      </ul>
+      <span>배송주문상품 정보</span>
+      <ul class="order-detail-info">
+        <li>
+          <span class="list-title">주문번호</span>
+          <span class="list-title">주문상품내역</span>
+        </li>
+        <!-- 여기부터 -->
+        <li>
+          <span>123123123123</span>
+          <div>
+            <div class="complete-img-wrapper">
+              <img src="https://source.unsplash.com/random/108x108" alt="" />
+            </div>
+            <p class="complete-oderInfo-detail">
+              <span>The 10: 나이키 에어맥스 97 OG x 오프-화이트</span>
+              <span>옵션 : 285 </span>
+              <span>수량 : 1개</span>
+            </p>
+          </div>
+        </li>
+        <!-- 여기까지 for 문으로 반복하시면 됩니다. -->
+      </ul>
+    </div>
+  </div>
 </section>
 {%endblock%}
