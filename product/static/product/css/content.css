@@ -146,6 +146,49 @@ section.product {
 #filter-btn {
   width: 100px;
 }
+#mobile-toggle-aside {
+  display: none;
+}
+@media screen and (max-width: 883px) {
+  #section-header {
+    top: 70px;
+    padding: 30px 12px 30px 34px;
+  }
+  #toggle-section-header:checked ~ #section-header {
+    top: -10px;
+  }
+  #toggle-section-header:checked ~ .product {
+    top: 140px;
+  }
+  section#product {
+    width: 100%;
+    left: 0;
+  }
+  /* 기존 필터 버튼 */
+  label[for="toggle-aside"] {
+    display: none;
+  }
+  /* 모바일 전용 필터 버튼  */
+  #mobile-toggle-aside {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 30px;
+  }
+  .card {
+    flex-basis: 49%;
+  }
+
+  .card .img-wrapper {
+    min-height: 317px;
+    width: 100%;
+    height: 65%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .card .img-wrapper {
+    min-height: 190px;
+  }
+}
 
 /* -------------------------------------------------------------- detail*/
 /* detail */

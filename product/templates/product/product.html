@@ -13,7 +13,7 @@
 {% block aside %}
 <input type="checkbox" id="toggle-aside" />
 <input type="checkbox" id="toggle-section-header" />
-<aside class="product">
+<aside class="product" id="aside-product">
   <div class="category-filter-box">
     <ul class="category-wrapper">
       <li>
@@ -181,6 +181,7 @@
   <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
   {% endfor %} {% endif %}
   <div class="filter-option">
+    <span id="mobile-toggle-aside">필터</span>
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>
     <div id="filter-box">
