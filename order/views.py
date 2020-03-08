@@ -76,8 +76,9 @@ class CompleteView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
 
-        # order_no 가져오기
+        # order를 context에 추가
         order_no = self.kwargs['order_no']
+        context['order'] = Order.objects.get(id=order_no)
 
         # order_list를 context에 추가
         context['order_list'] = OrderList.objects.filter(order_id=order_no)
