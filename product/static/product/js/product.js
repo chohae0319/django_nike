@@ -29,8 +29,11 @@ $(document).ready(function() {
     $('input[name="size"]:checked').each(function() {
       size_checked_list.push($(this).val());
     });
-    $("#aside-checked-size").text(`(${size_checked_list.length})`);
-    console.log(size_checked_list);
+    if (size_checked_list.length === 0) {
+      $("#aside-checked-size").text("");
+    } else {
+      $("#aside-checked-size").text(`(${size_checked_list.length})`);
+    }
   });
 });
 
