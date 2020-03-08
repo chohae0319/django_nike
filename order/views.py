@@ -178,7 +178,7 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/shipping.html', {'ship': form})
+    return render(request, 'order/shipping.html', {'ship':form})
 
 
 def ShippingShow(request):
@@ -216,4 +216,4 @@ def Shipping_delete(request, pk):
     if request.method == 'POST':
         ship.delete()
         return redirect('order:shipping-show')
-    return 
+    return render(request, 'order/shipping-delete.html', {'ship':ship})
