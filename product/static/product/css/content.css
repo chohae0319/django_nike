@@ -548,6 +548,7 @@ label.no-amount {
 .cart-order-box {
   border: 1px solid rgb(229, 229, 229);
   width: 384px;
+  height: 400px;
   margin-left: 20px;
 }
 
@@ -617,7 +618,13 @@ section#profile .profile-list-view {
   border-bottom: 1px solid #e0e0e0;
 }
 .profile-list-title {
+  display: flex;
+  justify-content: space-between;
   padding: 30px 0;
+}
+.profile-list-title a {
+  align-self: flex-end;
+  text-decoration: underline;
 }
 
 .profile-list-view {
