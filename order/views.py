@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
@@ -10,6 +11,7 @@ import order.exceptions
 from .forms import ShippingForm
 
 
+@login_required
 def checkout(request):
     # 세션에서 order_info 가져오기
     order_info = request.session['order_info']

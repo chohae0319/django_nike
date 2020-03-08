@@ -221,6 +221,29 @@ def cart_delete_all(request):      # 장바구니 전체상품 삭제
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
+def get_option(request, **kwargs):
+    # inventory id 가져오기
+    product_id = kwargs['pk']
+    inventory_set = Inventory.objects.filter(product_id=product_id)
+    product = Product.objects.get(id=product_id)
+    product_image = ProductImage.objects.filter(product_id=product_id)
+
+    name = product.name
+    category = product.category_name()
+    price = product.price
+    image = []
+    inventory = []
+    image.append(product.thumbnail.url)
+    for i in product_image:
+        image.append(i.image.url)
+    for i in inventory_set:
+        inventory.append({'size': i.size, 'amount': i.amount})
+
+    option = {'name': name, 'category': category, 'price': price, 'image': image, 'inventory': inventory}
+
+    return HttpResponse(json.dumps({'result': 'success', 'option': option}), content_type="application/json")
+
+
 class CartList(LoginRequiredMixin, ListView):
     login_url = '/member/login/'
 
