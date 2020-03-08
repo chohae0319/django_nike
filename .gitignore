@@ -10,6 +10,7 @@ nike/
 *.pyc
 
 db.sqlite3
+Todo.md
 
 migrations
 
