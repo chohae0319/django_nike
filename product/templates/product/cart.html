@@ -92,7 +92,7 @@
           window.location.href = "{% url 'products:cart' %}";
         }
         else if (answer == 'no user') {
-          alert("로그인하세요!");
+          window.location.href = "{% url 'member:login' %}";
         }
         else if (answer == 'no action') {
           window.location.href = "{% url 'products:cart' %}";
@@ -113,7 +113,7 @@
           window.location.href = "{% url 'products:cart' %}";
         }
         else if (answer == 'no user') {
-          alert("로그인하세요!");
+          window.location.href = "{% url 'member:login' %}";
         }
         else if (answer == 'no action') {
           window.location.href = "{% url 'products:cart' %}";
@@ -145,6 +145,9 @@
         var answer = response.result;
         if (answer == 'success') {
           window.location.href = "{% url 'order:checkout' %}";
+        }
+        else if (answer == 'no user') {
+          window.location.href = "{% url 'member:login' %}";
         }
         else {
           var message = response.message;

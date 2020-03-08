@@ -38,6 +38,10 @@ def checkout(request):
 
 class ToCheckout(View):
     def post(self, request):
+        # 로그인 안되어있으면 no user 반환
+        if not request.user.is_authenticated:
+            return HttpResponse(json.dumps({'result': 'no user'}), content_type="application/json")
+
         # 품절 검사
         for i in json.loads(request.POST.get('order-list', False)):
             inventory = Inventory.objects.get(id=i['inventory-id'])
@@ -74,6 +78,10 @@ class CompleteView(TemplateView):
 
 class MakeOrder(View):
     def post(self, request):
+        # 로그인 안되어있으면 no user 반환
+        if not request.user.is_authenticated:
+            return HttpResponse(json.dumps({'result': 'no user'}), content_type="application/json")
+
         # 로그인한 유저 정보 가져오기
         user_id = request.user
 
@@ -129,8 +137,15 @@ class MakeOrder(View):
                     # 품절 검사
                     all_inventory = Inventory.objects.filter(product_id=item['product_id'])
                     total_amount = all_inventory.aggregate(total_amount=Sum('amount'))['total_amount']
+
+                    # for inventory in all_inventory:
+                    #     if inventory.amount <= 0:
+                    #         inventory.soldout = True        # Inventory 모델의 soldout을 True로
+                    #         inventory.save()
+
                     if total_amount <= 0:
-                        item['product_id'].soldout = True
+                        item['product_id'].soldout = True   # Product 모델의 soldout을 True로
+
                     # 판매량 늘리기
                     item['product_id'].sales += item['quantity']
                     item['product_id'].save()

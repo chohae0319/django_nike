@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, request, JsonResponse
 from django.utils import timezone
+import member.urls
 import datetime
 
 import json

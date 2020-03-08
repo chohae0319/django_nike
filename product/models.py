@@ -40,9 +40,8 @@ class Inventory(models.Model):
     # 상품번호, 사이즈, 재고
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)  # 재고 존재하면 상품 삭제 불가
     size = models.CharField(max_length=10)
-    amount = models.IntegerField()
-    sale = models.IntegerField(default=0)
     soldout = models.BooleanField(default=False)
+    amount = models.IntegerField()
 
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)
