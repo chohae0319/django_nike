@@ -24,7 +24,12 @@ def about(request):
         'product/about.html/',
         {},
     )
-
+def error(request):
+    return render(
+        request,
+        'product/error.html/',
+        {},
+    )
 def SizeDetail(request):
     template_name = 'product/product.html'
     if request.method == "POST":
