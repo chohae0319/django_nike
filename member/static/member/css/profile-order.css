@@ -1,0 +1,87 @@
+.order-detail-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.order-card {
+  flex-basis: 49%;
+  border: 1px solid;
+  margin-bottom: 20px;
+}
+
+.order-detail-info-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(244, 244, 244);
+  padding: 10px 20px;
+}
+/* --------------------------------------------------------------배송지*/
+.shipping-info-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.detail-col {
+  flex-basis: 49%;
+}
+.shipping-info > p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 20px 20px;
+}
+.shipping-info > ul {
+  padding: 20px 0;
+}
+.shipping-info > ul > li {
+  padding: 10px 20px;
+}
+.buy-where {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.order-price {
+  padding: 24px 20px;
+}
+.order-price > p {
+  padding-bottom: 10px;
+}
+
+/* --------------------------------------------------------------결제 정보*/
+.order-pay-info {
+  display: flex;
+}
+.order-pay-info > div {
+  flex-basis: 49%;
+}
+
+.order-pay-box > * {
+  padding: 10px 20px;
+}
+.order-pay-box > ul > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 배송 정보 */
+.current-shipping-box > p:first-child {
+  padding: 10px 0;
+}
+
+/* 배송주문상품*/
+.order-info-wrapper {
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 0 10px 20px;
+}
+.order-info-wrapper > p {
+  padding-right: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.order-info-wrapper > p > a {
+  text-decoration: underline;
+}
