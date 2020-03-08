@@ -275,10 +275,10 @@ nav li a {
   display: none;
   position: absolute;
   top: 38px;
-  right: 130px;
+  right: 160px;
   width: 150px;
   background-color: #ffffff;
-  border-radius: 4px 0 4px 4px;
+  border-radius: 0 0 4px 4px;
   font-size: 12px;
   box-sizing: border-box;
   line-height: 34px;
