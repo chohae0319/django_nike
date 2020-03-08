@@ -5,9 +5,10 @@
 {% if user.is_authenticated %}
 <form method="POST" action="{% url 'order:shipping' %}">
     {% csrf_token %}
-    {{ form }}
+    {{ ship }}
     <input type="submit" value="배송지 추가" />
 </form>
+<a href="{% url 'order:shipping-show' %}"><button>배송지목록</button></a>
 {% else %}
 <div>
     <a href="{% url 'member:login'%}">

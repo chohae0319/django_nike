@@ -30,7 +30,7 @@ class Product(models.Model):
     thumbnail = models.ImageField(upload_to='product/thumbnail/')
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{} : {}'.format(self.pk, self.name)
 
     def category_name(self):
         return '{} {}'.format(self.gender, self.category_id.name)
@@ -40,18 +40,18 @@ class Inventory(models.Model):
     # 상품번호, 사이즈, 재고
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)  # 재고 존재하면 상품 삭제 불가
     size = models.CharField(max_length=10)
-    amount = models.IntegerField()
+    amount = models.IntegerField(default=0)
     soldout = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)
 
-    def soldout(self):
-        if (self.amount - self.sale) == 0:
-            self.soldout = True
-        else:
-            self.soldout = False
-        self.save()
+    # def soldout(self):
+    #     if (self.amount - self.sale) == 0:
+    #         self.soldout = True
+    #     else:
+    #         self.soldout = False
+    #     self.save()
 
 
 class ProductImage(models.Model):

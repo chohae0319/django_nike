@@ -62,10 +62,53 @@
               <span class="color-orange" id="size-alert"></span>
             </div>
           </div>
+          <!-- 버튼 -->
           <div id="order-wrapper">
-            <a href="#" class="round-btn-big" id="order-btn">바로구매</a>
+            <span class="round-btn-big order-btn">바로구매</span>
             <span class="round-btn-big white" id="cart-btn">장바구니 담기</span>
           </div>
+          <!-- 리뷰 -->
+          <ul class="review-box">
+            <li>
+              <div id="review-title">
+                <span>리뷰</span>
+                <p>
+                  <i class="xi-star-o"></i>
+                  <i class="xi-star-o"></i>
+                  <i class="xi-star-o"></i>
+                  <i class="xi-star-o"></i>
+                  <i class="xi-star-o"></i>
+                  <i class="xi-angle-down"></i>
+                </p>
+              </div>
+              <ul class="review-wrapper">
+                <li class="my-review">
+                  {% if user.is_authenticated %}
+                  <p>
+                    <i class="xi-star-o"></i>
+                    <i class="xi-star-o"></i>
+                    <i class="xi-star-o"></i>
+                    <i class="xi-star-o"></i>
+                    <i class="xi-star-o"></i>
+                  </p>
+                  <div class="my-review-input">
+                    <input type="text" />
+                  </div>
+                  {% else %}
+                  <div>
+                    로그인이 필요한 기능입니다.
+                  </div>
+                  {% endif %}
+                </li>
+                <li>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Earum accusantium tenetur ducimus voluptatum, labore quibusdam
+                  consequatur? Iusto, nobis maxime et enim, unde inventore sequi
+                  quaerat, dolorem quis exercitationem nisi minus
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -98,11 +141,12 @@
         </ul>
         <div class="mini-cart-link">
           <a href="/cart/" class="btn-rectangle"><span>장바구니 가기</span></a>
-          <a href="" class="btn-rectangle"><span>바로구매</span></a>
+          <span class="btn-rectangle order-btn">바로구매</span>
         </div>
       </div>
     </div>
   </div>
+  <div class="black-paper"></div>
 </div>
 <script>
   $(document).ready(function() {
@@ -137,12 +181,12 @@
       });
     });
     // 검정화면 클릭시 모달 끄기
-    $(".modal-cover").on("click", function() {
-      $(this).removeClass("on-modal");
+    $(".black-paper").on("click", function() {
+      $(".modal-cover").removeClass("on-modal");
       $("body").css({ overflow: "auto" });
     });
 
-    $("#order-btn").on("click", function() {
+    $(".order-btn").on("click", function() {
       var order_list = [];
       var inventory_id = $('input[name="inventory"]:checked').val();
       var quantity = $("#numOfItems").text() * 1;

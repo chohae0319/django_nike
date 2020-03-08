@@ -69,7 +69,6 @@
               <span>받으시는 분</span>
               <span id="receive_name_info" class="alert-msg"></span>
               <input type="text" name="name" autofocus placeholder="이름" id="receive_name" class="input-info"/>
-
             </div>
             <div>
               <span>연락처</span>
@@ -287,10 +286,10 @@
             <button onclick="makeOrder()">결제하기</button>
             <script>
               function makeOrder() {
-                var receive_name = $("#receive_name_info").text();
-                var receive_phone = $("#receive_phone_info").text();
-                var receive_address = $("#receive_address_info").text();
-                var memo = $("#receive_memo_info").text();
+                var receive_name = userInfo.name;
+                var receive_phone = userInfo.phone;
+                var receive_address = userInfo.address;
+                var memo = userInfo.memo;
                 $.ajax({
                   type: "POST",
                   url: "{% url 'order:make-order' %}",
@@ -343,7 +342,7 @@
             <li class="order-info-list"><span>스타일 : {{ item.inventory.product_id.style }}</span></li>
             <li class="order-info-list"><span>사이즈 : {{ item.inventory.size }}</span></li>
             <li class="order-info-list"><span>수량 : {{ item.quantity }}개</span></li>
-            <li class="order-info-list cart-item-price"><span>{{ item.inventory.product_id.price|intcomma }} 원</span></li>
+            <li class="order-info-list color-orange"><span>{{ item.inventory.product_id.price|intcomma }} 원</span></li>
           </ul>
         </div>
         {% endfor %}
@@ -355,13 +354,13 @@
             <span>예상 배송비</span><span>{{ request.session.order_info.shipping_price|intcomma }}원</span>
           </li>
           <li class="order-info-list">
-            <span>상품 할인 금액</span><span class="cart-item-price">0원</span>
+            <span>상품 할인 금액</span><span class="color-orange">0원</span>
           </li>
           <li class="order-info-list">
-            <span>주문 할인 금액</span><span class="cart-item-price">0원</span>
+            <span>주문 할인 금액</span><span class="color-orange">0원</span>
           </li>
           <li class="order-info-list">
-            <span>총 결제 예정 금액</span><span class="cart-item-price">{{ request.session.order_info.total_price|intcomma }}원</span class="cart-item-price">
+            <span>총 결제 예정 금액</span><span class="color-orange">{{ request.session.order_info.total_price|intcomma }}원</span class="cart-item-price">
           </li>
         </ul>
       </div>

@@ -15,7 +15,6 @@
 html,
 body {
   font-size: 12px;
-  height: 100%;
   width: 100%;
   position: relative;
 }
@@ -48,15 +47,6 @@ img {
 .hide {
   width: 0;
   height: 0;
-}
-.whole-wrapper {
-  display: none;
-  position: absolute;
-  top: 108px;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 2000;
 }
 /* title */
 .title {

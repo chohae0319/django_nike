@@ -20,3 +20,22 @@ $(function() {
     $("body").css("overflow", "auto");
   });
 });
+
+// 로그인 모달
+$(document).ready(function() {
+  $("#open-login").click(function() {
+    $(".whole-wrapper-login").css({ display: "block" });
+    $(".login-modal").css({ display: "block" });
+    $("body").css({ overflow: "hidden" });
+  });
+  $("#close-login").click(function() {
+    $(".whole-wrapper-login").css({ display: "none" });
+    $(".login-modal").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
+  });
+  $(".whole-wrapper-login").click(function() {
+    $(".whole-wrapper-login").css({ display: "none" });
+    $(".login-modal").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
+  });
+});

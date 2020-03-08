@@ -2,6 +2,13 @@
 <!-- title -->
 {% block title %}신발-나이키{% endblock %}
 
+<!-- 링크확장 -->
+{% load static %}
+<!-- 링크확장 -->
+{% block link %}
+<script src="{% static 'product/js/product.js' %}"></script>
+{% endblock %}
+
 <!-- aside -->
 {% block aside %}
 <input type="checkbox" id="toggle-aside" />
@@ -16,54 +23,149 @@
         <a href=""><span>러닝</span></a>
       </li>
       <li>
-        <a href=""><span>트레이닝 & 짐</span></a>
-      </li>
-      <li>
-        <a href=""><span>조던</span></a>
-      </li>
-      <li>
         <a href=""><span>축구</span></a>
       </li>
       <li>
-        <a href=""><span>골프</span></a>
-      </li>
-      <li>
-        <a href=""><span>테니스</span></a>
+        <a href=""><span>농구</span></a>
       </li>
       <li>
         <a href=""><span>샌들 & 슬리퍼</span></a>
       </li>
     </ul>
     <ul id="size-box">
-      <div>
-        <span>신발 사이즈</span>
-        <button>접기</button>
+      <div class="list-header">
+        <p>신발 사이즈 <span id="aside-checked-size"></span></p>
+        <span class="toggle-aside" id="toggle-size"
+          ><i class="xi-angle-up"></i
+        ></span>
       </div>
       <div id="size-wrapper">
-        <label class="size-label" for="210">210</label>
         <label class="size-label" for="220">220</label>
+        <label class="size-label" for="225">225</label>
         <label class="size-label" for="230">230</label>
+        <label class="size-label" for="234">234</label>
+        <label class="size-label" for="235">235</label>
+        <label class="size-label" for="239">239</label>
         <label class="size-label" for="240">240</label>
+        <label class="size-label" for="245">245</label>
         <label class="size-label" for="250">250</label>
+        <label class="size-label" for="255">255</label>
+        <label class="size-label" for="260">260</label>
+        <label class="size-label" for="265">265</label>
+        <label class="size-label" for="270">270</label>
+        <label class="size-label" for="280">280</label>
+        <label class="size-label" for="285">285</label>
+        <label class="size-label" for="290">290</label>
+        <label class="size-label" for="295">295</label>
+        <label class="size-label" for="300">300</label>
+        <label class="size-label" for="305">305</label>
+        <label class="size-label" for="310">310</label>
+        <label class="size-label" for="315">315</label>
+        <label class="size-label" for="320">320</label>
+        <label class="size-label" for="325">325</label>
+        <label class="size-label" for="330">330</label>
+        <label class="size-label" for="335">335</label>
+        <label class="size-label" for="340">340</label>
+        <label class="size-label" for="350">350</label>
+        <label class="size-label" for="360">360</label>
+        <label class="size-label" for="370">370</label>
+        <label class="size-label" for="380">380</label>
+        <label class="size-label" for="390">390</label>
+        <label class="size-label" for="400">400</label>
       </div>
       <div class="input-wrapper">
-        <input type="checkbox" name="size" id="210" value="210" />
         <input type="checkbox" name="size" id="220" value="220" />
+        <input type="checkbox" name="size" id="225" value="225" />
         <input type="checkbox" name="size" id="230" value="230" />
+        <input type="checkbox" name="size" id="234" value="234" />
+        <input type="checkbox" name="size" id="235" value="235" />
+        <input type="checkbox" name="size" id="239" value="239" />
         <input type="checkbox" name="size" id="240" value="240" />
+        <input type="checkbox" name="size" id="245" value="245" />
         <input type="checkbox" name="size" id="250" value="250" />
+        <input type="checkbox" name="size" id="255" value="255" />
+        <input type="checkbox" name="size" id="260" value="260" />
+        <input type="checkbox" name="size" id="265" value="265" />
+        <input type="checkbox" name="size" id="270" value="270" />
+        <input type="checkbox" name="size" id="280" value="280" />
+        <input type="checkbox" name="size" id="285" value="285" />
+        <input type="checkbox" name="size" id="290" value="290" />
+        <input type="checkbox" name="size" id="295" value="295" />
+        <input type="checkbox" name="size" id="300" value="300" />
+        <input type="checkbox" name="size" id="305" value="305" />
+        <input type="checkbox" name="size" id="310" value="310" />
+        <input type="checkbox" name="size" id="315" value="315" />
+        <input type="checkbox" name="size" id="320" value="320" />
+        <input type="checkbox" name="size" id="325" value="325" />
+        <input type="checkbox" name="size" id="330" value="330" />
+        <input type="checkbox" name="size" id="335" value="335" />
+        <input type="checkbox" name="size" id="340" value="340" />
+        <input type="checkbox" name="size" id="350" value="350" />
+        <input type="checkbox" name="size" id="360" value="360" />
+        <input type="checkbox" name="size" id="370" value="370" />
+        <input type="checkbox" name="size" id="380" value="380" />
+        <input type="checkbox" name="size" id="390" value="390" />
+        <input type="checkbox" name="size" id="400" value="400" />
       </div>
     </ul>
   </div>
 </aside>
 <script>
   $(document).ready(function() {
+    //  전체 상품은 보여주고
+    $("#notAjax").show();
+    //  ajax는 숨겨주고
+    $("#forAjax").hide();
     $('input[name="size"]').on("click", function() {
       var size_checked_list = [];
       $('input[name="size"]:checked').each(function() {
         size_checked_list.push($(this).val());
       });
+      var url = $(location).attr("pathname");
       console.log(size_checked_list);
+      $.ajax({
+        type: "POST",
+        url: "{% url 'products:size' %}",
+        data: {
+          size: size_checked_list,
+          url: url,
+          csrfmiddlewaretoken: "{{ csrf_token }}"
+        },
+        traditional: true,
+        dataType: "json",
+        success: function(response) {
+          $("#forAjax .card").fadeOut("nomal", function() {
+            $(this).remove();
+          });
+          var product = JSON.parse(response.product_list);
+          if (product.length === 0 && size_checked_list.length === 0) {
+            $("#notAjax").show(1000);
+            $("#forAjax").hide("slow");
+            return;
+          }
+          $("#notAjax").hide(1000);
+          $("#forAjax").show("slow");
+          var forAjax = $("#forAjax");
+          for (var i = 0; i < product.length; i++) {
+            forAjax.append(
+              `<div class='card card${i +
+                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a></div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
+            );
+            var pk = product[i]["pk"];
+            $(`.linkDetail${i}`).attr("href", "../../detail/" + pk + "/");
+            $(`.thumImg${i}`).attr(
+              "src",
+              "/media/" + product[i]["fields"]["thumbnail"]
+            );
+            $(`.itemTitle${i}`).html(product[i]["fields"]["name"]);
+            $(`.style${i}`).html(product[i]["fields"]["style"]);
+            $(`.price${i}`).prepend(product[i]["fields"]["price"]);
+          }
+        },
+        error: function(request, status, error) {
+          console.log("실패");
+        }
+      });
     });
   });
 </script>
@@ -73,23 +175,28 @@
 {% block content %}
 <div id="section-header">
   <h2 class="title" id="section-title">{{gender}}</h2>
-  {% for category in category %}
+  {% if category == '신발' %}
+  <h2 class="big-title">{{gender}}'s {{category}}</h2>
+  {% else %} {% for category in category %}
   <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
-  {% endfor %}
+  {% endfor %} {% endif %}
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>
     <div id="filter-box">
-      <span>신상품순</span>
+      <div id="filter-btn">
+        <span id="current-filter">신상품순</span>
+        <span><i class="xi-angle-down"></i></span>
+      </div>
       <ul id="filter-wrapper">
         <li>
-          <a href=""><span>신상품순</span></a>
+          <span>신상품순</span>
         </li>
         <li>
-          <a href=""><span>낮은 가격순</span></a>
+          <span>낮은 가격순</span>
         </li>
         <li>
-          <a href=""><span>높은 가격순</span></a>
+          <span>높은 가격순</span>
         </li>
       </ul>
     </div>
@@ -97,22 +204,20 @@
 </div>
 <section id="product" class="product">
   <div class="product-box">
-    <div class="product-wrapper flex-box">
+    <div id="notAjax" class="product-wrapper flex-box">
       {% for product in product_list %}
       <div class="card">
         <!-- product img -->
         <div class="img-wrapper">
           <a href="{% url 'products:detail' product.pk %}">
-            <img src="{{product.thumbnail.url}}" alt="상품1 이미지" />
+            <img src="{{product.thumbnail.url}}" alt="상품이미지" />
           </a>
         </div>
         <div class="product-info">
           <!-- item-title-->
-          <div class="item-title ">{{product.name}}</div>
+          <div class="item-title">{{product.name}}</div>
           <!-- sub-title -->
-          <div class="item-subtitle color-8D">
-            {{product.style}}
-          </div>
+          <div class="item-subtitle color-8D">{{product.style}}</div>
           <!-- item-color 는 안 하기로 결정-->
           <!-- price -->
           <div class="color-8D">{{product.price|intcomma}}원</div>
@@ -120,6 +225,7 @@
       </div>
       {% endfor %}
     </div>
+    <div id="forAjax" class="product-wrapper flex-box"></div>
   </div>
 </section>
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db.models import Sum
 from django.db import transaction
 from django.views.generic import TemplateView, View
@@ -9,6 +9,7 @@ from django.http import HttpResponse
 import json
 import order.exceptions
 from .forms import ShippingForm
+from django.contrib.auth.decorators import login_required
 
 
 @login_required
@@ -56,11 +57,16 @@ class ToCheckout(View):
 
 
         request.session['order_info'] = {}
-        request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
-        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
-        request.session['order_info']['amount'] = request.POST.get('amount', False)
-        request.session['order_info']['shipping_price'] = request.POST.get('shipping-price', False)
-        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
+        request.session['order_info']['is_cart'] = int(
+            request.POST.get('is-cart', False))
+        request.session['order_info']['order_list'] = request.POST.get(
+            'order-list', False)
+        request.session['order_info']['amount'] = request.POST.get(
+            'amount', False)
+        request.session['order_info']['shipping_price'] = request.POST.get(
+            'shipping-price', False)
+        request.session['order_info']['total_price'] = request.POST.get(
+            'total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -188,7 +194,6 @@ class MakeOrder(View):
 
 
 def Shippings(request):
-    #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
         shipping = ShippingForm(request.POST, instance=ship)
@@ -197,7 +202,7 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/shipping.html', {'form': form})
+    return render(request, 'order/shipping.html', {'ship':form})
 
 
 def ShippingShow(request):
@@ -213,6 +218,26 @@ def ShippingShow(request):
         form = ShippingForm()
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
-# def Shippings(request):
-#     form = ShippingForm(request, request.POST)
-#     return render(request, 'order/shipping.html', {'form': form})
+
+@login_required
+def Shipping_update(request, pk):
+    ship = Shipping.objects.get(id=pk)
+    pk = ship.pk
+    if request.method == 'POST':
+        shipping = ShippingForm(request.POST, instance=ship)
+        if shipping.is_valid():
+            shipping.save()
+            return redirect('order:shipping-show')
+
+    else:
+        ship = ShippingForm(instance=ship)
+    return 
+
+
+@login_required
+def Shipping_delete(request, pk):
+    ship = Shipping.objects.get(id=pk)
+    if request.method == 'POST':
+        ship.delete()
+        return redirect('order:shipping-show')
+    return render(request, 'order/shipping-delete.html', {'ship':ship})
