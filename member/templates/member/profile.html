@@ -13,15 +13,16 @@
     <div class="items"> <!-- 클래스명 임의로 명시 -->
         {% for order in my_orders %}
             <ul>
-                <li>{{ order.date_ordered }}</li><br>
-                <li>
-                    {% for item in order.items.all %}
-                        <li><strong>{{ item.product.name }}</strong></li>
-                        <li>{{ item.product.price }}</li>
-                        <li>{{ item.product.thumbnail }}</li>
-                    {% endfor %}
+                <li>order_size: {{ order.size }}</li>
+                <li>order_quantity: {{ order.quantity }}</li>
+                <li><strong>order_date: {{ order.order_id.order_date }}</strong></li>
+                <li>order_status: {{ order.order_id.status }}</li>
+                <li>total_price: {{ order.order_id.total_price }}</li>
+                <li>order_memo: {{ order.order_id.memo }}</li>
+                <li>product_name: {{ order.product_id.name }}</li>
+                <li>product_price: {{ order.product_id.price }}</li>
+                <li>product_thumbnail: {{ order.product_id.thumbnail }}</li>
                 </li><br>
-                <li>${{ order.get_cart_total }}</li>
             </ul>
         {% endfor %}
     </div>
@@ -30,10 +31,32 @@
 
 
 <div class="profile-list-title"><h2 class="big-title">장바구니</h2></div>
-<div class="profile-list-view no-items" id="profile-cart">
-  <span>장바구니에 담긴 상품이 없습니다. </span>
-  <a href="/">계속 쇼핑하기</a>
-</div>
+
+{% if not my_carts %}
+    <div class="profile-list-view no-items" id="profile-cart">
+      <span>장바구니에 담긴 상품이 없습니다. </span>
+      <a href="/">계속 쇼핑하기</a>
+    </div>
+{% else %}
+    <div class="my-cart">
+        {% for cart in my_carts %}
+            <ul>
+                <li>quantity : {{ cart.quantity }}</li>
+                <li>size : {{ cart.inventory_id.size }}</li>
+                <li>amount : {{ cart.inventory_id.amount }}</li>
+                <li>sale : {{ cart.inventory_id.sale }}</li>
+                <li>soldout : {{ cart.inventory_id.soldout }}</li>
+                <li>product_name : {{ cart.cart.inventory_id.product_id.name }}</li>
+                <li>price : {{ cart.cart.inventory_id.product_id.price }}</li>
+                <li>style : {{ cart.cart.inventory_id.product_id.style }}</li>
+                <li>release_date : {{ cart.cart.inventory_id.product_id.release_date }}</li>
+                <li>sales : {{ cart.cart.inventory_id.product_id.sales }}</li>
+                <li>thumbnail : {{ cart.cart.inventory_id.product_id.thumbnail }}</li>
+                <br>
+            </ul>
+        {% endfor %}
+    </div>
+{% endif %}
 
 
 {% endblock %}

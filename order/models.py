@@ -8,9 +8,9 @@ class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(default=0)               # 0: 결제완료, 1: 배송중, 2: 배송완료, 3: 주문취소
-    amount = models.IntegerField()               # 상품 금액
-    shipping_price = models.IntegerField()       # 배송비
-    total_price = models.IntegerField()          # 총 결제 금액
+    amount = models.IntegerField(default=0)               # 상품 금액
+    shipping_price = models.IntegerField(default=0)       # 배송비
+    total_price = models.IntegerField(default=0)          # 총 결제 금액
     # 받는 사람 정보
     receive_address = models.CharField(max_length=70)
     receive_name = models.CharField(max_length=10)

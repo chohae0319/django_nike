@@ -14,7 +14,6 @@ urlpatterns = [
     # path('checkout/', views.checkout, name='checkout'),
     path('shipping/', views.Shippings, name='shipping'),
     path('shipping-show/', views.ShippingShow, name='shipping-show'),
-<<<<<<< HEAD
     path('shipping-update/<int:pk>', views.Shipping_update, name='shipping-update'),
     path('shipping-delete/<int:pk>', views.Shipping_delete, name='shipping-delete'),
 
@@ -24,6 +23,4 @@ urlpatterns = [
     # path('cart/add/', views.add_cart, name='add-cart'),
     # path('cart/delete-one/', views.cart_delete_one, name='cart-delete-one'),
     # path('cart/delete-all/', views.cart_delete_all, name='cart-delete-all'),
-=======
->>>>>>> upstream/master
 ]

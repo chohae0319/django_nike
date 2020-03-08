@@ -6,6 +6,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 from .models import Profile, Order
 from django.contrib.auth.decorators import login_required
+from order.models import OrderList
+from product.models import Cart
 
 
 def signup(request):
@@ -50,10 +52,11 @@ def logout(request):
 
 
 def profile(request):
-    my_user_profile = Profile.objects.filter(user=request.user).first()
-    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    my_orders = OrderList.objects.all()
+    my_carts = Cart.objects.all()
     context = {
-        'my_orders': my_orders
+        'my_orders': my_orders,
+        'my_carts': my_carts
     }
     return render(request, 'member/profile.html', context)
 
@@ -90,3 +93,4 @@ def user_info_password(request):
     else:
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
+
