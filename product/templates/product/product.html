@@ -57,15 +57,49 @@
   </div>
 </aside>
 <script>
-  $(document).ready(function() {
-    $('input[name="size"]').on("click", function() {
-      var size_checked_list = [];
-      $('input[name="size"]:checked').each(function() {
-        size_checked_list.push($(this).val());
-      });
-      console.log(size_checked_list);
+$(document).ready(function() {
+  $('#notAjax').show();
+  $('#forAjax').hide();
+  $('input[name="size"]').on("click", function() {
+    var size_checked_list = [];
+    $('input[name="size"]:checked').each(function() {
+      size_checked_list.push($(this).val());
+    });
+    var url = $(location).attr('pathname');
+    console.log(size_checked_list);
+    $.ajax({
+      type: "POST",
+      url: "{% url 'products:size' %}",
+      data: {
+        'size': size_checked_list,
+        'url' : url,
+        'csrfmiddlewaretoken': "{{ csrf_token }}"
+      },
+      traditional : true,
+      dataType: "json",
+      success: function(response) {
+        console.log("성공");
+        var product = JSON.parse(response.product_list);
+        console.log(product[0]);
+        console.log(product[1]);
+        $('#notAjax').hide();
+        $('#forAjax').show();
+        for(var i = 0; i < product.length; i ++) {
+          var pk = product[i]["pk"]
+          $("#linkDetail").attr("href", "../../detail/" + pk + "/");
+          $("#thumImg").attr("src", "/media/"+product[i]["fields"]["thumbnail"]);
+          $(".item-title").html(product[i]["fields"]["name"]);
+          $("#style").html(product[i]["fields"]["style"]);
+          $("#price").html(product[i]["fields"]["price"]);
+          console.log(product[i]["fields"]);
+        }
+      },
+      error: function(request, status, error) {
+        console.log("실패");
+      }
     });
   });
+});
 </script>
 {% endblock aside %}
 
@@ -73,9 +107,13 @@
 {% block content %}
 <div id="section-header">
   <h2 class="title" id="section-title">{{gender}}</h2>
+  {% if category == '신발' %}
+  <h2 class="big-title">{{gender}}'s {{category}}</h2>
+  {% else %}
   {% for category in category %}
   <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
   {% endfor %}
+  {% endif %}
   <div class="filter-option">
     <label for="toggle-aside">filter</label>
     <label for="toggle-section-header">접기</label>
@@ -97,7 +135,7 @@
 </div>
 <section id="product" class="product">
   <div class="product-box">
-    <div class="product-wrapper flex-box">
+    <div id="notAjax" class="product-wrapper flex-box">
       {% for product in product_list %}
       <div class="card">
         <!-- product img -->
@@ -119,6 +157,27 @@
         </div>
       </div>
       {% endfor %}
+    </div>
+    <div id="forAjax" class="product-wrapper flex-box">
+      <div class="card">
+        <!-- product img -->
+        <div class="img-wrapper">
+          <a id="linkDetail" href="">
+            <img id="thumImg" src="{{product.thumbnail.url}}" alt="상품1 이미지" />
+          </a>
+        </div>
+        <div class="product-info">
+          <!-- item-title-->
+          <div class="item-title ">{{product.name}}</div>
+          <!-- sub-title -->
+          <div id="style" class="item-subtitle color-8D">
+            {{product.style}}
+          </div>
+          <!-- item-color 는 안 하기로 결정-->
+          <!-- price -->
+          <div id="price" class="color-8D">{{product.price|intcomma}}원</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
