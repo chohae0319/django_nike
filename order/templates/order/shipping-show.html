@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{% static 'order/css/checkout.css' %}" />
 <link rel="stylesheet" href="{% static 'order/css/shipping.css' %}" />
 <script src="{% static 'order/js/shipping.js' %}"></script>
+<script src="{% static 'order/js/shipping-update.js' %}"></script>
 {% endblock %}
 
 <!-- modal -->
@@ -19,7 +20,7 @@
     <form
       method="POST"
       action="{% url 'order:shipping' %}"
-      id="form-shipping-plus"
+      class="form-shipping-plus"
     >
       {% csrf_token %} {{ form }}
       <input type="submit" value="배송지 추가" />
@@ -36,10 +37,51 @@
     {% endif %}
   </div>
 </div>
+<!-- 수정 / 삭제 모달창 -->
 <input type="checkbox" id="shipping-modify" />
 <div id="modify-shipping">
   <div class="shipping-box">
     <label for="shipping-modify"><i class="xi-close"></i></label>
+    {% if user.is_authenticated %}
+    <div id="modify-form">
+      <form method="POST" action="" class="form-shipping-plus">
+        {% csrf_token %}
+        <span>배송지 이름</span>
+        <input
+          type="text"
+          name="destination_nickname"
+          id="modify-shipping-nickName"
+        />
+        <span>받으시는 분</span>
+        <input type="text" name="receiver" id="modify-shipping-receiver" />
+        <span>주소</span>
+        <input type="text" name="receiver_phone" id="modify-shipping-address" />
+        <span>연락처</span>
+        <input type="text" name="receiver_address" id="modify-shipping-phone" />
+
+        <input type="submit" value="수정하기" />
+      </form>
+    </div>
+    <div id="remove-form">
+      <form method="POST" action="">
+        {% csrf_token %}
+        <span>삭제 하시겠습니까?</span>
+        <div class="form-delete-wrapper">
+          <label for="shipping-modify">취소</label>
+          <input type="submit" value="삭제" />
+        </div>
+      </form>
+    </div>
+    {% else %}
+    <div class="already-login">
+      <h2 class="title">나이키</h2>
+      <span>로그인이 필요한 기능입니다.</span>
+      <div class="flex-box">
+        <a href="/member/login">로그인</a>
+        <a href="/">홈으로</a>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
@@ -55,36 +97,36 @@
 {% if not shipping_instance %}
 <div>등록된 배송지가 없습니다</div>
 {% else %}
-<<<<<<< HEAD
-{% for ship in shipping_instance %}
-<input type="radio" name="ship" id="ship{{ forloop.counter }}" value="{{ ship.pk }}">
-<label for="ship{{ forloop.counter }}">
-<p>{{ ship.destination_nickname }}</p>
-<p>{{ ship.receiver }}</p>
-<p>{{ ship.receiver_phone }}</p>
-<p>{{ ship.receiver_address }}</p>
-<a href="{% url 'order:shipping-update' pk=ship.pk %}"><button>수정</button></a>
-<a href="{% url 'order:shipping-delete' pk=ship.pk %}"><button>삭제</button></a>
-    <br>
-</label>
-{% endfor %}
-{% endif %}
-=======
 <!-- for 문을 통한 배송지 내역 반복문 -->
 <div class="order-address-box">
   {% for ship in shipping_instance %}
   <div class="order-address-list">
-    <span class="order-address-nickname">{{ ship.destination_nickname }}</span>
-    <span>{{ ship.receiver }}</span>
+    <span class="order-address-nickname {{ship.pk}}"
+      >{{ ship.destination_nickname }}</span
+    >
+    <span class="{{ship.pk}}">{{ ship.receiver }}</span>
     <p class="order-address-wrapper">
       <span class="color-gray">도로명</span>
-      <span>{{ ship.receiver_address }}</span>
+      <span class="{{ship.pk}}">{{ ship.receiver_address }}</span>
     </p>
     <p class="order-address-wrapper">
       <span class="color-gray">연락처</span>
-      <span>{{ ship.receiver_phone }}</span>
+      <span class="{{ship.pk}}">{{ ship.receiver_phone }}</span>
     </p>
-    <label for="shipping-modify">수정</label>
+    <div class="shipping-edit">
+      <label
+        for="shipping-modify"
+        val="open-update-shipping"
+        class="{{ship.pk}} "
+        >수정</label
+      >
+      <label
+        for="shipping-modify"
+        val="open-remove-shipping"
+        class="{{ship.pk}} "
+        >삭제</label
+      >
+    </div>
   </div>
   {% endfor %}
 </div>
@@ -92,4 +134,3 @@
 {% endif %}
 <!-- content -->
 {% endblock %}
->>>>>>> upstream/master

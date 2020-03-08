@@ -40,11 +40,16 @@ def checkout(request):
 class ToCheckout1(View):
     def post(self, request, *args, **kwargs):
         request.session['order_info'] = {}
-        request.session['order_info']['is_cart'] = int(request.POST.get('is-cart', False))
-        request.session['order_info']['order_list'] = request.POST.get('order-list', False)
-        request.session['order_info']['amount'] = request.POST.get('amount', False)
-        request.session['order_info']['shipping_price'] = request.POST.get('shipping-price', False)
-        request.session['order_info']['total_price'] = request.POST.get('total-price', False)
+        request.session['order_info']['is_cart'] = int(
+            request.POST.get('is-cart', False))
+        request.session['order_info']['order_list'] = request.POST.get(
+            'order-list', False)
+        request.session['order_info']['amount'] = request.POST.get(
+            'amount', False)
+        request.session['order_info']['shipping_price'] = request.POST.get(
+            'shipping-price', False)
+        request.session['order_info']['total_price'] = request.POST.get(
+            'total-price', False)
         return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
@@ -173,12 +178,8 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-<<<<<<< HEAD
-    return render(request, 'order/shipping.html', {'ship':form})
-=======
-    return render(request, 'order/shipping.html', {'form': form})
+    return render(request, 'order/shipping.html', {'ship': form})
 
->>>>>>> upstream/master
 
 def ShippingShow(request):
     shipping_instance = Shipping.objects.all()
@@ -193,19 +194,21 @@ def ShippingShow(request):
         form = ShippingForm()
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
-<<<<<<< HEAD
 
 @login_required
 def Shipping_update(request, pk):
     ship = Shipping.objects.get(id=pk)
+    pk = ship.pk
     if request.method == 'POST':
         shipping = ShippingForm(request.POST, instance=ship)
         if shipping.is_valid():
             shipping.save()
             return redirect('order:shipping-show')
+
     else:
         ship = ShippingForm(instance=ship)
-    return render(request, 'order/shipping-update.html', {'ship':ship})
+    return 
+
 
 @login_required
 def Shipping_delete(request, pk):
@@ -213,9 +216,4 @@ def Shipping_delete(request, pk):
     if request.method == 'POST':
         ship.delete()
         return redirect('order:shipping-show')
-    return render(request, 'order/shipping-delete.html', {'ship':ship})
-=======
-# def Shippings(request):
-#     form = ShippingForm(request, request.POST)
-#     return render(request, 'order/shipping.html', {'form': form})
->>>>>>> upstream/master
+    return 
