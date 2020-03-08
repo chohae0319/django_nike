@@ -33,7 +33,42 @@
     </title>
   </head>
   <body>
-    <div class="whole-wrapper"></div>
+    <div class="whole-wrapper-login"></div>
+    <div class="login-modal">
+      <div class="logo"></div>
+      <h3 class="login-header big-title">나이키 로그인</h3>
+      <span id="close-login"><i class="xi-close"></i></span>
+      <form
+        method="POST"
+        action="{% url 'member:login' %}"
+        class="form-box-signIn"
+      >
+        {% csrf_token %}
+        <input
+          type="text"
+          name="username"
+          autocomplete="username"
+          maxlength="150"
+          required
+          placeholder="이름"
+          class="sign-in-input"
+        />
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+          placeholder="비밀번호"
+          class="sign-in-input"
+        />
+        <input type="submit" value="로그인" class="sign-in-input" />
+        <div class="sign-in-footer">
+          <span
+            >회원이 아니신가요? <a href="/member/signup">회원가입하기</a></span
+          >
+        </div>
+      </form>
+    </div>
     {% block modal %}
     <!-- 필요한 모달창 들어올 곳 -->
     {% endblock %}
@@ -81,7 +116,7 @@
           <li>
             <!-- 로그인 안 했을 경우 -->
             <a href="/member/signup/"><span>회원가입</span></a>
-            <a href="/member/login/"><span>/ 로그인</span></a>
+            <span id="open-login">/ 로그인</span>
             {% endif %}
           </li>
           <li>

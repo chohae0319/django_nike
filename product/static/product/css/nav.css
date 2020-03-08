@@ -324,6 +324,53 @@ input#sidebar {
 #hamburger > label {
   cursor: pointer;
 }
+/* 로그인 모달 */
+#open-login {
+  cursor: pointer;
+}
+#close-login {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+}
+
+.whole-wrapper-login {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.login-modal {
+  display: none;
+  position: fixed;
+  z-index: 2001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+}
+.login-modal .logo {
+  margin: 40px auto;
+  width: 89px;
+  height: 32px;
+  background: url(https://www.nike.com/kr/error/logo_shut.jpg) no-repeat 0 0;
+}
+.login-modal .login-header {
+  text-align: center;
+}
+
+.login-modal form {
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
 @media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;
