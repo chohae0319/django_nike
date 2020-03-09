@@ -157,8 +157,7 @@ $(function() {
           memo: memo
         };
         nextStep = true;
-        console.log(userInfo);
-        console.log(nextStep);
+        return userInfo;
       }
     }
     // 정보 텍스트화

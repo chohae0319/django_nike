@@ -94,9 +94,4 @@ def user_info_password(request):
             return redirect('/')
     else:
         password_change_form = PasswordChangeForm(request.user)
-<<<<<<< HEAD
     return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
-
-=======
-    return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
->>>>>>> upstream/master

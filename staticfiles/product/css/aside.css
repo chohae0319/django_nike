@@ -1,7 +1,7 @@
 aside {
   width: 288px;
-  height: 100vh;
-  padding: 0 48px;
+  height: 100%;
+  padding: 0 48px 279px 48px;
   position: fixed;
   overflow-y: scroll;
   /* z-index: 99; */
@@ -25,11 +25,65 @@ aside.product {
 .category-wrapper li {
   height: 35px;
 }
+.category-wrapper li:hover {
+  color: black;
+}
 
 .category-wrapper li a {
   display: inline-block;
   padding: 7px 0;
 }
+#size-box {
+  border-top: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+#size-box .list-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0;
+}
+.list-header .toggle-aside {
+  cursor: pointer;
+}
+
+#size-box input[name="size"] {
+  display: none;
+}
+#size-wrapper {
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 50px;
+  transition: ease 0.35s;
+  border-bottom: 1px solid #e0e0e0;
+}
+.input-wrapper {
+  position: relative;
+  height: 500px;
+}
+#size-wrapper .size-label {
+  flex-basis: 24%;
+  text-align: center;
+  margin-top: 3.5px;
+  padding: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#size-wrapper .size-label.black-label {
+  border: 1px solid;
+}
+
+#size-wrapper .size-label:hover {
+  border: 1px solid;
+}
+
+/* ---------------------------------------------------profile */
 
 #profile-ul {
   margin-top: 20px;
