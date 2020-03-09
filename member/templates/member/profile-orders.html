@@ -1,4 +1,35 @@
-{% extends "member/profile-base.html" %}
+{% extends "member/profile-base.html" %}{% load humanize %}
+
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- 링크 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'member/css/profile-order.css' %}" />
+<link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'order/css/shipping.css' %}" />
+<script src="{% static 'member/js/change-shipping.js' %}"></script>
+{% endblock %}
+
+<!-- modal -->
+{% block modal %}
+<div id="order-shipping-modal"></div>
+<div class="order-shipping-box">
+  <label for="order-shipping-modify"><i class="xi-close"></i></label>
+  <form method="POST" action="" class="form-shipping-plus">
+    {% csrf_token %}
+    <span>받으시는 분</span>
+    <input type="text" name="receiver" id="modify-shipping-receiver" />
+    <span>주소</span>
+    <input type="text" name="receiver_phone" id="modify-shipping-address" />
+    <span>연락처</span>
+    <input type="text" name="receiver_address" id="modify-shipping-phone" />
+    <span>배송 메모</span>
+    <input type="text" name="receiver_address" id="modify-shipping-memo" />
+
+    <input type="submit" value="수정하기" />
+  </form>
+</div>
+{% endblock %}
 
 <!-- content -->
 {% block profileContent %}
@@ -6,8 +37,133 @@
 <div class="profile-list-title">
   <h2 class="big-title">주문내역/배송현황</h2>
 </div>
+{% if not my_orders %}
 <div class="profile-list-view no-itmes">
-  <span>현재 진행중인 주문/배송 상품이 없습니다.</span>
+  <span>최근 등록된 주문내역이 없습니다.</span>
 </div>
-
-{% endblock %}
+{% else %}
+<div class="order-detail-box">
+  {% for order in my_orders %}
+  <div class="order-card">
+    <!-- 헤더 -->
+    <div class="order-detail-info-header">
+      <span>주문일 : {{order.order_id.order_date}}</span
+      ><span>주문번호 : {{order.pk}}</span>
+    </div>
+    <!-- 배송지 -->
+    <div class="shipping-info-box">
+      <div class="shipping-info-wrapper">
+        <div class="shipping-info detail-col">
+          <p>
+            <strong class="title">배송지정보</strong
+            ><label
+              class="change-shipping{{order.pk}}"
+              for="order-shipping-modify"
+              ><span class="btn-rectangle">배송지 변경</span></label
+            >
+          </p>
+          <ul class="shipping-point-wrapper">
+            <li>
+              받으실 주소 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_address }}</span
+              >
+            </li>
+            <li>
+              받으시는 분 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_name }}</span
+              >
+            </li>
+            <li>
+              연락처 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_phone }}</span
+              >
+            </li>
+            <li>
+              메모 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.memo }}</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="order-price detail-col">
+          <p><strong class="title">결제금액</strong></p>
+          <p>{{ order.product_id.price|intcomma }}원</p>
+        </div>
+      </div>
+      <div class="buy-where">
+        <p><strong>구매하신 곳</strong></p>
+        <p>NIKE-CLONE.COM</p>
+      </div>
+    </div>
+    <!-- 결제 정보 -->
+    <div class="order-pay-info">
+      <div class="order-pay-box">
+        <p><strong class="title">결제정보</strong></p>
+        <ul>
+          <li>
+            <span>상품 금액</span>
+            <span>{{ order.product_id.price|intcomma}}원</span>
+          </li>
+          <li><span>배송비</span><span>0원</span></li>
+          <li><span>할인비용</span><span>0원</span></li>
+          <li>
+            <span>총 결제 금액</span
+            ><span class="color-orange"
+              >{{ order.order_id.total_price|intcomma }}원</span
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="current-shipping-box">
+        <p><strong class="title">배송 현황</strong></p>
+        <div class="col">
+          <p>택배배송</p>
+          <p>온라인 물류센터</p>
+        </div>
+        <p class="col">
+          {% if not order.order_id.status %}
+          <span>결제완료 <i class="xi-info"></i></span>
+          {% else %}
+          <span>배송준비중</span>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    <!-- 주문 정보 -->
+    <div class="order-info-wrapper">
+      <p>
+        <strong class="title">배송주문상품</strong>
+        <a href="../../product/detail/{{order.product_id.id}}"
+          ><span>상품보러가기</span></a
+        >
+      </p>
+      <div class="order-info-content">
+        <div class="thumbNail-wrapper">
+          <a href="../../product/detail/{{order.product_id.id}}">
+            <img
+              src="../../media/{{ order.product_id.thumbnail }}"
+              alt="product-thumNail"
+            />
+          </a>
+        </div>
+        <div class="order-info-detail">
+          <span class="order-info-title">{{ order.product_id.name }}</span>
+          <p>
+            <span class="order-info-style">{{ order.product_id.style }}</span>
+            <span class="order-info-size">{{ order.size }}</span>
+          </p>
+          <span class="order-info-amount">{{ order.quantity }}</span>
+          <span class="order-info-price"
+            >{{ order.product_id.price|intcomma }}원</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endblock %}

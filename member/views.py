@@ -38,7 +38,8 @@ def login(request):
         login_form = AuthenticationForm(request, request.POST)
         if login_form.is_valid():
             auth_login(request, login_form.get_user())
-            request.session['cart_count'] = Cart.objects.filter(user_id=request.user.pk).count()
+            request.session['cart_count'] = Cart.objects.filter(
+                user_id=request.user.pk).count()
         else:
             return render(request, 'member/login.html', {'message': 'password not match'})
         return redirect('/')
@@ -54,8 +55,8 @@ def logout(request):
 
 
 def profile(request):
-    my_orders = OrderList.objects.all()
-    my_carts = Cart.objects.all()
+    my_orders = OrderList.objects.all().order_by('-id')[:4]
+    my_carts = Cart.objects.all().order_by('-id')[:4]
     context = {
         'my_orders': my_orders,
         'my_carts': my_carts
@@ -64,19 +65,25 @@ def profile(request):
 
 
 def order(request):
-    return render(request, 'member/profile-orders.html', {})
+    my_orders = OrderList.objects.all().order_by('-id')
+    context = {
+        'my_orders': my_orders
+    }
+    return render(request, 'member/profile-orders.html', context)
 
 
 @login_required
 def user_info_update(request):
     if request.method == 'POST':
-        user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
+        user_change_form = CustomUserChangeForm(
+            request.POST, instance=request.user)
         if user_change_form.is_valid():
             user_change_form.save()
             return redirect('member:profile')
     else:
         user_change_form = UserChangeForm(instance=request.user)
-    return render(request, 'member/profile-update.html', {'user_change_form':user_change_form})
+    return render(request, 'member/profile-update.html', {'user_change_form': user_change_form})
+
 
 @login_required
 def user_info_delete(request):
@@ -84,6 +91,7 @@ def user_info_delete(request):
         request.user.delete()
         return redirect('/')
     return render(request, 'member/profile-delete.html')
+
 
 @login_required
 def user_info_password(request):
