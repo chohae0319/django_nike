@@ -6,8 +6,31 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'member/css/profile-order.css' %}" />
 <link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
-<!-- <script src="{% static 'member/js/profile.js' %}"></script> -->
+<link rel="stylesheet" href="{% static 'order/css/shipping.css' %}" />
+<script src="{% static 'member/js/change-shipping.js' %}"></script>
 {% endblock %}
+
+<!-- modal -->
+{% block modal %}
+<div id="order-shipping-modal"></div>
+<div class="order-shipping-box">
+  <label for="order-shipping-modify"><i class="xi-close"></i></label>
+  <form method="POST" action="" class="form-shipping-plus">
+    {% csrf_token %}
+    <span>받으시는 분</span>
+    <input type="text" name="receiver" id="modify-shipping-receiver" />
+    <span>주소</span>
+    <input type="text" name="receiver_phone" id="modify-shipping-address" />
+    <span>연락처</span>
+    <input type="text" name="receiver_address" id="modify-shipping-phone" />
+    <span>배송 메모</span>
+    <input type="text" name="receiver_address" id="modify-shipping-memo" />
+
+    <input type="submit" value="수정하기" />
+  </form>
+</div>
+{% endblock %}
+
 <!-- content -->
 {% block profileContent %}
 
@@ -33,13 +56,37 @@
         <div class="shipping-info detail-col">
           <p>
             <strong class="title">배송지정보</strong
-            ><span class="btn-rectangle">배송지 변경</span>
+            ><label
+              class="change-shipping{{order.pk}}"
+              for="order-shipping-modify"
+              ><span class="btn-rectangle">배송지 변경</span></label
+            >
           </p>
-          <ul>
-            <li>받으실 주소 : {{ order.order_id.receive_address }}</li>
-            <li>받으시는 분 : {{ order.order_id.receive_name }}</li>
-            <li>연락처 : {{ order.order_id.receive_phone }}</li>
-            <li>메모 : {{ order.order_id.memo }}</li>
+          <ul class="shipping-point-wrapper">
+            <li>
+              받으실 주소 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_address }}</span
+              >
+            </li>
+            <li>
+              받으시는 분 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_name }}</span
+              >
+            </li>
+            <li>
+              연락처 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.receive_phone }}</span
+              >
+            </li>
+            <li>
+              메모 :
+              <span class="change-shipping{{order.pk}}"
+                >{{ order.order_id.memo }}</span
+              >
+            </li>
           </ul>
         </div>
         <div class="order-price detail-col">

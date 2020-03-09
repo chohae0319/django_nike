@@ -85,3 +85,41 @@
 .order-info-wrapper > p > a {
   text-decoration: underline;
 }
+
+/* --------------------------------------------------------------모달창*/
+/* 배송지 변경 버튼 */
+label[for="order-shipping-modify"] {
+  cursor: pointer;
+}
+
+#order-shipping-modal {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.order-shipping-box {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  width: 600px;
+}
+
+.order-shipping-box > label {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
