@@ -201,7 +201,7 @@
       var total_price = amount + shipping_price;
       $.ajax({
         type: "POST",
-        url: "{% url 'order:to-checkout1' %}",
+        url: "{% url 'order:to-checkout' %}",
         data: {'is-cart': 0,
                'order-list': order_list_str,
                'amount': amount,

@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  $("#form-shipping-plus label").text("");
+  $(".form-shipping-plus label").text("");
   $("#id_destination_nickname")
     .attr("placeholder", "배송지 이름")
     .before($("<span>배송지 이름</span>"));
   $("#id_receiver")
     .attr("placeholder", "이름")
-    .before($("<span>이름</span>"));
+    .before($("<span>받으시는 분</span>"));
   $("#id_receiver_phone")
     .attr("placeholder", "전화번호")
     .before($("<span>전화번호</span>"));

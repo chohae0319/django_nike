@@ -39,7 +39,7 @@
           </ul>
         </div>
         <div class="cart-item-option">
-          <a href=""><span>옵션 변경</span></a>
+          <a href="javascript:void(0);" onclick="click_option({{ c.inventory_id.product_id.pk }})"><span>옵션 변경</span></a>
         </div>
         <div class="color-orange">
           <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
@@ -92,7 +92,7 @@
           window.location.href = "{% url 'products:cart' %}";
         }
         else if (answer == 'no user') {
-          alert("로그인하세요!");
+          window.location.href = "{% url 'member:login' %}";
         }
         else if (answer == 'no action') {
           window.location.href = "{% url 'products:cart' %}";
@@ -113,7 +113,7 @@
           window.location.href = "{% url 'products:cart' %}";
         }
         else if (answer == 'no user') {
-          alert("로그인하세요!");
+          window.location.href = "{% url 'member:login' %}";
         }
         else if (answer == 'no action') {
           window.location.href = "{% url 'products:cart' %}";
@@ -133,7 +133,7 @@
     var total_price = {{ total_price }};
     $.ajax({
       type: "POST",
-      url: "{% url 'order:to-checkout1' %}",
+      url: "{% url 'order:to-checkout' %}",
       data: {'is-cart': 1,
              'order-list': order_list_str,
              'amount': amount,
@@ -145,6 +145,30 @@
         var answer = response.result;
         if (answer == 'success') {
           window.location.href = "{% url 'order:checkout' %}";
+        }
+        else if (answer == 'no user') {
+          window.location.href = "{% url 'member:login' %}";
+        }
+        else {
+          var message = response.message;
+          var product = response.product;
+          if (message == 'out of stock') {
+            alert("재고가 부족합니다\n(상품명 : "+product+")")
+          }
+        }
+      }
+    });
+  }
+
+  function click_option(id) {
+    $.ajax({
+      type: "GET",
+      url: "/cart/get-option/" + id + "/",
+      dataType:'json',
+      success: function(response) {
+        var answer = response.result;
+        if (answer == 'success') {
+          console.log(response.option);
         }
       }
     });
