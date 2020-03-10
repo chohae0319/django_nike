@@ -1,62 +1,111 @@
-{% extends "member/profile-base.html" %}
+{% extends "member/profile-base.html" %}{% load humanize %}
+
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- 링크 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
+<!-- <script src="{% static 'member/js/profile.js' %}"></script> -->
+{% endblock %}
 
 <!-- content -->
 {% block profileContent %}
 
-<div class="profile-list-title"><h2 class="big-title">최근 주문 내역</h2></div class="profile-list-tile">
+<div class="profile-list-title">
+  <h2 class="big-title">최근 주문 내역</h2>
+  <a href="/member/order"
+    ><span>상세주문내역 <i class="xi-angle-right"></i></span
+  ></a>
+</div>
 
 {% if not my_orders %}
-    <div class="profile-list-view no-itmes">
-      <span>최근 등록된 주문내역이 없습니다.</span>
-    </div>
-    {% else %}
-    <div class="items"> <!-- 클래스명 임의로 명시 -->
-        {% for order in my_orders %}
-            <ul>
-                <li>order_size: {{ order.size }}</li>
-                <li>order_quantity: {{ order.quantity }}</li>
-                <li><strong>order_date: {{ order.order_id.order_date }}</strong></li>
-                <li>order_status: {{ order.order_id.status }}</li>
-                <li>total_price: {{ order.order_id.total_price }}</li>
-                <li>order_memo: {{ order.order_id.memo }}</li>
-                <li>product_name: {{ order.product_id.name }}</li>
-                <li>product_price: {{ order.product_id.price }}</li>
-                <li>product_thumbnail: {{ order.product_id.thumbnail }}</li>
-                </li><br>
-            </ul>
-        {% endfor %}
-    </div>
-{% endif %}
-
-
-
-<div class="profile-list-title"><h2 class="big-title">장바구니</h2></div>
-
-{% if not my_carts %}
-    <div class="profile-list-view no-items" id="profile-cart">
-      <span>장바구니에 담긴 상품이 없습니다. </span>
-      <a href="/">계속 쇼핑하기</a>
-    </div>
+<div class="profile-list-view no-itmes">
+  <span>최근 등록된 주문내역이 없습니다.</span>
+</div>
 {% else %}
-    <div class="my-cart">
-        {% for cart in my_carts %}
-            <ul>
-                <li>quantity : {{ cart.quantity }}</li>
-                <li>size : {{ cart.inventory_id.size }}</li>
-                <li>amount : {{ cart.inventory_id.amount }}</li>
-                <li>sale : {{ cart.inventory_id.sale }}</li>
-                <li>soldout : {{ cart.inventory_id.soldout }}</li>
-                <li>product_name : {{ cart.cart.inventory_id.product_id.name }}</li>
-                <li>price : {{ cart.cart.inventory_id.product_id.price }}</li>
-                <li>style : {{ cart.cart.inventory_id.product_id.style }}</li>
-                <li>release_date : {{ cart.cart.inventory_id.product_id.release_date }}</li>
-                <li>sales : {{ cart.cart.inventory_id.product_id.sales }}</li>
-                <li>thumbnail : {{ cart.cart.inventory_id.product_id.thumbnail }}</li>
-                <br>
-            </ul>
-        {% endfor %}
-    </div>
+<div class="profile-order-box">
+  {% for order in my_orders %}
+  <ul class="profile-order-wrapper">
+    <li class="order-info-header">
+      <div>
+        <span class="order-info-date">{{ order.order_id.order_date }}</span>
+        <span class="order-info-totalPrice"
+          >총 주문금액 {{ order.order_id.total_price|intcomma }}원</span
+        >
+      </div>
+      <span class="order-info-orderNum">주문번호 : {{order.pk}}</span>
+    </li>
+    <li class="order-info-content">
+      <div class="thumbNail-wrapper">
+        <img
+          src="../../media/{{ order.product_id.thumbnail }}"
+          alt="product-thumNail"
+        />
+      </div>
+      <div class="order-info-detail">
+        <span class="order-info-title">{{ order.product_id.name }}</span>
+        <p>
+          <span class="order-info-style">{{ order.product_id.style }}</span>
+          <span class="order-info-size">{{ order.size }}</span>
+        </p>
+        <span class="order-info-amount">{{ order.quantity }}</span>
+        <span class="order-info-price"
+          >{{ order.product_id.price|intcomma }}원</span
+        >
+      </div>
+      <div class="col">
+        <p>택배배송</p>
+        <p>온라인 물류센터</p>
+      </div>
+      <p class="col">
+        {% if not order.order_id.status %}
+        <span>결제완료 <i class="xi-info"></i></span>
+        {% else %}
+        <span>배송준비중</span>
+        {% endif %}
+      </p>
+    </li>
+  </ul>
+  {% endfor %}
+</div>
 {% endif %}
 
-
-{% endblock %}
+<div class="profile-list-title">
+  <h2 class="big-title">장바구니</h2>
+  <a href="/cart"
+    ><span>장바구니 전체보기 <i class="xi-angle-right"></i></span
+  ></a>
+</div>
+{% if not my_carts %}
+<div class="profile-list-view no-items" id="profile-cart">
+  <span>장바구니에 담긴 상품이 없습니다. </span>
+  <a href="/">계속 쇼핑하기</a>
+</div>
+{% else %}
+<div class="my-cart">
+  {% for cart in my_carts %}
+  <div class="card">
+    <!-- product img -->
+    <div class="img-wrapper">
+      <a href="../../product/detail/{{cart.inventory_id.product_id.id}}">
+        <img
+          src="../../media/{{ cart.inventory_id.product_id.thumbnail }}"
+          alt="상품이미지"
+        />
+      </a>
+    </div>
+    <div class="product-info">
+      <!-- item-title-->
+      <div class="item-title">{{ cart.inventory_id.product_id.name }}</div>
+      <!-- sub-title -->
+      <div class="item-subtitle color-8D">
+        {{ cart.inventory_id.product_id.style }}
+      </div>
+      <!-- item-color 는 안 하기로 결정-->
+      <!-- price -->
+      <div>{{ cart.inventory_id.product_id.price|intcomma }}원</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endblock %}

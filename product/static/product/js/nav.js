@@ -39,3 +39,33 @@ $(document).ready(function() {
     $("body").css({ overflow: "auto" });
   });
 });
+
+//  모바일 환경 nav 필터
+$(document).ready(function() {
+  // filter 버튼 클릭시
+  $(`#mobile-toggle-aside`).click(function() {
+    $("#aside-product").css({ display: "block" });
+    $(".whole-wrapper-login").css({ display: "block" });
+    $("body").css({ overflow: "hidden" });
+  });
+  // 검정 화면 클릭시
+  $(".whole-wrapper-login").click(function() {
+    $("#aside-product").css({ display: "none" });
+    $(".whole-wrapper-login").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
+  });
+  //  사이즈 선택시
+  $(".size-label").click(function() {
+    $("#aside-product").css({ display: "none" });
+    $(".whole-wrapper-login").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
+  });
+  $(window).resize(function() {
+    var windowWidth = $(window).width();
+    if (windowWidth > 883) {
+      $("#aside-product").css({ display: "block" });
+    } else {
+      $("#aside-product").css({ display: "none " });
+    }
+  });
+});

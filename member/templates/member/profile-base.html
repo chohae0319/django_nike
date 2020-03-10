@@ -8,7 +8,9 @@
 {% block aside %}
 <aside id="profile">
   <ul id="profile-ul">
-    <li><strong class="big-title">MY PAGE</strong></li>
+    <a href="/member/profile"
+      ><li><strong class="big-title">MY PAGE</strong></li></a
+    >
     <li><strong>{{ user.username }}</strong></li>
     <li>
       <div>
@@ -20,7 +22,7 @@
     <li>
       <div>
         <strong>활동정보</strong>
-        <a href=""><span>장바구니</span></a>
+        <a href="../../cart"><span>장바구니</span></a>
         <a href=""><span>상품리뷰</span></a>
       </div>
     </li>
