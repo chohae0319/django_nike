@@ -4,10 +4,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, Passwo
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
-from .models import Profile, Order
+from .models import Profile
 from product.models import Cart
 from django.contrib.auth.decorators import login_required
-from order.models import OrderList
+from order.models import Order, OrderList
 from product.models import Cart
 
 
@@ -55,8 +55,13 @@ def logout(request):
 
 
 def profile(request):
-    my_orders = OrderList.objects.all().order_by('-id')[:4]
-    my_carts = Cart.objects.all().order_by('-id')[:4]
+    user_id = request.user
+
+    # user_id에 해당하는 order_id 찾아서 리스트로 만들기
+    order_id_list = Order.objects.filter(user_id=1).values_list('id', flat=True)
+
+    my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
+    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
     context = {
         'my_orders': my_orders,
         'my_carts': my_carts
@@ -65,7 +70,12 @@ def profile(request):
 
 
 def order(request):
-    my_orders = OrderList.objects.all().order_by('-id')
+    user_id = request.user
+
+    # user_id에 해당하는 order_id 찾아서 리스트로 만들기
+    order_id_list = Order.objects.filter(user_id=1).values_list('id', flat=True)
+
+    my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')
     context = {
         'my_orders': my_orders
     }

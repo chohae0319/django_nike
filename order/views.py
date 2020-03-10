@@ -178,10 +178,11 @@ class MakeOrder(View):
                                                quantity=item['quantity'])
                     order_list_obj.save()
 
-                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제
+                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제, 장바구니 개수 세션 삭제
                 if is_cart:
                     data = Cart.objects.filter(user_id=user_id)
                     data.delete()
+                    request.session.pop('cart_count', None)
 
                 return HttpResponse(json.dumps({'result': 'success', 'order_no': order_no}), content_type="application/json")
 

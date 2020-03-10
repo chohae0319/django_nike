@@ -241,12 +241,10 @@ def cart_delete_one(request):      # 장바구니 특정상품 삭제
     cart_id = request.POST['cart-id']
     data = Cart.objects.get(id=cart_id)     # id가 cart_id와 일치하는 쿼리셋 반환
 
-    if data.user_id.id == user_id:       # 삭제 성공
-        data.delete()
-        request.session['cart_count'] -= 1
-        return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
-    else:       # Cart의 user_id와 로그인한 유저가 다른 경우
-        return HttpResponse(json.dumps({'result': 'no action'}), content_type="application/json")
+    # 삭제 성공
+    data.delete()
+    request.session['cart_count'] -= 1
+    return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
 def cart_delete_all(request):      # 장바구니 전체상품 삭제
@@ -255,10 +253,6 @@ def cart_delete_all(request):      # 장바구니 전체상품 삭제
         return HttpResponse(json.dumps({'result': 'no user'}), content_type="application/json")
 
     user_id = request.user.pk
-
-    # Cart의 user_id와 로그인한 유저가 다른 경우
-    if int(request.POST['user-id']) != user_id:
-        return HttpResponse(json.dumps({'result': 'no action'}), content_type="application/json")
 
     data = Cart.objects.filter(user_id=user_id)     # user_id가 일치하는 쿼리셋 반환
     data.delete()

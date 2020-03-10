@@ -94,9 +94,6 @@
         else if (answer == 'no user') {
           window.location.href = "{% url 'member:login' %}";
         }
-        else if (answer == 'no action') {
-          window.location.href = "{% url 'products:cart' %}";
-        }
       }
     });
   }
@@ -114,9 +111,6 @@
         }
         else if (answer == 'no user') {
           window.location.href = "{% url 'member:login' %}";
-        }
-        else if (answer == 'no action') {
-          window.location.href = "{% url 'products:cart' %}";
         }
       }
     });
