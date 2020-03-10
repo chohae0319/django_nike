@@ -56,9 +56,14 @@ $(document).ready(function() {
   });
   //  사이즈 선택시
   $(".size-label").click(function() {
-    $("#aside-product").css({ display: "none" });
-    $(".whole-wrapper-login").css({ display: "none" });
-    $("body").css({ overflow: "auto" });
+    var windowWidth = $(window).width();
+    if (windowWidth > 883) {
+      return;
+    } else {
+      $("#aside-product").css({ display: "none" });
+      $(".whole-wrapper-login").css({ display: "none" });
+      $("body").css({ overflow: "auto" });
+    }
   });
   $(window).resize(function() {
     var windowWidth = $(window).width();
