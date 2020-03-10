@@ -3,6 +3,46 @@
 <!-- title -->
 {% block title %} 장바구니-나이키 {% endblock %}
 
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- 링크 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'product/css/cart.css' %}" />
+<script src="{% static 'product/js/cart.js' %}"></script>
+{% endblock %}
+<!-- option 변경 모달창 -->
+{% block modal %}
+<div class="cart-option-modal" style="display: none;">
+  <p class="close-modal"><i class="xi-close"></i></p>
+  <div class="cart-modal-box">
+    <div class="cart-gallery">
+      <div class="cart-product-img-wrapper" id="thumNail">
+        <img src="" alt="썸네일" />
+      </div>
+    </div>
+    <div class="cart-option-box">
+      <div class="cart-product-info-header">
+        <p>
+          <span class="cart-product-category"></span
+          ><span class="cart-product-price"></span>
+        </p>
+        <h2 class="big-title"></h2>
+      </div>
+      <div class="order-box">
+        <div class="size-wrapper">
+          <h3>사이즈 선택</h3>
+          <span id="size-alert" class="color-orange"></span>
+          <div class="size-selector"></div>
+        </div>
+        <div class="cart-btn-wrapper">
+          <span class="round-btn-big white">옵션변경</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 <!-- content -->
 {% block content %}
 <section id="cart" class="cover">
@@ -34,12 +74,16 @@
           <ul>
             <li>{{ c.inventory_id.product_id.name }}</li>
             <li>스타일 : {{ c.inventory_id.product_id.style }}</li>
-            <li>사이즈 : {{ c.inventory_id.size }}</li>
+            <li>
+              사이즈 : <span class="{{c.pk}}">{{ c.inventory_id.size }}</span>
+            </li>
             <li>수량 : {{ c.quantity }}</li>
           </ul>
         </div>
         <div class="cart-item-option">
-          <a href="javascript:void(0);" onclick="click_option({{ c.inventory_id.product_id.pk }})"><span>옵션 변경</span></a>
+          <span class="{{ c.inventory_id.product_id.pk }}" value="{{c.pk}}"
+            >옵션 변경</span
+          >
         </div>
         <div class="color-orange">
           <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
@@ -63,13 +107,13 @@
         <li class="order-info-list">
           <span>예상 배송비</span><span>{{shipping_price|intcomma}}원</span>
         </li>
-        <li class="order-info-list">
+        <li class="order-info-list color-orange">
           <span>상품 할인 금액</span><span>0원</span>
         </li>
-        <li class="order-info-list">
+        <li class="order-info-list color-orange">
           <span>주문 할인 금액</span><span>0원</span>
         </li>
-        <li class="order-info-list">
+        <li class="order-info-list color-orange">
           <span>총 결제 예정 금액</span><span>{{total_price|intcomma}}원</span>
         </li>
         <a href="#" onclick="order()">주문하기</a>
@@ -155,20 +199,6 @@
           if (message == 'out of stock') {
             alert("재고가 부족합니다\n(상품명 : "+product+")")
           }
-        }
-      }
-    });
-  }
-
-  function click_option(id) {
-    $.ajax({
-      type: "GET",
-      url: "/cart/get-option/" + id + "/",
-      dataType:'json',
-      success: function(response) {
-        var answer = response.result;
-        if (answer == 'success') {
-          console.log(response.option);
         }
       }
     });
