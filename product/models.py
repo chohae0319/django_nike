@@ -19,7 +19,7 @@ class Product(models.Model):
         ('WOMEN', 'WOMEN'),
     )
 
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30)
     gender = models.CharField(max_length=5, choices=GENDER_CHOICES, default=1)
     price = models.IntegerField()
     style = models.CharField(max_length=10)    # 상품번호. 나중에 blank=false로 바꿀예정
@@ -41,7 +41,6 @@ class Inventory(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)  # 재고 존재하면 상품 삭제 불가
     size = models.CharField(max_length=10)
     amount = models.IntegerField(default=0)
-    soldout = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)
