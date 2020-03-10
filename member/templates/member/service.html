@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NIke-Clone 고객센터</title>
+    <link
+      href="{% static 'product/img/favicon.ico' %}"
+      rel="icon"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'member/css/service.css' %}" />
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'member/js/service.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      <a href="/"><div class="logo"></div></a>
+    </header>
+    <section>
+      <input id="title" />
+      <input id="body" />
+      <button id="submit">제출</button>
+      <button id="get">출력</button>
+      <p id="getTitle"></p>
+      <p id="getBody"></p>
+      <p id="issueNum"></p>
+      <!-- 수정 기능 구현 -->
+      <!-- issue를 project에 담고 완료된 목록들을 출력하는 것까지  -->
+    </section>
+  </body>
+</html>

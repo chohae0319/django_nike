@@ -54,6 +54,14 @@ def logout(request):
     return redirect('/')
 
 
+def service(request):
+    return render(
+        request,
+        'member/service.html/',
+        {},
+    )
+
+
 def profile(request):
     my_orders = OrderList.objects.all().order_by('-id')[:4]
     my_carts = Cart.objects.all().order_by('-id')[:4]
@@ -102,4 +110,4 @@ def user_info_password(request):
             return redirect('/')
     else:
         password_change_form = PasswordChangeForm(request.user)
-    return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
+    return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
