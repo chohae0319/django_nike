@@ -9,7 +9,8 @@ from .views import (
     user_info_update,
     user_info_delete,
     user_info_password,
-    service
+    service,
+    service_cancel
 )
 
 app_name = 'member'
@@ -24,4 +25,5 @@ urlpatterns = [
     path('profile-delete/', user_info_delete, name='profile-delete'),
     path('profile-password/', user_info_password, name='profile-password'),
     path('service/', service, name='service'),
+    path('service-cancel/', service_cancel, name='service-cancel'),
 ]

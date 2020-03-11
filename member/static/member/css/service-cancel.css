@@ -1,0 +1,74 @@
+.section {
+  position: relative;
+  margin: 20px 0;
+  width: 90%;
+  font-size: 12px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+}
+
+.section-header {
+  width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.content-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 70%;
+}
+
+.form-wrapper *:focus {
+  outline: none;
+  border: 1px solid black;
+}
+.form-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+input {
+  border: 1px solid #e0e0e0;
+  padding: 15px 10px;
+}
+
+/*  dropdown list */
+.order-dropdown-wrapper {
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+.order-dropdown-wrapper > p {
+  display: flex;
+  justify-content: space-between;
+}
+.order-dropdown-wrapper > p span {
+  flex: 1;
+}
+.order-dropdown-wrapper > p i {
+  padding: 15px;
+  font-size: 15px;
+}
+.hide-dropdown-box {
+  display: none;
+}
+
+/*  */
+textarea {
+  resize: none;
+  border: 1px solid #e0e0e0;
+  padding: 15px 10px;
+}
+
+.option-wrapper {
+  flex-basis: 25%;
+  border: 1px solid;
+}

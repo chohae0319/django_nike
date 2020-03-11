@@ -1,0 +1,77 @@
+{% extends "member/service.html" %}
+
+<!-- static 확장 -->
+{% load static %}
+<!-- link -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'member/css/service-cancel.css' %}" />
+<!-- xeicon -->
+<link
+  rel="stylesheet"
+  href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+/>
+<script src="{% static 'member/js/service-cancel.js' %}"></script>
+{% endblock %}
+
+<!-- title -->
+{% block title %}
+<h2>주문 취소 신청</h2>
+{% endblock %}
+
+<!-- content -->
+{% block content %}
+<div class="section">
+  <div class="section-header">
+    <h2>주문취소</h2>
+  </div>
+  <div class="content-box">
+    <div class="form-wrapper">
+      <div>
+        <label for="input-title">작성자</label>
+        <input type="text" value="{{user.username}}" />
+      </div>
+      <div>
+        <label for="input-title">취소하실 제품</label>
+        <div class="order-dropdown-wrapper">
+          <p><span></span><i class="xi-angle-down"></i></p>
+          <div class="hide-dropdown-box">
+            {% for order in my_orders %}
+            <ul class="order-list-wrapper">
+              <li>order_size: {{ order.size }}</li>
+              <li>order_quantity: {{ order.quantity }}</li>
+              <li>
+                <strong>order_date: {{ order.order_id.order_date }}</strong>
+              </li>
+              <li>order_status: {{ order.order_id.status }}</li>
+              <li>total_price: {{ order.order_id.total_price }}</li>
+              <li>order_memo: {{ order.order_id.memo }}</li>
+              <li class="product-name">{{ order.product_id.name }}</li>
+              <li class="product-price">{{ order.product_id.price }}</li>
+              <li>product_thumbnail: {{ order.product_id.thumbnail }}</li>
+            </ul>
+            {% endfor %}
+          </div>
+          <div class="toggle-dropdown">
+            <ul class="toggle-ul"></ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="input-title">Title</label>
+        <input type="text" placeholder="제목을 입력해주세요" />
+      </div>
+      <div>
+        <label for="input-title">취소사유</label>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="ex. 사이즈불량"
+        ></textarea>
+      </div>
+    </div>
+    <div class="option-wrapper"></div>
+  </div>
+</div>
+{% endblock %}

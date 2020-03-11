@@ -62,6 +62,15 @@ def service(request):
     )
 
 
+@login_required
+def service_cancel(request):
+    my_orders = OrderList.objects.all()
+    context = {
+        'my_orders': my_orders
+    }
+    return render(request, 'member/service-cancel.html/', context)
+
+@login_required
 def profile(request):
     my_orders = OrderList.objects.all().order_by('-id')[:4]
     my_carts = Cart.objects.all().order_by('-id')[:4]
@@ -71,7 +80,7 @@ def profile(request):
     }
     return render(request, 'member/profile.html', context)
 
-
+@login_required
 def order(request):
     my_orders = OrderList.objects.all().order_by('-id')
     context = {
