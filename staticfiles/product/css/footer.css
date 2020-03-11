@@ -1,6 +1,7 @@
 /* footer */
 footer {
   position: relative;
+  z-index: 3;
   top: 108.5px;
   bottom: 0em;
   width: 100%;
@@ -12,7 +13,7 @@ footer {
 
 .footer-header {
   display: flex;
-  width: 880px;
+  width: 70%;
   margin: 0 auto;
   padding: 60px 0;
   justify-content: space-between;

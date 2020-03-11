@@ -19,7 +19,7 @@ class Product(models.Model):
         ('WOMEN', 'WOMEN'),
     )
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=False)
     gender = models.CharField(max_length=5, choices=GENDER_CHOICES, default=1)
     price = models.IntegerField()
     style = models.CharField(max_length=10)    # 상품번호. 나중에 blank=false로 바꿀예정
