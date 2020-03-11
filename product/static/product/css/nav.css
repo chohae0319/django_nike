@@ -59,6 +59,15 @@ nav li a {
   font-size: 12px;
   padding: 0 11px;
 }
+#nav-guide li:last-child a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70px;
+}
+#nav-guide li:last-child i {
+  font-size: 20px;
+}
 #nav-guide li a {
   padding: 0;
 }
@@ -69,10 +78,27 @@ nav li a {
 #signOpen:hover {
   color: black;
 }
-
 .nav-upper .xi-cart {
-  font-size: 16px;
+  position: relative;
+  font-size: 23px;
   line-height: 38px;
+}
+
+/* 장바구니 담은 개수 */
+#nav-count-cart {
+  position: absolute;
+  top: 5px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: rgb(248, 84, 32);
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* nav-lower */
@@ -114,11 +140,6 @@ nav li a {
   border-radius: 2px;
 }
 
-/* hide button */
-button.hide {
-  border: none;
-}
-
 #nonhide-search-icon {
   position: absolute;
   right: 220px;
@@ -155,6 +176,9 @@ button.hide {
 }
 .nav-list-wrapper ul li {
   margin-bottom: 5px;
+}
+.nav-list-wrapper ul li a:hover {
+  color: #e0e0e0;
 }
 .nav-list-wrapper ul + ul {
   border-left: 1px solid rgb(229, 229, 229);
@@ -233,9 +257,17 @@ button.hide {
 /* profile-toggle */
 #user-profile {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#user-profile i {
+  font-size: 20px;
+  margin-right: 4px;
 }
 #user-profile:hover {
   color: black;
+  border-bottom: 2px solid;
 }
 
 #user-profile-drop {
@@ -292,6 +324,53 @@ input#sidebar {
 #hamburger > label {
   cursor: pointer;
 }
+/* 로그인 모달 */
+#open-login {
+  cursor: pointer;
+}
+#close-login {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+}
+
+.whole-wrapper-login {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.login-modal {
+  display: none;
+  position: fixed;
+  z-index: 2001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+}
+.login-modal .logo {
+  margin: 40px auto;
+  width: 89px;
+  height: 32px;
+  background: url(https://www.nike.com/kr/error/logo_shut.jpg) no-repeat 0 0;
+}
+.login-modal .login-header {
+  text-align: center;
+}
+
+.login-modal form {
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
 @media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;

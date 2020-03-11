@@ -18,8 +18,18 @@ def index(request):
         'product/index.html/',
         {},
     )
-
-
+def about(request):
+    return render(
+        request,
+        'product/about.html/',
+        {},
+    )
+def error(request):
+    return render(
+        request,
+        'product/error.html/',
+        {},
+    )
 def SizeDetail(request):
     template_name = 'product/product.html'
     if request.method == "POST":
@@ -81,7 +91,6 @@ class CategoryDetail(ListView):
                 context['category'] = Category.objects.filter(pk=id).values('name')
 
         return context
-
 
 class NewProductList(ListView):
     # 모든 신발 카테고리 해당. today 기준 출시일이 30일 전 이내인 상품만
@@ -296,9 +305,3 @@ class CartList(LoginRequiredMixin, ListView):
             context['total_price'] = context['amount'] + context['shipping_price']
 
         return context
-
-# 데이터 전송 없는 읽기 전용 페이지 입니다.
-
-
-def best(request):
-    return render(request, 'product/minsoo-best.html', {})
