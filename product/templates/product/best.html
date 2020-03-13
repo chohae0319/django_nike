@@ -16,14 +16,11 @@
     <div class="best-img-box">
       {% for product in life_product_list %}
       <div class="best-img-wrapper">
-        <img
-          src="{{product.thumbnail.url}}"
-          alt="나이키리액트비전"
-        />
+        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
-          <a href="">구매하기</a>
+          <a href="/product/detail/{{product.id}}">구매하기</a>
         </div>
       </div>
       {% endfor %}
@@ -39,14 +36,11 @@
     <div class="best-img-box-right">
       {% for product in run_product_list %}
       <div class="best-img-wrapper">
-        <img
-          src="{{product.thumbnail.url}}"
-          alt="나이키리액트비전"
-        />
+        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
-          <a href="">구매하기</a>
+          <a href="/product/detail/{{product.id}}">구매하기</a>
         </div>
       </div>
       {% endfor %}
@@ -61,14 +55,11 @@
     <div class="best-img-box">
       {% for product in bask_product_list %}
       <div class="best-img-wrapper">
-        <img
-          src="{{product.thumbnail.url}}"
-          alt="나이키리액트비전"
-        />
+        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
-          <a href="">구매하기</a>
+          <a href="/product/detail/{{product.id}}">구매하기</a>
         </div>
       </div>
       {% endfor %}
@@ -83,14 +74,11 @@
     <div class="best-img-box-right">
       {% for product in soc_product_list %}
       <div class="best-img-wrapper">
-        <img
-          src="{{product.thumbnail.url}}"
-          alt="나이키리액트비전"
-        />
+        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
-          <a href="">구매하기</a>
+          <a href="/product/detail/{{product.id}}">구매하기</a>
         </div>
       </div>
       {% endfor %}
@@ -102,17 +90,14 @@
       <!-- 해당 카테고리로 연결하시면 됩니다. -->
       <a href="{% url 'products:list' gender 5 %}">신발 전체 보기</a>
     </div>
-    <div class="best-img-box">
+    <div class="best-img-box flip">
       {% for product in flip_product_list %}
-      <div class="best-img-wrapper">
-        <img
-          src="{{product.thumbnail.url}}"
-          alt="나이키리액트비전"
-        />
+      <div class="best-img-wrapper flip">
+        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
-          <a href="">구매하기</a>
+          <a href="/product/detail/{{product.id}}">구매하기</a>
         </div>
       </div>
       {% endfor %}

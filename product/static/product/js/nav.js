@@ -23,11 +23,13 @@ $(function() {
 
 // 로그인 모달
 $(document).ready(function() {
+  //  키는 거
   $("#open-login").click(function() {
     $(".whole-wrapper-login").css({ display: "block" });
     $(".login-modal").css({ display: "block" });
     $("body").css({ overflow: "hidden" });
   });
+  //  끄는거
   $("#close-login").click(function() {
     $(".whole-wrapper-login").css({ display: "none" });
     $(".login-modal").css({ display: "none" });
@@ -56,9 +58,14 @@ $(document).ready(function() {
   });
   //  사이즈 선택시
   $(".size-label").click(function() {
-    $("#aside-product").css({ display: "none" });
-    $(".whole-wrapper-login").css({ display: "none" });
-    $("body").css({ overflow: "auto" });
+    var windowWidth = $(window).width();
+    if (windowWidth > 883) {
+      return;
+    } else {
+      $("#aside-product").css({ display: "none" });
+      $(".whole-wrapper-login").css({ display: "none" });
+      $("body").css({ overflow: "auto" });
+    }
   });
   $(window).resize(function() {
     var windowWidth = $(window).width();
