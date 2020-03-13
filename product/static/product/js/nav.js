@@ -23,11 +23,13 @@ $(function() {
 
 // 로그인 모달
 $(document).ready(function() {
+  //  키는 거
   $("#open-login").click(function() {
     $(".whole-wrapper-login").css({ display: "block" });
     $(".login-modal").css({ display: "block" });
     $("body").css({ overflow: "hidden" });
   });
+  //  끄는거
   $("#close-login").click(function() {
     $(".whole-wrapper-login").css({ display: "none" });
     $(".login-modal").css({ display: "none" });
