@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% block title %}
     <title>Error !</title>
+    {% endblock %}
     <link
       href="{% static 'product/img/favicon.ico' %}"
       rel="icon"
@@ -17,6 +19,7 @@
   <body>
     <div id="error-box">
       <div class="logo"></div>
+      {% block content %}
       <p class="error-title">서비스 이용에 불편을 드려서 죄송합니다.</p>
       <div class="error-content">
         <p>(404-NOT FOUND)</p>
@@ -26,6 +29,7 @@
           드립니다.
         </p>
       </div>
+      {% endblock %}
       <footer>
         <span
           >관련문의사항은 저희 GitHub Repository에 관련 Issues를 남겨주시면
