@@ -198,20 +198,30 @@
 {% block content %}
 <div id="section-header">
   {% if gender == 'Men' %}
-  <h2 class="title" id="section-title">Men</h2>
-  {% if category == '신발' %}
-  <h2 class="big-title">{{gender}}'s {{category}}</h2>
-  {% else %} {% for category in category %}
-  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
-  {% endfor %} {% endif %} {% else %}
-  <h2 class="title" id="section-title">Women</h2>
-  {% if category == '신발' %}
-  <h2 class="big-title">{{gender}}'s {{category}}</h2>
-  {% else %} {% for category in category %} {% if category.name == '농구' %}
-  <h2 class="big-title">{{gender}}'s 골프</h2>
+    <h2 class="title" id="section-title">Men</h2>
+        {% if category == '신발' %}
+        <h2 class="big-title">{{gender}}'s {{category}}</h2>
+        {% else %} 
+        <!--  -->
+        {% for category in category %}
+        <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
+        {% endfor %} 
+        {% endif %} 
   {% else %}
-  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
-  {% endif %} {% endfor %} {% endif %} {% endif %}
+    <h2 class="title" id="section-title">Women</h2>
+       {% if category == '신발' %}
+       <h2 class="big-title">{{gender}}'s {{category}}</h2>
+      {% else %} 
+      <!--  -->
+        {% for category in category %} 
+          {% if category.name == '농구' %}
+          <h2 class="big-title">{{gender}}'s 골프</h2>
+          {% else %}
+          <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
+          {% endif %} 
+        {% endfor %} 
+      {% endif %} 
+    {% endif %}
 
   <div class="filter-option">
     <span id="mobile-toggle-aside">필터</span>
