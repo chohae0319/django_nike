@@ -133,12 +133,12 @@ class NewProductList(ListView):
 
         if pk == 1:
             context['product_list'] = Product.objects.filter(
-                gender='MEN',
+                gender='Men',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
         else:
             context['product_list'] = Product.objects.filter(
-                gender='WOMEN',
+                gender='Women',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
 
@@ -187,13 +187,13 @@ class SaleProductList(ListView):
 
         if pk == 1:
             context['product_list'] = Product.objects.filter(
-                gender='MEN',
+                gender='Men',
                 release_date__lt=three_month_ago,
                 soldout=False
             ).reverse()
         else:
             context['product_list'] = Product.objects.filter(
-                gender='WOMEN',
+                gender='Women',
                 release_date__lt=three_month_ago,
                 soldout=False
             ).reverse()
