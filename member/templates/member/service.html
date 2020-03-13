@@ -29,8 +29,8 @@
       <h2>고객센터</h2>
       {% endblock %}
     </header>
+    {% block content %}
     <section>
-      {% block content %}
       <ul class="mainList-wrapper">
         <li class="ul-title">
           <h2>FAQ</h2>
@@ -40,7 +40,7 @@
           <ul class="list-ul">
             <li class="list-title">나의 정보 조회</li>
             <li>
-              <a href=""><span>주문 내역 조회</span></a>
+              <a href="{% url 'member:order' %}"><span>주문 내역 조회</span></a>
             </li>
             <li>
               <a href=""><span>아이디 / 비밀번호 찾기</span></a>
@@ -54,7 +54,9 @@
               <a href="/member/service-cancel/"><span>주문 취소 신청</span></a>
             </li>
             <li>
-              <a href=""><span>주문 취소 내역</span></a>
+              <a href="/member/service-cancelList/"
+                ><span>주문 취소 내역</span></a
+              >
             </li>
           </ul>
         </li>
@@ -70,18 +72,7 @@
           </ul>
         </li>
       </ul>
-      {% endblock %}
     </section>
-    <section style="display: none;">
-      <input id="title" />
-      <input id="body" />
-      <button id="submit">제출</button>
-      <button id="get">출력</button>
-      <p id="getTitle"></p>
-      <p id="getBody"></p>
-      <p id="issueNum"></p>
-      <!-- 수정 기능 구현 -->
-      <!-- issue를 project에 담고 완료된 목록들을 출력하는 것까지  -->
-    </section>
+    {% endblock %}
   </body>
 </html>

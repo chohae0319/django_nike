@@ -1,3 +1,6 @@
+#cancel-section {
+  height: 150vh;
+}
 .section {
   position: relative;
   margin: 20px 0;
@@ -24,7 +27,7 @@
 .form-wrapper {
   display: flex;
   flex-direction: column;
-  flex-basis: 70%;
+  flex-basis: 60%;
 }
 
 .form-wrapper *:focus {
@@ -35,6 +38,19 @@
   display: flex;
   flex-direction: column;
   padding: 10px 0;
+}
+#cancel-wrapper {
+  align-items: center;
+}
+#cancel-wrapper > span {
+  padding: 15px 50px;
+  background-color: black;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+.form-wrapper > div > span {
+  margin-bottom: 5px;
 }
 input {
   border: 1px solid #e0e0e0;
@@ -49,16 +65,34 @@ input {
 .order-dropdown-wrapper > p {
   display: flex;
   justify-content: space-between;
+  margin: 0;
 }
-.order-dropdown-wrapper > p span {
+.order-dropdown-wrapper > p span:first-child {
+  display: flex;
+  align-items: center;
   flex: 1;
-}
-.order-dropdown-wrapper > p i {
-  padding: 15px;
-  font-size: 15px;
+  padding-left: 10px;
 }
 .hide-dropdown-box {
   display: none;
+}
+.toggle-dropdown {
+  position: relative;
+}
+
+.toggle-ul {
+  display: none;
+  position: absolute;
+  left: -1px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+.toggle-ul > li {
+  padding: 20px;
+}
+.toggle-ul > li:hover {
+  background-color: rgb(247, 247, 247);
 }
 
 /*  */
@@ -69,6 +103,43 @@ textarea {
 }
 
 .option-wrapper {
-  flex-basis: 25%;
-  border: 1px solid;
+  flex-basis: 35%;
+  border: 1px solid #e0e0e0;
+  margin-top: 30px;
+}
+/*  option - card */
+
+.mini-image-wrapper {
+  width: 90%;
+  height: 320px;
+  padding: 10px 20px;
+}
+
+.mini-cart-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px 20px;
+}
+.mini-cart-wrapper li {
+  margin: 10px 0;
+}
+
+/*  xi - icons updown */
+.show {
+  display: inline;
+}
+#xi-icons {
+  padding: 15px;
+  font-size: 15px;
+}
+#xi-icons i:nth-child(2) {
+  display: none;
+}
+#xi-icons.updown i:nth-child(1) {
+  display: none;
+}
+#xi-icons.updown i:nth-child(2) {
+  display: inline;
 }

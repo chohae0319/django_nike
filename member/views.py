@@ -62,13 +62,30 @@ def service(request):
     )
 
 
+def service_cancel_list(request):
+    return render(
+        request,
+        'member/service-cancelList.html/',
+        {},
+    )
+
+
+def service_complete(request):
+    return render(
+        request,
+        'member/service-complete.html/',
+        {},
+    )
+
+
 @login_required
 def service_cancel(request):
-    my_orders = OrderList.objects.all()
+    my_orders = OrderList.objects.all().order_by('-id')
     context = {
         'my_orders': my_orders
     }
     return render(request, 'member/service-cancel.html/', context)
+
 
 @login_required
 def profile(request):
@@ -79,6 +96,7 @@ def profile(request):
         'my_carts': my_carts
     }
     return render(request, 'member/profile.html', context)
+
 
 @login_required
 def order(request):
