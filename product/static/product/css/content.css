@@ -498,8 +498,6 @@ label.no-amount {
 .already-login span {
   margin: 20px 0;
 }
-/* -------------------------------------------------------------- cart  --> cart.css 로 이동*/
-
 /* -------------------------------------------------------------- prfile mypage */
 /* profile */
 /* member안에 있는 css 폴더로 옮겨야 함 */
@@ -579,6 +577,7 @@ section#profile .profile-list-view {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 97.5%;
 }
 .best-category-header a {
   display: inline-block;
@@ -597,36 +596,50 @@ section#profile .profile-list-view {
   right: -50%;
   display: flex;
   width: 50%;
-  justify-content: space-between;
   flex-wrap: wrap;
+}
+/* 슬리퍼 box */
+.best-img-box.flip {
+  position: relative;
+  right: 0;
+  width: 100%;
 }
 .best-img-box-right {
   position: relative;
-  left: -1%;
   display: flex;
   width: 50%;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 .best-img-box .best-img-wrapper:first-child {
   position: absolute;
-  left: -102%;
+  left: -100%;
   width: 100%;
   height: 100%;
-  padding-bottom: 2%;
+  padding: 0 5px 5px 0;
+}
+/*  슬리퍼 */
+.best-img-box .best-img-wrapper.flip:first-child {
+  position: relative;
+  left: 0;
+  width: auto;
+  height: 260px;
+  padding: 0;
 }
 .best-img-box-right .best-img-wrapper:first-child {
   position: absolute;
-  right: -102%;
+  right: -96%;
   width: 100%;
   height: 100%;
-  padding-bottom: 2%;
+  padding: 0 0 5px 5px;
 }
 .best-img-wrapper {
   position: relative;
-  flex-basis: 49%;
-  height: 100%;
-  margin-bottom: 1%;
+  flex-basis: 47%;
+  height: 260px;
+  margin: 0 5px 5px 0;
+}
+.best-img-wrapper.flip {
+  flex-basis: 23.5%;
 }
 
 .best-hover-box {
@@ -656,13 +669,5 @@ section#profile .profile-list-view {
 @media screen and (max-width: 768px) {
   .best-img-box {
     flex-direction: column;
-  }
-  .best-notAlone {
-    margin-top: 3px;
-    flex-direction: row;
-    height: 500px;
-  }
-  .best-notAlone .best-img-wrapper {
-    margin-bottom: 8px;
   }
 }
