@@ -1,4 +1,3 @@
-
 .profile-order-wrapper > li {
   padding: 0 20px;
 }
@@ -55,12 +54,12 @@
 /* cart - card */
 .my-cart {
   display: flex;
-  justify-content: space-between;
   padding: 20px 0;
   width: 100%;
 }
 .my-cart .card {
   width: 24%;
+  margin-right: 10px;
 }
 .my-cart .card .img-wrapper {
   width: 100%;

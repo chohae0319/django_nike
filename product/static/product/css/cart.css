@@ -17,6 +17,14 @@
 #no-items i {
   font-size: 40px;
 }
+.cart-list-delete span {
+  display: inline-block;
+  padding-top: 20px;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .cart-contents {
   padding: 20px 0;
   display: flex;
