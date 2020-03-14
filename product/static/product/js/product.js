@@ -17,7 +17,7 @@ $(document).ready(function() {
     }
   });
 
-  // 사이즈 클릭시
+  // 사이즈 클릭시 검정 테두리
   $(".size-label").click(function() {
     $(this).toggleClass("black-label");
   });

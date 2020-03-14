@@ -91,7 +91,7 @@
             <a href="https://www.nike.com/kr/ko_kr/l/jordan">
               <div id="jordan-logo">
                 <img
-                  src="{% static 'product/img/스크린샷 2020-02-12 오후 8.54.47.png' %}"
+                  src="{% static 'product/img/jordan-logo.png' %}"
                   alt="조던로고"
                 />
               </div>
@@ -120,7 +120,7 @@
             {% endif %}
           </li>
           <li>
-            <a href=""><span>고객센터</span></a>
+            <a href="/member/service/"><span>고객센터</span></a>
           </li>
           <li>
             <a href="/cart/">
@@ -221,7 +221,7 @@
                     <a href="{% url 'products:list' 2 2 %}">러닝</a>
                   </li>
                   <li>
-                    <a href="{% url 'products:list' 2 3 %}">농구</a>
+                    <a href="{% url 'products:list' 2 3 %}">골프</a>
                   </li>
                   <li>
                     <a href="{% url 'products:list' 2 4 %}">축구</a>
@@ -368,16 +368,10 @@
         <ul class="col col2">
           <li class="list-title"><span>고객센터</span></li>
           <li>
-            <a href=""><span>080-022-0182</span></a>
-          </li>
-          <li>
             <a href=""><span>주문/결제</span></a>
           </li>
           <li>
-            <a href=""><span>배송</span></a>
-          </li>
-          <li>
-            <a href=""><span>주문배송조회</span></a>
+            <a href="{% url 'member:order' %}"><span>주문배송조회</span></a>
           </li>
           <li>
             <a href=""><span>멤버쉽 혜택/서비스</span></a>
@@ -386,13 +380,7 @@
             <a href=""><span>공지사항</span></a>
           </li>
           <li>
-            <a href=""><span>1:1 채팅 문의</span></a>
-          </li>
-          <li>
-            <a href=""><span>1:1 이메일문의</span></a>
-          </li>
-          <li>
-            <a href=""><span>이용약관</span></a>
+            <a href=""><span>기타문의</span></a>
           </li>
           <li>
             <a href=""><span>개인정보처리방침</span></a>

@@ -54,6 +54,40 @@ def logout(request):
     return redirect('/')
 
 
+def service(request):
+    return render(
+        request,
+        'member/service.html/',
+        {},
+    )
+
+
+def service_cancel_list(request):
+    return render(
+        request,
+        'member/service-cancelList.html/',
+        {},
+    )
+
+
+def service_complete(request):
+    return render(
+        request,
+        'member/service-complete.html/',
+        {},
+    )
+
+
+@login_required
+def service_cancel(request):
+    my_orders = OrderList.objects.all().order_by('-id')
+    context = {
+        'my_orders': my_orders
+    }
+    return render(request, 'member/service-cancel.html/', context)
+
+
+@login_required
 def profile(request):
     user_id = request.user
 
@@ -69,6 +103,7 @@ def profile(request):
     return render(request, 'member/profile.html', context)
 
 
+@login_required
 def order(request):
     user_id = request.user
 
@@ -112,4 +147,4 @@ def user_info_password(request):
             return redirect('/')
     else:
         password_change_form = PasswordChangeForm(request.user)
-    return render(request, 'member/profile-password.html', {'password_change_form':password_change_form})
+    return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
