@@ -133,12 +133,12 @@ class NewProductList(ListView):
 
         if pk == 1:
             context['product_list'] = Product.objects.filter(
-                gender='Men',
+                gender='MEN',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
         else:
             context['product_list'] = Product.objects.filter(
-                gender='Women',
+                gender='WOMEN',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
 
@@ -175,28 +175,59 @@ class BestProductList(ListView):
 
 class SaleProductList(ListView):
     model = Product
-    template_name = 'product/product.html'
+    template_name = 'product/test.html'
 
     def get_context_data(self, **kwargs):
         context = super(SaleProductList, self).get_context_data(**kwargs)
-        pk = self.kwargs['pk']
+        id = self.kwargs['id']
+        gender = self.kwargs['gender']
 
         date_format = "%Y-%m-%d"
         three_month_ago = (datetime.datetime.now() - datetime.timedelta(days=90)).strftime(date_format)
         now_date = datetime.datetime.now().strftime(date_format)
 
-        if pk == 1:
-            context['product_list'] = Product.objects.filter(
-                gender='Men',
-                release_date__lt=three_month_ago,
-                soldout=False
-            ).reverse()
+        url = []
+        category = []
+
+        # 카테고리 별 url & 카테고리 name 리스트
+        for i in range(1, 6):
+            category_id = Category.objects.filter(pk=i).values_list('name', flat=True)
+            for k in category_id:
+                category.append(k)
+            for j in range(1, 3):
+                url.append("{% url 'products:sale' " + str(j) + ' ' + str(i) + " %}")
+        context['url'] = url
+        context['category'] = category
+
+        # 카테고리 별 sale 상품 리스트
+        if gender == 1:
+            if id == 0:
+                context['product_list'] = Product.objects.filter(
+                    gender='MEN',
+                    release_date__lte=three_month_ago,
+                    soldout=False
+                )
+            else:
+                context['product_list'] = Product.objects.filter(
+                    gender='MEN',
+                    release_date__lt=three_month_ago,
+                    soldout=False,
+                    category_id=id
+                ).reverse()
         else:
-            context['product_list'] = Product.objects.filter(
-                gender='Women',
-                release_date__lt=three_month_ago,
-                soldout=False
-            ).reverse()
+            if id == 0:
+                context['product_list'] = Product.objects.filter(
+                    gender='WOMEN',
+                    release_date__lt=three_month_ago,
+                    soldout=False
+                ).reverse()
+            else:
+                context['product_list'] = Product.objects.filter(
+                    gender='WOMEN',
+                    release_date__lt=three_month_ago,
+                    soldout=False,
+                    category_id=id
+                ).reverse()
 
         return context
 
@@ -207,6 +238,7 @@ class SaleProductList(ListView):
 
 def detail(request):
     return render(request, 'product/detail.html', {})
+
 
 class ProductDetail(DetailView):
     model = Product
