@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.db.models import Sum, F
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
@@ -13,12 +15,34 @@ from django.core import serializers
 import json
 
 
+# def index(request):
+#     return render(
+#         request,
+#         'product/index.html/',
+#     )
+
 def index(request):
+    # 각 카테고리에서 판매량 1순위인 상품 리스트에 추가
+    # MEN, WOMEN 구분 함.
+    product_list = []
+    category = Category.objects.all()
+    count = range(1, len(category)+1)
+    pro3 = Product.objects.filter(gender__isnull=True)
+    for i in count:
+        # pro: men의 category_id가 i인 상품 중 판매량 1순위인 상품 1개
+        # pro2: women의 category_id가 i인 상품 중 판매량 1순위인 상품 1개
+        # pro3: men과 women의 각 카테고리에서 판매량 1순위인 상품 최종 리스트
+        pro = Product.objects.filter(gender='MEN', category_id=i).order_by('-sales')[:1]
+        pro2 = Product.objects.filter(gender='WOMEN', category_id=i).order_by('-sales')[:1]
+        pro3 = pro | pro2 | pro3
+    product_list = pro3
     return render(
         request,
         'product/index.html/',
-        {},
+        {'product_list': product_list},
     )
+
+
 def about(request):
     return render(
         request,
@@ -93,6 +117,7 @@ class CategoryDetail(ListView):
 
         return context
 
+
 class NewProductList(ListView):
     # 모든 신발 카테고리 해당. today 기준 출시일이 30일 전 이내인 상품만
     model = Product
@@ -108,12 +133,12 @@ class NewProductList(ListView):
 
         if pk == 1:
             context['product_list'] = Product.objects.filter(
-                gender='MEN',
+                gender='Men',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
         else:
             context['product_list'] = Product.objects.filter(
-                gender='WOMEN',
+                gender='Women',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
 
@@ -136,6 +161,7 @@ class BestProductList(ListView):
             context['bask_product_list'] = Product.objects.filter(gender='MEN', category_id=3).order_by('-sales')[:5]
             context['soc_product_list'] = Product.objects.filter(gender='MEN', category_id=4).order_by('-sales')[:5]
             context['flip_product_list'] = Product.objects.filter(gender='MEN', category_id=5).order_by('-sales')[:5]
+            context['gender'] = 1
         else:
             # WOMEN의 BEST 품목
             context['life_product_list'] = Product.objects.filter(gender='WOMEN', category_id=1).order_by('-sales')[:5]
@@ -143,6 +169,7 @@ class BestProductList(ListView):
             context['bask_product_list'] = Product.objects.filter(gender='WOMEN', category_id=3).order_by('-sales')[:5]
             context['soc_product_list'] = Product.objects.filter(gender='WOMEN', category_id=4).order_by('-sales')[:5]
             context['flip_product_list'] = Product.objects.filter(gender='WOMEN', category_id=5).order_by('-sales')[:5]
+            context['gender'] = 2
         return context
 
 
@@ -160,13 +187,13 @@ class SaleProductList(ListView):
 
         if pk == 1:
             context['product_list'] = Product.objects.filter(
-                gender='MEN',
+                gender='Men',
                 release_date__lt=three_month_ago,
                 soldout=False
             ).reverse()
         else:
             context['product_list'] = Product.objects.filter(
-                gender='WOMEN',
+                gender='Women',
                 release_date__lt=three_month_ago,
                 soldout=False
             ).reverse()
