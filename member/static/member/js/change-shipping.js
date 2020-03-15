@@ -16,6 +16,7 @@ $(document).ready(function() {
       $("#modify-shipping-address").val(address);
       $("#modify-shipping-phone").val(phone);
       $("#modify-shipping-memo").val(memo);
+      $("#modify-shipping-id").val(num);
       $("#order-shipping-modal form").attr(
         "action",
         `order-shipping-update/${num}`

@@ -138,9 +138,6 @@
         else if (answer == 'no user') {
           window.location.href = "{% url 'member:login' %}";
         }
-        else if (answer == 'no action') {
-          window.location.href = "{% url 'products:cart' %}";
-        }
       }
     });
   }
@@ -159,9 +156,6 @@
         else if (answer == 'no user') {
           window.location.href = "{% url 'member:login' %}";
         }
-        else if (answer == 'no action') {
-          window.location.href = "{% url 'products:cart' %}";
-        }
       }
     });
   }
@@ -170,7 +164,7 @@
     var order_list = [];
     {% for c in cart %}
     order_list.push({ 'inventory-id': {{ c.inventory_id.id }}, quantity: {{ c.quantity }} });
-    {% endfor %}
+    {% endfor %}4
     var order_list_str = JSON.stringify(order_list);
     var amount = {{ amount }};
     var shipping_price = {{ shipping_price }};

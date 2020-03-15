@@ -1,3 +1,6 @@
+import json
+
+from django.db.models import F
 from django.shortcuts import render, redirect
 from .forms import UserCreateForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm
@@ -91,8 +94,13 @@ def service_cancel(request):
 
 @login_required
 def profile(request):
-    my_orders = OrderList.objects.all().order_by('-id')[:4]
-    my_carts = Cart.objects.all().order_by('-id')[:4]
+    user_id = request.user
+
+    # user_id에 해당하는 order_id 찾아서 리스트로 만들기
+    order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
+
+    my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
+    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
     my_profile = Profile.objects.all()
     orders = Order.objects.all()
     total = sum([order.total_price for order in orders])
@@ -114,7 +122,12 @@ def profile(request):
 
 @login_required
 def order(request):
-    my_orders = OrderList.objects.all().order_by('-id')
+    user_id = request.user
+
+    # user_id에 해당하는 order_id 찾아서 리스트로 만들기
+    order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
+
+    my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')
     context = {
         'my_orders': my_orders
     }
@@ -153,9 +166,26 @@ def user_info_password(request):
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
 
+def change_shipping(request):
+    id = int(request.POST['id'])
+    receiver = request.POST['receiver']
+    phone = request.POST['phone']
+    address = request.POST['address']
+    memo = request.POST['memo']
+
+    order = OrderList.objects.get(id=id).order_id
+    order.receive_name = receiver
+    order.receive_phone = phone
+    order.receive_address = address
+    order.memo = memo
+    order.save()
+
+    return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
+
 def id_find(request):
     user = User.objects.all()
     id = user.username
     email = user.email
     info = {'id':id, 'email':email}
     return HttpResponse(json.dumps({'info': info}), content_type="application/json")
+
