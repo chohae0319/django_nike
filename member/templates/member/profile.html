@@ -12,6 +12,8 @@
 {% block profileContent %}
 
 <div class="profile-list-title">
+  <h5>회원등급: {{ my_profile.user_grade }}</h5>
+  <h5>보유쿠폰: {{ my_profile.coupon }}</h5>
   <h2 class="big-title">최근 주문 내역</h2>
   <a href="/member/order"
     ><span>상세주문내역 <i class="xi-angle-right"></i></span

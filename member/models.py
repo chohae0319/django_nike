@@ -15,6 +15,8 @@ class Profile(models.Model):
     cellphone_number = models.FloatField(default=None)
     shipping = models.CharField(max_length=100, default=None)
     account_number = models.IntegerField(default=None)
+    user_grade = models.CharField(max_length=100, default=None) # normal, platinum, mvp (3등급)
+    coupon = models.CharField(max_length=100, default=None)
 
     def __str__(self):
         return self.user.username

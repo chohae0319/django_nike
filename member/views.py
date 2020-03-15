@@ -10,9 +10,10 @@ from django.contrib.auth.models import User
 from .models import Profile
 from product.models import Cart
 from django.contrib.auth.decorators import login_required
-from order.models import Order, OrderList
+from order.models import OrderList, Order
 from product.models import Cart
 from django.http import HttpResponse
+import json
 
 
 def signup(request):
@@ -100,12 +101,24 @@ def profile(request):
 
     my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
     my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
+    my_profile = Profile.objects.all()
+    orders = Order.objects.all()
+    total = sum([order.total_price for order in orders])
+    if total > 150000:
+        my_profile.user_grade = 'mvp'
+        my_profile.coupon = '30%'
+    elif total > 100000:
+        my_profile.user_grade = 'platinum'
+        my_profile.coupon = '20%'
+    else:
+        my_profile.user_grade = 'normal'
+        my_profile.coupon = '10%'
     context = {
+        'my_profile': my_profile,
         'my_orders': my_orders,
         'my_carts': my_carts
     }
     return render(request, 'member/profile.html', context)
-
 
 @login_required
 def order(request):
@@ -153,7 +166,6 @@ def user_info_password(request):
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
 
-
 def change_shipping(request):
     id = int(request.POST['id'])
     receiver = request.POST['receiver']
@@ -169,3 +181,11 @@ def change_shipping(request):
     order.save()
 
     return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
+
+def id_find(request):
+    user = User.objects.all()
+    id = user.username
+    email = user.email
+    info = {'id':id, 'email':email}
+    return HttpResponse(json.dumps({'info': info}), content_type="application/json")
+
