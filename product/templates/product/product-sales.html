@@ -1,0 +1,84 @@
+{% extends "product/base.html" %} {% load humanize %} {% load static %}
+<!-- link -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'product/css/sales.css' %}" />
+{% endblock %}
+
+<!-- title -->
+{% block title %}SALE - 나이키{% endblock %}
+
+<!-- block -->
+{% block content %}
+<section class="cover" id="sales-section">
+  <div id="sales-box">
+    <header>
+      <p>Men`s SALE</p>
+      <div id="sale-main-nav">
+        <ul>
+          <li class="select">
+            <a href=""><span class="select">MEN</span></a>
+          </li>
+          <li>
+            <a href=""><span>WOMEN</span></a>
+          </li>
+          <li>
+            <a href=""><span>KIDS</span></a>
+          </li>
+        </ul>
+      </div>
+      <ul class="under-nav-list">
+        <li>
+          <a href=""><span>라이프스타일</span></a>
+        </li>
+        <li>
+          <a href=""><span>러닝</span></a>
+        </li>
+        <li>
+          <a href=""><span>농구</span></a>
+        </li>
+        <li>
+          <a href=""><span>축구</span></a>
+        </li>
+        <li>
+          <a href=""><span>샌들 & 슬리퍼</span></a>
+        </li>
+      </ul>
+    </header>
+    <div id="sale-gallery">
+      {% for product in product_list %}
+      <div class="sale-card">
+        <div class="img-wrapper">
+          <a href="">
+            <!-- 이미지 url -->
+            <img src="" alt="세일이미지{{product.pk}}" />
+          </a>
+        </div>
+        <div class="sale-product-info">
+          <p>
+            <!-- 재고가 있을 경우 -->
+            <span class="color-light-o">가격 인하</span>
+            <!-- 재고가 없을 경우 -->
+            <span class="color-light-o">품절</span>
+            <span>
+              <!-- 할인된 금액 -->
+            </span>
+          </p>
+          <p>
+            <span>
+              <!-- 상품명 -->
+            </span>
+            <span class="color-8D oldPrice">
+              <!-- 할인되기 전 원래 상품 금액 -->
+            </span>
+          </p>
+          <span class="color-8D">
+            <!-- style -->
+            <!-- 혹은  gender  + category  이렇게 써도 괜찮을 것 같아요-->
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
