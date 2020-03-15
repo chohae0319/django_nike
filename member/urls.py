@@ -12,7 +12,8 @@ from .views import (
     service,
     service_cancel,
     service_complete,
-    service_cancel_list
+    service_cancel_list,
+    change_shipping
 )
 
 app_name = 'member'
@@ -29,5 +30,6 @@ urlpatterns = [
     path('service/', service, name='service'),
     path('service-cancel/', service_cancel, name='service-cancel'),
     path('service-cancelList/', service_cancel_list, name='service-cancelList'),
-    path('service-complete/', service_complete, name='service-complete')
+    path('service-complete/', service_complete, name='service-complete'),
+    path('change-shipping/', change_shipping, name='change-shipping')
 ]

@@ -112,9 +112,9 @@ class MakeOrder(View):
         is_cart = order_info['is_cart']
 
         # 배송 정보
-        receive_address = request.POST.get('receive_name', False)
-        receive_name = request.POST.get('receive_phone', False)
-        receive_phone = request.POST.get('receive_address', False)
+        receive_address = request.POST.get('receive_address', False)
+        receive_name = request.POST.get('receive_name', False)
+        receive_phone = request.POST.get('receive_phone', False)
         memo = request.POST.get('memo', False)
 
         # 결제 금액

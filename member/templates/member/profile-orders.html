@@ -15,18 +15,47 @@
 <div id="order-shipping-modal"></div>
 <div class="order-shipping-box">
   <label for="order-shipping-modify"><i class="xi-close"></i></label>
-  <form method="POST" action="" class="form-shipping-plus">
+  <form class="form-shipping-plus">
     {% csrf_token %}
     <span>받으시는 분</span>
     <input type="text" name="receiver" id="modify-shipping-receiver" />
     <span>주소</span>
-    <input type="text" name="receiver_phone" id="modify-shipping-address" />
+    <input type="text" name="receiver_address" id="modify-shipping-address" />
     <span>연락처</span>
-    <input type="text" name="receiver_address" id="modify-shipping-phone" />
+    <input type="text" name="receiver_phone" id="modify-shipping-phone" />
     <span>배송 메모</span>
-    <input type="text" name="receiver_address" id="modify-shipping-memo" />
+    <input type="text" name="receiver_memo" id="modify-shipping-memo" />
+    <input type="hidden" id="modify-shipping-id" >
+    <input type="submit" id="modify-button" value="수정하기" />
+    <script>
+      $("#modify-button").click(function(e){
+        e.preventDefault();
 
-    <input type="submit" value="수정하기" />
+        var id = $("#modify-shipping-id").val();
+        var receiver = $("#modify-shipping-receiver").val();
+        var phone = $("#modify-shipping-phone").val();
+        var address = $("#modify-shipping-address").val();
+        var memo = $("#modify-shipping-memo").val();
+
+        $.ajax({
+          type: "POST",
+          url: "{% url 'member:change-shipping' %}",
+          data: {'id': id,
+                 'receiver': receiver,
+                 'phone': phone,
+                 'address': address,
+                 'memo': memo,
+                  csrfmiddlewaretoken: '{{ csrf_token }}'},
+          dataType:'json',
+          success: function(response) {
+            var answer = response.result;
+            if (answer == 'success') {
+              window.location.href = "{% url 'member:order' %}";
+            }
+          }
+        });
+      });
+    </script>
   </form>
 </div>
 {% endblock %}
@@ -55,12 +84,13 @@
       <div class="shipping-info-wrapper">
         <div class="shipping-info detail-col">
           <p>
-            <strong class="title">배송지정보</strong
-            ><label
+            <strong class="title">배송지정보</strong>
+            {% if order.status == 0 %}
+            <label
               class="change-shipping{{order.pk}}"
-              for="order-shipping-modify"
-              ><span class="btn-rectangle">배송지 변경</span></label
-            >
+              for="order-shipping-modify"><span class="btn-rectangle">배송지 변경</span>
+            </label>
+            {% endif %}
           </p>
           <ul class="shipping-point-wrapper">
             <li>

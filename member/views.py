@@ -1,3 +1,5 @@
+import json
+
 from django.db.models import F
 from django.shortcuts import render, redirect
 from .forms import UserCreateForm, CustomUserChangeForm
@@ -10,6 +12,7 @@ from product.models import Cart
 from django.contrib.auth.decorators import login_required
 from order.models import Order, OrderList
 from product.models import Cart
+from django.http import HttpResponse
 
 
 def signup(request):
@@ -149,3 +152,20 @@ def user_info_password(request):
     else:
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
+
+
+def change_shipping(request):
+    id = int(request.POST['id'])
+    receiver = request.POST['receiver']
+    phone = request.POST['phone']
+    address = request.POST['address']
+    memo = request.POST['memo']
+
+    order = OrderList.objects.get(id=id).order_id
+    order.receive_name = receiver
+    order.receive_phone = phone
+    order.receive_address = address
+    order.memo = memo
+    order.save()
+
+    return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
