@@ -4,11 +4,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, Passwo
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
-from .models import Profile, Order
+from .models import Profile
 from product.models import Cart
 from django.contrib.auth.decorators import login_required
-from order.models import OrderList
+from order.models import OrderList, Order
 from product.models import Cart
+from django.http import HttpResponse
+import json
 
 
 def signup(request):
@@ -91,12 +93,24 @@ def service_cancel(request):
 def profile(request):
     my_orders = OrderList.objects.all().order_by('-id')[:4]
     my_carts = Cart.objects.all().order_by('-id')[:4]
+    my_profile = Profile.objects.all()
+    orders = Order.objects.all()
+    total = sum([order.total_price for order in orders])
+    if total > 150000:
+        my_profile.user_grade = 'mvp'
+        my_profile.coupon = '30%'
+    elif total > 100000:
+        my_profile.user_grade = 'platinum'
+        my_profile.coupon = '20%'
+    else:
+        my_profile.user_grade = 'normal'
+        my_profile.coupon = '10%'
     context = {
+        'my_profile': my_profile,
         'my_orders': my_orders,
         'my_carts': my_carts
     }
     return render(request, 'member/profile.html', context)
-
 
 @login_required
 def order(request):
@@ -138,3 +152,10 @@ def user_info_password(request):
     else:
         password_change_form = PasswordChangeForm(request.user)
     return render(request, 'member/profile-password.html', {'password_change_form': password_change_form})
+
+def id_find(request):
+    user = User.objects.all()
+    id = user.username
+    email = user.email
+    info = {'id':id, 'email':email}
+    return HttpResponse(json.dumps({'info': info}), content_type="application/json")

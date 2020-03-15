@@ -13,6 +13,7 @@ import member.urls
 import datetime
 from django.core import serializers
 import json
+import itertools
 
 
 # def index(request):
@@ -34,7 +35,7 @@ def index(request):
         # pro3: men과 women의 각 카테고리에서 판매량 1순위인 상품 최종 리스트
         pro = Product.objects.filter(gender='MEN', category_id=i).order_by('-sales')[:1]
         pro2 = Product.objects.filter(gender='WOMEN', category_id=i).order_by('-sales')[:1]
-        pro3 = pro | pro2 | pro3
+        pro3 = itertools.chain(pro, pro2, pro3)
     product_list = pro3
     return render(
         request,
