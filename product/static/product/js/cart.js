@@ -41,11 +41,11 @@ $(document).ready(function() {
               if (response.option.inventory[i].amount) {
                 if (response.option.inventory[i].size === oldSize) {
                   $(".size-selector").append(
-                    `<input type='radio' checked name='inventory'  id='size${i}' value='${response.option.inventory[i].size}' /><label for='size${i}'>${response.option.inventory[i].size}</label><span>${response.option.inventory[i].amount}</span>`
+                    `<input type='radio' checked name='inventory'  id='size${i}' value='${response.option.inventory[i].id}' /><label for='size${i}'>${response.option.inventory[i].size}</label><span>${response.option.inventory[i].amount}</span>`
                   );
                 } else {
                   $(".size-selector").append(
-                    `<input type='radio' name='inventory'  id='size${i}' value='${response.option.inventory[i].size}' /><label for='size${i}'>${response.option.inventory[i].size}</label><span>${response.option.inventory[i].amount}</span>`
+                    `<input type='radio' name='inventory'  id='size${i}' value='${response.option.inventory[i].id}' /><label for='size${i}'>${response.option.inventory[i].size}</label><span>${response.option.inventory[i].amount}</span>`
                   );
                 }
               } else {
@@ -60,7 +60,26 @@ $(document).ready(function() {
             //  여가에 ajax POST 넣으시면 됩니다.
             $(".cart-btn-wrapper span").click(function() {
               var checked = $(`input[name="inventory"]:checked`).val();
+              var csrftoken = getCookie('csrftoken');
               console.log(checked);
+
+                $.ajax({
+                  type: "POST",
+                  url: "/cart/change-option/",
+                  data: {
+                    'cart-id': classNum,
+                    'inventory-id': checked,
+                    csrfmiddlewaretoken: csrftoken
+                  },
+                  success: function(response) {
+                    var answer = response.result;
+                    if (answer == 'success') {
+                      alert("변경되었습니다.");
+                      window.location.href = "/cart/";
+                    }
+                  }
+                });
+
             });
           }
         }
@@ -82,3 +101,19 @@ $(document).ready(function() {
     toggle = false;
   });
 });
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render, redirect
 from .forms import UserCreateForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm
@@ -92,7 +93,7 @@ def profile(request):
     user_id = request.user
 
     # user_id에 해당하는 order_id 찾아서 리스트로 만들기
-    order_id_list = Order.objects.filter(user_id=1).values_list('id', flat=True)
+    order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
 
     my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
     my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
@@ -108,7 +109,7 @@ def order(request):
     user_id = request.user
 
     # user_id에 해당하는 order_id 찾아서 리스트로 만들기
-    order_id_list = Order.objects.filter(user_id=1).values_list('id', flat=True)
+    order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
 
     my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')
     context = {

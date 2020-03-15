@@ -164,7 +164,7 @@
     var order_list = [];
     {% for c in cart %}
     order_list.push({ 'inventory-id': {{ c.inventory_id.id }}, quantity: {{ c.quantity }} });
-    {% endfor %}
+    {% endfor %}4
     var order_list_str = JSON.stringify(order_list);
     var amount = {{ amount }};
     var shipping_price = {{ shipping_price }};

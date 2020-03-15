@@ -190,9 +190,9 @@ class MakeOrder(View):
         except order.exceptions.OutOfStockError as e:
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
-        # 기타 에러상황
-        except Exception as e:
-            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        # # 기타 에러상황
+        # except Exception as e:
+        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):

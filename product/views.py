@@ -305,11 +305,22 @@ def get_option(request, **kwargs):
     for i in product_image:
         image.append(i.image.url)
     for i in inventory_set:
-        inventory.append({'size': i.size, 'amount': i.amount})
+        inventory.append({'id': i.id, 'size': i.size, 'amount': i.amount})
 
     option = {'name': name, 'category': category, 'price': price, 'image': image, 'inventory': inventory}
 
     return HttpResponse(json.dumps({'result': 'success', 'option': option}), content_type="application/json")
+
+
+def change_option(request):
+    cart_id = request.POST['cart-id']
+    inventory_id = request.POST['inventory-id']
+
+    cart = Cart.objects.get(pk=cart_id)
+    cart.inventory_id = Inventory.objects.get(pk=inventory_id)
+    cart.save()
+
+    return HttpResponse(json.dumps({'result': 'success'}), content_type="application/json")
 
 
 class CartList(LoginRequiredMixin, ListView):
