@@ -6,8 +6,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
+{% for url in url %}
+    <h5>{{url}}</h5>
+{% endfor %}
+{% for category in category %}
+    <h5>{{category}}</h5>
+{% endfor %}
 {% for product in product_list %}
-    <h1>{{product.name}}</h1>
+    <h5>{{product.name}}</h5>
 {% endfor %}
     <h1>test</h1>
 </body>
