@@ -137,11 +137,13 @@ class NewProductList(ListView):
                 gender='MEN',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
+            context['gender'] = 'Men'
         else:
             context['product_list'] = Product.objects.filter(
                 gender='WOMEN',
                 release_date__range=[one_month_ago, now_date]
             ).reverse()
+            context['gender'] = 'Women'
 
         return context
 
@@ -202,6 +204,7 @@ class SaleProductList(ListView):
 
         # 카테고리 별 sale 상품 리스트
         if gender == 1:
+            context['gender'] = 'Men'
             if id == 0:
                 context['product_list'] = Product.objects.filter(
                     gender='MEN',
@@ -209,6 +212,7 @@ class SaleProductList(ListView):
                     soldout=False
                 )
             else:
+                context['category_id'] = id
                 context['product_list'] = Product.objects.filter(
                     gender='MEN',
                     release_date__lt=three_month_ago,
@@ -216,6 +220,7 @@ class SaleProductList(ListView):
                     category_id=id
                 ).reverse()
         else:
+            context['gender'] = 'Women'
             if id == 0:
                 context['product_list'] = Product.objects.filter(
                     gender='WOMEN',
@@ -223,6 +228,7 @@ class SaleProductList(ListView):
                     soldout=False
                 ).reverse()
             else:
+                context['category_id'] = id
                 context['product_list'] = Product.objects.filter(
                     gender='WOMEN',
                     release_date__lt=three_month_ago,
@@ -231,15 +237,6 @@ class SaleProductList(ListView):
                 ).reverse()
 
         return context
-
-
-# def cart(request):
-#     return render(request, 'product/cart.html', {})
-
-
-def detail(request):
-    return render(request, 'product/detail.html', {})
-
 
 class ProductDetail(DetailView):
     model = Product
