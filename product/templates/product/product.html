@@ -187,55 +187,6 @@
         }
       });
     });
-    $("#test").on("click", function() {
-      console.log("서어어엉공");
-      var align = $(this).val();
-      var url = $(location).attr("pathname");
-      $.ajax({
-        type: "POST",
-        url: "{% url 'products:size' %}",
-        data: {
-          align: align,
-          url: url,
-          csrfmiddlewaretoken: "{{ csrf_token }}"
-        },
-        traditional: true,
-        dataType: "json",
-        success: function(response) {
-          $("#forAjax .card").fadeOut("nomal", function() {
-            $(this).remove();
-          });
-          var product = JSON.parse(response.product_list);
-          if (product.length === 0) {
-            $("#notAjax").show(1000);
-            $("#forAjax").hide("slow");
-            return;
-          }
-          $("#notAjax").hide(1000);
-          $("#forAjax").show("slow");
-          var forAjax = $("#forAjax");
-          for (var i = 0; i < product.length; i++) {
-            forAjax.append(
-              `<div class='card card${i +
-                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a><e/div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
-            );
-            var pk = product[i]["pk"];
-            $(`.linkDetail${i}`).attr("href", "../../detail/" + pk + "/");
-            $(`.thumImg${i}`).attr(
-              "src",
-              "/media/" + product[i]["fields"]["thumbnail"]
-            );
-            $(`.itemTitle${i}`).html(product[i]["fields"]["name"]);
-            $(`.style${i}`).html(product[i]["fields"]["style"]);
-            $(`.price${i}`).prepend(product[i]["fields"]["price"]);
-          }
-        },
-        error: function(request, status, error) {
-          console.log("실패");
-        }
-      });
-    });
-    console.log("실패패패패");
   });
 </script>
 {% endblock aside %}
@@ -274,7 +225,7 @@
       </div>
       <ul id="filter-wrapper">
         <li>
-          <span id="test">신상품순</span>
+          <span>신상품순</span>
         </li>
         <li>
           <span>낮은 가격순</span>
