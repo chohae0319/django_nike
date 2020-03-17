@@ -208,7 +208,7 @@ def Shippings(request):
 
 
 def ShippingShow(request):
-    shipping_instance = Shipping.objects.all()
+    shipping_instance = Shipping.objects.filter(user_id=request.user)
     #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
