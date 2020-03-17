@@ -1,3 +1,14 @@
+.hide {
+  display: none;
+}
+.category:hover {
+  text-decoration: underline;
+}
+.underBar {
+  color: #3b4a6b;
+  font-weight: bold;
+  text-decoration: underline;
+}
 #sales-section {
   padding: 0 48px;
 }
@@ -40,8 +51,9 @@ span.select {
 }
 .under-nav-list {
   display: flex;
-  width: 50%;
+  width: 65%;
   margin: 0 auto;
+  font-size: 15px;
 }
 .under-nav-list li {
   margin: 20px 0;
