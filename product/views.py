@@ -49,38 +49,121 @@ def about(request):
         'product/about.html/',
         {},
     )
+
+
 def error(request):
     return render(
         request,
         'product/error.html/',
         {},
     )
-def SizeDetail(request):
+
+
+def FilterDetail(request):
     template_name = 'product/product.html'
     if request.method == "POST":
         size_list = request.POST.getlist('size')
+        align = request.POST.get('orderType')
         url = request.POST.get('url')
         url = url.split('/')[3:5]
+
         size_id = []
         for i in size_list:
             product = Inventory.objects.filter(size=i, soldout=False).values_list('product_id', flat=True)
             for pro in product:
                 size_id.append(pro)
+
+        # 사이즈 필터 선택 유무 flag
+        if not size_id:
+            size_flag = 0
+        else:
+            size_flag = 1
+
+        # 정렬 방식 선택 유무 flag
+        if align is None:
+            align_flag = 0
+        else:
+            align_flag = 1
+
         if url[0] == '1':
+            # MEN 카테고리
             gender = 'Men'
             if url[1] == '0':
-                product_list = serializers.serialize("json", Product.objects.filter(gender='MEN', pk__in=size_id))
+                # 신발 전체
+                if size_flag == 1:
+                    # 사이즈 필터 ON
+                    if align_flag == 1:
+                        # 정렬 방식 선택(align: 정렬 방식)
+                        queryset = Product.objects.filter(gender='MEN', pk__in=size_id)
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json",
+                                                             Product.objects.filter(gender='MEN', pk__in=size_id))
+                else:
+                    # 사이즈 필터 OFF
+                    if align_flag == 1:
+                        # 정렬 방식 선택(align: 정렬 방식)
+                        queryset = Product.objects.filter(gender='MEN')
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json", Product.objects.filter(gender='MEN'))
                 category = '신발'
             else:
-                product_list = serializers.serialize("json", Product.objects.filter(gender='MEN', category_id=url[1], pk__in=size_id))
+                # 카테고리 별 신발
+                if size_flag == 1:
+                    if align_flag == 1:
+                        queryset = Product.objects.filter(gender='MEN', category_id=url[1], pk__in=size_id)
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json",
+                                                             Product.objects.filter(gender='MEN', category_id=url[1],
+                                                                                    pk__in=size_id))
+                else:
+                    if align_flag == 1:
+                        queryset = Product.objects.filter(gender='MEN', category_id=url[1])
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json", Product.objects.filter(gender='MEN', category_id=url[1]))
                 category = serializers.serialize("json", Category.objects.filter(pk=url[1]), fields=('name'))
         else:
+            # WOMEN 카테고리
             gender = 'Women'
             if url[1] == '0':
-                product_list = serializers.serialize("json", Product.objects.filter(gender='WOMEN', pk__in=size_id))
+                # 신발 전체
+                if size_flag == 1:
+                    # 사이즈 필터 ON
+                    if align_flag == 1:
+                        # 정렬 방식 선택(align: 정렬 방식)
+                        queryset = Product.objects.filter(gender='WOMEN', pk__in=size_id)
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json",
+                                                             Product.objects.filter(gender='WOMEN', pk__in=size_id))
+                else:
+                    # 사이즈 필터 OFF
+                    if align_flag == 1:
+                        queryset = Product.objects.filter(gender='WOMEN')
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json", Product.objects.filter(gender='WOMEN'))
                 category = '신발'
             else:
-                product_list = serializers.serialize("json", Product.objects.filter(gender='WOMEN', category_id=url[1], pk__in=size_id))
+                # 카테고리 별 신발
+                if size_flag == 1:
+                    if align_flag == 1:
+                        queryset = Product.objects.filter(gender='WOMEN', category_id=url[1], pk__in=size_id)
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json",
+                                                             Product.objects.filter(gender='WOMEN', category_id=url[1],
+                                                                                    pk__in=size_id))
+                else:
+                    if align_flag == 1:
+                        queryset = Product.objects.filter(gender='WOMEN', category_id=url[1])
+                        product_list = serializers.serialize("json", FilterList(align, queryset))
+                    else:
+                        product_list = serializers.serialize("json",
+                                                             Product.objects.filter(gender='WOMEN', category_id=url[1]))
                 category = serializers.serialize("json", Category.objects.filter(pk=url[1]), fields=('name'))
 
         ret = {'product_list': product_list,
@@ -88,6 +171,19 @@ def SizeDetail(request):
                'category': category}
 
         return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+def FilterList(align, queryset):
+    # 선택 된 정렬 방식에 따라 상품 align
+
+    if align == '신상품순':
+        product_list = queryset.order_by('-release_date')
+    elif align == '낮은 가격순':
+        product_list = queryset.order_by('price')
+    else:
+        product_list = queryset.order_by('-price')
+
+    return product_list
 
 
 class CategoryDetail(ListView):
