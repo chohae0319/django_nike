@@ -70,7 +70,7 @@ def FilterDetail(request):
 
         size_id = []
         for i in size_list:
-            product = Inventory.objects.filter(size=i, soldout=False).values_list('product_id', flat=True)
+            product = Inventory.objects.filter(size=i).values_list('product_id', flat=True)
             for pro in product:
                 size_id.append(pro)
 
