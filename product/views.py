@@ -70,7 +70,7 @@ def FilterDetail(request):
 
         size_id = []
         for i in size_list:
-            product = Inventory.objects.filter(size=i, soldout=False).values_list('product_id', flat=True)
+            product = Inventory.objects.filter(size=i, amount__gt=0).values_list('product_id', flat=True)
             for pro in product:
                 size_id.append(pro)
 
@@ -85,6 +85,10 @@ def FilterDetail(request):
             align_flag = 0
         else:
             align_flag = 1
+
+        print(size_flag)
+        print(align_flag)
+        print(size_id)
 
         if url[0] == '1':
             # MEN 카테고리
@@ -177,9 +181,9 @@ def FilterDetail(request):
 def FilterList(align, queryset):
     # 선택 된 정렬 방식에 따라 상품 align
 
-    if align == '신상품순':
+    if align == 'new-order':
         product_list = queryset.order_by('-release_date')
-    elif align == '낮은 가격순':
+    elif align == 'low-order':
         product_list = queryset.order_by('price')
     else:
         product_list = queryset.order_by('-price')
