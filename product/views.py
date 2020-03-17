@@ -271,7 +271,7 @@ class BestProductList(ListView):
 
 class SaleProductList(ListView):
     model = Product
-    template_name = 'product/test.html'
+    template_name = 'product/product-sales.html'
 
     def get_context_data(self, **kwargs):
         context = super(SaleProductList, self).get_context_data(**kwargs)
