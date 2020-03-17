@@ -27,7 +27,6 @@ urlpatterns = [
     path('product/new/<int:pk>', views.NewProductList.as_view(), name='new'),
     path('product/best/<int:pk>', views.BestProductList.as_view(), name='best'),
     path('product/sale/<int:gender>/<int:id>', views.SaleProductList.as_view(), name='sale'),
-    # 데이터 전송 없는 읽기전용 페이지 입니다.
     path('cart/', views.CartList.as_view(), name='cart'),
     path('product/detail/<int:pk>/', views.ProductDetail.as_view(), name='detail'),
     path('cart/add/', views.add_cart, name='add-cart'),

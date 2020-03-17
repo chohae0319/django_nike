@@ -2,6 +2,7 @@
 <!-- link -->
 {% block link %}
 <link rel="stylesheet" href="{% static 'product/css/sales.css' %}" />
+<script src="{% static 'product/js/product-sale.js' %}"></script>
 {% endblock %}
 
 <!-- title -->
@@ -12,45 +13,94 @@
 <section class="cover" id="sales-section">
   <div id="sales-box">
     <header>
-      <p>Men`s SALE</p>
+      <span id="gender" class="hide">{{gender}}</span>
+      <span id="category" class="hide">{{category_id}}</span>
+      <p>{{gender}}`s SALE</p>
       <div id="sale-main-nav">
         <ul>
-          <li class="select">
-            <a href=""><span class="select">MEN</span></a>
+          <li class="Men">
+            <a href="{% url 'products:sale' 1 0 %}"
+              ><span class="Men">MEN</span></a
+            >
           </li>
-          <li>
-            <a href=""><span>WOMEN</span></a>
+          <li class="Women">
+            <a href="{% url 'products:sale' 2 0 %}"
+              ><span class="Women">WOMEN</span></a
+            >
           </li>
           <li>
             <a href=""><span>KIDS</span></a>
           </li>
         </ul>
       </div>
+      {% if gender == "Men" %}
       <ul class="under-nav-list">
         <li>
-          <a href=""><span>라이프스타일</span></a>
+          <a href="{% url 'products:sale' 1 1 %}"
+            ><span class="category">라이프스타일</span></a
+          >
         </li>
         <li>
-          <a href=""><span>러닝</span></a>
+          <a href="{% url 'products:sale' 1 2 %}"
+            ><span class="category">러닝</span></a
+          >
         </li>
         <li>
-          <a href=""><span>농구</span></a>
+          <a href="{% url 'products:sale' 1 3 %}"
+            ><span class="category">농구</span></a
+          >
         </li>
         <li>
-          <a href=""><span>축구</span></a>
+          <a href="{% url 'products:sale' 1 4 %}"
+            ><span class="category">축구</span></a
+          >
         </li>
         <li>
-          <a href=""><span>샌들 & 슬리퍼</span></a>
+          <a href="{% url 'products:sale' 1 5 %}"
+            ><span class="category">샌들 & 슬리퍼</span></a
+          >
         </li>
       </ul>
+      {% else %}
+      <ul class="under-nav-list">
+        <li>
+          <a href="{% url 'products:sale' 2 1 %}"
+            ><span class="category">라이프스타일</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'products:sale' 2 2 %}"
+            ><span class="category">러닝</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'products:sale' 2 3 %}"
+            ><span class="category">골프</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'products:sale' 2 4 %}"
+            ><span class="category">축구</span></a
+          >
+        </li>
+        <li>
+          <a href="{% url 'products:sale' 2 5 %}"
+            ><span class="category">샌들 & 슬리퍼</span></a
+          >
+        </li>
+      </ul>
+      {% endif %}
     </header>
     <div id="sale-gallery">
       {% for product in product_list %}
       <div class="sale-card">
         <div class="img-wrapper">
-          <a href="">
+          <a href="../../../product/detail/{{product.id}}">
             <!-- 이미지 url -->
-            <img src="" alt="세일이미지{{product.pk}}" />
+            <img
+              src="{{ product.thumbnail.url }}"
+              alt="세일이미지{{product.pk}}"
+            />
           </a>
         </div>
         <div class="sale-product-info">
@@ -58,22 +108,21 @@
             <!-- 재고가 있을 경우 -->
             <span class="color-light-o">가격 인하</span>
             <!-- 재고가 없을 경우 -->
-            <span class="color-light-o">품절</span>
-            <span>
-              <!-- 할인된 금액 -->
+            <!-- <span class="color-light-o">품절</span> -->
+            <span class="color-8D oldPrice" id="{{product.pk}}">
+              {{product.price}}
             </span>
           </p>
           <p>
             <span>
-              <!-- 상품명 -->
+              {{product.name}}
             </span>
-            <span class="color-8D oldPrice">
-              <!-- 할인되기 전 원래 상품 금액 -->
+            <span id="newPrice{{product.pk}}" class="price">
+              {{product.price}}
             </span>
           </p>
-          <span class="color-8D">
-            <!-- style -->
-            <!-- 혹은  gender  + category  이렇게 써도 괜찮을 것 같아요-->
+          <span class="color-8D style {{product.gender}}">
+            {{product.gender}} {{product.category_id}}
           </span>
         </div>
       </div>
