@@ -7,15 +7,16 @@ $(document).ready(function() {
       var arr = $(`.shipping-point-wrapper .${classNum}`);
       var array = [];
       array.push(arr);
-      var address = array[0][0].textContent;
-      var receiver = array[0][1].textContent;
-      var phone = array[0][2].textContent;
+      var receiver = array[0][0].textContent;
+      var phone = array[0][1].textContent;
+      var address = array[0][2].textContent;
       var memo = array[0][3].textContent;
 
       $("#modify-shipping-receiver").val(receiver);
       $("#modify-shipping-address").val(address);
       $("#modify-shipping-phone").val(phone);
       $("#modify-shipping-memo").val(memo);
+      $("#modify-shipping-id").val(num);
       $("#order-shipping-modal form").attr(
         "action",
         `order-shipping-update/${num}`

@@ -43,7 +43,6 @@ class Inventory(models.Model):
         Product, on_delete=models.PROTECT)  # 재고 존재하면 상품 삭제 불가
     size = models.CharField(max_length=10)
     amount = models.IntegerField(default=0)
-    soldout = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}: {}'.format(self.product_id, self.size)

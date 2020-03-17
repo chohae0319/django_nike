@@ -1,4 +1,4 @@
-{% extends "member/profile-base.html" %}{% load humanize %}
+{% extends "member/profile-base.html" %}{% load humanize %}{% load filters %}
 
 <!-- 템플릿 확장 -->
 {% load static %}
@@ -12,6 +12,8 @@
 {% block profileContent %}
 
 <div class="profile-list-title">
+  <h5>회원등급: {{ my_profile.user_grade }}</h5>
+  <h5>보유쿠폰: {{ my_profile.coupon }}</h5>
   <h2 class="big-title">최근 주문 내역</h2>
   <a href="/member/order"
     ><span>상세주문내역 <i class="xi-angle-right"></i></span
@@ -58,10 +60,10 @@
         <p>온라인 물류센터</p>
       </div>
       <p class="col">
-        {% if not order.order_id.status %}
-        <span>결제완료 <i class="xi-info"></i></span>
+        {% if not order.status %}
+        <span> {{ order.status | convert_status }} <i class="xi-info"></i></span>
         {% else %}
-        <span>배송준비중</span>
+        <span> {{ order.status | convert_status }} </span>
         {% endif %}
       </p>
     </li>

@@ -7,8 +7,6 @@ from django.utils import timezone
 class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=timezone.now)
-    # 0: 결제완료, 1: 배송중, 2: 배송완료, 3: 주문취소
-    status = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)               # 상품 금액
     shipping_price = models.IntegerField(default=0)       # 배송비
     total_price = models.IntegerField(default=0)          # 총 결제 금액
@@ -27,6 +25,7 @@ class OrderList(models.Model):  # Order 모델에 대한 상세내역 담는 클
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT)
     size = models.IntegerField()
     quantity = models.IntegerField()
+    status = models.IntegerField(default=0)     # 0: 결제완료, 1: 배송중, 2: 배송완료, 3: 주문취소
 
     def __str__(self):
         return '{}({}) : {}'.format(self.order_id.pk, self.pk, self.product_id)
