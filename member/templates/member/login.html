@@ -16,7 +16,16 @@
     <h1>나이키 로그인</h1>
   </div>
 
-  {% if login_form %}
+  {% if message %}
+  <form method="POST" class="form-box-signIn">
+    {% csrf_token %} {{ login_form.as_p }}
+    <p class="login-alert-msg">{{ message }}</p>
+    <input type="submit" value="로그인" />
+    <div class="sign-in-footer">
+      <span>회원이 아니신가요? <a href="/member/signup">회원가입하기</a></span>
+    </div>
+  </form>
+  {% else %}
   <form method="POST" class="form-box-signIn">
     {% csrf_token %} {{ login_form.as_p }}
     <input type="submit" value="로그인" />
@@ -24,15 +33,8 @@
       <span>회원이 아니신가요? <a href="/member/signup">회원가입하기</a></span>
     </div>
   </form>
-
-  {% else %}
-  <div>{{ message }}</div>
-  <a href="/member/login/"
-    ><button type="button" class="btn btn-primary">
-      go back
-    </button>
-  </a>
   {% endif %}
+
   <!-- js -->
   {% load static %}
   <script src="{% static 'member/js/member.js' %}"></script>
