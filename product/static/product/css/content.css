@@ -17,33 +17,6 @@ section.product {
   margin-bottom: 264px;
 }
 
-/* --------------------------------------------------------------  index mainpage*/
-#index .main-card {
-  width: 95%;
-  margin: 0 auto 40px auto;
-}
-
-#index .card-comment-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 95%;
-}
-
-.card-comment-box .card-comment-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.card-comment-header p {
-  font-size: 16px;
-}
-
-#index .main-card video {
-  width: 100%;
-}
-
 /* -------------------------------------------------------------- product */
 
 /* product */
@@ -141,6 +114,10 @@ section.product {
 }
 #filter-wrapper.filter-wrapper span:hover {
   color: #e0e0e0;
+}
+
+#filter-wrapper input[type="radio"] {
+  display: none;
 }
 
 #filter-btn {
@@ -420,6 +397,7 @@ label.no-amount {
   /* border: 1px solid; */
   width: 380px;
   margin: 0 auto;
+  padding-bottom: 80px;
 }
 #sign-up .form-box-signUp p {
   margin: 10px 0;
@@ -438,6 +416,11 @@ label.no-amount {
   margin-top: 20px;
   background-color: black;
   color: #fff;
+}
+.login-alert-msg {
+  color: rgb(248, 84, 32);
+  font-size: 10px;
+  padding-top: 20px;
 }
 
 /* -------------------------------------------------------------- sign-in*/

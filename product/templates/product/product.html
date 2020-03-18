@@ -344,8 +344,6 @@
       orderType = $("input[name='orderType']:checked").attr("id");
 
       var url = $(location).attr("pathname");
-      console.log(size_checked_list);
-      console.log(orderType);
       $.ajax({
         type: "POST",
         url: "{% url 'products:size' %}",
@@ -358,7 +356,7 @@
         traditional: true,
         dataType: "json",
         success: function(response) {
-          console.log(response);
+          console.log(response.response);
           $("#forAjax .card").fadeOut("nomal", function() {
             $(this).remove();
           });

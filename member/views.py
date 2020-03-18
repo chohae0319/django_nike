@@ -46,7 +46,7 @@ def login(request):
             request.session['cart_count'] = Cart.objects.filter(
                 user_id=request.user.pk).count()
         else:
-            return render(request, 'member/login.html', {'message': 'password not match'})
+            return render(request, 'member/login.html', {'message': '아이디와 비밀번호가 일치하지 않습니다.', 'login_form': login_form})
         return redirect('/')
     else:
         login_form = AuthenticationForm()
