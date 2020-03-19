@@ -28,6 +28,8 @@ $(document).ready(function() {
     $(".whole-wrapper-login").css({ display: "block" });
     $(".login-modal").css({ display: "block" });
     $("body").css({ overflow: "hidden" });
+    $("#email-verify").css({ display: "block" });
+    $("#email-verified").css({ display: "none" });
   });
   //  끄는거
   $("#close-login").click(function() {
@@ -38,7 +40,69 @@ $(document).ready(function() {
   $(".whole-wrapper-login").click(function() {
     $(".whole-wrapper-login").css({ display: "none" });
     $(".login-modal").css({ display: "none" });
+    $(".find-membership-modal").css({ opacity: "0", display: "none" });
     $("body").css({ overflow: "auto" });
+  });
+
+  //  아이디 찾기
+  $("#find-membership-btn").click(function() {
+    $(".find-membership-modal").css({ opacity: "1", display: "block" });
+  });
+
+  // 창 닫기
+  $(".close-find-membership i").click(function() {
+    $(".whole-wrapper-login").css({ display: "none" });
+    $(".find-membership-modal").css({ opacity: "0", display: "none" });
+    $(".login-modal").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
+    $("#email-verify").css({ display: "block" });
+    $("#email-verified").css({ display: "none" });
+  });
+
+  // 로그인으로 돌아가기
+  $("#back-to-login").click(function() {
+    $(".find-membership-modal").css({ opacity: "0", display: "none" });
+    $("#email-verify").css({ display: "block" });
+    $("#email-verified").css({ display: "none" });
+  });
+
+  // 다음단계 진행하기
+  $("#submit-email").click(function() {
+    var email = $("#input-email").val();
+    var expert = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    console.log(email.length);
+    if (email.length === 0) {
+      $("#email-alert-msg").text("이메일을 입력해주세요");
+    } else if (expert.test(email) == false) {
+      $("#email-alert-msg").text("이메일 형식에 맞게 입력해주세요");
+      console.log("ASD");
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "/member/id-find/",
+        data: {
+          email: email,
+          csrfmiddlewaretoken:
+            "SDMhjD8JzOKYVkPjrnx8diP4cLAjjmtcWEauEZHX7DQg8NDl2CkkaIzj3iyLjKn3"
+        },
+        success: function(response) {
+          // 성공시 다음단계 진행
+          $("#email-alert-msg").text("");
+          $("#email-verify").css({ display: "none" });
+          $("#email-verified").css({ display: "block" });
+          console.log(response);
+        },
+        error: function() {
+          console.log("에러");
+        }
+      });
+    }
+  });
+
+  //  이전단계로 돌아가기
+  $("#back-to-lastStep").click(function() {
+    $("#email-verify").css({ display: "block" });
+    $("#email-verified").css({ display: "none" });
   });
 });
 

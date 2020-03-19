@@ -23,6 +23,7 @@ $(document).ready(function() {
   });
 });
 
+// 체크된 사이즈 갯수 적어주기
 $(document).ready(function() {
   $('input[name="size"]').on("click", function() {
     var size_checked_list = [];
