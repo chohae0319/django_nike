@@ -1,7 +1,7 @@
 import json
 
 from django.db.models import F
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserCreateForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
@@ -207,8 +207,14 @@ def change_shipping(request):
 
 
 def id_find(request):
-    user = User.objects.all()
-    id = user.username
-    email = user.email
-    info = {'id': id, 'email': email}
-    return HttpResponse(json.dumps({'info': info}), content_type="application/json")
+    email = request.POST.get('email', '')
+    data = User.objects.get(email=email) # template에서 받아온 email과 일치하는 이메일을 갖는 user queryset 반환
+    username = data.username
+    user_email = data.email
+    last_name = data.last_name
+    first_name = data.first_name
+    name = first_name + last_name
+    date_joined = data.date_joined
+
+    info = {'username':username, 'name':name, 'user_email':user_email, 'date_joined':date_joined }
+    return HttpResponse(json.dumps({'info': info}, indent=4, sort_keys=True, default=str), content_type="application/json")
