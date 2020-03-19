@@ -93,19 +93,21 @@
         <p>찾으시는 계정이 있습니까?</p>
         <ul class="find-profile-listWrapper">
           <!-- for user in users -->
+          {% for information in info %}
           <li class="find-profile-list">
             <div>
               <p>
-                <span>아이디 : </span><span>{{user.username}}</span>
+                <span>아이디 : </span><span>{{information.username}}</span>
               </p>
               <span>내 계정이 맞습니다.</span>
             </div>
             <ul>
-                <li>user.useremail</li>
-                <li>user.userlastname + user.userfirstname</li>
-                <li>가입한 날짜</li>
+                <li>{{information.user_email}}</li>
+                <li>{{information.name}}</li></li>
+                <li>{{information.date_joined}}</li>
             </ul>
           </li>
+          {% endfor %}
           <!-- endfor -->
         </ul>
         <span id="back-to-lastStep">이전단계</span>
