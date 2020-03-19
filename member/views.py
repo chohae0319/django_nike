@@ -98,11 +98,10 @@ def profile(request):
 
     # user_id에 해당하는 order_id 찾아서 리스트로 만들기
     order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
-
     my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
     my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
     my_profile = Profile.objects.all()
-    orders = Order.objects.all()
+    orders = Order.objects.filter(user_id=user_id)
     total = sum([order.total_price for order in orders])
     if total > 150000:
         my_profile.user_grade = 'mvp'
