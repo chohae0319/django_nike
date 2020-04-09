@@ -1,0 +1,37 @@
+{% extends "product/base.html" %}
+
+<!-- title -->
+{% block title %}나이키{% endblock %}
+
+<!-- sign-up content -->
+{% block content %}
+<!-- 회원일 경우 -->
+{% if user.is_authenticated %}
+<div class="already-login">
+  <h2 class="title">나이키</h2>
+  <span>{{ user.username }}님은 이미 회원이십니다.</span>
+  <a href="/">확인</a>
+</div>
+<!-- 회원가입하러 왔을 경우 -->
+{% else %}
+<section class="cover" id="sign-up">
+  <h1>회원가입</h1>
+  {% if form %}
+  <form method="POST" action="/member/signup/" class="form-box-signUp">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="회원가입하기 (만 14세 이상)" />
+  </form>
+  {% else %}
+  <div>{{ message }}</div>
+  <a href="/member/signup/"
+    ><button type="button" class="btn btn-primary">
+      go back
+    </button>
+  </a>
+  {% endif %}
+  <!-- 회원인지 묻는 endif -->
+  {% endif %}
+</section>
+{% load static %}
+<script src="{% static 'member/js/member.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "product/base.html" %} {% load humanize %}
+
+<!-- 링크확장 -->
+{% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'order/css/complete.css' %}" />
+{% endblock%}
+
+<!-- block title -->
+{% block title %} 나이키 - 주문완료{% endblock %}
+
+<!-- block content -->
+{% block content %}
+<section class="cover">
+  <div class="complete-box">
+    <div class="complete-header">
+      <h2 class="big-title">주문해 주셔서 감사합니다.</h2>
+      <h4>
+        배송이 시작되면 SMS/이메일로 배송이 안내 됩니다.
+      </h4>
+      <a href="/member/order" class="btn-rectangle">주문내역/배송현황</a>
+    </div>
+    <div class="order-info-box">
+      <ul class="order-info-wrapper">
+        <li>
+          <span class="list-title">주문날짜</span>
+          <span>{{ order.order_date|date:'Y-m-d' }}</span>
+        </li>
+        <li>
+          <span class="list-title">결제완료금액</span>
+          <span>{{ order.total_price|intcomma }}원</span>
+        </li>
+      </ul>
+      <span>배송주문상품 정보</span>
+      <ul class="order-detail-info">
+        <li>
+          <span class="list-title">주문번호</span>
+          <span class="list-title">주문상품내역</span>
+        </li>
+        {% for item in order_list %}
+        <li>
+          <span>{{ item.id }}</span>
+          <div>
+            <div class="complete-img-wrapper">
+              <img src="{{ item.product_id.thumbnail.url }}" alt="" />
+            </div>
+            <p class="complete-oderInfo-detail">
+              <span>{{ item.product_id.name }}</span>
+              <span>옵션 : {{ item.size }} </span>
+              <span>수량 : {{ item.quantity }}개</span>
+            </p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{%endblock%}

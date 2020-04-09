@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NIke-Clone 고객센터</title>
+    <link
+      href="{% static 'product/img/favicon.ico' %}"
+      rel="icon"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'member/css/service.css' %}" />
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'member/js/service.js' %}"></script>
+    {% block link %}
+    <!-- css / js -->
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="logo-wrapper">
+        <a href="/"><div class="logo"></div></a>
+      </div>
+      {% block title %}
+      <h2>고객센터</h2>
+      {% endblock %}
+    </header>
+    {% block content %}
+    <section>
+      <ul class="mainList-wrapper">
+        <li class="ul-title">
+          <h2>FAQ</h2>
+          <span>자주 찾는 질문에서 궁금한 내용을 찾아보세요</span>
+        </li>
+        <li class="col">
+          <ul class="list-ul">
+            <li class="list-title">나의 정보 조회</li>
+            <li>
+              <a href="{% url 'member:order' %}"><span>주문 내역 조회</span></a>
+            </li>
+            <li>
+              <a href="/member/id-find/"><span>아이디 / 비밀번호 찾기</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="col">
+          <ul class="list-ul">
+            <li class="list-title">배송 / 취소 안내</li>
+            <li>
+              <a href="/member/service-cancel/"><span>주문 취소 신청</span></a>
+            </li>
+            <li>
+              <a href="/member/service-cancelList/"
+                ><span>주문 취소 내역</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="col">
+          <ul class="list-ul">
+            <li class="list-title">서비스 안내</li>
+            <li>
+              <a href=""><span>회원 혜택</span></a>
+            </li>
+            <li>
+              <a href=""><span>기타 문의</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    {% endblock %}
+  </body>
+</html>
