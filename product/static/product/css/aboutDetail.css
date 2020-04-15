@@ -1,0 +1,43 @@
+.category {
+  display: none;
+}
+#aboutDetail {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+#aboutDetail div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#aboutDetail > div {
+  flex-basis: 50%;
+  height: 100vh;
+}
+.codeView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.codeView:hover {
+  transform: scale(1.5);
+  transition: ease 0.3s;
+}
+
+.wrapper {
+  right: 0;
+  flex-direction: column;
+}
+.wrapper > .up,
+.wrapper > .down {
+  flex-basis: 50%;
+}

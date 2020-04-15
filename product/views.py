@@ -44,6 +44,40 @@ def about(request):
         {},
     )
 
+class aboutDetail(ListView):
+    model = Product
+    template_name = 'product/aboutDetail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(aboutDetail, self).get_context_data(**kwargs)
+        category = self.kwargs['category']
+        id = self.kwargs['id']
+        if category == 1:
+            context['category2'] = 'member'
+            if id == 0:
+                context['category3'] = 'sign-in'
+            elif id==1:
+                context['category3'] = 'sign-up'
+            else:
+                context['category3'] = 'member' 
+        elif category == 2:
+            context['category2'] = 'order'
+            if id == 0:
+                context['category3'] = 'grade'
+            elif id == 1:
+                context['category3'] = 'shipping'
+            else : 
+                context['category3'] = 'cart'
+        else :
+            context['category2'] = 'cancel'
+            if id == 0:
+                context['category3'] = 'cancelList'
+            else:
+                context['category3'] = 'cancel'
+
+        return context
+
+
 
 def error(request):
     return render(
