@@ -1,0 +1,48 @@
+#cancel-list-box {
+  min-height: 70vh;
+  height: auto;
+}
+
+.cancel-list-wrapper {
+  margin: 0 20px;
+  border: 1px solid #e0e0e0;
+}
+.cancel-list-wrapper li:first-child {
+  background-color: #e0e0e0;
+}
+.cancel-list {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.cancel-list + .cancel-list {
+  border-top: 1px solid #e0e0e0;
+}
+.cancel-list span {
+  flex-basis: 20%;
+  padding: 10px 0;
+  text-align: center;
+}
+.cancel-list span:first-child {
+  flex-basis: 3%;
+  min-width: 63.2px;
+  padding: 10px 20px;
+}
+.cancel-list span:nth-child(2) {
+  text-align: start;
+  padding-left: 10px;
+}
+.cancel-list span:last-child {
+  flex: 1;
+}
+
+.userSection {
+  padding: 20px;
+  font-size: 20px;
+}
+
+#no-items {
+  padding: 25px;
+}

@@ -6,24 +6,25 @@ $(document).ready(function() {
   $(".form-box-signUp p label").text("");
 
   // placeholder 추가
-  $("#id_email").attr(
-    "placeholder",
-    "사용하실 ID를 입력해주세요. (수신 가능 E-mail)"
-  );
+  $("#id_email").attr("placeholder", "수신 가능 E-mail을 입력해주세요");
   // 포커스 주기
   $("#id_email").focus();
 
   // placeholder 추가
   // autofocus 속성 삭제
   $("#id_username")
-    .attr("placeholder", "이름을 입력해주세요.")
+    .attr("placeholder", "사용하실 아이디를 입력해주세요.")
     .removeAttr("autofocus");
 
+  $(".form-box-signUp #id_username").before("<div>아이디</div>");
+  $(".form-box-signUp #id_email").before("<div>이메일</div>");
   // placeholder 추가
+  $("#id_password1").before("<div>비밀번호</div>");
   $("#id_password1").attr(
     "placeholder",
     "영문+숫자+특수문자 8~16자리(특수문자 괄호()는 사용 불가)"
   );
+  $("#id_password2").before("<div>비밀번호 확인</div>");
   $("#id_password2").attr("placeholder", "패스워드를 다시 입력해주세요.");
 });
 

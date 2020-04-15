@@ -5,7 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>About Django Nike</title>
+    <link
+      href="{% static 'product/img/favicon 2.ico' %}"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/about.css' %}" />
     <!-- xeicon -->
@@ -22,7 +27,7 @@
       <video class="landing-video" autoplay muted loop playsinline>
         <source
           type="video/mp4"
-          src="{% static 'product/video/400274_ABOUTNIKE2019_4_original.mp4' %}"
+          src="{% static 'product/video/400274_ABOUTNIKE2019_4_original (1).mp4' %}"
         />
       </video>
       <header>
@@ -52,8 +57,8 @@
         <div class="comment-box">
           <span class="main-title">ABOUT OUR PROJECT</span>
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
+            이 프로젝트는 캠퍼스 픽에서<br />
+            자체적으로 진행한 장고 스터디 프로젝트이며<br />
             <br />
             백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
             프론트 개발 1명 : 김민수<br />
@@ -82,19 +87,18 @@
         </div>
         <div class="comment-box">
           <span class="main-title" style="border-bottom: 2px solid brown;"
-            >ABOUT OUR PROJECT</span
+            >ABOUT FRONT-END</span
           >
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
+            저는 이번 프로젝트에서 <br />
+            Template 작성 및 View 데이터 연결을 주로 담당했으며 <br />
+            전체적인 퍼블리싱 및 디자인 리뉴얼, <br />
+            필요한 View 파일 또한 제가 작성했습니다.
             <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
             <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            장고 프레임워크를 경험해보지 못했던 탓에 <br />
+            처음에는 허덕이고 헤맸었지만, 금방 배울 수 있을만큼 <br>
+            장고는 접근성이 높은 프레임워크였습니다.
           </p>
         </div>
       </div>
@@ -103,23 +107,55 @@
     <section class="fade-in" data-fade-in-speed="800">
       <div class="section-content-box">
         <div class="comment-box">
-          <span class="main-title" style="border-bottom: 2px solid rgb(8,46,32);">ABOUT OUR PROJECT</span>
+          <span
+            class="main-title"
+            style="border-bottom: 2px solid rgb(8, 46, 32);"
+            >ABOUT OUR TECH</span
+          >
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
-            <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
-            <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            <ul>
+              <li class="tech-list">
+                <strong>기능</strong>
+                <div>
+                  <p>세부기능</p>
+               </div>
+               <span>TECH</span>
+              </li>
+              <li class="tech-list">
+                <strong>회원관리</strong>
+                <div>
+                  <p>로그인</p>
+                  <p>회원가입</p>
+                  <p>회원 정보 수정 및 삭제</p>
+               </div>
+               <span>Django form</span>
+              </li>
+              <li class="tech-list">
+                <strong>주문 / 배송지 관리</strong>
+                <div>
+                  <p>결제 금액에 따른 회원 등급 설정</p>
+                  <p>배송지 추가 및 최초 등록</p>
+                  <p>장바구니 추가</p>
+               </div>
+               <span>Ajax <br> views.py</span>
+              </li>
+              <li class="tech-list">
+                <strong>주문 취소 신청</strong>
+                <div>
+                  <p>issue 등록</p>
+                  <p>issue 목록 조회</p>
+               </div>
+               <span>GitHub API</span>
+              </li>
+            </ul>
           </p>
         </div>
         <div class="img-wrapper">
-          <div class="border-box-right" style="background-color: rgb(8, 46, 32);"></div>
-          <img src="{% static 'product/img/about-logo.png' %}" alt="aboutimg" />
+          <div
+            class="border-box-right"
+            style="background-color: rgb(8, 46, 32);"
+          ></div>
+          <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="aboutimg" />
         </div>
       </div>
     </section>
@@ -130,17 +166,17 @@
         <div class="img-wrapper">
           <div
             class="border-box-left"
-            style="background-color: rgb(25,53,86);"
+            style="background-color: rgb(25, 53, 86);"
           ></div>
           <img
-            src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+            src=""
             alt="aboutimg"
           />
         </div>
         <div class="comment-box">
           <span
             class="main-title"
-            style="border-bottom:  2px solid rgb(25,53,86);"
+            style="border-bottom: 2px solid rgb(25, 53, 86);"
             >ABOUT OUR PROJECT</span
           >
           <p>
@@ -164,7 +200,7 @@
         <div class="comment-box">
           <span
             class="main-title"
-            style="border-bottom: 2px solid rgb(25,16,16);"
+            style="border-bottom: 2px solid rgb(25, 16, 16);"
             >ABOUT OUR PROJECT</span
           >
           <p>
