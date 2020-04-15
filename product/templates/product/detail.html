@@ -29,11 +29,7 @@
       <div class="detail-product-info">
         <div class="detail-item-tilte">
           <div class="detail-title-header">
-            {% if product.category_name == 'WOMEN 농구' %}
-            <span>WOMEN 골프</span>
-            {% else %}
             <span>{{ product.category_name }}</span>
-            {% endif %}
             <span>{{ product.price|intcomma }}원</span>
           </div>
           <h2 class="big-title">{{ product.name }}</h2>

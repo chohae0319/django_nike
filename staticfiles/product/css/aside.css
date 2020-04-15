@@ -1,24 +1,21 @@
 aside {
   width: 288px;
   height: 100%;
-  padding: 0 48px;
+  padding: 0 48px 279px 48px;
   position: fixed;
   overflow-y: scroll;
+  /* z-index: 99; */
   top: 108.5px;
 }
 aside::-webkit-scrollbar {
   display: none;
 }
 aside.product {
-  z-index: 2;
-  display: block;
   top: 279px;
   transition: all 0.35s;
-  background-color: #ffffff;
 }
 
 #toggle-aside:checked ~ aside.product {
-  display: none;
   left: -288px;
 }
 #toggle-section-header:checked ~ aside.product {
@@ -84,16 +81,6 @@ aside.product {
 
 #size-wrapper .size-label:hover {
   border: 1px solid;
-}
-@media screen and (max-width: 883px) {
-  aside.product {
-    display: none;
-    z-index: 2001;
-    top: 0;
-    padding: 40px 48px;
-    left: 0;
-    width: 288px;
-  }
 }
 
 /* ---------------------------------------------------profile */

@@ -31,7 +31,6 @@ nav li a {
 
 /* nav-upper */
 .nav-upper {
-  padding-right: 20px;
   height: 38px;
   line-height: 38px;
   overflow-y: hidden;
@@ -106,7 +105,7 @@ nav li a {
 .nav-lower {
   box-sizing: border-box;
   height: 70px;
-  padding: 0 32px 0 20px;
+  padding: 0 32px 0 30px;
   align-items: center;
 }
 
@@ -275,10 +274,10 @@ nav li a {
   display: none;
   position: absolute;
   top: 38px;
-  right: 160px;
+  right: 130px;
   width: 150px;
   background-color: #ffffff;
-  border-radius: 0 0 4px 4px;
+  border-radius: 4px 0 4px 4px;
   font-size: 12px;
   box-sizing: border-box;
   line-height: 34px;
@@ -304,8 +303,8 @@ input#sidebar {
   z-index: 20000;
   opacity: 0;
   top: 0;
-  right: -73.5%;
-  width: 73.5%;
+  right: -470px;
+  width: 470px;
   height: 100vh;
   background-color: #ffffff;
   transition: all 0.35s;
@@ -315,7 +314,7 @@ input#sidebar {
 #whole-wrapper {
   position: fixed;
   top: 0;
-  right: 73.5%;
+  right: 470px;
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
@@ -371,10 +370,7 @@ input#sidebar {
   margin: 0 auto;
   padding: 30px 0;
 }
-input#toggle-aside,
-input#toggle-section-header {
-  display: none;
-}
+
 @media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;

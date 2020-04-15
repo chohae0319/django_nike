@@ -23,15 +23,11 @@ $(function() {
 
 // 로그인 모달
 $(document).ready(function() {
-  //  키는 거
   $("#open-login").click(function() {
     $(".whole-wrapper-login").css({ display: "block" });
     $(".login-modal").css({ display: "block" });
     $("body").css({ overflow: "hidden" });
-    $("#email-verify").css({ display: "block" });
-    $("#email-verified").css({ display: "none" });
   });
-  //  끄는거
   $("#close-login").click(function() {
     $(".whole-wrapper-login").css({ display: "none" });
     $(".login-modal").css({ display: "none" });
@@ -40,36 +36,7 @@ $(document).ready(function() {
   $(".whole-wrapper-login").click(function() {
     $(".whole-wrapper-login").css({ display: "none" });
     $(".login-modal").css({ display: "none" });
-    $(".find-membership-modal").css({ opacity: "0", display: "none" });
     $("body").css({ overflow: "auto" });
-  });
-
-  //  아이디 찾기
-  $("#find-membership-btn").click(function() {
-    $(".find-membership-modal").css({ opacity: "1", display: "block" });
-  });
-
-  // 창 닫기
-  $(".close-find-membership i").click(function() {
-    $(".whole-wrapper-login").css({ display: "none" });
-    $(".find-membership-modal").css({ opacity: "0", display: "none" });
-    $(".login-modal").css({ display: "none" });
-    $("body").css({ overflow: "auto" });
-    $("#email-verify").css({ display: "block" });
-    $("#email-verified").css({ display: "none" });
-  });
-
-  // 로그인으로 돌아가기
-  $("#back-to-login").click(function() {
-    $(".find-membership-modal").css({ opacity: "0", display: "none" });
-    $("#email-verify").css({ display: "block" });
-    $("#email-verified").css({ display: "none" });
-  });
-
-  //  이전단계로 돌아가기
-  $("#back-to-lastStep").click(function() {
-    $("#email-verify").css({ display: "block" });
-    $("#email-verified").css({ display: "none" });
   });
 });
 
@@ -89,14 +56,9 @@ $(document).ready(function() {
   });
   //  사이즈 선택시
   $(".size-label").click(function() {
-    var windowWidth = $(window).width();
-    if (windowWidth > 883) {
-      return;
-    } else {
-      $("#aside-product").css({ display: "none" });
-      $(".whole-wrapper-login").css({ display: "none" });
-      $("body").css({ overflow: "auto" });
-    }
+    $("#aside-product").css({ display: "none" });
+    $(".whole-wrapper-login").css({ display: "none" });
+    $("body").css({ overflow: "auto" });
   });
   $(window).resize(function() {
     var windowWidth = $(window).width();

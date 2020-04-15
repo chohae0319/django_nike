@@ -15,43 +15,23 @@
 <input type="checkbox" id="toggle-section-header" />
 <aside class="product" id="aside-product">
   <div class="category-filter-box">
-    {% if gender == 'Men' %}
     <ul class="category-wrapper">
       <li>
-        <a href="{% url 'products:list' 1 1 %}"><span>라이프스타일</span></a>
+        <a href=""><span>라이프스타일</span></a>
       </li>
       <li>
-        <a href="{% url 'products:list' 1 2 %}"><span>러닝</span></a>
+        <a href=""><span>러닝</span></a>
       </li>
       <li>
-        <a href="{% url 'products:list' 1 3 %}"><span>농구</span></a>
+        <a href=""><span>축구</span></a>
       </li>
       <li>
-        <a href="{% url 'products:list' 1 4 %}"><span>축구</span></a>
+        <a href=""><span>농구</span></a>
       </li>
       <li>
-        <a href="{% url 'products:list' 1 5 %}"><span>샌들 & 슬리퍼</span></a>
+        <a href=""><span>샌들 & 슬리퍼</span></a>
       </li>
     </ul>
-    {% else%}
-    <ul class="category-wrapper">
-      <li>
-        <a href="{% url 'products:list' 2 1 %}"><span>라이프스타일</span></a>
-      </li>
-      <li>
-        <a href="{% url 'products:list' 2 2 %}"><span>러닝</span></a>
-      </li>
-      <li>
-        <a href="{% url 'products:list' 2 3 %}"><span>골프</span></a>
-      </li>
-      <li>
-        <a href="{% url 'products:list' 2 4 %}"><span>축구</span></a>
-      </li>
-      <li>
-        <a href="{% url 'products:list' 2 5 %}"><span>샌들 & 슬리퍼</span></a>
-      </li>
-    </ul>
-    {% endif %}
     <ul id="size-box">
       <div class="list-header">
         <p>신발 사이즈 <span id="aside-checked-size"></span></p>
@@ -94,230 +74,38 @@
         <label class="size-label" for="400">400</label>
       </div>
       <div class="input-wrapper">
-        <input
-          type="checkbox"
-          name="size"
-          id="220"
-          value="220"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="225"
-          value="225"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="230"
-          value="230"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="234"
-          value="234"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="235"
-          value="235"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="239"
-          value="239"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="240"
-          value="240"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="245"
-          value="245"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="250"
-          value="250"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="255"
-          value="255"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="260"
-          value="260"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="265"
-          value="265"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="270"
-          value="270"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="280"
-          value="280"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="285"
-          value="285"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="290"
-          value="290"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="295"
-          value="295"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="300"
-          value="300"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="305"
-          value="305"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="310"
-          value="310"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="315"
-          value="315"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="320"
-          value="320"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="325"
-          value="325"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="330"
-          value="330"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="335"
-          value="335"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="340"
-          value="340"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="350"
-          value="350"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="360"
-          value="360"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="370"
-          value="370"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="380"
-          value="380"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="390"
-          value="390"
-          class="re-order"
-        />
-        <input
-          type="checkbox"
-          name="size"
-          id="400"
-          value="400"
-          class="re-order"
-        />
+        <input type="checkbox" name="size" id="220" value="220" />
+        <input type="checkbox" name="size" id="225" value="225" />
+        <input type="checkbox" name="size" id="230" value="230" />
+        <input type="checkbox" name="size" id="234" value="234" />
+        <input type="checkbox" name="size" id="235" value="235" />
+        <input type="checkbox" name="size" id="239" value="239" />
+        <input type="checkbox" name="size" id="240" value="240" />
+        <input type="checkbox" name="size" id="245" value="245" />
+        <input type="checkbox" name="size" id="250" value="250" />
+        <input type="checkbox" name="size" id="255" value="255" />
+        <input type="checkbox" name="size" id="260" value="260" />
+        <input type="checkbox" name="size" id="265" value="265" />
+        <input type="checkbox" name="size" id="270" value="270" />
+        <input type="checkbox" name="size" id="280" value="280" />
+        <input type="checkbox" name="size" id="285" value="285" />
+        <input type="checkbox" name="size" id="290" value="290" />
+        <input type="checkbox" name="size" id="295" value="295" />
+        <input type="checkbox" name="size" id="300" value="300" />
+        <input type="checkbox" name="size" id="305" value="305" />
+        <input type="checkbox" name="size" id="310" value="310" />
+        <input type="checkbox" name="size" id="315" value="315" />
+        <input type="checkbox" name="size" id="320" value="320" />
+        <input type="checkbox" name="size" id="325" value="325" />
+        <input type="checkbox" name="size" id="330" value="330" />
+        <input type="checkbox" name="size" id="335" value="335" />
+        <input type="checkbox" name="size" id="340" value="340" />
+        <input type="checkbox" name="size" id="350" value="350" />
+        <input type="checkbox" name="size" id="360" value="360" />
+        <input type="checkbox" name="size" id="370" value="370" />
+        <input type="checkbox" name="size" id="380" value="380" />
+        <input type="checkbox" name="size" id="390" value="390" />
+        <input type="checkbox" name="size" id="400" value="400" />
       </div>
     </ul>
   </div>
@@ -328,35 +116,24 @@
     $("#notAjax").show();
     //  ajax는 숨겨주고
     $("#forAjax").hide();
-    $("#price_align_asc").hide();
-    $("#price_align_desc").hide();
-    $("#current_align").hide();
-    // 사이즈 버튼이 클릭 되면 ==> 정렬 방식도 가져오고
-    //  정렬 방식이 클릭되어도 사이즈를 가져오게끔
-    $(".re-order").on("click", function() {
+    $('input[name="size"]').on("click", function() {
       var size_checked_list = [];
-      var orderType = "";
       $('input[name="size"]:checked').each(function() {
         size_checked_list.push($(this).val());
       });
-
-      // 정렬방식이 정해졌다면
-      orderType = $("input[name='orderType']:checked").attr("id");
-
       var url = $(location).attr("pathname");
+      console.log(size_checked_list);
       $.ajax({
         type: "POST",
         url: "{% url 'products:size' %}",
         data: {
           size: size_checked_list,
-          orderType: orderType,
           url: url,
           csrfmiddlewaretoken: "{{ csrf_token }}"
         },
         traditional: true,
         dataType: "json",
         success: function(response) {
-          console.log(response.response);
           $("#forAjax .card").fadeOut("nomal", function() {
             $(this).remove();
           });
@@ -372,7 +149,7 @@
           for (var i = 0; i < product.length; i++) {
             forAjax.append(
               `<div class='card card${i +
-                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a><e/div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
+                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a></div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
             );
             var pk = product[i]["pk"];
             $(`.linkDetail${i}`).attr("href", "../../detail/" + pk + "/");
@@ -397,46 +174,12 @@
 <!-- content -->
 {% block content %}
 <div id="section-header">
-  {% if gender == 'Men' %}
-  <h2 class="title" id="section-title">Men</h2>
-  {% if category %} {% if category == '신발' %}
+  <h2 class="title" id="section-title">{{gender}}</h2>
+  {% if category == '신발' %}
   <h2 class="big-title">{{gender}}'s {{category}}</h2>
-  {% else %}
-  <!-- 남성 전체 신발 if -->
-  {% for category in category %}
+  {% else %} {% for category in category %}
   <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
-  {% endfor %}
-  <!-- category name -->
-  {% endif %}
-  <!-- 남자 category if-->
-  {% else %}
-  <h2 class="big-title">{{gender}}'s New Releases</h2>
-  {% endif %}
-  <!-- 신상일 경우의 subtitle -->
-  <!-- 여성 -->
-  {% else %}
-  <h2 class="title" id="section-title">Women</h2>
-  {% if category %} {% if category == '신발' %}
-  <h2 class="big-title">{{gender}}'s {{category}}</h2>
-  {% else %}
-  <!--  여성 전체 신발 if-->
-  {% for category in category %} {% if category.name == '농구' %}
-  <h2 class="big-title">{{gender}}'s 골프</h2>
-  {% else %}
-  <h2 class="big-title">{{gender}}'s {{category.name}}</h2>
-  {% endif %}
-  <!-- 농구 -> 골프 if -->
-  {% endfor %}
-  <!-- category name -->
-  {% endif %}
-  <!-- 여자 category if-->
-  {% else %}
-  <h2 class="big-title">{{gender}}'s New Releases</h2>
-  {% endif %}
-  <!-- 신상일 경우의 subtitle -->
-  {% endif %}
-  <!-- gender if -->
-
+  {% endfor %} {% endif %}
   <div class="filter-option">
     <span id="mobile-toggle-aside">필터</span>
     <label for="toggle-aside">filter</label>
@@ -447,17 +190,14 @@
         <span><i class="xi-angle-down"></i></span>
       </div>
       <ul id="filter-wrapper">
-        <input type="radio" name="orderType" id="new-order" class="re-order" />
-        <input type="radio" name="orderType" id="low-order" class="re-order" />
-        <input type="radio" name="orderType" id="high-order" class="re-order" />
         <li>
-          <label for="new-order"><span>신상품순</span></label>
+          <span>신상품순</span>
         </li>
         <li>
-          <label for="low-order"><span>낮은 가격순</span></label>
+          <span>낮은 가격순</span>
         </li>
         <li>
-          <label for="high-order"><span>높은 가격순</span></label>
+          <span>높은 가격순</span>
         </li>
       </ul>
     </div>

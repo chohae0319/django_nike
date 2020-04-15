@@ -17,13 +17,12 @@ $(document).ready(function() {
     }
   });
 
-  // 사이즈 클릭시 검정 테두리
+  // 사이즈 클릭시
   $(".size-label").click(function() {
     $(this).toggleClass("black-label");
   });
 });
 
-// 체크된 사이즈 갯수 적어주기
 $(document).ready(function() {
   $('input[name="size"]').on("click", function() {
     var size_checked_list = [];

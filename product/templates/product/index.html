@@ -1,12 +1,4 @@
-{% extends "product/base.html" %} {% load humanize %}
-
-<!-- 링크확장 -->
-{% load static %}
-<!-- 링크확장 -->
-{% block link %}
-<link rel="stylesheet" href="{% static 'product/css/index.css' %}" />
-{% endblock %}
-
+{% extends "product/base.html" %}
 <!-- content -->
 {% block content %}
 <section class="cover" id="index">
@@ -186,26 +178,5 @@
       </div>
     </figurecaption>
   </figure>
-  <div class="slider">
-    {% for product in product_list %}
-    <div class="card">
-      <!-- product img -->
-      <div class="img-wrapper">
-        <a href="{% url 'products:detail' product.pk %}">
-          <img src="{{product.thumbnail.url}}" alt="상품이미지" />
-        </a>
-      </div>
-      <div class="product-info">
-        <!-- item-title-->
-        <div class="item-title">{{product.name}}</div>
-        <!-- sub-title -->
-        <div class="item-subtitle color-8D">{{product.style}}</div>
-        <!-- item-color 는 안 하기로 결정-->
-        <!-- price -->
-        <div>{{product.price|intcomma}}원</div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
 </section>
 {% endblock %}

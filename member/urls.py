@@ -6,16 +6,9 @@ from .views import (
     logout,
     profile,
     order,
-    rate,
     user_info_update,
     user_info_delete,
     user_info_password,
-    service,
-    service_cancel,
-    service_complete,
-    service_cancel_list,
-    change_shipping,
-    id_find
 )
 
 app_name = 'member'
@@ -26,14 +19,8 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('profile/', profile, name='profile'),
     path('order/', order, name='order'),
-    path('profile-rate/', rate, name='rate'),
     path('profile-update/', user_info_update, name='profile-update'),
     path('profile-delete/', user_info_delete, name='profile-delete'),
     path('profile-password/', user_info_password, name='profile-password'),
-    path('service/', service, name='service'),
-    path('service-cancel/', service_cancel, name='service-cancel'),
-    path('service-cancelList/', service_cancel_list, name='service-cancelList'),
-    path('service-complete/', service_complete, name='service-complete'),
-    path('change-shipping/', change_shipping, name='change-shipping'),
-    path('id-find/', id_find, name='id-find'),
+
 ]

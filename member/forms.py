@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Profile
+
 
 
 class UserCreateForm(UserCreationForm):
@@ -11,7 +11,7 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email',  'password1', 'password2')
+        fields = ('email', 'username', 'password1', 'password2')
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
@@ -36,14 +36,15 @@ class UserCreateForm(UserCreationForm):
             raise forms.ValidationError('비밀번호와 비밀번호 확인란의 값이 일치하지 않습니다')
         return password2
 
+
     def __init__(self, *args, **kwargs):
         super(UserCreateForm, self).__init__(*args, **kwargs)
 
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
-
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
-        model = get_user_model()
-        fields = ['username', 'email', 'first_name', 'last_name']
+        model = Profile
+        fields = ['user', 'cellphone_number']
+

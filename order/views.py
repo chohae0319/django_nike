@@ -112,9 +112,9 @@ class MakeOrder(View):
         is_cart = order_info['is_cart']
 
         # 배송 정보
-        receive_address = request.POST.get('receive_address', False)
-        receive_name = request.POST.get('receive_name', False)
-        receive_phone = request.POST.get('receive_phone', False)
+        receive_address = request.POST.get('receive_name', False)
+        receive_name = request.POST.get('receive_phone', False)
+        receive_phone = request.POST.get('receive_address', False)
         memo = request.POST.get('memo', False)
 
         # 결제 금액
@@ -178,11 +178,10 @@ class MakeOrder(View):
                                                quantity=item['quantity'])
                     order_list_obj.save()
 
-                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제, 장바구니 개수 세션 삭제
+                # 장바구니에서 주문했을 시, 장바구니에 담겨있는 상품들 삭제
                 if is_cart:
                     data = Cart.objects.filter(user_id=user_id)
                     data.delete()
-                    request.session.pop('cart_count', None)
 
                 return HttpResponse(json.dumps({'result': 'success', 'order_no': order_no}), content_type="application/json")
 
@@ -190,9 +189,9 @@ class MakeOrder(View):
         except order.exceptions.OutOfStockError as e:
             return HttpResponse(json.dumps({'result': 'fail', 'message': 'out of stock'}), content_type="application/json")
 
-        # # 기타 에러상황
-        # except Exception as e:
-        #     return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
+        # 기타 에러상황
+        except Exception as e:
+            return HttpResponse(json.dumps({'result': 'fail', 'message': 'unknown error'}), content_type="application/json")
 
 
 def Shippings(request):
@@ -208,7 +207,7 @@ def Shippings(request):
 
 
 def ShippingShow(request):
-    shipping_instance = Shipping.objects.filter(user_id=request.user)
+    shipping_instance = Shipping.objects.all()
     #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
