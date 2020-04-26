@@ -1,20 +1,22 @@
-$(document).ready(function() {
+$(document).ready(function () {
   //  로딩과 동시에
   $.ajax({
     url: "https://api.github.com/repos/Minsoo-web/react-blog/issues",
     type: "GET",
     headers: {
-      Authorization: "token 5cb0436cf883ec31b3cd41f47f75556752697d46",
-      "content-type": "application/json"
+      Authorization: "token 68a2056e6305014f4973d6dec375a3252b29f5a7",
+      "content-type": "application/json",
     },
     datatype: "json",
     //  성공시
-    success: function(data) {
+    success: function (data) {
       //   로그인 한 회원 것만 보이게
       console.log(data);
       var username = $("#username").text();
-      var myList = data.filter(function(list) {
-        return list.labels[1].name == username;
+      var myList = data.filter(function (list) {
+        if (list.labels[1].name) {
+          return list.labels[1].name == username;
+        }
       });
       console.log(myList);
       if (myList.length) {
@@ -32,8 +34,8 @@ $(document).ready(function() {
         );
       }
     },
-    error: function() {
+    error: function () {
       window.location.href = "../../product/error";
-    }
+    },
   });
 });

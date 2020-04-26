@@ -12,7 +12,7 @@ $(document).ready(function () {
       url: url,
       type: "POST",
       headers: {
-        Authorization: "token 5cb0436cf883ec31b3cd41f47f75556752697d46",
+        Authorization: "token 2994bcbfbef05273a8878c24c8c31e252c0fa3a6",
         "content-type": "application/json",
       },
       data: JSON.stringify({

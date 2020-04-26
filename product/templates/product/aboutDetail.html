@@ -20,26 +20,26 @@
   <body>
     <span id="category2" class="category">{{category2}}</span>
     <span id="category3" class="category">{{category3}}</span>
-    {% if category3 == 'sign-up' %}
+    {% if category3 == 'sign-up' or category3 == 'cancelList' %}
     <div id="aboutDetail">
       <div class="big">
-        <div class="codeView">code view</div>
+        <a href="{{url1}}"><div class="codeView">code view</div></a>
       </div>
       <div class="wrapper">
-        <div class="codeView">code view</div>
+        <a href="{{url2}}"><div class="codeView">code view</div></a>
       </div>
     </div>
     {% else %}
     <div id="aboutDetail">
       <div class="big">
-        <div class="codeView">code view</div>
+        <a href="{{url1}}"><div class="codeView">code view</div></a>
       </div>
       <div class="wrapper">
         <div class="up">
-          <div class="codeView">code view</div>
+          <a href="{{url2}}"><div class="codeView">code view</div></a>
         </div>
         <div class="down">
-          <div class="codeView">code view</div>
+          <a href="{{url3}}"><div class="codeView">code view</div></a>
         </div>
       </div>
     </div>
