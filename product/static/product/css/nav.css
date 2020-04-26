@@ -375,6 +375,7 @@ input#toggle-aside,
 input#toggle-section-header {
   display: none;
 }
+
 @media screen and (max-width: 883px) {
   .nav-upper {
     width: 0;
@@ -431,5 +432,24 @@ input#toggle-section-header {
   }
   #sidebar-inner-box li + li {
     border-top: 1px solid #e0e0e0;
+  }
+
+  /* 햄버거 드롭다운 메뉴 */
+  .nav-ham-check {
+    display: none;
+  }
+
+  .label-ham {
+    cursor: pointer;
+  }
+  .ham-dropdown {
+    display: none;
+  }
+  .nav-ham-check:checked ~ .ham-dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+  .ham-dropdown p {
+    padding-top: 20px;
   }
 }

@@ -106,7 +106,7 @@
     </div>
     <script>
       // 다음단계 진행하기
-      $("#submit-email").click(function() {
+      $("#submit-email").click(function () {
         var email = $("#input-email").val();
         var expert = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
         if (email.length === 0) {
@@ -119,9 +119,9 @@
             url: "{% url 'member:id-find' %}",
             data: {
               email: email,
-              csrfmiddlewaretoken: "{{ csrf_token }}"
+              csrfmiddlewaretoken: "{{ csrf_token }}",
             },
-            success: function(response) {
+            success: function (response) {
               // 성공시 다음단계 진행
               $("#email-alert-msg").text("");
               $("#email-verify").css({ display: "none" });
@@ -150,16 +150,12 @@
                 </li>`);
               }
               // email 발송 해야댐
-              $(".find-profile-confirm").click(function() {
-                var number = Number(
-                  $(this)
-                    .attr("id")
-                    .split("-")[1]
-                );
+              $(".find-profile-confirm").click(function () {
+                var number = Number($(this).attr("id").split("-")[1]);
 
                 //  이메일
                 console.log(response.info[number].email);
-                
+
                 $(".find-profile-listWrapper").remove();
                 $("#email-verified p").remove();
                 $("#email-verified h3").after(
@@ -171,10 +167,10 @@
                 );
               });
             },
-            error: function(response) {
+            error: function (response) {
               console.log("에러", response.status);
               $("#email-alert-msg").text("다시 시도해 주세요.");
-            }
+            },
           });
         }
       });
@@ -423,30 +419,39 @@
         </li>
         {% endif %}
         <li>
-          <a href=""><span>New Releasses</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-men" />
+          <label for="nav-ham-men" class="label-ham"><p>Men</p></label>
+          <div class="ham-dropdown">
+            <a href="{% url 'products:list' 1 0 %}"><p>전체보기</p></a>
+            <a href="{% url 'products:new' 1  %}"><p>New Releasses</p></a>
+            <a href="{% url 'products:best' 1  %}"><p>BEST</p></a>
+            <a href="{% url 'products:sale' 1  0%}"><p>SALE</p></a>
+          </div>
         </li>
         <li>
-          <a href=""><span>Men</span></a>
-        </li>
-        <li>
-          <a href=""><span>Women</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-women" />
+          <label for="nav-ham-women" class="label-ham"><p>Women</p></label>
+          <div class="ham-dropdown">
+            <a href="{% url 'products:list' 2 0 %}"><p>전체보기</p></a>
+            <a href="{% url 'products:new' 2 %}"><p>New Releasses</p></a>
+            <a href="{% url 'products:best' 2  %}"><p>BEST</p></a>
+            <a href="{% url 'products:sale' 2 0 %}"><p>SALE</p></a>
+          </div>
         </li>
         <li>
           <a href=""><span>Kids</span></a>
         </li>
-        <li>
-          <a href=""><span>SALE</span></a>
-        </li>
+        {% if user.is_authenticated %}
         <li>
           <a href="/member/profile/"><span>마이페이지</span></a>
         </li>
+        {% else %} {% endif %}
       </ul>
     </div>
     <!-- nav js -->
     <script src="{% static 'product/js/nav.js' %}"></script>
     <script src="{% static 'product/js/profile-dropdown.js' %}"></script>
 
-    <!-- modal 로그인이 필요가 없어져서 삭제 -->
     {% endblock %}
 
     <!-- aside -->
