@@ -168,7 +168,6 @@ section.product {
 }
 
 /* -------------------------------------------------------------- detail*/
-/* detail */
 section#detail {
   padding: 20px;
 }
@@ -178,14 +177,14 @@ section#detail {
 }
 
 .detail-img-gallery {
-  width: 840px;
-  padding: 0 50px 0 30px;
+  width: 65%;
+  padding: 0 30px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .detail-img-wrapper {
-  width: 348px;
+  width: 47.5%;
   height: 348px;
   margin: 0 10px 10px 0;
 }
@@ -379,6 +378,34 @@ label.no-amount {
   position: relative;
   flex: 1;
 }
+/* detail - mobile */
+@media screen and (max-width: 900px) {
+  .detail-img-wrapper {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #detail .detail-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .detail-img-gallery {
+    width: 90%;
+    margin-bottom: 50px;
+  }
+  .detail-img-wrapper {
+    width: 48%;
+  }
+}
+@media screen and (max-width: 664px) {
+  .detail-img-gallery {
+    justify-content: center;
+  }
+  .detail-img-wrapper {
+    width: 90%;
+    margin-right: 0;
+  }
+}
 
 /* -------------------------------------------------------------- sign-up */
 /* sign-up */
@@ -481,7 +508,7 @@ label.no-amount {
 .already-login span {
   margin: 20px 0;
 }
-/* -------------------------------------------------------------- prfile mypage */
+/* -------------------------------------------------------------- profile mypage */
 /* profile */
 /* member안에 있는 css 폴더로 옮겨야 함 */
 section#profile .profile-list-title,

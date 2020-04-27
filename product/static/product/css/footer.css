@@ -28,11 +28,20 @@ footer {
   color: #ffffff;
 }
 
+/*  social */
+.col4 i {
+  font-size: x-large;
+}
+
+.footer-sns-list {
+  display: flex;
+  align-items: center;
+}
+
 .footer-header .col li.list-title {
   color: #ffffff;
 }
 @media screen and (max-width: 768px) {
   .footer-header {
-    display: none;
   }
 }

@@ -376,7 +376,7 @@ input#toggle-section-header {
   display: none;
 }
 
-@media screen and (max-width: 883px) {
+@media screen and (max-width: 920px) {
   .nav-upper {
     width: 0;
     height: 0;

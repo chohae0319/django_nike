@@ -466,7 +466,9 @@
       <div class="footer-header">
         <ul class="col col1">
           <li class="list-title">
-            <a href=""><span>매장안내</span></a>
+            <a href="https://www.nike.com/kr/ko_kr/store?ignoreSharing=true"
+              ><span>매장안내</span></a
+            >
           </li>
           {% if user.is_authenticated %}
           <li class="list-title">
@@ -483,22 +485,16 @@
         <ul class="col col2">
           <li class="list-title"><span>고객센터</span></li>
           <li>
-            <a href=""><span>주문/결제</span></a>
+            <a href="/member/service"><span>주문취소</span></a>
           </li>
           <li>
             <a href="{% url 'member:order' %}"><span>주문배송조회</span></a>
           </li>
           <li>
-            <a href=""><span>멤버쉽 혜택/서비스</span></a>
+            <a href="/member/profile-rate"><span>멤버쉽 혜택/서비스</span></a>
           </li>
           <li>
-            <a href=""><span>공지사항</span></a>
-          </li>
-          <li>
-            <a href=""><span>기타문의</span></a>
-          </li>
-          <li>
-            <a href=""><span>개인정보처리방침</span></a>
+            <a href="/member/service"><span>기타문의</span></a>
           </li>
         </ul>
         <ul class="col col3">
@@ -509,10 +505,10 @@
         </ul>
         <ul class="col col4">
           <li class="list-title"><span>SOCIAL</span></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <a href="https://github.com/Minsoo-web"><li class="footer-sns-list"><i class="xi-github"></i><span>GitHub</span></li></a>
+          <a href="https://www.instagram.com/minsoo_gramm/"><li class="footer-sns-list"><i class="xi-instagram"></i><span>Instagram</span></li></a>
+          <a href="https://www.youtube.com/watch?v=mOk4ghoRtDo"><li class="footer-sns-list"><i class="xi-youtube"></i><span>Youtube</span></li></a>
+          <a href="https://open.kakao.com/me/minsooweb"><li class="footer-sns-list"><i class="xi-kakaotalk"></i><span>Kakaotalk</span></li></a>
         </ul>
       </div>
     </footer>
