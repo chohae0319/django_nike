@@ -606,6 +606,7 @@ section#profile .profile-list-view {
   right: -50%;
   display: flex;
   width: 50%;
+  height: 100%;
   flex-wrap: wrap;
 }
 /* 슬리퍼 box */
@@ -632,23 +633,25 @@ section#profile .profile-list-view {
   position: relative;
   left: 0;
   width: auto;
-  height: 260px;
+  height: fit-content;
   padding: 0;
 }
 .best-img-box-right .best-img-wrapper:first-child {
   position: absolute;
-  right: -96%;
+  right: -95%;
   width: 100%;
   height: 100%;
   padding: 0 0 5px 5px;
+  margin: 0 0 5px 5px;
 }
 .best-img-wrapper {
+  display: flex;
   position: relative;
   flex-basis: 47%;
-  height: 260px;
   margin: 0 5px 5px 0;
 }
 .best-img-wrapper.flip {
+  height: fit-content;
   flex-basis: 23.5%;
 }
 
@@ -676,8 +679,36 @@ section#profile .profile-list-view {
   display: flex;
 }
 
-@media screen and (max-width: 768px) {
+.best-img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 424px) {
+  .size-selector label {
+    flex-basis: 17%;
+  }
   .best-img-box {
-    flex-direction: column;
+    right: auto;
+    width: auto;
+  }
+  .best-img-box .best-img-wrapper:first-child {
+    position: relative;
+    left: auto;
+    width: auto;
+    height: auto;
+    padding: inherit;
+  }
+  .best-img-box-right .best-img-wrapper:first-child {
+    position: relative;
+    right: auto;
+    padding: inherit;
+    margin: 0 5px 5px 0;
+  }
+  .best-img-box-right {
+    width: auto;
+  }
+  .best-img-wrapper.flip {
+    flex-basis: 45%;
   }
 }

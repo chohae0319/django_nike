@@ -382,6 +382,11 @@ input#toggle-section-header {
     height: 0;
     visibility: hidden;
   }
+  .nav-lower {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
+  }
   .nav-lower .mainNav {
     display: none;
   }
