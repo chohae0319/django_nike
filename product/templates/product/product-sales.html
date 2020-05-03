@@ -122,7 +122,10 @@
             </span>
           </p>
           <span class="color-8D style {{product.gender}}">
-            {{product.gender}} {{product.category_id}}
+            <!-- 여성 농구 => 여성 골프 -->
+            {% if category_id == 3 and gender == "Women"%} 여성 골프 {% else %}
+            <!-- 나머지 -->
+            {{product.gender}} {{product.category_id}} {% endif %}
           </span>
         </div>
       </div>
