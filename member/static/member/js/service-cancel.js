@@ -63,7 +63,6 @@ $(document).ready(function () {
         product.push(productItem);
       }
     }
-    console.log(product);
     if (toggle) {
       for (var i = 0; i < numOfItems; i++) {
         $(".toggle-ul").append(
@@ -88,7 +87,7 @@ $(document).ready(function () {
       $("#checked-price").text(`결제 금액 : ${product[classNum].price}원`);
 
       // 제출하기
-      $("#submit-btn").click(function () {
+      $(".submit-btn").click(function () {
         if (checkSelect) {
           var title = $("#cancel-input-title").val().length;
           var body = $("#cancel-input-body").val().length;
@@ -96,16 +95,19 @@ $(document).ready(function () {
           if (!title && !body) {
             $(".alert-msg-title").text("필수사항입니다.");
             $(".alert-msg").text("필수사항입니다.");
+            $("#cancel-input-title").focus();
           }
           // 제목만 없을때
           else if (!title && body) {
             $(".alert-msg-title").text("필수사항입니다.");
             $(".alert-msg").text("");
+            $("#cancel-input-title").focus();
           }
           // 바디만 없을때
           else if (title && !body) {
             $(".alert-msg-title").text("");
             $(".alert-msg").text("필수사항입니다.");
+            $("#cancel-input-body").focus();
           }
           // 다 걸른 최종 상태
           else {
@@ -126,7 +128,7 @@ $(document).ready(function () {
   });
 
   //  안 골랐을 경우
-  $("#submit-btn").click(function () {
+  $(".submit-btn").click(function () {
     if (!checkSelect) {
       alert("상품을 골라주세요");
     }
