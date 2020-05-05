@@ -52,6 +52,7 @@
           required
           placeholder="이름"
           class="sign-in-input"
+          id="sign-in-name"
         />
         <input
           type="password"
@@ -440,6 +441,9 @@
         </li>
         <li>
           <a href=""><span>Kids</span></a>
+        </li>
+        <li>
+          <a href="/member/service/"><span>고객센터</span></a>
         </li>
         {% if user.is_authenticated %}
         <li>
