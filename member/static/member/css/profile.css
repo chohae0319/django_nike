@@ -36,6 +36,7 @@
   flex-direction: column;
   width: 350px;
   height: 90px;
+  padding-left: 10px;
 }
 .order-info-detail > * {
   margin-bottom: 5px;
@@ -56,11 +57,40 @@
   display: flex;
   padding: 20px 0;
   width: 100%;
+  flex-wrap: nowrap;
+  overflow: scroll;
 }
 .my-cart .card {
-  width: 24%;
   margin-right: 10px;
 }
 .my-cart .card .img-wrapper {
-  width: 100%;
+  width: 233px;
+}
+
+aside {
+  width: 23%;
+  height: 100%;
+  padding: 0 48px;
+  position: fixed;
+  overflow-y: scroll;
+  top: 108.5px;
+}
+
+@media screen and (max-width: 830px) {
+  section#profile {
+    display: none;
+  }
+  aside {
+    position: relative;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  #profile-ul {
+    margin: 0;
+    margin-bottom: 108.5px;
+    font-size: 14px;
+    text-align: center;
+    height: 100%;
+  }
 }

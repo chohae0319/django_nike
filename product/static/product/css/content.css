@@ -1,9 +1,10 @@
 section {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  /* max-width: 960px; */
+  width: 76%;
   top: 108.5px;
-  left: 288px;
+  left: 23%;
   min-height: 100vh;
   transition: 0.35s;
 }
@@ -469,7 +470,7 @@ label.no-amount {
 .sign-in-footer {
   text-align: center;
   margin-top: 30px;
-  color: rgb(229, 229, 229);
+  color: #8d8d8d;
 }
 .sign-in-footer a {
   color: black;

@@ -115,7 +115,13 @@ aside.product {
   flex-direction: column;
   justify-content: center;
 }
-
+#profile-ul li div > strong {
+  padding-bottom: 10px;
+}
 #profile-ul li div a {
-  padding-top: 20px;
+  padding: 10px 0;
+}
+
+#profile-ul li div a:hover {
+  background-color: #f4f4f4;
 }
