@@ -1,3 +1,9 @@
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+}
+
 #checkout input[type="checkbox"] {
   display: none;
 }
@@ -37,7 +43,7 @@
   justify-content: space-between;
   cursor: pointer;
   width: 100%;
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
 }
 #checkout i {
@@ -245,4 +251,17 @@ span#after-address {
 .alert-msg {
   font-size: 16px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 640px) {
+  .checkout-main-box {
+    flex-direction: column;
+    flex-flow: column-reverse;
+  }
+  .client-detail-box {
+    padding-right: 0;
+  }
+  .order-detail-box {
+    margin-right: 0;
+  }
 }

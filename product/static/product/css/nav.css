@@ -458,3 +458,11 @@ input#toggle-section-header {
     padding-top: 20px;
   }
 }
+
+/* 로그인 모달 모바일 */
+@media screen and (max-width: 575px) {
+  .login-modal {
+    width: 72.5%;
+    height: 73.5%;
+  }
+}

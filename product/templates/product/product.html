@@ -372,7 +372,7 @@
           for (var i = 0; i < product.length; i++) {
             forAjax.append(
               `<div class='card card${i +
-                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a><e/div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
+                1}'><div class='img-wrapper'><a class='linkDetail${i}'><img class='thumImg${i}'/></a></div><div class='product-info'><div class='itemTitle${i}'></div><div class='item-subtitle style${i} color-8D'></div><div class='price${i} color-8D'>원</div></div></div>`
             );
             var pk = product[i]["pk"];
             $(`.linkDetail${i}`).attr("href", "../../detail/" + pk + "/");

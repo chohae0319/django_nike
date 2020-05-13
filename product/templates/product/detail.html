@@ -20,7 +20,7 @@
       </div>
       {% for p in product_image %}
       <div class="detail-img-wrapper">
-        <a href=""><img src="{{ p.image.url }}" alt="이미지 상세 보기"/></a>
+        <a href=""><img src="{{ p.image.url }}" alt="이미지 상세 보기" /></a>
       </div>
       {% endfor %}
     </div>
@@ -191,6 +191,13 @@
     });
 
     $(".order-btn").on("click", function() {
+      var is_login ={% if user.is_authenticated %}true{% else %}false{% endif %};
+
+      if(!is_login){
+        alert("로그인 해주세요");
+        return;
+      }
+
       var order_list = [];
       var inventory_id = $('input[name="inventory"]:checked').val();
       var quantity = $("#numOfItems").text() * 1;

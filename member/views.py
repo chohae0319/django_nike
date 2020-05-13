@@ -124,7 +124,7 @@ def profile(request):
         user_id=user_id).values_list('id', flat=True)
     my_orders = OrderList.objects.filter(
         order_id__in=order_id_list).order_by('-id')[:4]
-    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
+    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')
     my_profile = Profile.objects.all()
     orders = Order.objects.filter(user_id=user_id)
     total = sum([order.total_price for order in orders])

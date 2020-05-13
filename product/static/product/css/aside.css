@@ -1,5 +1,5 @@
 aside {
-  width: 288px;
+  width: 23%;
   height: 100%;
   padding: 0 48px;
   position: fixed;
@@ -84,6 +84,11 @@ aside.product {
 
 #size-wrapper .size-label:hover {
   border: 1px solid;
+}
+@media screen and (max-width: 1050px) {
+  #size-wrapper .size-label {
+    flex-basis: 33%;
+  }
 }
 @media screen and (max-width: 883px) {
   aside.product {

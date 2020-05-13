@@ -125,6 +125,12 @@ img {
   min-height: 500px;
   background-color: #ffffff;
 }
+@media screen and (max-width: 575px) {
+  .find-membership-modal {
+    width: 72.5%;
+    height: 73.5%;
+  }
+}
 
 #find-membership-wrapper {
   display: flex;
