@@ -91,6 +91,8 @@
 
 /* 받으시는 분 연락처 5:5 */
 #checkout-address-box #address-list1 > div {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
@@ -249,7 +251,7 @@ span#after-address {
 }
 
 .alert-msg {
-  font-size: 16px;
+  font-size: 10px;
   font-weight: bold;
 }
 
