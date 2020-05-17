@@ -7,7 +7,20 @@ $(function () {
 // 모바일 검색창에서 검색창 누를 시 모달 창 띄우기
 $(function () {
   $("#hide-search-input").focus(function () {
-    $("#hide-search-modal").toggleClass("big-modal");
+    $(".hide-search-modal").addClass("big-modal");
+    $("body").css({ overflow: "hidden" });
+  });
+  $("#nonhide-search-icon").click(() => {
+    $(".hide-search-modal").addClass("big-modal");
+    $("body").css({ overflow: "hidden" });
+  });
+  $(".xi-maker").click(() => {
+    $(".hide-search-modal").addClass("big-modal");
+    $("body").css({ overflow: "hidden" });
+  });
+  $("#hide-search-close").click(() => {
+    $(".hide-search-modal").removeClass("big-modal");
+    $("body").css({ overflow: "auto" });
   });
 });
 
