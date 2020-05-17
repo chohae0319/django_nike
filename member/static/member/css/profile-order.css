@@ -73,6 +73,9 @@
 .current-shipping-box {
   padding: 0 20px;
 }
+.current-shipping-box .col {
+  width: auto;
+}
 .current-shipping-box > p:first-child {
   padding: 10px 0;
 }
@@ -152,5 +155,10 @@ label[for="order-shipping-modify"] {
     align-items: flex-start;
     align-content: space-between;
     height: 100px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .order-shipping-box {
+    width: 90%;
   }
 }
