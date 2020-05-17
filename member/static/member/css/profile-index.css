@@ -1,0 +1,19 @@
+@media screen and (max-width: 830px) {
+  section#profile {
+    display: none;
+  }
+  aside {
+    display: block;
+    position: relative;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  #profile-ul {
+    margin: 0;
+    margin-bottom: 108.5px;
+    font-size: 14px;
+    text-align: center;
+    height: 100%;
+  }
+}
