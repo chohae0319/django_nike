@@ -111,9 +111,6 @@ nav li a {
 }
 
 /* logo-wrapper */
-.nav-lower .nikeLogo {
-  width: 194px;
-}
 .logo-wrapper {
   width: 80px;
   height: 69px;
@@ -198,10 +195,6 @@ nav li a {
 }
 
 #nav-mobile .icon-wrapper {
-  width: 30px;
-  height: 30px;
-  /* border: 1px solid; */
-  margin-left: 20px;
   cursor: pointer;
 }
 
@@ -244,17 +237,34 @@ nav li a {
   height: 50px;
   padding-left: 45px;
 }
+.hide-search-modal {
+  display: none;
+}
 
-.big-modal {
+.hide-search-modal.big-modal {
   position: absolute;
   z-index: 1000;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background-color: #ffffff;
-  transition: ease 0.5s;
 }
+.search-msg-wrapper {
+  width: 80%;
+  height: 50%;
+}
+.search-msg-wrapper p {
+  padding: 20px 0;
+}
+#hide-search-close {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* profile-toggle */
 #user-profile {
   cursor: pointer;
@@ -395,6 +405,8 @@ input#toggle-section-header {
   }
   #nav-mobile {
     display: flex;
+    justify-content: space-between;
+    width: 145px;
   }
   #hide-search-icon:focus #hide-search-focus {
     width: 100%;
