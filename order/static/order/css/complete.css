@@ -4,7 +4,7 @@
 }
 
 .complete-header {
-  padding: 60px 0;
+  padding: 35px 0;
   text-align: center;
 }
 
@@ -29,11 +29,12 @@
 .order-info-box > ul > li {
   display: flex;
 }
-.order-info-box > ul > li > * {
+.order-info-wrapper > li > * {
   padding: 10px;
 }
 
 section .list-title {
+  padding: 10px;
   text-align: center;
   background-color: rgb(245, 245, 245);
 }
@@ -49,24 +50,29 @@ section .list-title {
 }
 
 /*  */
-.order-detail-info > li > span:first-child {
+.order-detail-content {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 100px;
-  max-width: 100px;
-  word-break: break-all;
+  flex-direction: column;
+}
+.order-detail-content.orderNumber {
+  flex-basis: 30%;
   border-right: 1px solid #e0e0e0;
 }
-/* 주문상품내역 */
-.order-detail-info > li > span:nth-child(2) {
-  flex: 1;
-  text-align: center;
+.order-detail-content.orderInfo {
+  flex-basis: 70%;
 }
-.order-detail-info > li > div:nth-child(2) {
-  flex: 1;
+.order-detail-content.orderInfo > div {
   display: flex;
+  padding: 10px;
 }
+.order-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* 주문상품내역 */
 .complete-img-wrapper {
   width: 190px;
   height: 190px;
@@ -79,4 +85,42 @@ section .list-title {
 }
 .complete-oderInfo-detail > span {
   padding: 10px 0;
+}
+
+@media screen and (max-width: 600px) {
+  /* 타이틀 크기 */
+  .big-title {
+    font-size: 22px;
+  }
+  h4 {
+    font-size: 11px;
+  }
+  .complete-header .btn-rectangle {
+    padding: 20px 75px;
+  }
+
+  /* 반응형 퍼센트 적용 */
+  .order-info-box {
+    width: 90%;
+  }
+  /* 세로정렬 */
+  .order-info-box > ul > li,
+  .order-detail-content.orderInfo > div {
+    display: flex;
+    flex-direction: column;
+  }
+  /* border-right 삭제 */
+  .order-detail-content.orderNumber {
+    flex-basis: auto;
+    border-right: none;
+  }
+  /* 주문번호에 padding */
+  .order-number {
+    padding: 10px 0;
+  }
+
+  /*이미지 가운데 정렬 */
+  .complete-img-wrapper {
+    margin: 0 auto;
+  }
 }
