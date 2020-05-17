@@ -1,0 +1,37 @@
+[
+{
+  "model": "product.category",
+  "pk": 1,
+  "fields": {
+    "name": "\ub77c\uc774\ud504\uc2a4\ud0c0\uc77c"
+  }
+},
+{
+  "model": "product.category",
+  "pk": 2,
+  "fields": {
+    "name": "\ub7ec\ub2dd"
+  }
+},
+{
+  "model": "product.category",
+  "pk": 3,
+  "fields": {
+    "name": "\ub18d\uad6c"
+  }
+},
+{
+  "model": "product.category",
+  "pk": 4,
+  "fields": {
+    "name": "\ucd95\uad6c"
+  }
+},
+{
+  "model": "product.category",
+  "pk": 5,
+  "fields": {
+    "name": "\uc0cc\ub4e4 & \uc2ac\ub9ac\ud37c"
+  }
+}
+]
