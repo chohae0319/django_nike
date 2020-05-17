@@ -447,7 +447,18 @@
         </li>
         {% if user.is_authenticated %}
         <li>
-          <a href="/member/profile/"><span>마이페이지</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-mypage" />
+          <label for="nav-ham-mypage" class="label-ham"><p>마이페이지</p></label>
+          <div class="ham-dropdown">
+            <a href="/member/profile/"><p>MY PAGE</p></a>
+            <a href="/member/profile-rate"><p>회원등급 현황</p></a>
+            <a href="/member/order/"><p>주문 배송</p></a>
+            <a href="/member/service/"><p>취소 / 반품</p></a>
+            <a href="/order/shipping-show"><p>배송지 관리</p></a>
+            <a href="/member/profile-update"><p>회원정보 관리</p></a>
+        <a href="/member/profile-password"><p>비밀번호</p></a>
+        <a href="/member/profile-delete"><p>회원탈퇴</p></a>
+          </div>
         </li>
         {% else %} {% endif %}
       </ul>

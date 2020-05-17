@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // 클래스 추가
   $(".form-box-signUp input").addClass("sign-up-input");
 
@@ -20,16 +20,13 @@ $(document).ready(function() {
   $(".form-box-signUp #id_email").before("<div>이메일</div>");
   // placeholder 추가
   $("#id_password1").before("<div>비밀번호</div>");
-  $("#id_password1").attr(
-    "placeholder",
-    "영문+숫자+특수문자 8~16자리(특수문자 괄호()는 사용 불가)"
-  );
+  $("#id_password1").attr("placeholder", "비밀번호는 자유롭게 작성가능합니다.");
   $("#id_password2").before("<div>비밀번호 확인</div>");
   $("#id_password2").attr("placeholder", "패스워드를 다시 입력해주세요.");
 });
 
 // sign-in
-$(document).ready(function() {
+$(document).ready(function () {
   // 클래스 추가
   $(".form-box-signIn input").addClass("sign-in-input");
   $(".form-box-signIn p label").text("");
@@ -44,7 +41,7 @@ $(document).ready(function() {
 });
 
 // member - update
-$(document).ready(function() {
+$(document).ready(function () {
   $(
     "#profile-update #id_user_permissions,#id_is_staff,#id_is_active,#id_date_joined"
   ).remove();
@@ -74,7 +71,7 @@ $(document).ready(function() {
 });
 
 // 비밀번호 변경
-$(document).ready(function() {
+$(document).ready(function () {
   $("#profile-password ul").remove();
   $("#profile-password label").remove();
   $(

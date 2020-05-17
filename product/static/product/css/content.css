@@ -609,7 +609,7 @@ section#profile .profile-list-view {
 #profile-update input,
 #profile-password input,
 #profile-delete input {
-  width: 442.5px;
+  width: 100%;
   height: 40px;
   padding: 9px 12px;
   /* margin-bottom: 20px; */
@@ -621,7 +621,6 @@ section#profile .profile-list-view {
   color: #fff;
 }
 #profile-delete p {
-  width: 442.5px;
   font-size: 24px;
   margin: 20px 0;
 }

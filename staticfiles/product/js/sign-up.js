@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   // 클래스 추가
   $(".form-box-signUp input").addClass("sign-up-input");
 

@@ -404,7 +404,7 @@ input#toggle-section-header {
     display: none;
   }
   input#sidebar:checked ~ nav {
-    right: 470px;
+    right: 73.5%;
   }
   input#sidebar:checked ~ #whole-wrapper {
     z-index: 20000;
@@ -412,10 +412,10 @@ input#toggle-section-header {
     overflow: hidden;
   }
   input#sidebar:checked ~ aside {
-    left: -470px;
+    left: -73.5%;
   }
   input#sidebar:checked ~ section {
-    left: -470px;
+    left: -73.5%;
   }
   input#sidebar:checked ~ #hide-sidebar {
     display: block;

@@ -4,8 +4,8 @@
 {% load static %}
 <!-- 링크 -->
 {% block link %}
-<link rel="stylesheet" href="{% static 'member/css/profile-order.css' %}" />
 <link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'member/css/profile-order.css' %}" />
 <link rel="stylesheet" href="{% static 'order/css/shipping.css' %}" />
 <script src="{% static 'member/js/change-shipping.js' %}"></script>
 {% endblock %}
@@ -25,10 +25,10 @@
     <input type="text" name="receiver_phone" id="modify-shipping-phone" />
     <span>배송 메모</span>
     <input type="text" name="receiver_memo" id="modify-shipping-memo" />
-    <input type="hidden" id="modify-shipping-id" >
+    <input type="hidden" id="modify-shipping-id" />
     <input type="submit" id="modify-button" value="수정하기" />
     <script>
-      $("#modify-button").click(function(e){
+      $("#modify-button").click(function (e) {
         e.preventDefault();
 
         var id = $("#modify-shipping-id").val();
@@ -40,19 +40,21 @@
         $.ajax({
           type: "POST",
           url: "{% url 'member:change-shipping' %}",
-          data: {'id': id,
-                 'receiver': receiver,
-                 'phone': phone,
-                 'address': address,
-                 'memo': memo,
-                  csrfmiddlewaretoken: '{{ csrf_token }}'},
-          dataType:'json',
-          success: function(response) {
+          data: {
+            id: id,
+            receiver: receiver,
+            phone: phone,
+            address: address,
+            memo: memo,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+          },
+          dataType: "json",
+          success: function (response) {
             var answer = response.result;
-            if (answer == 'success') {
+            if (answer == "success") {
               window.location.href = "{% url 'member:order' %}";
             }
-          }
+          },
         });
       });
     </script>
@@ -88,11 +90,12 @@
             {% if order.status == 0 %}
             <label
               class="change-shipping{{order.pk}}"
-              for="order-shipping-modify"><span class="btn-rectangle">배송지 변경</span>
+              for="order-shipping-modify"
+              ><span class="btn-rectangle">배송지 변경</span>
             </label>
             {% endif %}
           </p>
-          <ul class="shipping-point-wrapper">
+          <!-- <ul class="shipping-point-wrapper">
             <li>
               받으실 주소 :
               <span class="change-shipping{{order.pk}}"
@@ -117,13 +120,39 @@
                 >{{ order.order_id.memo }}</span
               >
             </li>
-          </ul>
+          </ul> -->
         </div>
         <div class="order-price detail-col">
           <p><strong class="title">결제금액</strong></p>
           <p>{{ order.order_id.total_price|intcomma }}원</p>
         </div>
       </div>
+      <ul class="shipping-point-wrapper">
+        <li>
+          받으실 주소 :
+          <span class="change-shipping{{order.pk}}"
+            >{{ order.order_id.receive_address }}</span
+          >
+        </li>
+        <li>
+          받으시는 분 :
+          <span class="change-shipping{{order.pk}}"
+            >{{ order.order_id.receive_name }}</span
+          >
+        </li>
+        <li>
+          연락처 :
+          <span class="change-shipping{{order.pk}}"
+            >{{ order.order_id.receive_phone }}</span
+          >
+        </li>
+        <li>
+          메모 :
+          <span class="change-shipping{{order.pk}}"
+            >{{ order.order_id.memo }}</span
+          >
+        </li>
+      </ul>
       <div class="buy-where">
         <p><strong>구매하신 곳</strong></p>
         <p>NIKE-CLONE.COM</p>
@@ -156,7 +185,9 @@
         </div>
         <p class="col">
           {% if not order.status %}
-          <span> {{ order.status | convert_status }} <i class="xi-info"></i></span>
+          <span>
+            {{ order.status | convert_status }} <i class="xi-info"></i
+          ></span>
           {% else %}
           <span> {{ order.status | convert_status }} </span>
           {% endif %}

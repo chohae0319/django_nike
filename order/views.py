@@ -12,7 +12,7 @@ from .forms import ShippingForm
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def checkout(request):
     # 세션에서 order_info 가져오기
     order_info = request.session['order_info']
@@ -206,7 +206,7 @@ def Shippings(request):
         form = ShippingForm()
     return render(request, 'order/shipping.html', {'ship':form})
 
-
+@login_required(login_url='/member/login/')
 def ShippingShow(request):
     shipping_instance = Shipping.objects.filter(user_id=request.user)
     #shipping_instance = get_object_or_404(Shipping)
@@ -221,7 +221,7 @@ def ShippingShow(request):
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def Shipping_update(request, pk):
     ship = Shipping.objects.get(id=pk)
     pk = ship.pk
@@ -236,7 +236,7 @@ def Shipping_update(request, pk):
     return 
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def Shipping_delete(request, pk):
     ship = Shipping.objects.get(id=pk)
     if request.method == 'POST':

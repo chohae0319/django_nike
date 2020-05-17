@@ -3,6 +3,13 @@
 <!-- 타이틀 -->
 {% block title %}개인정보수정-나이키{% endblock %}
 
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- 링크 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
+{% endblock %}
+
 <!-- content -->
 {% block profileContent %}
 

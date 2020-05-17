@@ -5,6 +5,7 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'order/css/checkout.css' %}" />
 <link rel="stylesheet" href="{% static 'order/css/shipping.css' %}" />
+<link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
 <script src="{% static 'order/js/shipping.js' %}"></script>
 <script src="{% static 'order/js/shipping-update.js' %}"></script>
 {% endblock %}
@@ -54,11 +55,14 @@
         />
         <span>받으시는 분</span>
         <input type="text" name="receiver" id="modify-shipping-receiver" />
-        <span>주소</span>
-        <input type="text" name="receiver_phone" id="modify-shipping-address" />
         <span>연락처</span>
-        <input type="text" name="receiver_address" id="modify-shipping-phone" />
-
+        <input type="text" name="receiver_phone" id="modify-shipping-phone" />
+        <span>주소</span>
+        <input
+          type="text"
+          name="receiver_address"
+          id="modify-shipping-address"
+        />
         <input type="submit" value="수정하기" />
       </form>
     </div>
