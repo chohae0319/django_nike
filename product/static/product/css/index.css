@@ -52,4 +52,19 @@
   .card .img-wrapper {
     width: 300px;
   }
+  #index .card-comment-box .main-title {
+    font-size: 30px;
+  }
+
+  #index .card-comment-box {
+    align-items: flex-start;
+  }
+  .card-comment-box .card-comment-header {
+    text-align: start;
+    margin-bottom: 40px;
+  }
+  .card-comment-header p {
+    font-size: 13px;
+    white-space: pre-line;
+  }
 }
