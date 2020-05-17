@@ -412,6 +412,9 @@ label.no-amount {
   }
 }
 @media screen and (max-width: 768px) {
+  section#detail {
+    padding: 0;
+  }
   #detail .detail-header {
     flex-direction: column;
     align-items: center;
@@ -419,6 +422,7 @@ label.no-amount {
   .detail-img-gallery {
     width: 90%;
     margin-bottom: 50px;
+    padding: 0;
   }
   .detail-img-wrapper {
     width: 48%;
@@ -430,7 +434,14 @@ label.no-amount {
   }
   .detail-img-wrapper {
     width: 90%;
+    height: 90%;
     margin-right: 0;
+  }
+  .detail-selection {
+    width: 90%;
+  }
+  #order-wrapper > .round-btn-big {
+    width: 90%;
   }
 }
 
