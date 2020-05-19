@@ -7,6 +7,7 @@
 {% block content %}
 <section id="best" class="cover">
   <!-- 왼쪽이 큰 버전 -->
+  <!-- lifeStyle -->
   <div class="best-category-gallery">
     <div class="best-category-header">
       <h2 class="main-title">BEST 라이프스타일</h2>
@@ -16,7 +17,11 @@
     <div class="best-img-box">
       {% for product in life_product_list %}
       <div class="best-img-wrapper">
-        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
+        <img
+          src="{{product.thumbnail.url}}"
+          alt="bestLifeStyle{{product.pk}}"
+          class="best-img"
+        />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
@@ -27,6 +32,7 @@
     </div>
   </div>
   <!-- 오른쪽이 큰 버전-->
+  <!-- 러닝 -->
   <div class="best-category-gallery">
     <div class="best-category-header">
       <h2 class="main-title">BEST 러닝</h2>
@@ -36,7 +42,11 @@
     <div class="best-img-box-right">
       {% for product in run_product_list %}
       <div class="best-img-wrapper">
-        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
+        <img
+          src="{{product.thumbnail.url}}"
+          alt="besk러닝{{product.pk}}"
+          class="best-img"
+        />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
@@ -46,6 +56,7 @@
       {% endfor %}
     </div>
   </div>
+  <!-- basketball-->
   <div class="best-category-gallery">
     <div class="best-category-header">
       <h2 class="main-title">BEST 농구</h2>
@@ -55,7 +66,11 @@
     <div class="best-img-box">
       {% for product in bask_product_list %}
       <div class="best-img-wrapper">
-        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
+        <img
+          src="{{product.thumbnail.url}}"
+          alt="best농구{{product.pk}}"
+          class="best-img"
+        />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
@@ -65,6 +80,7 @@
       {% endfor %}
     </div>
   </div>
+  <!-- soccer -->
   <div class="best-category-gallery">
     <div class="best-category-header">
       <h2 class="main-title">BEST 축구</h2>
@@ -74,7 +90,11 @@
     <div class="best-img-box-right">
       {% for product in soc_product_list %}
       <div class="best-img-wrapper">
-        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
+        <img
+          src="{{product.thumbnail.url}}"
+          alt="나이키리액트비전"
+          class="best-img"
+        />
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>
@@ -84,6 +104,7 @@
       {% endfor %}
     </div>
   </div>
+  <!-- flip-flops -->
   <div class="best-category-gallery">
     <div class="best-category-header">
       <h2 class="main-title">BEST 샌들&슬리퍼</h2>
@@ -93,7 +114,7 @@
     <div class="best-img-box flip">
       {% for product in flip_product_list %}
       <div class="best-img-wrapper flip">
-        <img src="{{product.thumbnail.url}}" alt="나이키리액트비전" />
+        <img src="{{product.thumbnail.url}}" alt="flip-flops{{product.pk}}"  class="best-img"/>
         <div class="best-hover-box">
           <h3 class="title">{{product.name}}</h3>
           <h3 class="title">{{product.price|intcomma}}원</h3>

@@ -5,7 +5,7 @@
 <!-- 링크 -->
 {% block link %}
 <link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
-<!-- <script src="{% static 'member/js/profile.js' %}"></script> -->
+<link rel="stylesheet" href="{% static 'member/css/profile-index.css' %}" />
 {% endblock %}
 
 <!-- content -->
@@ -14,7 +14,7 @@
 <div class="profile-list-title">
   <h2 class="big-title">최근 주문 내역</h2>
   <a href="/member/order"
-    ><span>상세주문내역 <i class="xi-angle-right"></i></span
+    ><span>상세주문내역 & 전체보기<i class="xi-angle-right"></i></span
   ></a>
 </div>
 
@@ -48,7 +48,7 @@
           <span class="order-info-style">{{ order.product_id.style }}</span>
           <span class="order-info-size">{{ order.size }}</span>
         </p>
-        <span class="order-info-amount">{{ order.quantity }}</span>
+        <span class="order-info-amount">{{ order.quantity }} 개</span>
         <span class="order-info-price"
           >{{ order.product_id.price|intcomma }}원</span
         >

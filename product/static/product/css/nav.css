@@ -109,11 +109,11 @@ nav li a {
   padding: 0 32px 0 20px;
   align-items: center;
 }
+.nikeLogo{
+  width: 192px;
+}
 
 /* logo-wrapper */
-.nav-lower .nikeLogo {
-  width: 194px;
-}
 .logo-wrapper {
   width: 80px;
   height: 69px;
@@ -198,10 +198,6 @@ nav li a {
 }
 
 #nav-mobile .icon-wrapper {
-  width: 30px;
-  height: 30px;
-  /* border: 1px solid; */
-  margin-left: 20px;
   cursor: pointer;
 }
 
@@ -244,17 +240,34 @@ nav li a {
   height: 50px;
   padding-left: 45px;
 }
+.hide-search-modal {
+  display: none;
+}
 
-.big-modal {
+.hide-search-modal.big-modal {
   position: absolute;
   z-index: 1000;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background-color: #ffffff;
-  transition: ease 0.5s;
 }
+.search-msg-wrapper {
+  width: 80%;
+  height: 50%;
+}
+.search-msg-wrapper p {
+  padding: 20px 0;
+}
+#hide-search-close {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* profile-toggle */
 #user-profile {
   cursor: pointer;
@@ -375,11 +388,17 @@ input#toggle-aside,
 input#toggle-section-header {
   display: none;
 }
-@media screen and (max-width: 883px) {
+
+@media screen and (max-width: 920px) {
   .nav-upper {
     width: 0;
     height: 0;
     visibility: hidden;
+  }
+  .nav-lower {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
   }
   .nav-lower .mainNav {
     display: none;
@@ -389,6 +408,8 @@ input#toggle-section-header {
   }
   #nav-mobile {
     display: flex;
+    justify-content: space-between;
+    width: 145px;
   }
   #hide-search-icon:focus #hide-search-focus {
     width: 100%;
@@ -398,7 +419,7 @@ input#toggle-section-header {
     display: none;
   }
   input#sidebar:checked ~ nav {
-    right: 470px;
+    right: 73.5%;
   }
   input#sidebar:checked ~ #whole-wrapper {
     z-index: 20000;
@@ -406,10 +427,10 @@ input#toggle-section-header {
     overflow: hidden;
   }
   input#sidebar:checked ~ aside {
-    left: -470px;
+    left: -73.5%;
   }
   input#sidebar:checked ~ section {
-    left: -470px;
+    left: -73.5%;
   }
   input#sidebar:checked ~ #hide-sidebar {
     display: block;
@@ -431,5 +452,32 @@ input#toggle-section-header {
   }
   #sidebar-inner-box li + li {
     border-top: 1px solid #e0e0e0;
+  }
+
+  /* 햄버거 드롭다운 메뉴 */
+  .nav-ham-check {
+    display: none;
+  }
+
+  .label-ham {
+    cursor: pointer;
+  }
+  .ham-dropdown {
+    display: none;
+  }
+  .nav-ham-check:checked ~ .ham-dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+  .ham-dropdown p {
+    padding-top: 20px;
+  }
+}
+
+/* 로그인 모달 모바일 */
+@media screen and (max-width: 575px) {
+  .login-modal {
+    width: 72.5%;
+    height: 73.5%;
   }
 }

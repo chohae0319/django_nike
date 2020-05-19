@@ -59,6 +59,7 @@ def logout(request):
     return redirect('/')
 
 
+@login_required(login_url='/member/login/')
 def rate(request):
     my_profile = Profile.objects.all()
     orders = Order.objects.filter(user_id=request.user)
@@ -87,6 +88,7 @@ def service(request):
     )
 
 
+@login_required(login_url='/member/login/')
 def service_cancel_list(request):
     return render(
         request,
@@ -95,6 +97,7 @@ def service_cancel_list(request):
     )
 
 
+@login_required(login_url='/member/login/')
 def service_complete(request):
     return render(
         request,
@@ -103,7 +106,7 @@ def service_complete(request):
     )
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def service_cancel(request):
     my_orders = OrderList.objects.all().order_by('-id')
     context = {
@@ -112,14 +115,16 @@ def service_cancel(request):
     return render(request, 'member/service-cancel.html/', context)
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def profile(request):
     user_id = request.user
 
     # user_id에 해당하는 order_id 찾아서 리스트로 만들기
-    order_id_list = Order.objects.filter(user_id=user_id).values_list('id', flat=True)
-    my_orders = OrderList.objects.filter(order_id__in=order_id_list).order_by('-id')[:4]
-    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')[:4]
+    order_id_list = Order.objects.filter(
+        user_id=user_id).values_list('id', flat=True)
+    my_orders = OrderList.objects.filter(
+        order_id__in=order_id_list).order_by('-id')[:4]
+    my_carts = Cart.objects.filter(user_id=user_id).order_by('-id')
     my_profile = Profile.objects.all()
     orders = Order.objects.filter(user_id=user_id)
     total = sum([order.total_price for order in orders])
@@ -140,7 +145,7 @@ def profile(request):
     return render(request, 'member/profile.html', context)
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def order(request):
     user_id = request.user
 
@@ -156,7 +161,7 @@ def order(request):
     return render(request, 'member/profile-orders.html', context)
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def user_info_update(request):
     if request.method == 'POST':
         user_change_form = CustomUserChangeForm(
@@ -169,7 +174,7 @@ def user_info_update(request):
     return render(request, 'member/profile-update.html', {'user_change_form': user_change_form})
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def user_info_delete(request):
     if request.method == 'POST':
         request.user.delete()
@@ -177,7 +182,7 @@ def user_info_delete(request):
     return render(request, 'member/profile-delete.html')
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def user_info_password(request):
     if request.method == 'POST':
         password_change_form = PasswordChangeForm(request.user, request.POST)
@@ -207,14 +212,15 @@ def change_shipping(request):
 
 
 def id_find(request):
-    email = request.POST.get('email', '')
-    data = User.objects.get(email=email) # template에서 받아온 email과 일치하는 이메일을 갖는 user queryset 반환
-    username = data.username
-    user_email = data.email
-    last_name = data.last_name
-    first_name = data.first_name
-    name = first_name + last_name
-    date_joined = data.date_joined
+    email = request.POST['email']
+    # template에서 받아온 email과 일치하는 이메일을 갖는 user queryset 반환
+    data = User.objects.filter(email=email)
 
-    info = {'username':username, 'name':name, 'user_email':user_email, 'date_joined':date_joined }
-    return HttpResponse(json.dumps({'info': info}, indent=4, sort_keys=True, default=str), content_type="application/json")
+    datas = []
+
+    for dt in data:
+        datas.append({'id': dt.username, 'email': dt.email,
+                      'date': dt.date_joined, 'name': dt.last_name + dt.first_name})
+
+    # info = {'username':username, 'name':name, 'user_email':user_email, 'date_joined':date_joined }
+    return HttpResponse(json.dumps({'info': datas}, indent=4, sort_keys=True, default=str), content_type="application/json")

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tech View</title>
+    <link
+      href="{% static 'product/img/favicon 2.ico' %}"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'product/css/aboutDetail.css' %}" />
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'product/js/aboutDetail.js' %}"></script>
+  </head>
+  <body>
+    <span id="category2" class="category">{{category2}}</span>
+    <span id="category3" class="category">{{category3}}</span>
+    {% if category3 == 'sign-up' or category3 == 'cancelList' %}
+    <div id="aboutDetail">
+      <div class="big">
+        <a href="{{url1}}"><div class="codeView">code view</div></a>
+      </div>
+      <div class="wrapper">
+        <a href="{{url2}}"><div class="codeView">code view</div></a>
+      </div>
+    </div>
+    {% else %}
+    <div id="aboutDetail">
+      <div class="big">
+        <a href="{{url1}}"><div class="codeView">code view</div></a>
+      </div>
+      <div class="wrapper">
+        <div class="up">
+          <a href="{{url2}}"><div class="codeView">code view</div></a>
+        </div>
+        <div class="down">
+          <a href="{{url3}}"><div class="codeView">code view</div></a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>

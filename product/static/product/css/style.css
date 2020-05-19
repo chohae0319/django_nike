@@ -122,8 +122,14 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
-  height: 500px;
+  min-height: 500px;
   background-color: #ffffff;
+}
+@media screen and (max-width: 575px) {
+  .find-membership-modal {
+    width: 72.5%;
+    height: 73.5%;
+  }
 }
 
 #find-membership-wrapper {
@@ -240,7 +246,7 @@ img {
 #back-to-lastStep {
   display: block;
   width: 20%;
-  margin: 10px auto;
+  margin: 15px auto;
   text-decoration: underline;
   font-weight: bold;
   cursor: pointer;

@@ -15,13 +15,6 @@ from django.core import serializers
 import json
 import itertools
 
-
-# def index(request):
-#     return render(
-#         request,
-#         'product/index.html/',
-#     )
-
 def index(request):
     # 각 카테고리에서 판매량 1순위인 상품 리스트에 추가
     # MEN, WOMEN 구분 함.
@@ -50,6 +43,58 @@ def about(request):
         'product/about.html/',
         {},
     )
+
+class aboutDetail(ListView):
+    model = Product
+    template_name = 'product/aboutDetail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(aboutDetail, self).get_context_data(**kwargs)
+        category = self.kwargs['category']
+        id = self.kwargs['id']
+
+        if category == 1:
+            context['category2'] = 'member'
+            if id == 0:
+                context['category3'] = 'sign-in'
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/views.py#L39'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/product/templates/product/base.html#L36'
+                context['url3'] ='https://github.com/Minsoo-web/django_nike/blob/master/product/views.py#L391'
+            elif id==1:
+                context['category3'] = 'sign-up'
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/views.py#L19'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/static/member/js/member.js#L1'
+            else:
+                context['category3'] = 'member' 
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/views.py#L162'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/views.py#L183'
+                context['url3'] ='https://github.com/Minsoo-web/django_nike/blob/master/order/views.py#L225'
+
+        elif category == 2:
+            context['category2'] = 'order'
+            if id == 0:
+                context['category3'] = 'grade'
+            elif id == 1:
+                context['category3'] = 'shipping'
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/order/static/order/js/checkout-next-step.js#L1'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/order/views.py#L198'
+                context['url3'] ='https://github.com/Minsoo-web/django_nike/blob/master/order/views.py#L225'
+            else : 
+                context['category3'] = 'cart'
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/product/templates/product/detail.html#L121'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/product/static/product/js/cart.js#L1'
+                context['url3'] ='https://github.com/Minsoo-web/django_nike/blob/master/product/templates/product/cart.html#L60'
+        else :
+            context['category2'] = 'cancel'
+            if id == 0:
+                context['category3'] = 'cancelList'
+                context['url1'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/static/member/js/service-cancel.js#L9'
+                context['url2'] ='https://github.com/Minsoo-web/django_nike/blob/master/member/static/member/js/service-list.js#L1'
+            else:
+                context['category3'] = 'cancel'
+
+        return context
+
 
 
 def error(request):

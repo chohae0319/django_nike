@@ -21,6 +21,7 @@ app_name = "products"
 urlpatterns = [
     path('', views.index),
     path('product/about',views.about, name='about'),
+    path('product/about/<int:category>/<int:id>',views.aboutDetail.as_view(), name='aboutDetail'),
     path('product/error',views.error,name='error'),
     path('product/all/<int:gender>/<int:id>', views.CategoryDetail.as_view(), name='list'),
     path('product/size/', views.FilterDetail, name='size'),

@@ -24,7 +24,7 @@
       <div class="cart-product-info-header">
         <p>
           <span class="cart-product-category"></span
-          ><span class="cart-product-price"></span>
+          ><span class="cart-product-price color-orange"></span>
         </p>
         <h2 class="big-title"></h2>
       </div>
@@ -78,15 +78,23 @@
               사이즈 : <span class="{{c.pk}}">{{ c.inventory_id.size }}</span>
             </li>
             <li>수량 : {{ c.quantity }}</li>
+            <li class="cart-mobile cart-item-option">
+              <span class="{{ c.inventory_id.product_id.pk }}" value="{{c.pk}}"
+                >옵션 변경</span
+              >
+              <span class="color-orange"
+                >{{ c.inventory_id.product_id.price|intcomma }}</span
+              >
+            </li>
           </ul>
         </div>
-        <div class="cart-item-option">
+        <div class="cart-item-option cart-desktop">
           <span class="{{ c.inventory_id.product_id.pk }}" value="{{c.pk}}"
             >옵션 변경</span
           >
-        </div>
-        <div class="color-orange">
-          <span>{{ c.inventory_id.product_id.price|intcomma }}</span>
+          <span class="color-orange"
+            >{{ c.inventory_id.product_id.price|intcomma }}</span
+          >
         </div>
         <div class="cart-item-delete">
           <i class="xi-close" onclick="delete_one({{ c.id }})"></i>

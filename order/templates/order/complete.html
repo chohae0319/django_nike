@@ -27,27 +27,31 @@
         </li>
         <li>
           <span class="list-title">결제완료금액</span>
-          <span>{{ order.total_price|intcomma }}원</span>
+          <span class="color-orange">{{ order.total_price|intcomma }}원</span>
         </li>
       </ul>
       <span>배송주문상품 정보</span>
+
       <ul class="order-detail-info">
-        <li>
-          <span class="list-title">주문번호</span>
-          <span class="list-title">주문상품내역</span>
-        </li>
         {% for item in order_list %}
         <li>
-          <span>{{ item.id }}</span>
-          <div>
-            <div class="complete-img-wrapper">
-              <img src="{{ item.product_id.thumbnail.url }}" alt="" />
+          <div class="order-detail-content orderNumber">
+            <span class="list-title">주문번호</span>
+            <span class="order-number">{{ item.id }}</span>
+          </div>
+
+          <div class="order-detail-content orderInfo">
+            <span class="list-title">주문상품내역</span>
+            <div>
+              <div class="complete-img-wrapper">
+                <img src="{{ item.product_id.thumbnail.url }}" alt="" />
+              </div>
+              <p class="complete-oderInfo-detail">
+                <span>{{ item.product_id.name }}</span>
+                <span>옵션 : {{ item.size }} </span>
+                <span>수량 : {{ item.quantity }}개</span>
+              </p>
             </div>
-            <p class="complete-oderInfo-detail">
-              <span>{{ item.product_id.name }}</span>
-              <span>옵션 : {{ item.size }} </span>
-              <span>수량 : {{ item.quantity }}개</span>
-            </p>
           </div>
         </li>
         {% endfor %}

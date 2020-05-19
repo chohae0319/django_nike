@@ -5,7 +5,6 @@ footer {
   top: 108.5px;
   bottom: 0em;
   width: 100%;
-  height: 80vh;
   background-color: black;
   color: #ffffff;
   font-size: 11px;
@@ -28,11 +27,25 @@ footer {
   color: #ffffff;
 }
 
+/*  social */
+.col4 i {
+  font-size: x-large;
+}
+
+.footer-sns-list {
+  display: flex;
+  align-items: center;
+}
+
 .footer-header .col li.list-title {
   color: #ffffff;
 }
 @media screen and (max-width: 768px) {
   .footer-header {
-    display: none;
+    flex-direction: column;
+    align-content: space-between;
+  }
+  .footer-header .col {
+    margin-bottom: 20px;
   }
 }

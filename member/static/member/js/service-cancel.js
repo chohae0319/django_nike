@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   var toggle = true;
   var product = [];
   var checkSelect = false;
@@ -12,24 +12,24 @@ $(document).ready(function() {
       url: url,
       type: "POST",
       headers: {
-        Authorization: "token e07ce42e16e8f0cf7f1f38f7d8c9a3656662e0bb",
-        "content-type": "application/json"
+        Authorization: "token 2994bcbfbef05273a8878c24c8c31e252c0fa3a6",
+        "content-type": "application/json",
       },
       data: JSON.stringify({
         title: inputTitle,
         body: inputBody,
-        labels: ["help wanted", requestUser]
+        labels: ["help wanted", requestUser],
       }),
-      success: function() {
+      success: function () {
         window.location.href = "/member/service-complete";
       },
-      error: function() {
+      error: function () {
         window.location.href = "../../product/error";
-      }
+      },
     });
   }
 
-  $(".order-dropdown-wrapper>p").click(function() {
+  $(".order-dropdown-wrapper>p").click(function () {
     $(".toggle-ul").toggleClass("show");
     $("#xi-icons").toggleClass("updown");
     var numOfItems = $(".order-list-wrapper").length;
@@ -57,13 +57,12 @@ $(document).ready(function() {
         style: productStyle,
         orderNum: productOrderNum,
         body: "",
-        user: ""
+        user: "",
       };
       if (toggle) {
         product.push(productItem);
       }
     }
-    console.log(product);
     if (toggle) {
       for (var i = 0; i < numOfItems; i++) {
         $(".toggle-ul").append(
@@ -72,7 +71,7 @@ $(document).ready(function() {
       }
       toggle = false;
     }
-    $(".ordered-product-list").click(function() {
+    $(".ordered-product-list").click(function () {
       checkSelect = true;
       var classNum = Number(
         $(this)
@@ -88,7 +87,7 @@ $(document).ready(function() {
       $("#checked-price").text(`결제 금액 : ${product[classNum].price}원`);
 
       // 제출하기
-      $("#submit-btn").click(function() {
+      $(".submit-btn").click(function () {
         if (checkSelect) {
           var title = $("#cancel-input-title").val().length;
           var body = $("#cancel-input-body").val().length;
@@ -96,16 +95,19 @@ $(document).ready(function() {
           if (!title && !body) {
             $(".alert-msg-title").text("필수사항입니다.");
             $(".alert-msg").text("필수사항입니다.");
+            $("#cancel-input-title").focus();
           }
           // 제목만 없을때
           else if (!title && body) {
             $(".alert-msg-title").text("필수사항입니다.");
             $(".alert-msg").text("");
+            $("#cancel-input-title").focus();
           }
           // 바디만 없을때
           else if (title && !body) {
             $(".alert-msg-title").text("");
             $(".alert-msg").text("필수사항입니다.");
+            $("#cancel-input-body").focus();
           }
           // 다 걸른 최종 상태
           else {
@@ -126,13 +128,13 @@ $(document).ready(function() {
   });
 
   //  안 골랐을 경우
-  $("#submit-btn").click(function() {
+  $(".submit-btn").click(function () {
     if (!checkSelect) {
       alert("상품을 골라주세요");
     }
   });
   // toggle 접기
-  $(".toggle-ul").click(function() {
+  $(".toggle-ul").click(function () {
     $(this).toggleClass("show");
     $("#xi-icons").toggleClass("updown");
   });

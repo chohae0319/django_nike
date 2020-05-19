@@ -3,6 +3,13 @@
 <!-- 타이틀 -->
 {% block title %}개인정보수정-나이키{% endblock %}
 
+<!-- 템플릿 확장 -->
+{% load static %}
+<!-- 링크 -->
+{% block link %}
+<link rel="stylesheet" href="{% static 'member/css/profile.css' %}" />
+{% endblock %}
+
 <!-- content -->
 {% block profileContent %}
 
@@ -13,7 +20,6 @@
 >
   <h1 class="profile-update-title">회원정보 수정</h1>
   {% csrf_token %} {{ user_change_form }}
-
   <input type="submit" value="수정하기" />
 </form>
 {% load static %}

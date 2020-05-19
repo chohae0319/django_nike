@@ -78,45 +78,51 @@
           <span>취소사유</span>
           <span class="color-orange alert-msg"></span>
           <textarea
-            name=""
             id="cancel-input-body"
             cols="30"
             rows="10"
             placeholder="ex. 사이즈불량"
           ></textarea>
         </div>
-        <div id="cancel-wrapper">
-          <span id="submit-btn">신청하기</span>
+        <div class="cancel-wrapper desktop">
+          <span class="submit-btn">신청하기</span>
         </div>
       </div>
-      <div class="option-wrapper">
-        <div class="mini-cart-card">
-          <div class="mini-image-wrapper">
-            <img
-              id="product-thumNail"
-              src="https://allmods.net/wp-content/uploads/2018/08/no-image-available.png"
-              alt=""
-            />
+
+      <div class="option-box">
+        <span>주문 상세 정보</span>
+        <div class="option-wrapper">
+          <div class="mini-cart-card">
+            <div class="mini-image-wrapper">
+              <img
+                id="product-thumNail"
+                src="https://allmods.net/wp-content/uploads/2018/08/no-image-available.png"
+                alt=""
+              />
+            </div>
+            <div class="mini-cart-detail">
+              <ul class="mini-cart-wrapper">
+                <li>
+                  <span class="checked-product">선택된 상품이 없습니다.</span>
+                </li>
+                <li><span id="checked-style"></span></li>
+                <li>
+                  <span id="checked-size"></span>
+                </li>
+                <li>
+                  <span id="checked-quantity"></span>
+                </li>
+                <li>
+                  <span class="color-orange" id="checked-price"></span>
+                </li>
+              </ul>
+              <div class="cancel-wrapper mobile">
+                <span class="submit-btn">신청하기</span>
+              </div>
+            </div>
           </div>
-          <div class="mini-cart-detail">
-            <ul class="mini-cart-wrapper">
-              <li>
-                <span class="checked-product">선택된 상품이 없습니다.</span>
-              </li>
-              <li><span id="checked-style"></span></li>
-              <li>
-                <span id="checked-size"></span>
-              </li>
-              <li>
-                <span id="checked-quantity"></span>
-              </li>
-              <li>
-                <span class="color-orange" id="checked-price"></span>
-              </li>
-            </ul>
-          </div>
+          <ul></ul>
         </div>
-        <ul></ul>
       </div>
     </div>
   </div>

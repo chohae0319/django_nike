@@ -8,11 +8,11 @@
     <!-- xeicon -->
     <link
       rel="stylesheet"
-      href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+      href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
     />
     <link
-      href="{% static 'product/img/favicon.ico' %}"
-      rel="icon"
+      href="{% static 'product/img/favicon 2.ico' %}"
+      rel="shortcut icon"
       type="image/x-icon"
     />
     <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
@@ -52,6 +52,7 @@
           required
           placeholder="이름"
           class="sign-in-input"
+          id="sign-in-name"
         />
         <input
           type="password"
@@ -79,9 +80,18 @@
         <p>계정에 연결된 이메일이나 전화번호를 입력하시면</p>
         <p>아이디 조회와 비밀번호를 재설정 하실 수 있습니다.</p>
         <div class="find-membership-div">
-          <input type="text" placeholder="이메일을 입력해주세요" id="input-email"/>
+          <input
+            type="text"
+            placeholder="이메일을 입력해주세요"
+            id="input-email"
+          />
           <span id="email-alert-msg"></span>
-          <input type="button" value="다음" class="btn-rectangle"  id="submit-email"/>
+          <input
+            type="button"
+            value="다음"
+            class="btn-rectangle"
+            id="submit-email"
+          />
           <p>
             <span id="back-to-login"><strong>로그인</strong>으로 돌아가기</span>
           </p>
@@ -91,28 +101,81 @@
         <h3 class="big-title">아이디 / 비밀번호 찾기</h3>
         <p>검색하신 계정의 정보들 입니다.</p>
         <p>찾으시는 계정이 있습니까?</p>
-        <ul class="find-profile-listWrapper">
-          <!-- for user in users -->
-          {% for information in info %}
-          <li class="find-profile-list">
-            <div>
-              <p>
-                <span>아이디 : </span><span>{{information.username}}</span>
-              </p>
-              <span>내 계정이 맞습니다.</span>
-            </div>
-            <ul>
-                <li>{{information.user_email}}</li>
-                <li>{{information.name}}</li></li>
-                <li>{{information.date_joined}}</li>
-            </ul>
-          </li>
-          {% endfor %}
-          <!-- endfor -->
-        </ul>
+        <ul class="find-profile-listWrapper"></ul>
         <span id="back-to-lastStep">이전단계</span>
       </div>
     </div>
+    <script>
+      // 다음단계 진행하기
+      $("#submit-email").click(function () {
+        var email = $("#input-email").val();
+        var expert = /^[A-Za-z0-9\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        if (email.length === 0) {
+          $("#email-alert-msg").text("이메일을 입력해주세요");
+        } else if (expert.test(email) == false) {
+          $("#email-alert-msg").text("이메일 형식에 맞게 입력해주세요");
+        } else {
+          $.ajax({
+            type: "POST",
+            url: "{% url 'member:id-find' %}",
+            data: {
+              email: email,
+              csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (response) {
+              // 성공시 다음단계 진행
+              $("#email-alert-msg").text("");
+              $("#email-verify").css({ display: "none" });
+              $("#email-verified").css({ display: "block" });
+              console.log(response);
+              console.log(response.info.length);
+              for (var i = 0; i < response.info.length; i++) {
+                var date = response.info[i].date.substring(0, 16);
+                var name = response.info[i].name;
+                if (name.length === 0) {
+                  name = "해당 고객님 성함 정보가 없습니다.";
+                }
+                $(".find-profile-listWrapper").append(`
+                <li class="find-profile-list">
+                  <div>
+                    <p>
+                      <span class="find-profile-userID">아이디 : ${response.info[i].id}</span>
+                    </p>
+                    <span id="profile-${i}" class="find-profile-confirm">내 계정이 맞습니다.</span>
+                  </div>
+                  <ul>
+                    <li class="find-profile-email" id="profile-email-${i}">${response.info[i].email}</li>
+                    <li class="find-profile-name">${name}</li>
+                    <li class="find-profile-dateJoined">가입한 일시 : ${date}</li>
+                  </ul>
+                </li>`);
+              }
+              // email 발송 해야댐
+              $(".find-profile-confirm").click(function () {
+                var number = Number($(this).attr("id").split("-")[1]);
+
+                //  이메일
+                console.log(response.info[number].email);
+
+                $(".find-profile-listWrapper").remove();
+                $("#email-verified p").remove();
+                $("#email-verified h3").after(
+                  `<p>비밀번호를 재설정하기 위한</p>
+                   <p>안내 메일을 발송했습니다.</p>
+                   <p>메일로 발송된 링크를 눌러</p>
+                   <p>비밀번호를 재설정하세요.</p>
+                   `
+                );
+              });
+            },
+            error: function (response) {
+              console.log("에러", response.status);
+              $("#email-alert-msg").text("다시 시도해 주세요.");
+            },
+          });
+        }
+      });
+    </script>
     {% block modal %}
     <!-- 필요한 모달창 들어올 곳 -->
     {% endblock %}
@@ -129,7 +192,9 @@
             <a href="/"><span>Nike</span></a>
           </li>
           <li>
-            <a href=""><span>Nike Membership</span></a>
+            <a href="https://www.nike.com/kr/ko_kr/"
+              ><span>Go Real Nike Korea</span></a
+            >
           </li>
           <li>
             <a href="https://www.nike.com/kr/ko_kr/l/jordan">
@@ -143,11 +208,6 @@
           </li>
           <li>
             <a href="https://www.converse.co.kr/"><span>converse</span></a>
-          </li>
-          <li>
-            <a href="https://www.nike.com/kr/ko_kr/"
-              ><span>진짜 나이키 가기</span></a
-            >
           </li>
         </ul>
         <ul class="flex-box" id="nav-guide">
@@ -336,7 +396,16 @@
           </div>
         </div>
       </div>
-      <div id="hide-search-modal"></div>
+      <div class="hide-search-modal">
+        <div class="search-msg-wrapper">
+          <h2 class="main-title">죄송합니다</h2>
+          <p>
+            요청하신 서비스는 준비중입니다. <br>
+            빠른 시일 내에 준비하겠습니다. 
+          </p>
+          <p id="hide-search-close">되돌아가기</p>
+        </div>
+      </div>
       <div id="user-profile-drop">
         <a href="/member/profile/"><span>마이페이지</span></a>
         <a href="/member/profile-update/"><span>회원정보관리</span></a>
@@ -357,30 +426,53 @@
         </li>
         {% endif %}
         <li>
-          <a href=""><span>New Releasses</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-men" />
+          <label for="nav-ham-men" class="label-ham"><p>Men</p></label>
+          <div class="ham-dropdown">
+            <a href="{% url 'products:list' 1 0 %}"><p>전체보기</p></a>
+            <a href="{% url 'products:new' 1  %}"><p>New Releasses</p></a>
+            <a href="{% url 'products:best' 1  %}"><p>BEST</p></a>
+            <a href="{% url 'products:sale' 1  0%}"><p>SALE</p></a>
+          </div>
         </li>
         <li>
-          <a href=""><span>Men</span></a>
-        </li>
-        <li>
-          <a href=""><span>Women</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-women" />
+          <label for="nav-ham-women" class="label-ham"><p>Women</p></label>
+          <div class="ham-dropdown">
+            <a href="{% url 'products:list' 2 0 %}"><p>전체보기</p></a>
+            <a href="{% url 'products:new' 2 %}"><p>New Releasses</p></a>
+            <a href="{% url 'products:best' 2  %}"><p>BEST</p></a>
+            <a href="{% url 'products:sale' 2 0 %}"><p>SALE</p></a>
+          </div>
         </li>
         <li>
           <a href=""><span>Kids</span></a>
         </li>
         <li>
-          <a href=""><span>SALE</span></a>
+          <a href="/member/service/"><span>고객센터</span></a>
         </li>
+        {% if user.is_authenticated %}
         <li>
-          <a href="/member/profile/"><span>마이페이지</span></a>
+          <input type="checkbox" class="nav-ham-check" id="nav-ham-mypage" />
+          <label for="nav-ham-mypage" class="label-ham"><p>마이페이지</p></label>
+          <div class="ham-dropdown">
+            <a href="/member/profile/"><p>MY PAGE</p></a>
+            <a href="/member/profile-rate"><p>회원등급 현황</p></a>
+            <a href="/member/order/"><p>주문 배송</p></a>
+            <a href="/member/service/"><p>취소 / 반품</p></a>
+            <a href="/order/shipping-show"><p>배송지 관리</p></a>
+            <a href="/member/profile-update"><p>회원정보 관리</p></a>
+        <a href="/member/profile-password"><p>비밀번호</p></a>
+        <a href="/member/profile-delete"><p>회원탈퇴</p></a>
+          </div>
         </li>
+        {% else %} {% endif %}
       </ul>
     </div>
     <!-- nav js -->
     <script src="{% static 'product/js/nav.js' %}"></script>
     <script src="{% static 'product/js/profile-dropdown.js' %}"></script>
 
-    <!-- modal 로그인이 필요가 없어져서 삭제 -->
     {% endblock %}
 
     <!-- aside -->
@@ -395,7 +487,9 @@
       <div class="footer-header">
         <ul class="col col1">
           <li class="list-title">
-            <a href=""><span>매장안내</span></a>
+            <a href="https://www.nike.com/kr/ko_kr/store?ignoreSharing=true"
+              ><span>매장안내</span></a
+            >
           </li>
           {% if user.is_authenticated %}
           <li class="list-title">
@@ -412,22 +506,16 @@
         <ul class="col col2">
           <li class="list-title"><span>고객센터</span></li>
           <li>
-            <a href=""><span>주문/결제</span></a>
+            <a href="/member/service"><span>주문취소</span></a>
           </li>
           <li>
             <a href="{% url 'member:order' %}"><span>주문배송조회</span></a>
           </li>
           <li>
-            <a href=""><span>멤버쉽 혜택/서비스</span></a>
+            <a href="/member/profile-rate"><span>멤버쉽 혜택/서비스</span></a>
           </li>
           <li>
-            <a href=""><span>공지사항</span></a>
-          </li>
-          <li>
-            <a href=""><span>기타문의</span></a>
-          </li>
-          <li>
-            <a href=""><span>개인정보처리방침</span></a>
+            <a href="/member/service"><span>기타문의</span></a>
           </li>
         </ul>
         <ul class="col col3">
@@ -438,10 +526,10 @@
         </ul>
         <ul class="col col4">
           <li class="list-title"><span>SOCIAL</span></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <a href="https://github.com/Minsoo-web"><li class="footer-sns-list"><i class="xi-github"></i><span>GitHub</span></li></a>
+          <a href="https://www.instagram.com/minsoo_gramm/"><li class="footer-sns-list"><i class="xi-instagram"></i><span>Instagram</span></li></a>
+          <a href="https://www.youtube.com/watch?v=mOk4ghoRtDo"><li class="footer-sns-list"><i class="xi-youtube"></i><span>Youtube</span></li></a>
+          <a href="https://open.kakao.com/me/minsooweb"><li class="footer-sns-list"><i class="xi-kakaotalk"></i><span>Kakaotalk</span></li></a>
         </ul>
       </div>
     </footer>

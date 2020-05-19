@@ -1,9 +1,10 @@
 section {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  /* max-width: 960px; */
+  width: 76%;
   top: 108.5px;
-  left: 288px;
+  left: 23%;
   min-height: 100vh;
   transition: 0.35s;
 }
@@ -21,7 +22,7 @@ section.product {
 
 /* product */
 #product {
-  width: 929px;
+  width: 74.5%;
 }
 
 /* wrapper */
@@ -40,6 +41,11 @@ section.product {
 .card .img-wrapper {
   width: 300px;
   height: 300px;
+}
+.card .img-wrapper a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 .product-info {
   font-size: 16px;
@@ -126,6 +132,16 @@ section.product {
 #mobile-toggle-aside {
   display: none;
 }
+@media screen and (max-width: 1210px) {
+  .product-box .card {
+    width: 45%;
+  }
+  .product-box .card .img-wrapper {
+    width: 100%;
+    height: 75%;
+  }
+}
+
 @media screen and (max-width: 883px) {
   #section-header {
     top: 70px;
@@ -161,6 +177,17 @@ section.product {
     height: 65%;
   }
 }
+@media screen and (max-width: 500px) {
+  .product-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-box .card {
+    width: 75%;
+    height: 400px;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .card .img-wrapper {
     min-height: 190px;
@@ -168,7 +195,6 @@ section.product {
 }
 
 /* -------------------------------------------------------------- detail*/
-/* detail */
 section#detail {
   padding: 20px;
 }
@@ -178,14 +204,14 @@ section#detail {
 }
 
 .detail-img-gallery {
-  width: 840px;
-  padding: 0 50px 0 30px;
+  width: 65%;
+  padding: 0 30px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .detail-img-wrapper {
-  width: 348px;
+  width: 47.5%;
   height: 348px;
   margin: 0 10px 10px 0;
 }
@@ -379,6 +405,45 @@ label.no-amount {
   position: relative;
   flex: 1;
 }
+/* detail - mobile */
+@media screen and (max-width: 900px) {
+  .detail-img-wrapper {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 768px) {
+  section#detail {
+    padding: 0;
+  }
+  #detail .detail-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .detail-img-gallery {
+    width: 90%;
+    margin-bottom: 50px;
+    padding: 0;
+  }
+  .detail-img-wrapper {
+    width: 48%;
+  }
+}
+@media screen and (max-width: 664px) {
+  .detail-img-gallery {
+    justify-content: center;
+  }
+  .detail-img-wrapper {
+    width: 90%;
+    height: 90%;
+    margin-right: 0;
+  }
+  .detail-selection {
+    width: 90%;
+  }
+  #order-wrapper > .round-btn-big {
+    width: 90%;
+  }
+}
 
 /* -------------------------------------------------------------- sign-up */
 /* sign-up */
@@ -409,6 +474,13 @@ label.no-amount {
   height: 44px;
   border: 0.5px solid rgb(229, 229, 229);
   padding: 9px 12px;
+}
+
+@media screen and (max-width: 575px) {
+  .sign-up-input,
+  .sign-in-input {
+    width: 100%;
+  }
 }
 
 .form-box-signUp input[type="submit"],
@@ -442,7 +514,7 @@ label.no-amount {
 .sign-in-footer {
   text-align: center;
   margin-top: 30px;
-  color: rgb(229, 229, 229);
+  color: #8d8d8d;
 }
 .sign-in-footer a {
   color: black;
@@ -481,7 +553,22 @@ label.no-amount {
 .already-login span {
   margin: 20px 0;
 }
-/* -------------------------------------------------------------- prfile mypage */
+
+/* 로그인 & 회원가입 모바일 */
+@media screen and (max-width: 575px) {
+  #sign-up > h1 {
+    width: 100%;
+  }
+  #sign-up .form-box-signUp,
+  #sign-in .form-box-signIn {
+    width: 80%;
+  }
+  .sign-in-header {
+    width: 80%;
+  }
+}
+
+/* -------------------------------------------------------------- profile mypage */
 /* profile */
 /* member안에 있는 css 폴더로 옮겨야 함 */
 section#profile .profile-list-title,
@@ -533,7 +620,7 @@ section#profile .profile-list-view {
 #profile-update input,
 #profile-password input,
 #profile-delete input {
-  width: 442.5px;
+  width: 100%;
   height: 40px;
   padding: 9px 12px;
   /* margin-bottom: 20px; */
@@ -545,7 +632,6 @@ section#profile .profile-list-view {
   color: #fff;
 }
 #profile-delete p {
-  width: 442.5px;
   font-size: 24px;
   margin: 20px 0;
 }
@@ -562,6 +648,7 @@ section#profile .profile-list-view {
   align-items: center;
   width: 97.5%;
 }
+
 .best-category-header a {
   display: inline-block;
   text-align: center;
@@ -579,6 +666,7 @@ section#profile .profile-list-view {
   right: -50%;
   display: flex;
   width: 50%;
+  height: 100%;
   flex-wrap: wrap;
 }
 /* 슬리퍼 box */
@@ -605,23 +693,25 @@ section#profile .profile-list-view {
   position: relative;
   left: 0;
   width: auto;
-  height: 260px;
+  height: fit-content;
   padding: 0;
 }
 .best-img-box-right .best-img-wrapper:first-child {
   position: absolute;
-  right: -96%;
+  right: -95%;
   width: 100%;
   height: 100%;
   padding: 0 0 5px 5px;
+  margin: 0 0 5px 5px;
 }
 .best-img-wrapper {
+  display: flex;
   position: relative;
   flex-basis: 47%;
-  height: 260px;
   margin: 0 5px 5px 0;
 }
 .best-img-wrapper.flip {
+  height: fit-content;
   flex-basis: 23.5%;
 }
 
@@ -649,8 +739,49 @@ section#profile .profile-list-view {
   display: flex;
 }
 
-@media screen and (max-width: 768px) {
+.best-img {
+  max-width: 100%;
+  height: auto;
+}
+@media screen and (max-width: 424px) {
+  .size-selector label {
+    flex-basis: 17%;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  /* best */
+  .best-category-header {
+    margin-bottom: 20px;
+  }
+  .best-category-header > h2.main-title {
+    font-size: 14px;
+  }
+  .best-category-header a {
+    padding: 0 6px;
+    margin-right: 6px;
+  }
   .best-img-box {
-    flex-direction: column;
+    right: auto;
+    width: auto;
+  }
+  .best-img-box .best-img-wrapper:first-child {
+    position: relative;
+    left: auto;
+    width: auto;
+    height: auto;
+    padding: inherit;
+  }
+  .best-img-box-right .best-img-wrapper:first-child {
+    position: relative;
+    right: auto;
+    padding: inherit;
+    margin: 0 5px 5px 0;
+  }
+  .best-img-box-right {
+    width: auto;
+  }
+  .best-img-wrapper.flip {
+    flex-basis: 45%;
   }
 }

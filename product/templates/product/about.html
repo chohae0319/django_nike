@@ -5,7 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>About Django Nike</title>
+    <link
+      href="{% static 'product/img/favicon 2.ico' %}"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="{% static 'product/css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'product/css/about.css' %}" />
     <!-- xeicon -->
@@ -22,7 +27,7 @@
       <video class="landing-video" autoplay muted loop playsinline>
         <source
           type="video/mp4"
-          src="{% static 'product/video/400274_ABOUTNIKE2019_4_original.mp4' %}"
+          src="{% static 'product/video/400274_ABOUTNIKE2019_4_original (1).mp4' %}"
         />
       </video>
       <header>
@@ -52,8 +57,8 @@
         <div class="comment-box">
           <span class="main-title">ABOUT OUR PROJECT</span>
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
+            이 프로젝트는 캠퍼스 픽에서<br />
+            자체적으로 진행한 장고 스터디 프로젝트이며<br />
             <br />
             백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
             프론트 개발 1명 : 김민수<br />
@@ -74,27 +79,26 @@
     <section class="fade-in" data-fade-in-speed="800">
       <div class="section-content-box">
         <div class="img-wrapper">
-          <div class="border-box-left" style="background-color: brown;"></div>
+          <div class="border-box-left" style="background-color: rgb(249, 133, 62);"></div>
           <img
-            src="https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+            src="{% static 'product/img/wallpaper3.png' %}"
             alt="aboutimg"
           />
         </div>
         <div class="comment-box">
-          <span class="main-title" style="border-bottom: 2px solid brown;"
-            >ABOUT OUR PROJECT</span
+          <span class="main-title" style="border-bottom: 2px solid rgb(249, 133, 62);"
+            >ABOUT FRONT-END</span
           >
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
+            저는 이번 프로젝트에서 <br />
+            Template 작성 및 View 데이터 연결을 주로 담당했으며 <br />
+            전체적인 퍼블리싱 및 디자인 리뉴얼, <br />
+            필요한 View 파일 또한 제가 작성했습니다.
             <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
             <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            장고 프레임워크를 경험해보지 못했던 탓에 <br />
+            처음에는 허덕이고 헤맸었지만, 금방 배울 수 있을만큼 <br>
+            장고는 접근성이 높은 프레임워크였습니다.
           </p>
         </div>
       </div>
@@ -103,23 +107,53 @@
     <section class="fade-in" data-fade-in-speed="800">
       <div class="section-content-box">
         <div class="comment-box">
-          <span class="main-title" style="border-bottom: 2px solid rgb(8,46,32);">ABOUT OUR PROJECT</span>
+          <span
+            class="main-title"
+            style="border-bottom: 2px solid rgb(8, 46, 32);"
+            >ABOUT OUR TECH</span
+          >
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
-            <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
-            <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            <ul>
+              <li class="tech-list">
+                <strong>기능</strong>
+                <div>
+                  <p>세부기능</p>
+               </div>
+               <span>TECH</span>
+              </li>
+              <li class="tech-list">
+                <strong>회원관리</strong>
+                <div>
+                  <p><a href="{% url 'products:aboutDetail' 1 0 %}">로그인</a></p>
+                  <p><a href="{% url 'products:aboutDetail' 1 1 %}">회원가입</a></p>
+                  <p><a href="{% url 'products:aboutDetail' 1 2 %}">회원 정보 수정 및 삭제</a></p>
+               </div>
+               <span>Django form</span>
+              </li>
+              <li class="tech-list">
+                <strong>주문 / 배송지 관리</strong>
+                <div>
+                  <p><a href="{% url 'products:aboutDetail' 2 1 %}">배송지 추가 및 최초 등록</a></p>
+                  <p><a href="{% url 'products:aboutDetail' 2 2 %}">장바구니 추가</a></p>
+               </div>
+               <span>Ajax <br> views.py</span>
+              </li>
+              <li class="tech-list">
+                <strong>주문 취소 신청</strong>
+                <div>
+                  <p><a href="{% url 'products:aboutDetail' 3 0 %}">주문 취소</a></p>
+               </div>
+               <span>GitHub API</span>
+              </li>
+            </ul>
           </p>
         </div>
         <div class="img-wrapper">
-          <div class="border-box-right" style="background-color: rgb(8, 46, 32);"></div>
-          <img src="{% static 'product/img/about-logo.png' %}" alt="aboutimg" />
+          <div
+            class="border-box-right"
+            style="background-color: rgb(8, 46, 32);"
+          ></div>
+          <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="aboutimg" />
         </div>
       </div>
     </section>
@@ -130,30 +164,42 @@
         <div class="img-wrapper">
           <div
             class="border-box-left"
-            style="background-color: rgb(25,53,86);"
+            style="background-color: rgb(25, 53, 86);"
           ></div>
           <img
-            src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+            src="{% static 'product/img/wallpaper2.png' %}"
             alt="aboutimg"
           />
         </div>
         <div class="comment-box">
           <span
             class="main-title"
-            style="border-bottom:  2px solid rgb(25,53,86);"
-            >ABOUT OUR PROJECT</span
+            style="border-bottom: 2px solid rgb(25, 53, 86);"
+            >END OF PROJECT</span
           >
           <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
-            <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
-            <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            이번 프로젝트는 나에게 첫 프로젝트이자<br>
+            프레임워크로 배포까지 마친, 의미가 깊은 프로젝트이다. 
+    
+            <h2>Django에 대하여</h2>
+            Django는 python 기반 프레임워크임에도 불구하고<br />
+            python을 거의 몰라도 간단한 view 함수나 url 연결이 용이해<br />
+            진입장벽이 매우매우 낮았다. (프론트엔드 개발자에게)<br />
+    
+            <h2>아쉬웠던 점에 대하여</h2>
+            우선 "색상"을 넣지 않은것이 제일 아쉬웠다.<br />
+            짧은 시간 안에 해결하려 했던 조급함이 문제였을까<br />
+            색상 카테고리를 넣지 않고 제품을 나열하기로 한 결정은<br />
+            너무나도 아쉬웠다. <br/><br/>
+            프론트엔드 프레임워크를 사용하지 않은 점 또한 아쉬웠다. <br/>
+            프로젝트를 진행하면 할 수록 데이터의 송수신에 익숙해져 가며 <br/>
+            성장해가는 모습에 뿌듯했지만, Django 프레임워크에 익숙해져 갈뿐 <br/>
+            퍼블리셔로 성장하는 것은 아닐까라는 불안함과 아쉬움이 컸다. <br/><br/>
+            마지막으로 CSS의 아쉬움이었다. <br>
+            중복되는 코드들을 한데 모아 작성해야하지 않은 <br>
+            통일되지 않은 코드들로 똑같은 테마나 비슷한 디자인을 만났을때의, <br>
+            보수작업의 난해함에 어쩌면 CSS야 말로 <br>
+            유지보수에 가장 중요한 역할은 아닐까라는 생각을 했었다. 
           </p>
         </div>
       </div>
@@ -164,29 +210,33 @@
         <div class="comment-box">
           <span
             class="main-title"
-            style="border-bottom: 2px solid rgb(25,16,16);"
-            >ABOUT OUR PROJECT</span
+            style="border-bottom: 2px solid rgb(34, 214, 72);"
+            >CONTACT TO US</span
           >
-          <p>
-            이 프로젝트는 캠퍼스 픽에서 자체적으로 진행한 장고 스터디의
-            프로젝트이며<br />
+          <p> 
+            <a href="https://github.com/chohae0319/django_nike">fork된 통합 repository </a> <br/>
             <br />
-            백엔드 개발 3명 : 김초혜, 변형욱, 이소연<br />
-            프론트 개발 1명 : 김민수<br />
-            위와 같이 4명이 참가한 프로젝트입니다. <br />
-            <br />
-            한 달이라는 짧은 시간안에 최대한의 완성도를 뽑아 내고자 <br />
-            나이키 브랜드에서 신발이라는 카테고리만 선정해서 <br />
-            Nike-Shoes 라는 서브 페이지로 리뉴얼 브랜딩 해보았습니다. <br />
+            <h2>
+              <a href="https://github.com/Minsoo-web">프론트엔드 : 김민수 </a>
+            </h2>
+            <h2>
+              <a href="https://github.com/woogie0781">회원  : 변형욱 </a>
+            </h2>
+            <h2>
+              <a href="https://github.com/32sylee">장바구니 / 상품 / 주문 : 이소연 </a>
+            </h2>
+            <h2>
+              <a href="https://github.com/chohae0319">상품 / 프로젝트 관리 : 김초혜 (스터디장) </a>
+            </h2>
           </p>
         </div>
         <div class="img-wrapper">
           <div
             class="border-box-right"
-            style="background-color: rgb(25, 16, 16);"
+            style="background-color: rgb(34, 214, 72);"
           ></div>
           <img
-            src="https://images.unsplash.com/photo-1568401933942-b02f7899172f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            src="https://images.unsplash.com/photo-1554350747-ec45fd24f51b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
             alt="aboutimg"
           />
         </div>

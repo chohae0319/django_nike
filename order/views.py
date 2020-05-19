@@ -12,7 +12,7 @@ from .forms import ShippingForm
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def checkout(request):
     # 세션에서 order_info 가져오기
     order_info = request.session['order_info']
@@ -26,7 +26,7 @@ def checkout(request):
         order_list.append(item)
 
     # 배송지 목록을 불러옴
-    shipping_instance = Shipping.objects.all()
+    shipping_instance = Shipping.objects.filter(user_id=request.user)
     #shipping_instance = get_object_or_404(Shipping)
     if request.method == 'POST':
         ship = Shipping.objects.create(user_id=request.user)
@@ -54,7 +54,6 @@ class ToCheckout(View):
                 return HttpResponse(json.dumps(
                     {'result': 'fail', 'message': 'out of stock', 'product': inventory.product_id.name}),
                     content_type="application/json")
-
 
         request.session['order_info'] = {}
         request.session['order_info']['is_cart'] = int(
@@ -84,6 +83,7 @@ class CompleteView(TemplateView):
         context['order_list'] = OrderList.objects.filter(order_id=order_no)
 
         return context
+
 
 class MakeOrder(View):
     def post(self, request):
@@ -144,8 +144,10 @@ class MakeOrder(View):
                 # 2~3. 품절 검사 & 판매량 늘리기
                 for item in order_list:
                     # 품절 검사
-                    all_inventory = Inventory.objects.filter(product_id=item['product_id'])
-                    total_amount = all_inventory.aggregate(total_amount=Sum('amount'))['total_amount']
+                    all_inventory = Inventory.objects.filter(
+                        product_id=item['product_id'])
+                    total_amount = all_inventory.aggregate(
+                        total_amount=Sum('amount'))['total_amount']
 
                     # for inventory in all_inventory:
                     #     if inventory.amount <= 0:
@@ -153,7 +155,8 @@ class MakeOrder(View):
                     #         inventory.save()
 
                     if total_amount <= 0:
-                        item['product_id'].soldout = True   # Product 모델의 soldout을 True로
+                        # Product 모델의 soldout을 True로
+                        item['product_id'].soldout = True
 
                     # 판매량 늘리기
                     item['product_id'].sales += item['quantity']
@@ -204,9 +207,10 @@ def Shippings(request):
             return redirect('order:shipping-show')
     else:
         form = ShippingForm()
-    return render(request, 'order/shipping.html', {'ship':form})
+    return render(request, 'order/shipping.html', {'ship': form})
 
 
+@login_required(login_url='/member/login/')
 def ShippingShow(request):
     shipping_instance = Shipping.objects.filter(user_id=request.user)
     #shipping_instance = get_object_or_404(Shipping)
@@ -221,7 +225,7 @@ def ShippingShow(request):
     return render(request, 'order/shipping-show.html', {'shipping_instance': shipping_instance, "form": form})
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def Shipping_update(request, pk):
     ship = Shipping.objects.get(id=pk)
     pk = ship.pk
@@ -233,13 +237,13 @@ def Shipping_update(request, pk):
 
     else:
         ship = ShippingForm(instance=ship)
-    return 
+    return
 
 
-@login_required
+@login_required(login_url='/member/login/')
 def Shipping_delete(request, pk):
     ship = Shipping.objects.get(id=pk)
     if request.method == 'POST':
         ship.delete()
         return redirect('order:shipping-show')
-    return render(request, 'order/shipping-delete.html', {'ship':ship})
+    return render(request, 'order/shipping-delete.html', {'ship': ship})

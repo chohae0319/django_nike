@@ -44,7 +44,7 @@ span.percentage {
 span.percentage span {
   position: absolute;
   top: -16px;
-  left: -23px;
+  left: -60px;
   display: inline-block;
   width: 100px;
 }
@@ -55,4 +55,10 @@ span.percentage span {
   bottom: -20px;
   right: 0;
   color: #8d8d8d;
+}
+
+@media screen and (max-width: 600px) {
+  .current-orderPrice {
+    flex-direction: column;
+  }
 }

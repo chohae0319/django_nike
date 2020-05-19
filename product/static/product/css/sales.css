@@ -51,18 +51,16 @@ span.select {
 }
 .under-nav-list {
   display: flex;
-  width: 65%;
-  margin: 0 auto;
   font-size: 15px;
 }
 .under-nav-list li {
   margin: 20px 0;
   flex-basis: 20%;
 }
-.under-nav-list li:first-child span {
+.under-nav-list li:first-child a {
   border-left: none;
 }
-.under-nav-list li span {
+.under-nav-list li a {
   display: inline-block;
   width: 100%;
   padding: 10px 0;
@@ -90,7 +88,7 @@ span.select {
 }
 
 .sale-card .img-wrapper {
-  width: 384px;
+  width: 100%;
   height: 384px;
 }
 
@@ -108,4 +106,34 @@ span.select {
 
 .oldPrice {
   text-decoration: line-through;
+}
+
+@media screen and (max-width: 920px) {
+  #sale-main-nav > ul {
+    width: 100%;
+    margin: 0;
+  }
+  .sale-card {
+    flex-basis: 60%;
+  }
+  #sale-gallery {
+    justify-content: center;
+  }
+  .under-nav-list {
+    font-size: 12px;
+  }
+  .under-nav-list li a {
+    border-left: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  #sales-section {
+    padding: 0 10px;
+  }
+  .sale-card {
+    width: 80%;
+  }
+  .sale-card .img-wrapper {
+    width: 100%;
+  }
 }

@@ -13,8 +13,16 @@ html {
   scroll-behavior: smooth;
   font-family: "Arita-dotum-Medium", sans-serif;
 }
+a{
+  color: inherit;
+}
 p {
   margin: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 span.big-title {
   font-size: 87.6px;
@@ -154,7 +162,7 @@ header button {
   margin: 20px auto;
 }
 .section-content-box > div {
-  flex-basis: 45%;
+  flex-basis: 46%;
 }
 
 .comment-box {
@@ -191,4 +199,20 @@ header button {
   width: 80%;
   height: 80%;
   background-color: seagreen;
+}
+
+/*  tech */
+.tech-list {
+  display: flex;
+  border: 1px solid;
+  justify-content: space-between;
+  padding: 15px;
+}
+.tech-list div {
+  flex: 1;
+}
+.tech-list strong {
+  display: inline-block;
+  margin-right: 20px;
+  min-width: 120px;
 }

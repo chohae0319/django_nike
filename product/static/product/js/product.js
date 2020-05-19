@@ -1,7 +1,7 @@
 var open = true;
-$(document).ready(function() {
+$(document).ready(function () {
   var wrapper = $("#size-wrapper");
-  $("#toggle-size").click(function() {
+  $("#toggle-size").click(function () {
     var height = wrapper.height();
     //   열려있다면 접기
     if (open) {
@@ -18,16 +18,16 @@ $(document).ready(function() {
   });
 
   // 사이즈 클릭시 검정 테두리
-  $(".size-label").click(function() {
+  $(".size-label").click(function () {
     $(this).toggleClass("black-label");
   });
 });
 
 // 체크된 사이즈 갯수 적어주기
-$(document).ready(function() {
-  $('input[name="size"]').on("click", function() {
+$(document).ready(function () {
+  $('input[name="size"]').on("click", function () {
     var size_checked_list = [];
-    $('input[name="size"]:checked').each(function() {
+    $('input[name="size"]:checked').each(function () {
       size_checked_list.push($(this).val());
     });
     if (size_checked_list.length === 0) {
@@ -39,17 +39,18 @@ $(document).ready(function() {
 });
 
 // 필터 버튼 드롭다운
-$(document).ready(function() {
+$(document).ready(function () {
   var filter = $("#filter-wrapper");
   var span = $("#filter-wrapper span");
-  $("#filter-btn").click(function() {
+  $("#filter-btn").click(function () {
     filter.addClass("filter-wrapper");
   });
-  filter.on("mouseleave", function() {
+  filter.on("mouseleave", function () {
     $(this).removeClass("filter-wrapper");
   });
-  span.click(function() {
+  span.click(function () {
     var text = $(this).text();
     $("#current-filter").text(text);
+    filter.removeClass("filter-wrapper");
   });
 });

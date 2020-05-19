@@ -1,6 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  // 배송지 수정
   $(`.shipping-info-wrapper label[for="order-shipping-modify"]`).click(
-    function() {
+    function () {
       var classNum = $(this).attr("class");
       var num = Number(classNum.replace("change-shipping", ""));
       console.log(num);
@@ -26,12 +27,14 @@ $(document).ready(function() {
       $("body").css({ overflow: "hidden" });
     }
   );
-  $(`.order-shipping-box label[for="order-shipping-modify"]`).click(function() {
-    $("#order-shipping-modal").css({ display: "none" });
-    $(".order-shipping-box").css({ display: "none" });
-    $("body").css({ overflow: "auto" });
-  });
-  $("#order-shipping-modal").click(function() {
+  $(`.order-shipping-box label[for="order-shipping-modify"]`).click(
+    function () {
+      $("#order-shipping-modal").css({ display: "none" });
+      $(".order-shipping-box").css({ display: "none" });
+      $("body").css({ overflow: "auto" });
+    }
+  );
+  $("#order-shipping-modal").click(function () {
     $(this).css({ display: "none" });
     $(".order-shipping-box").css({ display: "none" });
     $("body").css({ overflow: "auto" });
